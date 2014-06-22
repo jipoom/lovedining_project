@@ -37,7 +37,7 @@
 					<div class="col-md-12">
                         <label class="control-label" for="content">Content</label>
 						
-						{{ Form::textarea('content', null, array('class'=>'form-control full-width wysihtml5', 'rows'=>'10'))}} </p>
+						{{ Form::textarea('content', null, array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
 						{{{ $errors->first('content', ':message') }}}
 					</div>
 				</div>
