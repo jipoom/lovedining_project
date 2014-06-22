@@ -22,9 +22,12 @@
 				<!-- Post Title -->
 				<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        <label class="control-label" for="title">Post Title</label>
-						<input class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
-						{{{ $errors->first('title', '<span class="help-block">:message</span>') }}}
+                        <label class="control-label" for="title">ชื่อร้านอาหาร</label>
+						{{ Form::text('restaurant_name', null, array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
+						{{{ $errors->first('restaurant_name', ':message') }}}
+                        <label class="control-label" for="title">ชื่อรีวิว</label>
+						{{ Form::text('title', null, array('class'=>'form-control', 'placeholder'=>'ชื่อรีวิว'))}} </p>
+						{{{ $errors->first('title', ':message') }}}
 					</div>
 				</div>
 				<!-- ./ post title -->
@@ -33,8 +36,9 @@
 				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="control-label" for="content">Content</label>
-						<textarea class="form-control full-width wysihtml5" name="content" value="content" rows="10">{{{ Input::old('content', isset($post) ? $post->content : null) }}}</textarea>
-						{{{ $errors->first('content', '<span class="help-block">:message</span>') }}}
+						
+						{{ Form::textarea('content', null, array('class'=>'form-control full-width wysihtml5', 'rows'=>'10'))}} </p>
+						{{{ $errors->first('content', ':message') }}}
 					</div>
 				</div>
 				<!-- ./ content -->
@@ -58,7 +62,7 @@
 					<div class="col-md-12 controls">
                         <label class="control-label" for="meta-description">Meta Description</label>
 						<input class="form-control" type="text" name="meta-description" id="meta-description" value="{{{ Input::old('meta-description', isset($post) ? $post->meta_description : null) }}}" />
-						{{{ $errors->first('meta-description', '<span class="help-block">:message</span>') }}}
+						{{{ $errors->first('meta-description', ':message') }}}
 					</div>
 				</div>
 				<!-- ./ meta description -->

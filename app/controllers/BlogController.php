@@ -48,11 +48,10 @@ class BlogController extends BaseController {
 	 * @return View
 	 * @throws NotFoundHttpException
 	 */
-	public function getView($slug)
+	public function getView($postId)
 	{
 		// Get this blog post data
-		$post = $this->post->where('slug', '=', $slug)->first();
-
+		$post = $this->post->where('id', '=', $postId)->first();
 		// Check if the blog post exists
 		if (is_null($post))
 		{
@@ -62,7 +61,7 @@ class BlogController extends BaseController {
 			// 404 error page.
 			return App::abort(404);
 		}
-
+	
 		// Get this post comments
 		$comments = $post->comments()->orderBy('created_at', 'ASC')->get();
 
@@ -83,19 +82,18 @@ class BlogController extends BaseController {
 	 * @param  string  $slug
 	 * @return Redirect
 	 */
-	public function postView($slug)
+	public function postView($postId)
 	{
 
         $user = $this->user->currentUser();
         $canComment = $user->can('post_comment');
 		if ( ! $canComment)
 		{
-			return Redirect::to($slug . '#comments')->with('error', 'You need to be logged in to post comments!');
+			return Redirect::to($postId . '#comments')->with('error', 'You need to be logged in to post comments!');
 		}
 
 		// Get this blog post data
-		$post = $this->post->where('slug', '=', $slug)->first();
-
+		$post = $this->post->where('id', '=', $postId)->first();
 		// Declare the rules for the form validation
 		$rules = array(
 			'comment' => 'required|min:3'
@@ -116,14 +114,14 @@ class BlogController extends BaseController {
 			if($post->comments()->save($comment))
 			{
 				// Redirect to this blog post page
-				return Redirect::to($slug . '#comments')->with('success', 'Your comment was added with success.');
+				return Redirect::to($postId . '#comments')->with('success', 'Your comment was added with success.');
 			}
 
 			// Redirect to this blog post page
-			return Redirect::to($slug . '#comments')->with('error', 'There was a problem adding your comment, please try again.');
+			return Redirect::to($postId . '#comments')->with('error', 'There was a problem adding your comment, please try again.');
 		}
 
 		// Redirect to this blog post page
-		return Redirect::to($slug)->withInput()->withErrors($validator);
+		return Redirect::to($postId)->withInput()->withErrors($validator);
 	}
 }

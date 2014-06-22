@@ -74,7 +74,7 @@ class AdminBlogsController extends AdminController {
 
             // Update the blog post data
             $this->post->title            = Input::get('title');
-            $this->post->slug             = Str::slug(Input::get('title'));
+            //$this->post->slug             = Str::slug(Input::get('title'));
             $this->post->content          = Input::get('content');
             $this->post->meta_title       = Input::get('meta-title');
             $this->post->meta_description = Input::get('meta-description');

@@ -72,7 +72,7 @@ class Post extends Eloquent {
 	 */
 	public function url()
 	{
-		return Url::to($this->slug);
+		return Url::to($this->id);
 	}
 
 	/**
