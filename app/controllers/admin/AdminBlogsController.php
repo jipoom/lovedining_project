@@ -45,9 +45,18 @@ class AdminBlogsController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/blogs/title.create_a_new_blog');
-
+		
+		//Category
+		$init_cat = Category::first();
+		$category = array($init_cat->id => $init_cat->category_name);
+		$categories = Category::all();
+		foreach($categories as $temp)
+		{
+				
+			$category = array_add($category, $temp->id, $temp->category_name);
+		}
         // Show the page
-        return View::make('admin/blogs/create_edit', compact('title'));
+        return View::make('admin/blogs/create_edit', compact('title','category'));
 	}
 
 	/**
@@ -60,7 +69,9 @@ class AdminBlogsController extends AdminController {
         // Declare the rules for the form validation
         $rules = array(
             'title'   => 'required|min:3',
-            'content' => 'required|min:3'
+            'restaurant_name'  => 'required|min:3',
+            'content' => 'required|min:3',
+            'tel' => 'required|min:9|max:11'
         );
 
         // Validate the inputs
@@ -74,6 +85,14 @@ class AdminBlogsController extends AdminController {
 
             // Update the blog post data
             $this->post->title            = Input::get('title');
+			$this->post->restaurant_name  = Input::get('restaurant_name');
+			$this->post->tel  = Input::get('tel');
+			$this->post->street_addr  = Input::get('street_addr');
+			$this->post->subdistrict  = Input::get('subdistrict');
+			$this->post->district  = Input::get('district');
+			$this->post->province  = Input::get('province');
+			$this->post->zip  = Input::get('zip');
+			$this->post->category_id  = Input::get('category_id');
             //$this->post->slug             = Str::slug(Input::get('title'));
             $this->post->content          = Input::get('content');
             $this->post->meta_title       = Input::get('meta-title');
@@ -117,9 +136,18 @@ class AdminBlogsController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/blogs/title.blog_update');
-
+		
+		//Category
+		$init_cat = Category::first();
+		$category = array($init_cat->id => $init_cat->category_name);
+		$categories = Category::all();
+		foreach($categories as $temp)
+		{
+				
+			$category = array_add($category, $temp->id, $temp->category_name);
+		}
         // Show the page
-        return View::make('admin/blogs/create_edit', compact('post', 'title'));
+        return View::make('admin/blogs/create_edit', compact('post', 'title', 'category'));
 	}
 
     /**

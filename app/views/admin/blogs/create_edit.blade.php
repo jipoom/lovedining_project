@@ -22,12 +22,29 @@
 				<!-- Post Title -->
 				<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        <label class="control-label" for="title">ชื่อร้านอาหาร</label>
-						{{ Form::text('restaurant_name', null, array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
-						{{{ $errors->first('restaurant_name', ':message') }}}
                         <label class="control-label" for="title">ชื่อรีวิว</label>
-						{{ Form::text('title', null, array('class'=>'form-control', 'placeholder'=>'ชื่อรีวิว'))}} </p>
+						{{ Form::text('title',Input::old('title', isset($post) ? $post->title : null) , array('class'=>'form-control', 'placeholder'=>'ชื่อรีวิว'))}} </p>
 						{{{ $errors->first('title', ':message') }}}
+                       
+                        <label class="control-label" for="title">ชื่อร้านอาหาร</label>
+						{{ Form::text('restaurant_name', Input::old('title', isset($post) ? $post->restaurant_name : null), array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
+						{{{ $errors->first('restaurant_name', ':message') }}}
+						
+						 <label class="control-label" for="title">ประเภทร้านอาหาร</label>
+						
+						 {{ Form::select('category_id', $category, Input::old('title', isset($post) ? Category::find($post->category_id)->id : null)); }} </p>  
+						
+						 <label class="control-label" for="title">เบอร์โทร</label>
+						{{ Form::text('tel', Input::old('title', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
+						{{{ $errors->first('tel', ':message') }}}
+						
+						 <label class="control-label" for="title">ที่อยู่</label></P>
+					    {{ Form::text('street_addr', Input::old('title', isset($post) ? $post->street_addr : null), array('placeholder'=>'เลขที่')) }} 
+					    {{ Form::text('subdistrict', Input::old('title', isset($post) ? $post->subdistrict : null), array('placeholder'=>'แขวง')) }} </p>  
+					    {{ Form::text('district', Input::old('title', isset($post) ? $post->district : null), array('placeholder'=>'เขต')) }}  
+					    {{ Form::text('province', Input::old('title', isset($post) ? $post->province : null), array('placeholder'=>'จังหวัด')) }} 
+					    {{ Form::text('zip', Input::old('title', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
+                        
 					</div>
 				</div>
 				<!-- ./ post title -->
@@ -37,7 +54,7 @@
 					<div class="col-md-12">
                         <label class="control-label" for="content">Content</label>
 						
-						{{ Form::textarea('content', null, array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
+						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
 						{{{ $errors->first('content', ':message') }}}
 					</div>
 				</div>
@@ -46,6 +63,7 @@
 			<!-- ./ general tab -->
 
 			<!-- Meta Data tab -->
+			
 			<div class="tab-pane" id="tab-meta-data">
 				<!-- Meta Title -->
 				<div class="form-group {{{ $errors->has('meta-title') ? 'error' : '' }}}">
