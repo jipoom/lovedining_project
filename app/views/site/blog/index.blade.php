@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h4><strong><a href="{{{ $post->url() }}}">{{ String::title($post->title) }}</a></strong></h4>
-			</div>
+			</div>			
 		</div>
 		<!-- ./ post title -->
 
@@ -22,11 +22,21 @@
 				<p>
 					{{ String::tidy(Str::limit($post->content, 200)) }}
 				</p>
-				<p><a class="btn btn-mini btn-default" href="{{{ $post->url() }}}">Read more</a></p>
+				<p><a class="btn btn-mini btn-default" href="{{{ $post->url() }}}">Read more</a></p>	
 			</div>
+			
 		</div>
 		<!-- ./ post content -->
 
+		<!-- Post address -->
+		<div class="row">
+			<div class="col-md-8">
+				จังหวัด{{ String::tidy($post->province) }}	&nbsp
+			</div>
+		</div>
+		<!-- ./ post address -->
+		
+		
 		<!-- Post Footer -->
 		<div class="row">
 			<div class="col-md-8">

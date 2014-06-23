@@ -27,14 +27,24 @@
 {{-- Content --}}
 @section('content')
 <h3>{{ $post->title }}</h3>
-
+<p>ร้านอาหาร: {{ $post->restaurant_name }}</p>
+<p>โทร: {{ $post->tel }}</p>
+<p>ที่อยู่:
+{{ String::tidy($post->street_addr) }}&nbsp
+แขวง{{ String::tidy($post->subdistrict) }},	&nbsp
+เขต{{ String::tidy($post->district) }},&nbsp
+จังหวัด{{ String::tidy($post->province) }}	&nbsp
+{{ String::tidy($post->zip) }}	&nbsp</p>
+<br><h4><label>Review</h4>
 <p>{{ $post->content() }}</p>
+
 
 <div>
 	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
 </div>
-
 <hr />
+<p></p>
+
 
 <a id="comments"></a>
 <h4>{{{ $comments->count() }}} Comments</h4>

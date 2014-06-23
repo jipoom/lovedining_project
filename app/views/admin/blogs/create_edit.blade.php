@@ -36,7 +36,7 @@
 						
 						 <label class="control-label" for="title">เบอร์โทร</label>
 						{{ Form::text('tel', Input::old('title', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
-						{{{ $errors->first('tel', ':message') }}}
+						{{{ $errors->first('tel', ':message') }}}<p>
 						
 						 <label class="control-label" for="title">ที่อยู่</label></P>
 					    {{ Form::text('street_addr', Input::old('title', isset($post) ? $post->street_addr : null), array('placeholder'=>'เลขที่')) }} 

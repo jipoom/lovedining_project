@@ -71,7 +71,7 @@ class AdminBlogsController extends AdminController {
             'title'   => 'required|min:3',
             'restaurant_name'  => 'required|min:3',
             'content' => 'required|min:3',
-            'tel' => 'required|min:9|max:11'
+            'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i'
         );
 
         // Validate the inputs
@@ -160,10 +160,13 @@ class AdminBlogsController extends AdminController {
 	{
 
         // Declare the rules for the form validation
-        $rules = array(
+         $rules = array(
             'title'   => 'required|min:3',
-            'content' => 'required|min:3'
+            'restaurant_name'  => 'required|min:3',
+            'content' => 'required|min:3',
+            'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i'
         );
+
 
         // Validate the inputs
         $validator = Validator::make(Input::all(), $rules);
@@ -173,7 +176,15 @@ class AdminBlogsController extends AdminController {
         {
             // Update the blog post data
             $post->title            = Input::get('title');
-            $post->slug             = Str::slug(Input::get('title'));
+            $this->post->restaurant_name  = Input::get('restaurant_name');
+			$this->post->tel  = Input::get('tel');
+			$this->post->street_addr  = Input::get('street_addr');
+			$this->post->subdistrict  = Input::get('subdistrict');
+			$this->post->district  = Input::get('district');
+			$this->post->province  = Input::get('province');
+			$this->post->zip  = Input::get('zip');
+			$this->post->category_id  = Input::get('category_id');
+            //$post->slug             = Str::slug(Input::get('title'));
             $post->content          = Input::get('content');
             $post->meta_title       = Input::get('meta-title');
             $post->meta_description = Input::get('meta-description');
