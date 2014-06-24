@@ -35,7 +35,7 @@
 						 {{ Form::select('category_id', $category, Input::old('title', isset($post) ? Category::find($post->category_id)->id : null)); }} </p>  
 						
 						 <label class="control-label" for="title">เบอร์โทร</label>
-						{{ Form::text('tel', Input::old('title', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
+						{{ Form::text('tel', Input::old('title', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'เบอร์โทรศัพท์ (eg. 021234567, 0987654321)'))}} </p>
 						{{{ $errors->first('tel', ':message') }}}<p>
 						
 						 <label class="control-label" for="title">ที่อยู่</label></P>
