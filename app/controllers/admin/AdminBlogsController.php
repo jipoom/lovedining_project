@@ -88,18 +88,21 @@ class AdminBlogsController extends AdminController {
 			$this->post->restaurant_name  = Input::get('restaurant_name');
 			$this->post->tel  = Input::get('tel');
 			$this->post->street_addr  = Input::get('street_addr');
+			$this->post->soi    = Input::get('soi');
+			$this->post->road    = Input::get('road');
 			$this->post->subdistrict  = Input::get('subdistrict');
 			$this->post->district  = Input::get('district');
 			$this->post->province  = Input::get('province');
 			$this->post->zip  = Input::get('zip');
 			$this->post->category_id  = Input::get('category_id');
+			
             //$this->post->slug             = Str::slug(Input::get('title'));
             $this->post->content          = Input::get('content');
             $this->post->meta_title       = Input::get('meta-title');
             $this->post->meta_description = Input::get('meta-description');
             $this->post->meta_keywords    = Input::get('meta-keywords');
             $this->post->user_id          = $user->id;
-
+			
             // Was the blog post created?
             if($this->post->save())
             {
@@ -142,8 +145,7 @@ class AdminBlogsController extends AdminController {
 		$category = array($init_cat->id => $init_cat->category_name);
 		$categories = Category::all();
 		foreach($categories as $temp)
-		{
-				
+		{				
 			$category = array_add($category, $temp->id, $temp->category_name);
 		}
         // Show the page
@@ -179,6 +181,8 @@ class AdminBlogsController extends AdminController {
             $this->post->restaurant_name  = Input::get('restaurant_name');
 			$this->post->tel  = Input::get('tel');
 			$this->post->street_addr  = Input::get('street_addr');
+			$this->post->soi    = Input::get('soi');
+			$this->post->road    = Input::get('road');
 			$this->post->subdistrict  = Input::get('subdistrict');
 			$this->post->district  = Input::get('district');
 			$this->post->province  = Input::get('province');

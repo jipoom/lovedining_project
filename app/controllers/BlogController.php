@@ -42,6 +42,19 @@ class BlogController extends BaseController {
 	}
 
 	/**
+	 * Returns blog posts in accordance with the selected catagory.
+	 *
+	 * @return View
+	 */
+	public function getCategory($category)
+	{
+		// Get all the blog posts
+		$posts = $this->post->where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
+
+		// Show the page
+		return View::make('site/blog/index', compact('posts'));
+	}
+	/**
 	 * View a blog post.
 	 *
 	 * @param  string  $slug
@@ -71,11 +84,27 @@ class BlogController extends BaseController {
         if(!empty($user)) {
             $canComment = $user->can('post_comment');
         }
-		$address = $post->street_addr.' '.$post->subdistrict.' '.$post->district.' '.$post->province;
+		//form phisical address
+		$address = $post->street_addr.' '.$post->soi.' '.$post->road.' '.$post->subdistrict.' '.$post->district.' '.$post->province;
+		
+		//add to the PostsUserRead
+		$postsUserRead = new PostsUserRead;
+		
+		//check if user is logged in and has not read this review yet.
+		if(Auth::check() && !($postsUserRead->where('post_id','=', $postId)->where('user_id','=', Auth::user()->id)->exists()))
+		{
+			
+			$postsUserRead->user_id = Auth::user()->id;
+			$postsUserRead->post_id = $postId;
+			$postsUserRead->category_id = $post->category_id;
+			$postsUserRead->save();
+		}
+		
+		
 		// Show the page
 		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment', 'address'));
 	}
-
+	
 	/**
 	 * View a blog post.
 	 *

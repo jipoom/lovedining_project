@@ -61,6 +61,16 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
 						<li {{ (Request::is('/') ? ' class="active"' : '') }}><a href="{{{ URL::to('') }}}">Home</a></li>
+						@foreach(Category::all() as $category)
+								<li class="active"><a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
+								@if (Auth::check()) 
+									@if(PostsUserRead::where('user_id', '=', Auth::user()->id)->where('category_id', '=', $category->id)->count() != Post::where('category_id', '=', $category->id)->count())
+										(new)
+									@endif	
+								@endif		
+								</a></li>
+								
+						@endforeach	
 					</ul>
 
                     <ul class="nav navbar-nav pull-right">

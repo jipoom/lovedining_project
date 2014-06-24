@@ -30,11 +30,33 @@
 <p>ร้านอาหาร: {{ $post->restaurant_name }}</p>
 <p>โทร: {{ $post->tel }}</p>
 <p>ที่อยู่:
-{{ String::tidy($post->street_addr) }}&nbsp
-แขวง{{ String::tidy($post->subdistrict) }},	&nbsp
-เขต{{ String::tidy($post->district) }},&nbsp
-จังหวัด{{ String::tidy($post->province) }}	&nbsp
-{{ String::tidy($post->zip) }}	&nbsp</p>
+@if($post->street_addr)
+	{{$post->street_addr}}
+@endif
+&nbsp
+@if($post->soi)
+	ซอย{{$post->soi}}
+@endif
+&nbsp
+@if($post->road)
+	ถนน{{$post->road}}
+@endif
+&nbsp
+@if($post->subdistrict)
+	แขวง{{$post->subdistrict}}
+@endif
+&nbsp</br>
+@if($post->district)
+	เขต{{$post->district}}
+@endif	
+&nbsp
+@if($post->province)
+	{{$post->province}}
+@endif	
+&nbsp
+@if($post->zip)
+	{{$post->zip}}
+@endif	
 
 <input type="hidden" id="province" value= {{String::tidy($post->province) }}/>
 

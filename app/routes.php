@@ -107,5 +107,8 @@ Route::get('contact-us', function()
 Route::get('{postId}', 'BlogController@getView');
 Route::post('{postId}', 'BlogController@postView');
 
+# Category - ID
+Route::get('category/{categoryId}', 'BlogController@getCategory');
+
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));

@@ -40,6 +40,8 @@
 						
 						 <label class="control-label" for="title">ที่อยู่</label></P>
 					    {{ Form::text('street_addr', Input::old('title', isset($post) ? $post->street_addr : null), array('placeholder'=>'เลขที่')) }} 
+					    {{ Form::text('soi', Input::old('title', isset($post) ? $post->soi : null), array('placeholder'=>'ซอย')) }} 
+					    {{ Form::text('road', Input::old('title', isset($post) ? $post->road : null), array('placeholder'=>'ถนน')) }} 
 					    {{ Form::text('subdistrict', Input::old('title', isset($post) ? $post->subdistrict : null), array('placeholder'=>'แขวง')) }} </p>  
 					    {{ Form::text('district', Input::old('title', isset($post) ? $post->district : null), array('placeholder'=>'เขต')) }}  
 					    {{ Form::text('province', Input::old('title', isset($post) ? $post->province : null), array('placeholder'=>'จังหวัด')) }} 
