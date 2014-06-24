@@ -71,9 +71,9 @@ class BlogController extends BaseController {
         if(!empty($user)) {
             $canComment = $user->can('post_comment');
         }
-
+		$address = $post->street_addr.' '.$post->subdistrict.' '.$post->district.' '.$post->province;
 		// Show the page
-		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
+		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment', 'address'));
 	}
 
 	/**
