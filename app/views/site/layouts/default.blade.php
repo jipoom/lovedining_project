@@ -68,7 +68,7 @@
 									$unread = 0;
 									$unread = Post::where('category_id', '=', $category->id)->count() - PostsUserRead::where('user_id', '=', Auth::user()->id)->where('category_id', '=', $category->id)->count();
 									?>
-									@if($unread!=0)
+									@if($unread>0)
 										({{$unread}})
 									@endif	
 								@endif		

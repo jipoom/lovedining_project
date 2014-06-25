@@ -21,7 +21,7 @@
 		</h3>
 	</div>
 
-	<table id="blogs" class="table table-striped table-hover">
+	<table id="category" class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th class="col-md-4">{{{ Lang::get('admin/category/table.title') }}}</th>
@@ -39,7 +39,7 @@
 	<script type="text/javascript">
 		var oTable;
 		$(document).ready(function() {
-			oTable = $('#blogs').dataTable( {
+			oTable = $('#category').dataTable( {
 				"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
 				"sPaginationType": "bootstrap",
 				"oLanguage": {

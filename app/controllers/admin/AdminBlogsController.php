@@ -139,7 +139,7 @@ class AdminBlogsController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/blogs/title.blog_update');
-		
+		echo $post;
 		//Category
 		$init_cat = Category::first();
 		$category = array($init_cat->id => $init_cat->category_name);
@@ -246,10 +246,9 @@ class AdminBlogsController extends AdminController {
         {
             $id = $post->id;
             $post->delete();
-
             // Was the blog post deleted?
             $post = Post::find($id);
-            if(empty($post))
+            if(empty($post) && PostsUserRead::where('post_id', '=', $id)->delete())
             {
                 // Redirect to the blog posts management page
                 return Redirect::to('admin/blogs')->with('success', Lang::get('admin/blogs/messages.delete.success'));

@@ -18,6 +18,7 @@
 Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
+Route::model('category', 'Category');
 Route::model('role', 'Role');
 
 /** ------------------------------------------
@@ -26,6 +27,7 @@ Route::model('role', 'Role');
  */
 Route::pattern('comment', '[0-9]+');
 Route::pattern('post', '[0-9]+');
+Route::pattern('category', '[0-9]+');
 Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
