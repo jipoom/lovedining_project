@@ -64,8 +64,12 @@
 						@foreach(Category::all() as $category)
 								<li class="active"><a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
 								@if (Auth::check()) 
-									@if(PostsUserRead::where('user_id', '=', Auth::user()->id)->where('category_id', '=', $category->id)->count() != Post::where('category_id', '=', $category->id)->count())
-										(new)
+									<?php 
+									$unread = 0;
+									$unread = Post::where('category_id', '=', $category->id)->count() - PostsUserRead::where('user_id', '=', Auth::user()->id)->where('category_id', '=', $category->id)->count();
+									?>
+									@if($unread!=0)
+										({{$unread}})
 									@endif	
 								@endif		
 								</a></li>

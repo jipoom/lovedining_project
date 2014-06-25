@@ -50,6 +50,10 @@ class Post extends Eloquent {
 		return $this->hasMany('Comment');
 	}
 
+	public function post()
+	{
+		return $this->belongsTo('Category', 'category_id');
+	}
     /**
      * Get the date the post was created.
      *

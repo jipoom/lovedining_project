@@ -1,6 +1,6 @@
 <?php
 
-class AdminBlogsController extends AdminController {
+class AdminCategoryController extends AdminController {
 
 
     /**
@@ -27,13 +27,13 @@ class AdminBlogsController extends AdminController {
     public function getIndex()
     {
         // Title
-        $title = Lang::get('admin/blogs/title.blog_management');
+        $title = Lang::get('admin/category/title.category_management');
 
         // Grab all the blog posts
-        $posts = $this->post;
+        $category = Category::all();
 
         // Show the page
-        return View::make('admin/blogs/index', compact('posts', 'title'));
+        return View::make('admin/category/index', compact('category', 'title'));
     }
 
 	/**
@@ -44,19 +44,10 @@ class AdminBlogsController extends AdminController {
 	public function getCreate()
 	{
         // Title
-        $title = Lang::get('admin/blogs/title.create_a_new_blog');
+        $title = Lang::get('admin/category/title.category_update');
 		
-		//Category
-		$init_cat = Category::first();
-		$category = array($init_cat->id => $init_cat->category_name);
-		$categories = Category::all();
-		foreach($categories as $temp)
-		{
-				
-			$category = array_add($category, $temp->id, $temp->category_name);
-		}
         // Show the page
-        return View::make('admin/blogs/create_edit', compact('title','category'));
+        return View::make('admin/category/create_edit', compact('title'));
 	}
 
 	/**
@@ -107,11 +98,11 @@ class AdminBlogsController extends AdminController {
             if($this->post->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/blogs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+                return Redirect::to('admin/blogs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/category/messages.create.success'));
             }
 
             // Redirect to the blog post create page
-            return Redirect::to('admin/blogs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
+            return Redirect::to('admin/blogs/create')->with('error', Lang::get('admin/category/messages.create.error'));
         }
 
         // Form validation failed
@@ -135,21 +126,15 @@ class AdminBlogsController extends AdminController {
      * @param $post
      * @return Response
      */
-	public function getEdit($post)
+	public function getEdit($categoryId)
 	{
         // Title
-        $title = Lang::get('admin/blogs/title.blog_update');
+        $title = Lang::get('admin/category/title.category_update');
 		
 		//Category
-		$init_cat = Category::first();
-		$category = array($init_cat->id => $init_cat->category_name);
-		$categories = Category::all();
-		foreach($categories as $temp)
-		{				
-			$category = array_add($category, $temp->id, $temp->category_name);
-		}
+		$category = Category::find($categoryId);
         // Show the page
-        return View::make('admin/blogs/create_edit', compact('post', 'title', 'category'));
+        return View::make('admin/category/create_edit', compact('category','title'));
 	}
 
     /**
@@ -158,15 +143,12 @@ class AdminBlogsController extends AdminController {
      * @param $post
      * @return Response
      */
-	public function postEdit($post)
+	public function postEdit($category)
 	{
 
         // Declare the rules for the form validation
          $rules = array(
-            'title'   => 'required|min:3',
-            'restaurant_name'  => 'required|min:3',
-            'content' => 'required|min:3',
-            'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i'
+            'category'   => 'required|min:3',
         );
 
 
@@ -177,32 +159,17 @@ class AdminBlogsController extends AdminController {
         if ($validator->passes())
         {
             // Update the blog post data
-            $post->title            = Input::get('title');
-            $post->restaurant_name  = Input::get('restaurant_name');
-			$post->tel  = Input::get('tel');
-			$post->street_addr  = Input::get('street_addr');
-			$post->soi    = Input::get('soi');
-			$post->road    = Input::get('road');
-			$post->subdistrict  = Input::get('subdistrict');
-			$post->district  = Input::get('district');
-			$post->province  = Input::get('province');
-			$post->zip  = Input::get('zip');
-			$post->category_id  = Input::get('category_id');
-            //$post->slug             = Str::slug(Input::get('title'));
-            $post->content          = Input::get('content');
-            $post->meta_title       = Input::get('meta-title');
-            $post->meta_description = Input::get('meta-description');
-            $post->meta_keywords    = Input::get('meta-keywords');
+            $category->category_name  = Input::get('category');
 
             // Was the blog post updated?
-            if($post->save())
+            if($category->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
+                return Redirect::to('admin/category/' . $category->id . '/edit')->with('success', Lang::get('admin/category/messages.update.success'));
             }
 
             // Redirect to the blogs post management page
-            return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
+            return Redirect::to('admin/category/' . $category->id . '/edit')->with('error', Lang::get('admin/category/messages.update.error'));
         }
 
         // Form validation failed
@@ -219,7 +186,7 @@ class AdminBlogsController extends AdminController {
     public function getDelete($post)
     {
         // Title
-        $title = Lang::get('admin/blogs/title.blog_delete');
+        $title = Lang::get('admin/category/title.category_delete');
 
         // Show the page
         return View::make('admin/blogs/delete', compact('post', 'title'));
@@ -252,28 +219,40 @@ class AdminBlogsController extends AdminController {
             if(empty($post))
             {
                 // Redirect to the blog posts management page
-                return Redirect::to('admin/blogs')->with('success', Lang::get('admin/blogs/messages.delete.success'));
+                return Redirect::to('admin/blogs')->with('success', Lang::get('admin/category/messages.delete.success'));
             }
         }
         // There was a problem deleting the blog post
-        return Redirect::to('admin/blogs')->with('error', Lang::get('admin/blogs/messages.delete.error'));
+        return Redirect::to('admin/blogs')->with('error', Lang::get('admin/category/messages.delete.error'));
     }
 
-    /**
+       /**
      * Show a list of all the blog posts formatted for Datatables.
      *
      * @return Datatables JSON
      */
     public function getData()
-    {
-        $posts = Post::select(array('posts.id', 'posts.title', 'posts.id as comments', 'posts.created_at'));
+   {
+        /*$category = Category::join('posts', 'category_id', '=', 'category.id')
+                        ->select(array('category.id as id', 'category.category_name as category'));
 
-        return Datatables::of($posts)
+        return Datatables::of($category)
 
-        ->edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}')
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/comments/\' . $id . \'/edit\' ) }}}" class="iframe btn btn-default btn-xs">{{{ Lang::get(\'button.edit\') }}}</a>
+                <a href="{{{ URL::to(\'admin/comments/\' . $id . \'/delete\' ) }}}" class="iframe btn btn-xs btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+            ')
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+
+        ->make();*/
+        
+        $category = Category::select(array('category.id', 'category.category_name', 'category.id as posts'));
+
+        return Datatables::of($category)
+
+        ->edit_column('posts', '{{ DB::table(\'posts\')->where(\'category_id\', \'=\', $id)->count() }}')
+
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/category/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
+                <a href="{{{ URL::to(\'admin/category/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
 
         ->remove_column('id')

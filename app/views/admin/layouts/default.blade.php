@@ -94,6 +94,7 @@
     							<li{{ (Request::is('admin/roles*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/roles') }}}"><span class="glyphicon glyphicon-user"></span> Roles</a></li>
     						</ul>
     					</li>
+    					<li{{ (Request::is('admin/category*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/category') }}}"><span class="glyphicon glyphicon-list-alt"></span> Category</a></li>
     				</ul>
     				<ul class="nav navbar-nav pull-right">
     					<li><a href="{{{ URL::to('/') }}}">View Homepage</a></li>
