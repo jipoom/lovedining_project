@@ -95,6 +95,7 @@
     						</ul>
     					</li>
     					<li{{ (Request::is('admin/category*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/category') }}}"><span class="glyphicon glyphicon-list-alt"></span> Category</a></li>
+    					<li{{ (Request::is('admin/campaign*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-list-alt"></span> Campaign</a></li>
     				</ul>
     				<ul class="nav navbar-nav pull-right">
     					<li><a href="{{{ URL::to('/') }}}">View Homepage</a></li>

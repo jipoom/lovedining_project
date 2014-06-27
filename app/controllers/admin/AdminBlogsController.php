@@ -277,8 +277,12 @@ class AdminBlogsController extends AdminController {
      */
     public function getData()
     {
-        $posts = Post::select(array('posts.id', 'posts.title', 'posts.id as comments', 'posts.created_at'));
+        $posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category' ,'posts.id as comments', 'posts.created_at'))
+		->join('category', 'posts.category_id', '=', 'category.id');
 
+        //$posts = Post::leftjoin('category', 'posts.category_id', '=', 'category.id')
+        //->select(array('posts.id', 'posts.title', 'category.category_name as category ','posts.id as comments', 'posts.created_at'));
+        
         return Datatables::of($posts)
 
         ->edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}')
@@ -290,6 +294,8 @@ class AdminBlogsController extends AdminController {
         ->remove_column('id')
 
         ->make();
+       
+
     }
 
 }

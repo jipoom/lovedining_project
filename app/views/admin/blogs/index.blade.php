@@ -14,17 +14,20 @@
 	<div class="page-header">
 		<h3>
 			{{{ $title }}}
-
+			
 			<div class="pull-right">
 				<a href="{{{ URL::to('admin/blogs/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+			 	
 			</div>
 		</h3>
 	</div>
-
+	
 	<table id="blogs" class="table table-striped table-hover">
 		<thead>
+			
 			<tr>
 				<th class="col-md-4">{{{ Lang::get('admin/blogs/table.title') }}}</th>
+				<th class="col-md-2">{{{ Lang::get('admin/blogs/table.categories') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/blogs/table.comments') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/blogs/table.created_at') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>

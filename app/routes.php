@@ -19,6 +19,7 @@ Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('category', 'Category');
+Route::model('campaign', 'Campaign');
 Route::model('role', 'Role');
 
 /** ------------------------------------------
@@ -78,6 +79,15 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::get('category/{category}/delete', 'AdminCategoryController@getDelete');
     Route::post('category/{category}/delete', 'AdminCategoryController@postDelete');
     Route::controller('category', 'AdminCategoryController');
+	
+	# Campaign Management
+	Route::get('campaign/{campaign}/show', 'AdminCampaignController@getShow');
+    Route::get('campaign/{campaign}/show', 'AdminCampaignController@getShow');
+    Route::get('campaign/{campaign}/edit', 'AdminCampaignController@getEdit');
+    Route::post('campaign/{campaign}/edit', 'AdminCampaignController@postEdit');
+    Route::get('campaign/{campaign}/delete', 'AdminCampaignController@getDelete');
+    Route::post('campaign/{campaign}/delete', 'AdminCampaignController@postDelete');
+    Route::controller('campaign', 'AdminCampaignController');
 
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');
