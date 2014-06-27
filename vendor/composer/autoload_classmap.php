@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdminBlogsController' => $baseDir . '/app/controllers/admin/AdminBlogsController.php',
+    'AdminCampaignController' => $baseDir . '/app/controllers/admin/AdminCampaignController.php',
     'AdminCategoryController' => $baseDir . '/app/controllers/admin/AdminCategoryController.php',
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',
@@ -19,6 +20,7 @@ return array(
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'BaseControllerTestCase' => $baseDir . '/app/tests/library/BaseControllerTestCase.php',
     'BlogController' => $baseDir . '/app/controllers/BlogController.php',
+    'Campaign' => $baseDir . '/app/models/Campaign.php',
     'Category' => $baseDir . '/app/models/Category.php',
     'Comment' => $baseDir . '/app/models/Comment.php',
     'CommentsTableSeeder' => $baseDir . '/app/database/seeds/CommentsTableSeeder.php',
@@ -394,6 +396,7 @@ return array(
     'Post' => $baseDir . '/app/models/Post.php',
     'PostsTableSeeder' => $baseDir . '/app/database/seeds/PostsTableSeeder.php',
     'PostsUserRead' => $baseDir . '/app/models/PostsUserRead.php',
+    'Province' => $baseDir . '/app/models/Province.php',
     'Role' => $baseDir . '/app/models/Role.php',
     'RolesTableSeeder' => $baseDir . '/app/database/seeds/RolesTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',

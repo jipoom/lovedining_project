@@ -49,8 +49,13 @@ class Post extends Eloquent {
 	{
 		return $this->hasMany('Comment');
 	}
-
-	public function post()
+	
+	public function campaign()
+	{
+		return $this->hasMany('Campaign');
+	}
+	
+	public function cetagory()
 	{
 		return $this->belongsTo('Category', 'category_id');
 	}
