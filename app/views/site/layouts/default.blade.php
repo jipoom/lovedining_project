@@ -100,7 +100,8 @@
 			<!-- Notifications -->
 			@include('notifications')
 			<!-- ./ notifications -->
-
+			
+			@yield('sort')			
 			<!-- Content -->
 			@yield('content')
 			<!-- ./ content -->
@@ -115,7 +116,7 @@
 
 	    <div id="footer">
 	      <div class="container">
-	        <p class="muted credit">Laravel 4 Starter Site on <a href="https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site">Github</a>.</p>
+	        <p class="muted credit">Lovedining</p>
 	      </div>
 	    </div>
 

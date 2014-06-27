@@ -55,8 +55,19 @@ class AdminBlogsController extends AdminController {
 				
 			$category = array_add($category, $temp->id, $temp->category_name);
 		}
+		
+		//Province
+		$init_province = Province::first();
+		$provinceTemp = array($init_province->id => $init_province->province_name);
+		$provinces = Province::all();
+		foreach($provinces as $temp)
+		{		
+			$provinceTemp = array_add($provinceTemp, $temp->id, $temp->province_name);
+		}
+		
+		
         // Show the page
-        return View::make('admin/blogs/create_edit', compact('title','category'));
+        return View::make('admin/blogs/create_edit', compact('title','category','provinceTemp'));
 	}
 
 	/**
@@ -139,7 +150,6 @@ class AdminBlogsController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/blogs/title.blog_update');
-		echo $post;
 		//Category
 		$init_cat = Category::first();
 		$category = array($init_cat->id => $init_cat->category_name);
@@ -148,6 +158,8 @@ class AdminBlogsController extends AdminController {
 		{				
 			$category = array_add($category, $temp->id, $temp->category_name);
 		}
+		
+		
         // Show the page
         return View::make('admin/blogs/create_edit', compact('post', 'title', 'category'));
 	}

@@ -119,7 +119,13 @@ Route::get('{postId}', 'BlogController@getView');
 Route::post('{postId}', 'BlogController@postView');
 
 # Category - ID
-Route::get('category/{categoryId}', 'BlogController@getCategory');
+//Route::get('category/{categoryId}/{mode}', 'BlogController@getCategory');
+
+Route::group(array('prefix' => 'category'), function()
+{
+	 Route::get('{categoryId}/{mode}', 'BlogController@getCategoryMode');
+	 Route::get('{categoryId}/', 'BlogController@getCategory');
+});
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
