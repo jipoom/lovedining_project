@@ -27,7 +27,7 @@ class AdminCampaignController extends AdminController {
     public function getIndex()
     {
         // Title
-        $title = Lang::get('admin/campaign/title.category_management');
+        $title = Lang::get('admin/campaign/title.campaign_management');
 
         // Grab all the blog posts
         $campaign = $this->campaign;
@@ -45,7 +45,7 @@ class AdminCampaignController extends AdminController {
 	{
 		
 		// Title
-        $title = Lang::get('admin/campaign/title.create_a_new_category');
+        $title = Lang::get('admin/campaign/title.create_a_new_campaign');
 		
 		$init_post = Post::first();
 		$restaurant = array($init_post->id => $init_post->restaurant_name);
@@ -69,7 +69,9 @@ class AdminCampaignController extends AdminController {
 	{
         // Declare the rules for the form validation
          $rules = array(
-            'campaign'   => 'required|min:3|unique:category,category_name',
+            'campaign'   => 'required|min:3',
+            'expiryDate' => 'required',
+            'description' => 'required'
         );
 
 
@@ -81,12 +83,14 @@ class AdminCampaignController extends AdminController {
         {
             // Update the blog post data
             $this->campaign->name  = Input::get('campaign');
-
+			$this->campaign->post_id  = Input::get('postId');
+			$this->campaign->expiry_date  = Input::get('expiryDate');
+			$this->campaign->description  = Input::get('description');
             // Was the blog post updated?
             if($this->campaign->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/campaign/' . $this->campaign->id . '/edit')->with('success', Lang::get('admin/category/campaign.create.success'));
+                return Redirect::to('admin/campaign/' . $this->campaign->id . '/edit')->with('success', Lang::get('admin/campaign/messages.create.success'));
             }
 
             // Redirect to the blog post create page
@@ -117,7 +121,7 @@ class AdminCampaignController extends AdminController {
 	public function getEdit($campaign)
 	{
         // Title
-        $title = Lang::get('admin/campaign/title.category_update');
+        $title = Lang::get('admin/campaign/title.campaign_update');
 		
 		$init_post = Post::first();
 		$restaurant = array($init_post->id => $init_post->restaurant_name);
@@ -142,7 +146,9 @@ class AdminCampaignController extends AdminController {
 		
         // Declare the rules for the form validation
          $rules = array(
-            'campaign'   => 'required|min:3|unique:campaign,name',
+            'campaign'   => 'required|min:3',
+            'expiryDate' => 'required',
+            'description' => 'required'
         );
 
 
@@ -154,7 +160,10 @@ class AdminCampaignController extends AdminController {
         {
             // Update the blog post data
             $campaign->name  = Input::get('campaign');
-
+			$campaign->name  = Input::get('campaign');
+			$campaign->post_id  = Input::get('postId');
+			$campaign->expiry_date  = Input::get('expiryDate');
+			$campaign->description  = Input::get('description');
             // Was the blog post updated?
             if($campaign->save())
             {
@@ -167,7 +176,7 @@ class AdminCampaignController extends AdminController {
         }
 
         // Form validation failed
-        return Redirect::to('admin/category/' . $category->id . '/edit')->withInput()->withErrors($validator);
+        return Redirect::to('admin/campaign/' . $campaign->id . '/edit')->withInput()->withErrors($validator);
 	}
 
 

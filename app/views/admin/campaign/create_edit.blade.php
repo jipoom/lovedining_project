@@ -1,5 +1,9 @@
 @extends('admin.layouts.modal')
 
+<script language="JavaScript" src="{{asset('assets/js/datepicker/ts_picker.js')}}"></script>
+
+
+
 {{-- Content --}}
 @section('content')
 	<!-- Tabs -->
@@ -25,16 +29,22 @@
 						{{ Form::text('campaign',Input::old('campaign', isset($campaign) ? $campaign->name : null) , array('class'=>'form-control', 'placeholder'=>'Campaign name'))}} </p>
 						{{{ $errors->first('campaign', ':message') }}}
 						
-						 <label class="control-label" for="title">ร้านอาหาร</label>
+						 <label class="control-label" for="postId">ร้านอาหาร</label>
 						
-						 {{ Form::select('restaurant_name', $restaurant, Input::old('restaurant_name', isset($campaign) ? Campaign::find($campaign->post_id): null)); }} </p>  
+						 {{ Form::select('postId', $restaurant, Input::old('postId', isset($campaign) ? $campaign->post_id: null)); }} </p>  
 						
 						 <!-- Selection Expiry Date -->
-						 <label class="control-label" for="title">Expiry Date</label>
-						 <input type="Text" name="timestamp" value="">
-<a href="javascript:show_calendar('document.form_edit.timestamp', document.form_edit.timestamp.value);"><img src="{{asset('assets/js/datepicker/cal.gif')}}" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
+						 <label class="control-label" for="timestamp">Expiry Date</label>
+															
 						
-					
+						{{ Form::text('expiryDate',Input::old('expiryDate', isset($campaign) ? $campaign->expiry_date : null))}} </p>
+						{{{ $errors->first('campaign', ':message') }}}
+
+
+						</p>
+						 <label class="control-label" for="description">Description</label>
+						 {{ Form::textarea('description', Input::old('description', isset($campaign) ? $campaign->description : null), array('rows'=>'5'))}} </p>
+						 {{{ $errors->first('description', ':message') }}}	
 						
 					</div>
 				</div>
@@ -56,5 +66,5 @@
 		<!-- ./ form actions -->
 	</form>
 
-<script language="JavaScript" src="{{asset('assets/js/datepicker/ts_picker.js')}}"></script>
+
 @stop

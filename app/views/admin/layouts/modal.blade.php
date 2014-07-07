@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/jquery.simple-dtpicker.css')}}" />
 
 	<style>
 	.tab-pane {
@@ -122,6 +123,7 @@
     <script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
     <script src="{{asset('assets/js/prettify.js')}}"></script>
 	<script src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
+	<script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>
 	
  <script type="text/javascript">
 $(document).ready(function(){
@@ -146,6 +148,14 @@ event.preventDefault();
 });
 $('.wysihtml5').wysihtml5();
 $(prettyPrint)
+
+
+//DatePicker
+$(function(){
+		$('*[name=expiryDate]').appendDtpicker();
+});
+
+
 </script>
 
     @yield('scripts')

@@ -2,9 +2,9 @@
 
 return array(
 
-	'category_management'    => 'Campaign Management',
-	'category_update'        => 'Update a Campaign',
-	'category_delete'        => 'Delete a Campaign',
-	'create_a_new_category'  => 'Create a New Campaign',
+	'campaign_management'    => 'Campaign Management',
+	'campaign_update'        => 'Update a Campaign',
+	'campaign_delete'        => 'Delete a Campaign',
+	'create_a_new_campaign'  => 'Create a New Campaign',
 
 );
