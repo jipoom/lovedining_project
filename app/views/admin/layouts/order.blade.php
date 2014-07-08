@@ -48,13 +48,27 @@
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/wysihtml5/prettify.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
-	
+
 	<style>
 	body {
 		padding: 60px 0;
 	}
+	
+	#sortable1, #sortable2 {
+    border: 1px solid #eee;
+    width: 142px;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+  }
+  #sortable1 li, #sortable2 li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
 	</style>
 
 	@yield('styles')
@@ -63,12 +77,12 @@
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-
+	
 </head>
 
 <body>
 	
-
+	<div id = "showCategory">
 		<!-- Container -->
 		<div class="container">
 			<!-- Navbar -->
@@ -145,22 +159,21 @@
 		</div>
 		<!-- ./ container -->
 
+
+	</div>
+	<!-- ./ showCategory -->
 	<!-- Javascripts -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
     <script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-    <script src="{{asset('assets/js/datatables-bootstrap.js')}}"></script>
-    <script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
     <script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
     <script src="{{asset('assets/js/prettify.js')}}"></script>
-	
-	
-    <script type="text/javascript">
-    	$('.wysihtml5').wysihtml5();
-        $(prettyPrint);
-    </script>
+	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    
+
+   
 
     @yield('scripts')
 

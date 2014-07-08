@@ -27,7 +27,14 @@ class AdminCategoryController extends AdminController {
     public function getIndex()
     {
         // Title
-        $title = Lang::get('admin/category/title.category_management');
+        if(Request::is('admin/category*'))
+		{
+        	$title = Lang::get('admin/category/title.category_management');
+		}
+		else if(Request::is('admin/order*'))
+		{
+			$title = Lang::get('admin/category/title.order_management');
+		}
 
         // Grab all the blog posts
         $category = $this->category;
@@ -93,7 +100,7 @@ class AdminCategoryController extends AdminController {
      * @param $post
      * @return Response
      */
-	public function getShow($post)
+	public function getShow($category)
 	{
         // redirect to the frontend
 	}
@@ -209,6 +216,7 @@ class AdminCategoryController extends AdminController {
      */
     public function getData()
    {
+        	
         
         $category = Category::select(array('category.id', 'category.category_name', 'category.id as posts'));
 

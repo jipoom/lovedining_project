@@ -12,6 +12,7 @@ return array(
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',
     'AdminDashboardController' => $baseDir . '/app/controllers/admin/AdminDashboardController.php',
+    'AdminOrderController' => $baseDir . '/app/controllers/admin/AdminOrderController.php',
     'AdminRolesController' => $baseDir . '/app/controllers/admin/AdminRolesController.php',
     'AdminUsersController' => $baseDir . '/app/controllers/admin/AdminUsersController.php',
     'Andrew13\\Helpers\\String' => $baseDir . '/app/library/Andrew13/Helpers/String.php',

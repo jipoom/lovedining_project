@@ -71,9 +71,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('roles/{role}/delete', 'AdminRolesController@postDelete');
     Route::controller('roles', 'AdminRolesController');
 
+	# Category Order Management
+	Route::get('order/{category}/show', 'AdminOrderController@getShow');
+    Route::get('order/{mode}', 'AdminOrderController@changeOrder');
+    Route::controller('order', 'AdminOrderController');
+	
 	# Category Management
 	Route::get('category/{category}/show', 'AdminCategoryController@getShow');
-    Route::get('category/{category}/show', 'AdminCategoryController@getShow');
     Route::get('category/{category}/edit', 'AdminCategoryController@getEdit');
     Route::post('category/{category}/edit', 'AdminCategoryController@postEdit');
     Route::get('category/{category}/delete', 'AdminCategoryController@getDelete');
