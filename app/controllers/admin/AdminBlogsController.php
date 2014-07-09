@@ -210,6 +210,7 @@ class AdminBlogsController extends AdminController {
             if($post->save())
             {
                 // Redirect to the new blog post page
+                PostsUserRead::where('post_id', '=', $post->id)->delete();
                 return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
             }
 

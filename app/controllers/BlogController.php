@@ -117,7 +117,7 @@ class BlogController extends BaseController {
 		$postsUserRead = new PostsUserRead;
 		
 		//check if user is logged in and has not read this review yet.
-		if(Auth::check() && !($postsUserRead->where('post_id','=', $postId)->where('user_id','=', Auth::user()->id)->exists()))
+		if(Auth::check() && !($postsUserRead->where('post_id','=', $postId)->where('user_id','=', Auth::user()->id)->where('category_id','=',$post->category_id)->exists()))
 		{
 			
 			$postsUserRead->user_id = Auth::user()->id;
