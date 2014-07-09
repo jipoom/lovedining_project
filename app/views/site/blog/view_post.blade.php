@@ -27,16 +27,14 @@
 {{-- Content --}}
 @section('content')
 <h3 style="color: #1AC4BF">{{ $post->title }}</h3>
-
-
-
-<br><h4><label>Review</h4>
+<div>
+	<span class="badge badge-info pull-right">Posted {{{ $post->date() }}}</span>
+</div>
+<br>
 <p>{{ $post->content() }}</p>
 
 
-<div>
-	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
-</div>
+
 <hr />
 <p></p>
 
@@ -109,7 +107,7 @@
 
 <body onload="codeAddress({{'\''.$address.'\''}})">
 <div id="googleMap" style="width:400px;height:280px;"></div>
-
+<hr />
 <a id="comments"></a>
 <h4>{{{ $comments->count() }}} Comments</h4>
 
@@ -160,7 +158,7 @@ You don't have the correct permissions to add comments.
 </div>
 @endif
 
-<h4>Add a Comment</h4>
+
 <form  method="post" action="{{{ URL::to($post->id) }}}">
 	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 
@@ -168,7 +166,7 @@ You don't have the correct permissions to add comments.
 
 	<div class="form-group">
 		<div class="col-md-12">
-			<input type="submit" class="btn btn-default" id="submit" value="Submit" />
+			<input type="submit" class="btn btn-default" id="submit" value="Add a Comment" />
 		</div>
 	</div>
 </form>
