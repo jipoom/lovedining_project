@@ -74,6 +74,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	# Category Order Management
 	Route::get('order/{category}/show', 'AdminOrderController@getShow');
     Route::get('order/{mode}', 'AdminOrderController@changeOrder');
+	Route::get('order/save/{mode}', 'AdminOrderController@saveOrder');
     Route::controller('order', 'AdminOrderController');
 	
 	# Category Management

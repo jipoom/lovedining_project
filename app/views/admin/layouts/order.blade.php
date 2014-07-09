@@ -117,7 +117,7 @@
 	    						</a>
 	    						<ul class="dropdown-menu">
 	    							<li{{ (Request::is('admin/category*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/category') }}}"><span class="glyphicon glyphicon-list-alt"></span> Manage</a></li>
-	    							<li{{ (Request::is('admin/order*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/order') }}}"><span class="glyphicon glyphicon-list-alt"></span> Order</a></li>
+	    							<li{{ (Request::is('admin/order*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/order/') }}}"><span class="glyphicon glyphicon-list-alt"></span> Order</a></li>
 	    						</ul>
 	    					</li>
 							    			    					

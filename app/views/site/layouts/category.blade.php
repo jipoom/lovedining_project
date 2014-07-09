@@ -63,7 +63,8 @@
 	                <div class="collapse navbar-collapse navbar-ex1-collapse">
 	                    <ul class="nav navbar-nav">
 							<li {{ (Request::is('/') ? ' class="active"' : '') }}><a href="{{{ URL::to('') }}}">Home</a></li>
-							@foreach(Category::all() as $category)
+							<?php $mode = CategoryOrder::getMode();?>
+							@foreach(CategoryOrder::getOrder($mode) as $category)
 									<li class="active"><a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
 									@if (Auth::check()) 
 										<?php 
