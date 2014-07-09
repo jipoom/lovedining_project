@@ -100,7 +100,6 @@
 <br><h4><label>Review</h4>
 <p>{{ $post->content() }}</p>
 
-
 <div>
 	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
 </div>
@@ -130,12 +129,14 @@
 			</div>
 
 			<div class="col-md-11">
-				{{{ $comment->content() }}}
+				{{ $comment->content() }}
 			</div>
 		</div>
 	</div>
 </div>
+
 <hr />
+
 @endforeach
 @else
 <hr />
@@ -163,6 +164,7 @@ You don't have the correct permissions to add comments.
 	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 
 	<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>
+	
 
 	<div class="form-group">
 		<div class="col-md-12">

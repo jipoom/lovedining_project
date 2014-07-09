@@ -48,6 +48,7 @@ class AdminOrderController extends AdminController {
 		//Sort Category by mode
 		$title = Lang::get('admin/category/title.order_management');
 		$categories = CategoryOrder::getOrder($mode);
+		$success = "Your comment was added with success.";
 		$rank = 1;
 		foreach ($categories as $category) {
 			$temp = Category::find($category -> id);
@@ -64,6 +65,7 @@ class AdminOrderController extends AdminController {
 		}
 
 		return View::make('admin/order/index', compact('categories', 'title', 'mode'));
+		
 
 	}
 
