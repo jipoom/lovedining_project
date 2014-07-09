@@ -32,15 +32,19 @@ class AdminOrderController extends AdminController {
 		$order = CategoryOrder::all();
 		$mode = CategoryOrder::getMode();
 		$categories = CategoryOrder::getOrder($mode);
+		$message = null;
 		// Show the page
-		return View::make('admin/order/index', compact('categories', 'title', 'mode'));
+		return View::make('admin/order/index', compact('categories', 'title', 'mode','message'));
+		
 	}
 
 	public function changeOrder($mode) {
 		//Sort Category by mode
 		$title = Lang::get('admin/category/title.order_management');
 		$categories = CategoryOrder::getOrder($mode);
-		return View::make('admin/order/index', compact('categories', 'title', 'mode'));
+		$message = null;
+		return View::make('admin/order/index', compact('categories', 'title', 'mode','message'));
+		
 
 	}
 
@@ -48,7 +52,7 @@ class AdminOrderController extends AdminController {
 		//Sort Category by mode
 		$title = Lang::get('admin/category/title.order_management');
 		$categories = CategoryOrder::getOrder($mode);
-		$success = "Your comment was added with success.";
+		$message = "Change Category Order succeeded.";
 		$rank = 1;
 		foreach ($categories as $category) {
 			$temp = Category::find($category -> id);
@@ -63,8 +67,7 @@ class AdminOrderController extends AdminController {
 			$orderMode -> user_id = $user->id;
 			$orderMode -> save();
 		}
-
-		return View::make('admin/order/index', compact('categories', 'title', 'mode'));
+		return Redirect::to('admin/order')->with('success', Lang::get('admin/order/messages.change.success'));
 		
 
 	}

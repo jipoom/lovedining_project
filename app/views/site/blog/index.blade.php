@@ -39,7 +39,7 @@
 @endif
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-12">
 		<!-- Post Title -->
 		<div class="row">
 			<div class="col-md-8">

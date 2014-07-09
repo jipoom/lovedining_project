@@ -9,9 +9,24 @@
 @section('author')Laravel 4 Bootstrap Starter SIte @stop
 @section('description')Blogs administration index @stop
 
+
+
 {{-- Content --}}
 @section('content')
 	<div class="page-header">
+		@if ($message)
+		<div class="alert alert-success alert-block">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<h4>Success</h4>
+		    @if(is_array($message))
+		        @foreach ($message as $m)
+		            {{ $m }}
+		        @endforeach
+		    @else
+		        {{ $message }}
+		    @endif
+		</div>
+		@endif
 		<h3>
 			{{{ $title }}}
 			<div class="pull-right">
@@ -27,6 +42,7 @@
 				
 			</div>
 		</h3>
+		
 	</div>
 		<table id="blogs" class="table table-striped table-hover">
 		<thead>
