@@ -26,10 +26,23 @@
 
 {{-- Content --}}
 @section('content')
-<h3>{{ $post->title }}</h3>
-<p>ร้านอาหาร: {{ $post->restaurant_name }}</p>
-<p>โทร: {{ $post->tel }}</p>
-<p>ที่อยู่:
+<h3 style="color: #1AC4BF">{{ $post->title }}</h3>
+
+
+
+<br><h4><label>Review</h4>
+<p>{{ $post->content() }}</p>
+
+
+<div>
+	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
+</div>
+<hr />
+<p></p>
+
+<h4>ร้านอาหาร: {{ $post->restaurant_name }}</h4>
+<h5>โทร: {{ $post->tel }}</h5>
+<h5>ที่อยู่:
 @if($post->street_addr)
 	{{$post->street_addr}}
 @endif
@@ -45,7 +58,7 @@
 @if($post->subdistrict)
 	แขวง{{$post->subdistrict}}
 @endif
-&nbsp</br>
+&nbsp
 @if($post->district)
 	เขต{{$post->district}}
 @endif	
@@ -57,7 +70,7 @@
 @if($post->zip)
 	{{$post->zip}}
 @endif	
-
+</h5>
 <input type="hidden" id="province" value= {{String::tidy($post->province) }}/>
 
    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
@@ -97,16 +110,6 @@
 <body onload="codeAddress({{'\''.$address.'\''}})">
 <div id="googleMap" style="width:400px;height:280px;"></div>
 
-<br><h4><label>Review</h4>
-<p>{{ $post->content() }}</p>
-
-<div>
-	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
-</div>
-<hr />
-<p></p>
-
-
 <a id="comments"></a>
 <h4>{{{ $comments->count() }}} Comments</h4>
 
@@ -128,15 +131,13 @@
 				<hr />
 			</div>
 
-			<div class="col-md-11">
+			<div class="col-md-11"> 
 				{{ $comment->content() }}
 			</div>
 		</div>
 	</div>
 </div>
-
 <hr />
-
 @endforeach
 @else
 <hr />
@@ -164,7 +165,6 @@ You don't have the correct permissions to add comments.
 	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 
 	<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>
-	
 
 	<div class="form-group">
 		<div class="col-md-12">
@@ -173,4 +173,6 @@ You don't have the correct permissions to add comments.
 	</div>
 </form>
 @endif
+
+
 @stop
