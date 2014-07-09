@@ -1,4 +1,4 @@
-@extends('site.layouts.category')
+@extends('site.layouts.default')
 
 @section('sort')
 

@@ -45,9 +45,9 @@
 	</head>
 
 	<body>
-		<!-- To make sticky footer need to wrap in a div -->
 		<!-- div relaod -->
-		<div id="reload">
+		<div id = "reload">
+			<!-- To make sticky footer need to wrap in a div -->		
 			<div id="wrap">
 			<!-- Navbar -->
 			<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
@@ -79,30 +79,28 @@
 									
 							@endforeach	
 						</ul>
-						<input type="text" name="fname">
-						<button type="button">Search</button>
+	
 	                    <ul class="nav navbar-nav pull-right">
-		  						
-		  						@if (Auth::check())
-		    					<li class="divider-vertical"></li>
-		    					<li class="dropdown">
-		    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-		    								<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
-		    							</a>
-		    							<ul class="dropdown-menu">
-		    								@if (Auth::user()->hasRole('admin'))
-		    									<li><a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-wrench"></span> Admin Panel</a></li>
-		                        			@endif
-		    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
-		    								<li class="divider"></li>
-		    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
-		    							</ul>
-		    					</li>
-		    					 @else
-		                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
-		                        <li {{ (Request::is('user/register') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
-		                        @endif
-		    				</ul>
+	                        @if (Auth::check())
+	    					<li class="divider-vertical"></li>
+	    					<li class="dropdown">
+	    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    								<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
+	    							</a>
+	    							<ul class="dropdown-menu">
+	    								@if (Auth::user()->hasRole('admin'))
+	    									<li><a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-wrench"></span> Admin Panel</a></li>
+	                        			@endif
+	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+	    								<li class="divider"></li>
+	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+	    							</ul>
+	    					</li>
+	    					 @else
+	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
+	                        <li {{ (Request::is('user/register') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
+	                        @endif
+	                    </ul>
 						<!-- ./ nav-collapse -->
 					</div>
 				</div>
@@ -126,20 +124,19 @@
 			<div id="push"></div>
 			</div>
 			<!-- ./wrap -->
-		
+	
 	
 		    <div id="footer">
 		      <div class="container">
 		        <p class="muted credit">Lovedining</p>
 		      </div>
 		    </div>
-			
-			
+	
 			<!-- Javascripts
 			================================================== -->
 	        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	        <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-		
+	
 	        @yield('scripts')
         </div>
         <!-- end div relaod -->

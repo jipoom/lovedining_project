@@ -92,7 +92,7 @@
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-</head>
+
 
 <body onload="codeAddress({{'\''.$address.'\''}})">
 <div id="googleMap" style="width:400px;height:280px;"></div>
