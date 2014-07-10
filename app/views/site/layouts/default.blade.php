@@ -80,24 +80,23 @@
 
 								@endforeach
 							</ul>
-							
+
 							<!-- Searchbox -->
 							<div id="tfnewsearch">
 
-									<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120">
-									<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
+								<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120" onkeypress="return runScript(event)">
+								<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
 
-								
-		 	<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
-			  <option value="date">Recently published</option>
-			  <option value="reviewName">Review Name</option>
-			  <option value="restaurantName">Restaurant Name</option>
-			  <option value="popularity">Popularity</option>
-			</select>	-->
-			
+								<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
+								<option value="date">Recently published</option>
+								<option value="reviewName">Review Name</option>
+								<option value="restaurantName">Restaurant Name</option>
+								<option value="popularity">Popularity</option>
+								</select>	-->
+
 								<div class="tfclear"></div>
 							</div>
-							
+
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
 								<li class="divider-vertical"></li>
@@ -164,28 +163,34 @@
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 			<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 			<script>
-			function searchAction(mode) {
-			  var word = $("#keywords").val();
-			  if (mode=="") {
-			    document.getElementById("txtHint").innerHTML="";
-			    return;
-			  } 
-			  if (window.XMLHttpRequest) {
-			    // code for IE7+, Firefox, Chrome, Opera, Safari
-			    xmlhttp=new XMLHttpRequest();
-			  } else { // code for IE6, IE5
-			    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			  }
-			  xmlhttp.onreadystatechange=function() {
-			    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			      document.getElementById("reload").innerHTML=xmlhttp.responseText;
-			    }
-			  }
-			  xmlhttp.open("GET","{{{ URL::to('search') }}}/"+word,true);
-			  xmlhttp.send();
-			
-			}
-</script>
+				function searchAction(mode) {
+					var word = $("#keywords").val();
+					if (mode == "") {
+						document.getElementById("txtHint").innerHTML = "";
+						return;
+					}
+					if (window.XMLHttpRequest) {
+						// code for IE7+, Firefox, Chrome, Opera, Safari
+						xmlhttp = new XMLHttpRequest();
+					} else {// code for IE6, IE5
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange = function() {
+						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+							document.getElementById("reload").innerHTML = xmlhttp.responseText;
+						}
+					}
+					xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
+					xmlhttp.send();
+
+				}
+
+				function runScript(e) {
+					if (e.keyCode == 13) {
+						searchAction("go");
+					}
+				}
+			</script>
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->
