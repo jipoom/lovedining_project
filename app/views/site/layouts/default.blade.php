@@ -40,6 +40,8 @@
 	</head>
 
 	<body>
+		<!-- for facebook like and share -->
+		<div id="fb-root"></div>
 		<!-- To make sticky footer need to wrap in a div -->
 		<!-- div relaod -->
 		<div id="reload">
@@ -63,7 +65,7 @@
 							<!-- Searchbox -->
 							<div id="tfnewsearch">
 
-								<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120" onkeypress="return runScript(event)">
+								<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder ="Search" size="15" maxlength="120" onkeypress="return runScript(event)">
 								<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
 
 								<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
@@ -77,10 +79,9 @@
 							</div>
 
 						</div>
-						
-						
+
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
-							
+
 							<ul class="nav navbar-nav">
 								<li {{ (Request::is('/') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('') }}}">Home</a>
@@ -103,7 +104,6 @@
 								@endforeach
 							</ul>
 
-							
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
 								<li class="divider-vertical"></li>
@@ -133,7 +133,7 @@
 								</li>
 								@endif
 							</ul>
-							
+
 							<!-- ./ nav-collapse -->
 						</div>
 					</div>
@@ -199,6 +199,19 @@
 					}
 				}
 			</script>
+			<!-- for facebook like and share -->
+			<script>
+				( function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id))
+							return;
+						js = d.createElement(s);
+						js.id = id;
+						js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=566292166825639&version=v2.0";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+			</script>
+
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->
