@@ -21,9 +21,6 @@
 		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
 
 		<style>
-			body {
-				padding: 60px 0;
-			}
 			@section('styles')
 			@show
 		</style>
@@ -51,17 +48,17 @@
 				<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
 					<div class="container">
 						<div class="navbar-header">
-							<img src="smiley.gif" alt="Smiley face" width="100" height="100">
+							<img src="smiley.gif" alt="Logo" width="100" height="100">
 
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar">testtttttttttttttttttttttttttt</span>
-								<span class="icon-bar">testtttttttttttttttttttttttttt</span>
-								<span class="icon-bar">testtttttttttttttttttttttttttt</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
 							</button>
 						</div>
 						<div style="height: 45px;">
-							
+
 							testttttttt
 							<!-- Searchbox -->
 							<div id="tfnewsearch">
@@ -79,12 +76,11 @@
 								<div class="tfclear"></div>
 							</div>
 
-							
 						</div>
 						
 						
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
-
+							
 							<ul class="nav navbar-nav">
 								<li {{ (Request::is('/') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('') }}}">Home</a>
@@ -137,6 +133,7 @@
 								</li>
 								@endif
 							</ul>
+							
 							<!-- ./ nav-collapse -->
 						</div>
 					</div>
