@@ -51,36 +51,18 @@
 				<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
 					<div class="container">
 						<div class="navbar-header">
+							<img src="smiley.gif" alt="Smiley face" width="100" height="100">
+
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
+								<span class="icon-bar">testtttttttttttttttttttttttttt</span>
+								<span class="icon-bar">testtttttttttttttttttttttttttt</span>
+								<span class="icon-bar">testtttttttttttttttttttttttttt</span>
 							</button>
 						</div>
-						<div class="collapse navbar-collapse navbar-ex1-collapse">
-							<ul class="nav navbar-nav">
-								<li {{ (Request::is('/') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('') }}}">Home</a>
-								</li>
-								<?php $mode = CategoryOrder::getMode(); ?>
-								@foreach(CategoryOrder::getOrder($mode) as $category)
-								<li class="active">
-									<a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
-									@if (Auth::check())
-									<?php
-									$unread = 0;
-									$unread = Post::where('category_id', '=', $category -> id) -> count() - PostsUserRead::where('user_id', '=', Auth::user() -> id) -> where('category_id', '=', $category -> id) -> count();
-									?>
-									@if($unread>0)
-									({{$unread}})
-									@endif
-									@endif </a>
-								</li>
-
-								@endforeach
-							</ul>
-
+						<div style="height: 45px;">
+							
+							testttttttt
 							<!-- Searchbox -->
 							<div id="tfnewsearch">
 
@@ -97,6 +79,35 @@
 								<div class="tfclear"></div>
 							</div>
 
+							
+						</div>
+						
+						
+						<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+							<ul class="nav navbar-nav">
+								<li {{ (Request::is('/') ? ' class="active"' : '') }}>
+									<a href="{{{ URL::to('') }}}">Home</a>
+								</li>
+								<?php $mode = CategoryOrder::getMode(); ?>
+								@foreach(CategoryOrder::getOrder($mode) as $category)
+								<li {{ (Request::is('category/'.$category->
+									id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
+									@if (Auth::check())
+									<?php
+									$unread = 0;
+									$unread = Post::where('category_id', '=', $category -> id) -> count() - PostsUserRead::where('user_id', '=', Auth::user() -> id) -> where('category_id', '=', $category -> id) -> count();
+									?>
+									@if($unread>0)
+									({{$unread}})
+									@endif
+									@endif </a>
+								</li>
+
+								@endforeach
+							</ul>
+
+							
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
 								<li class="divider-vertical"></li>

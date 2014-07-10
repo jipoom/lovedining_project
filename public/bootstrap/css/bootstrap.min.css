@@ -4980,16 +4980,15 @@ button.close {
 	padding: 15px;
 }
 .tftextinput {
-	margin: 0;
+	margin: 0 0 0 0;
 	padding: 1px 5px;
 	font-size: 12px;
 	border: 1px solid #0076a3;
 	border-right: 0px;
-	border-top-left-radius: 5px 5px;
-	border-bottom-left-radius: 5px 5px;
+	border-radius: 5px 5px;
 }
 .tfbutton {
-	margin: 0;
+	margin: 0 0 0 0;
 	padding: 1px 5px;
 	font-size: 12px;
 	outline: none;
@@ -5002,8 +5001,8 @@ button.close {
 	background: #0095cd;
 	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
 	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
-	border-top-right-radius: 5px 5px;
-	border-bottom-right-radius: 5px 5px;
+	border-radius: 5px 5px;
+
 }
 .tfbutton:hover {
 	text-decoration: none;
