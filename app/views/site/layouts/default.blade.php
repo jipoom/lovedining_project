@@ -82,9 +82,9 @@
 							</ul>
 							
 							<!-- Searchbox -->
-							<div id="tfheader">
+							<div id="tfnewsearch">
 
-									<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="21" maxlength="120">
+									<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120">
 									<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
 
 								
