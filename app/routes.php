@@ -142,5 +142,12 @@ Route::group(array('prefix' => 'category'), function()
 	 Route::get('{categoryId}/', 'BlogController@getCategory');
 });
 
+# Search
+
+Route::group(array('prefix' => 'search'), function()
+{
+	 Route::get('{keyword}', 'BlogController@searchReview');
+});
+
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));

@@ -179,4 +179,17 @@ class BlogController extends BaseController {
 		// Redirect to this blog post page
 		return Redirect::to($postId)->withInput()->withErrors($validator);
 	}
+	public function searchReview($keyword)
+	{
+		$mode = null;
+		$yetToPrint = false;
+		$wordTemp = explode(' ', $keyword);
+		foreach($wordTemp as $term)
+	    {
+	        $posts = $this->post->where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->paginate(10);
+	    }
+		
+        return View::make('site/blog/index', compact('posts','yetToPrint','mode','keyword'));
+    
+	}
 }
