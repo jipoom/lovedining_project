@@ -50,7 +50,7 @@
 				<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
 					<div class="container">
 						<div class="navbar-header">
-							<img src="smiley.gif" alt="Logo" width="100" height="100">
+							<img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo" width="170" height="100">
 
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
