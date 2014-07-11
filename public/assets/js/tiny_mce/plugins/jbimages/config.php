@@ -38,7 +38,7 @@
 | -------------------------------------------------------------------*/
 
 	
-	$config['img_path'] = '../../images'; // Relative to domain name
+	$config['img_path'] = 'http://'.$_SERVER['HTTP_HOST'] .'/lovedining_project/public/images'; // Relative to domain name
 	//$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . $config['img_path']; // Physical path. [Usually works fine like this]
 	//$config['upload_path'] = 'C:/xampp/htdocs/tinymce/examples/images';
 	$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] .'/lovedining_project/public/images';
