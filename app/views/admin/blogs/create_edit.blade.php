@@ -8,7 +8,7 @@
 			
 			<div class="pull-right">
 				
-				<a href="{{{ URL::to('admin/blogs/') }}}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
+				<a href="{{{ URL::previous() }}}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
 			 	
 			</div>
 		</h3>

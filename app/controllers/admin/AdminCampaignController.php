@@ -245,7 +245,7 @@ class AdminCampaignController extends AdminController {
         
         return Datatables::of($campaign)
 		
-		->edit_column('restaurant', '<a href="{{{ URL::to(\'admin/blogs/\'. $post_id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($restaurant, 40, \'...\') }}}</a>')
+		->edit_column('restaurant', '<a href="{{{ URL::to(\'admin/blogs/\'. $post_id .\'/edit\') }}}">{{{ Str::limit($restaurant, 40, \'...\') }}}</a>')
 		
 		->edit_column('description', '{{Str::limit($description, 30, \'...\')}}')
 

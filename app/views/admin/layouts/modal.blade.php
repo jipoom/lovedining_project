@@ -157,54 +157,6 @@ $(function(){
 
 
 </script>
-<!-- TinyMCE -->
-<script type="text/javascript" src="{{asset('assets/js/tiny_mce/tiny_mce.js')}}"></script>
-<script type="text/javascript">
-	tinyMCE.init({
- 
-  mode : "textareas",
-	
-  // ===========================================
-  // Set THEME to ADVANCED
-  // ===========================================
-	
-  theme : "advanced",
-	
-  // ===========================================
-  // INCLUDE the PLUGIN
-  // ===========================================
- 
-  plugins : "jbimages,autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
-	
-  // ===========================================
-  // Set LANGUAGE to EN (Otherwise, you have to use plugin's translation file)
-  // ===========================================
- 
-  language : "en",
-	 
-  theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
-  theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,preview,|,forecolor,backcolor,|,jbimages,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions",
-
- 
-  // ===========================================
-  // Put PLUGIN'S BUTTON on the toolbar
-  // ===========================================
- 
- 
-  theme_advanced_toolbar_location : "top",
-  theme_advanced_toolbar_align : "left",
-  theme_advanced_statusbar_location : "bottom",
-  theme_advanced_resizing : true,
-	
-  // ===========================================
-  // Set RELATIVE_URLS to FALSE (This is required for images to display properly)
-  // ===========================================
- 
-  relative_urls : false
-	
-});
-</script>
-<!-- /TinyMCE -->
     @yield('scripts')
 
 </body>
