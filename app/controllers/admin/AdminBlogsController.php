@@ -118,8 +118,10 @@ class AdminBlogsController extends AdminController {
             if($this->post->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/blogs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
-            }
+                //return Redirect::to('admin/blogs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+           		return Redirect::to('admin/blogs/')->with('success', Lang::get('admin/blogs/messages.create.success'));
+           
+		    }
 
             // Redirect to the blog post create page
             return Redirect::to('admin/blogs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
@@ -211,7 +213,8 @@ class AdminBlogsController extends AdminController {
             {
                 // Redirect to the new blog post page
                 PostsUserRead::where('post_id', '=', $post->id)->delete();
-                return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
+                //return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
+           		return Redirect::to('admin/blogs/')->with('success', Lang::get('admin/blogs/messages.update.success'));
             }
 
             // Redirect to the blogs post management page
@@ -288,7 +291,7 @@ class AdminBlogsController extends AdminController {
 
         ->edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}')
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
 

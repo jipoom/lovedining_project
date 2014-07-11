@@ -1,7 +1,18 @@
-@extends('admin.layouts.modal')
+@extends('admin.layouts.blog')
 
 {{-- Content --}}
 @section('content')
+	<div class="page-header">
+		<h3>
+			{{{ $title }}}
+			
+			<div class="pull-right">
+				
+				<a href="{{{ URL::to('admin/blogs/') }}}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
+			 	
+			</div>
+		</h3>
+	</div>
 	<!-- Tabs -->
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>

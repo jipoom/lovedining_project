@@ -53,7 +53,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('blogs/{post}/edit', 'AdminBlogsController@postEdit');
     Route::get('blogs/{post}/delete', 'AdminBlogsController@getDelete');
     Route::post('blogs/{post}/delete', 'AdminBlogsController@postDelete');
-	Route::post('blogs/create/review', 'AdminBlogsController@getCreate');
     Route::controller('blogs', 'AdminBlogsController');
 
     # User Management
