@@ -56,8 +56,11 @@
 					<div class="col-md-12">
                         <label class="control-label" for="content">Content</label>
 						
-						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
+						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
+						{{{ $errors->first('content', ':message') }}}-->
+						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'10'))}} </p>
 						{{{ $errors->first('content', ':message') }}}
+						
 					</div>
 				</div>
 				<!-- ./ content -->
