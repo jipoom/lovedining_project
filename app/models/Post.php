@@ -104,7 +104,6 @@ class Post extends Eloquent {
 	public function updated_at()
 	{
         return $this->date($this->updated_at);
-	}
-	
+	}	
 
 }

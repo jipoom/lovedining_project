@@ -55,7 +55,7 @@
 			</div>
 			<div class="col-md-6">
 				<p>
-					{{ String::tidy(Str::limit($post->content, 200)) }}
+					{{ String::tidy(Str::limit(preg_replace("/<img[^>]+\>/i", "", $post->content), 200)) }}
 				</p>
 				<p><a class="btn btn-mini btn-default" href="{{{ $post->url() }}}">Read more</a></p>	
 			</div>
