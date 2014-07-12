@@ -69,7 +69,7 @@
 						
 						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
 						{{{ $errors->first('content', ':message') }}}-->
-						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'15', 'cols' => '130'))}} </p>
+						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'25', 'cols' => '130'))}} </p>
 						{{{ $errors->first('content', ':message') }}}
 						
 					</div>
