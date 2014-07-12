@@ -87,12 +87,19 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	
 	# Campaign Management
 	Route::get('campaign/{campaign}/show', 'AdminCampaignController@getShow');
-    Route::get('campaign/{campaign}/show', 'AdminCampaignController@getShow');
     Route::get('campaign/{campaign}/edit', 'AdminCampaignController@getEdit');
     Route::post('campaign/{campaign}/edit', 'AdminCampaignController@postEdit');
     Route::get('campaign/{campaign}/delete', 'AdminCampaignController@getDelete');
     Route::post('campaign/{campaign}/delete', 'AdminCampaignController@postDelete');
     Route::controller('campaign', 'AdminCampaignController');
+	
+	# Introduction Management
+	/*Route::get('introduction/{introduction}/show', 'AdminCampaignController@getShow');
+    Route::get('introduction/{introduction}/edit', 'AdminCampaignController@getEdit');
+    Route::post('introduction/{introduction}/edit', 'AdminCampaignController@postEdit');
+    Route::get('introduction/{introduction}/delete', 'AdminCampaignController@getDelete');
+    Route::post('introduction/{introduction}/delete', 'AdminCampaignController@postDelete');
+    Route::controller('introduction', 'AdminCampaignIntroduction');*/
 
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');

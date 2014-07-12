@@ -101,8 +101,8 @@
 								<li{{ (Request::is('admin') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 									
-									<li{{ (Request::is('admin/introduction*') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('admin/introduction') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Introduce</a></li>
+									<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
+									<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Introduce</a></li>
 									
 									
 									<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
