@@ -67,7 +67,7 @@
 				<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
 					<div class="container">
 						<div class="navbar-header">
-							<img src="smiley.gif" alt="Logo" width="100" height="100">
+							<img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo" width="170" height="100">
 
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
@@ -100,6 +100,11 @@
 							<ul class="nav navbar-nav">
 								<li{{ (Request::is('admin') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+									
+									<li{{ (Request::is('admin/introduction*') ? ' class="active"' : '') }}>
+									<a href="{{{ URL::to('admin/introduction') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Introduce</a></li>
+									
+									
 									<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
 										<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-list-alt"></span> Blog</a></li>
 										<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}>
