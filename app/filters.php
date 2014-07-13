@@ -122,3 +122,6 @@ Route::filter('detectLang',  function($route, $request, $lang = 'auto')
         App::setLocale($userLang);
     }
 });
+
+
+

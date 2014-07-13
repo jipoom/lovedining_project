@@ -9,7 +9,7 @@ class CategoryOrder extends Eloquent {
 		if($mode == "name")			
 			return Category::orderBy('category_name', 'ASC')->get();
 		else if($mode == "numReviews")			
-			return DB::select(DB::raw('SELECT count(*) as counts,category_name,category.id
+			return DB::select(DB::raw('SELECT count(posts.id) as counts,category_name,category.id
 								FROM category
 								LEFT JOIN posts
 								ON category.id=posts.category_id

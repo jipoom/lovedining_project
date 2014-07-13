@@ -21,6 +21,7 @@ Route::model('post', 'Post');
 Route::model('category', 'Category');
 Route::model('campaign', 'Campaign');
 Route::model('role', 'Role');
+Route::model('message', 'PrivateMessage');
 
 /** ------------------------------------------
  *  Route constraint patterns
@@ -134,6 +135,17 @@ Route::get('contact-us', function()
 {
     // Return about us page
     return View::make('site/contact-us');
+});
+
+Route::group(array('prefix' => 'message_service', 'before' => 'auth'), function()
+{
+	# Private Message	
+	Route::get('view/{message}', 'PrivateMessageController@getMessage');
+    Route::get('reply/{message}', 'PrivateMessageController@getReply');
+    Route::post('reply/{message}', 'PrivateMessageController@postReply');
+	Route::get('{message}/delete', 'PrivateMessageController@getDelete');
+    Route::post('{message}/delete', 'PrivateMessageController@postDelete');
+    Route::controller('', 'PrivateMessageController');
 });
 
 # Posts - Second to last set, match slug

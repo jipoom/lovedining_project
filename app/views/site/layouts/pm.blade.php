@@ -1,50 +1,67 @@
 <!DOCTYPE html>
+
 <html lang="en">
-	<head>
-		<!-- Basic Page Needs
-		================================================== -->
-		<meta charset="utf-8" />
+
+	<head id="Starter-Site">
+
+		<meta charset="UTF-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
 		<title> @section('title')
-			Laravel 4 Sample Site
+			Private Message
 			@show </title>
-		<meta name="keywords" content="your, awesome, keywords, here" />
-		<meta name="author" content="Jon Doe" />
-		<meta name="description" content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei." />
 
-		<!-- Mobile Specific Metas
-		================================================== -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="keywords" content="@yield('keywords')" />
+		<meta name="author" content="@yield('author')" />
+		<!-- Google will often use this as its description of your page/site. Make it good. -->
+		<meta name="description" content="@yield('description')" />
 
-		<!-- CSS
-		================================================== -->
+		<!-- Speaking of Google, don't forget to set your site up: http://google.com/webmasters -->
+		<meta name="google-site-verification" content="">
+
+		<!-- Dublin Core Metadata : http://dublincore.org/ -->
+		<meta name="DC.title" content="Project Name">
+		<meta name="DC.subject" content="@yield('description')">
+		<meta name="DC.creator" content="@yield('author')">
+
+		<!--  Mobile Viewport Fix -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- This is the traditional favicon.
+		- size: 16x16 or 32x32
+		- transparency is OK
+		- see wikipedia for info on browser support: http://mky.be/favicon/ -->
+		<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.png') }}}">
+
+		<!-- iOS favicons. -->
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{{ asset('assets/ico/apple-touch-icon-114-precomposed.png') }}}">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}">
+		<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}">
+
+		<!-- CSS -->
 		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/wysihtml5/prettify.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
 
-		<style>
-			@section('styles')
-			@show
-		</style>
+		@yield('styles')
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
-		<!-- Favicons
-		================================================== -->
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}">
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{{ asset('assets/ico/apple-touch-icon-114-precomposed.png') }}}">
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}">
-		<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}">
-		<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.png') }}}">
 	</head>
 
 	<body>
-		<!-- for facebook like and share -->
-		<div id="fb-root"></div>
-		<!-- To make sticky footer need to wrap in a div -->
-		<!-- div relaod -->
-		<div id="reload">
+
+		<div id = "reload">
+			<!-- Container -->
 			<div id="wrap">
 				<!-- Navbar -->
 				<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
@@ -149,7 +166,6 @@
 					@include('notifications')
 					<!-- ./ notifications -->
 
-					@yield('sort')
 					<!-- Content -->
 					@yield('content')
 					<!-- ./ content -->
@@ -160,20 +176,33 @@
 				<div id="push"></div>
 			</div>
 			<!-- ./wrap -->
+			<!-- Footer -->
+			<footer class="clearfix">
+				@yield('footer')
+			</footer>
+			<!-- ./ Footer -->
 
-			<div id="footer">
-				<div class="container">
-					<p class="muted credit">
-						Lovedining
-					</p>
-				</div>
-			</div>
+			<!-- ./ container -->
+		</div>
+		<!-- ./ showCategory -->
 
-			<!-- Javascripts
-			================================================== -->
-			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-			<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-			<script>
+		<!-- Javascripts -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
+		<script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+		<script src="{{asset('assets/js/datatables-bootstrap.js')}}"></script>
+		<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
+		<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
+		<script src="{{asset('assets/js/prettify.js')}}"></script>
+
+		<script type="text/javascript">
+			$('.wysihtml5').wysihtml5();
+			$(prettyPrint);
+		</script>
+		<!-- SearchAction -->
+		<script>
 				function searchAction(mode) {
 					var word = $("#keywords").val();
 					if (mode == "") {
@@ -202,21 +231,55 @@
 					}
 				}
 			</script>
-			<!-- for facebook like and share -->
-			<script>
-				( function(d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id))
-							return;
-						js = d.createElement(s);
-						js.id = id;
-						js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=566292166825639&version=v2.0";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));
-			</script>
+		
+		<!-- TinyMCE -->
+		<script type="text/javascript" src="{{asset('assets/js/tiny_mce/tiny_mce.js')}}"></script>
+		<script type="text/javascript">
+			tinyMCE.init({
 
-			@yield('scripts')
-		</div>
-		<!-- end div relaod -->
+				mode : "textareas",
+
+				// ===========================================
+				// Set THEME to ADVANCED
+				// ===========================================
+
+				theme : "advanced",
+
+				// ===========================================
+				// INCLUDE the PLUGIN
+				// ===========================================
+
+				plugins : "jbimages,autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
+
+				// ===========================================
+				// Set LANGUAGE to EN (Otherwise, you have to use plugin's translation file)
+				// ===========================================
+
+				language : "en",
+
+				theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,preview,|,forecolor,backcolor,|,jbimages,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions",
+
+				// ===========================================
+				// Put PLUGIN'S BUTTON on the toolbar
+				// ===========================================
+
+				theme_advanced_toolbar_location : "top",
+				theme_advanced_toolbar_align : "left",
+				theme_advanced_statusbar_location : "bottom",
+				theme_advanced_resizing : true,
+
+				// ===========================================
+				// Set RELATIVE_URLS to FALSE (This is required for images to display properly)
+				// ===========================================
+
+				relative_urls : false
+
+			});
+		</script>
+		<!-- /TinyMCE -->
+		@yield('scripts')
+
 	</body>
+
 </html>

@@ -29,7 +29,7 @@ class AdminOrderController extends AdminController {
 
 		// Grab all the blog posts
 		// $categories = Category::all();
-		$order = CategoryOrder::all();
+		// $order = CategoryOrder::all();
 		$mode = CategoryOrder::getMode();
 		$categories = CategoryOrder::getOrder($mode);
 		$message = null;
@@ -52,7 +52,7 @@ class AdminOrderController extends AdminController {
 		//Sort Category by mode
 		$title = Lang::get('admin/category/title.order_management');
 		$categories = CategoryOrder::getOrder($mode);
-		$message = "Change Category Order succeeded.";
+		//$message = "Change Category Order succeeded.";
 		$rank = 1;
 		foreach ($categories as $category) {
 			$temp = Category::find($category -> id);
