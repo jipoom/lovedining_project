@@ -71,7 +71,7 @@ class PrivateMessageController extends BaseController {
 	 */
 	public function postCreate() {
 		// Declare the rules for the form validation
-		$rules = array('content' => 'required|min:3', 'title' => 'required|min:3');
+		$rules = array('content' => 'required|min:3', 'title' => 'required|min:3', 'to' => 'required|exists:users,username');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -86,7 +86,7 @@ class PrivateMessageController extends BaseController {
 			$this -> privateMessage -> title = Input::get('title');
 			$this -> privateMessage -> sender = $from -> username;
 			$this -> privateMessage -> receiver = $to -> username;
-			
+
 			$messageSender -> content = Input::get('content');
 			$messageSender -> title = Input::get('title');
 			$messageSender -> sender = $from -> username;
@@ -105,16 +105,14 @@ class PrivateMessageController extends BaseController {
 		return Redirect::to('message_service/create') -> withInput() -> withErrors($validator);
 	}
 
-	public function getReply($privateMessage)
-	{
+	public function getReply($privateMessage) {
 		$title = Lang::get('messages.reply_title');
 		return View::make('site/pm/new_reply', compact('privateMessage', 'title'));
 	}
 
-	public function postReply($privateMessage)
-	{
-			// Declare the rules for the form validation
-		$rules = array('content' => 'required|min:3', 'title' => 'required|min:3');
+	public function postReply($privateMessage) {
+		// Declare the rules for the form validation
+		$rules = array('content' => 'required|min:3', 'title' => 'required|min:3', 'to' => 'required|exists:users,username');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -129,7 +127,7 @@ class PrivateMessageController extends BaseController {
 			$this -> privateMessage -> title = Input::get('title');
 			$this -> privateMessage -> sender = $from -> username;
 			$this -> privateMessage -> receiver = $to -> username;
-			
+
 			$messageSender -> content = Input::get('content');
 			$messageSender -> title = Input::get('title');
 			$messageSender -> sender = $from -> username;
@@ -137,16 +135,17 @@ class PrivateMessageController extends BaseController {
 			// Was the blog post updated?
 			if ($this -> privateMessage -> save() && $messageSender -> save()) {
 				// Redirect to the new blog post page
-				return Redirect::to('message_service/reply/'.$privateMessage->id) -> with('success', Lang::get('messages.success'));
+				return Redirect::to('message_service/reply/' . $privateMessage -> id) -> with('success', Lang::get('messages.success'));
 			}
 
 			// Redirect to the blog post create page
-			return Redirect::to('message_service/reply/'.$privateMessage->id) -> with('error', Lang::get('admin/campaign/messages.create.error'));
+			return Redirect::to('message_service/reply/' . $privateMessage -> id) -> with('error', Lang::get('admin/campaign/messages.create.error'));
 		}
 
 		// Form validation failed
 		return Redirect::to('message_service/create') -> withInput() -> withErrors($validator);
 	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -176,19 +175,16 @@ class PrivateMessageController extends BaseController {
 	 */
 	public function postDelete($privateMessage) {
 		// Declare the rules for the form validation
-		if(Auth::user()->username == $message->receiver)
-		{
-			$rules = array(
-	            'id' => 'required|integer'
-	        );
+		if (Auth::user() -> username == $message -> receiver) {
+			$rules = array('id' => 'required|integer');
 			// Validate the inputs
 			$validator = Validator::make(Input::all(), $rules);
-	
+
 			// Check if the form validates with success
 			if ($validator -> passes()) {
 				$id = $privateMessage -> id;
 				$privateMessage -> delete();
-	
+
 				if (empty($privateMessage)) {
 					// Redirect to the blog posts management page
 					return Redirect::to('message_service') -> with('success', Lang::get('messages.delete.success'));
@@ -199,6 +195,7 @@ class PrivateMessageController extends BaseController {
 		}
 
 	}
+
 	/**
 	 * Show a list of all the blog posts formatted for Datatables.
 	 *
@@ -215,9 +212,37 @@ class PrivateMessageController extends BaseController {
                 <a href="{{{ URL::to(\'message_service/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ') -> remove_column('id') -> make();
 	}
-	
-	public function autpcomplete()
-	{
+
+	public function autocomplete() {
+		/*$mysql_server = 'localhost';
+		$mysql_login = 'root';
+		$mysql_password = '';
+		$mysql_database = 'laravel';
+
+		mysql_connect($mysql_server, $mysql_login, $mysql_password);
+		mysql_select_db($mysql_database);
+
+		$req = "SELECT username " . "FROM users " . "WHERE username LIKE '%" . $_REQUEST['term'] . "%' ";
+
+		$query = mysql_query($req);
+
+		while ($row = mysql_fetch_array($query)) {
+			$results[] = array('label' => $row['username']);
+		}
+
+		echo json_encode($results);
+		 
+		*/
+		$match = '%' .Input::get('term') . '%';
+		$init_user =  User::where('username', 'like', $match)->firstOrFail();
+		$results = array($init_user->id => $init_user->username);
+
+		$query = User::where('username', 'like', $match)->get();
+		foreach($query as $user)
+		{
+			$results = array_add($results, $user->id, $user->username);
+		}
+		echo json_encode($results);
 		
 	}
 

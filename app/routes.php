@@ -145,6 +145,7 @@ Route::group(array('prefix' => 'message_service', 'before' => 'auth'), function(
     Route::post('reply/{message}', 'PrivateMessageController@postReply');
 	Route::get('{message}/delete', 'PrivateMessageController@getDelete');
     Route::post('{message}/delete', 'PrivateMessageController@postDelete');
+	Route::get('search', 'PrivateMessageController@autocomplete');
     Route::controller('', 'PrivateMessageController');
 });
 

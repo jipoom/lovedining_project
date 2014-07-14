@@ -35,7 +35,7 @@
 							<label class="control-label" for="title">To:</label>
 						@endif
 						{{ Form::text('to',Input::old('to', isset($privateMessage) ? $privateMessage->sender : null) , array('class'=>'form-control', 'id'=>'to','placeholder'=>'To'))}} </p>
-						{{{ $errors->first('title', ':message') }}}
+						{{{ $errors->first('to', ':message') }}}
 					
 					</div>
 				</div>
@@ -70,4 +70,15 @@
 	</form>
 @stop
 @section('scripts')
+ <script>
+$(function() {
+
+	$( "#to" ).autocomplete(
+	{
+		 source:'search',
+		 minLength: 2,
+	})
+
+});
+</script>
 @stop
