@@ -105,16 +105,12 @@
 								</li>
 								<?php $mode = CategoryOrder::getMode(); ?>
 								@foreach(CategoryOrder::getOrder($mode) as $category)
-								<li {{ (Request::is('category/'.$category->
-									id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
+								<li {{ (Request::is('category/'.$category->id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
 									@if (Auth::check())
-									<?php
-									$unread = 0;
-									$unread = Post::where('category_id', '=', $category -> id) -> count() - PostsUserRead::where('user_id', '=', Auth::user() -> id) -> where('category_id', '=', $category -> id) -> count();
-									?>
-									@if($unread>0)
-									({{$unread}})
-									@endif
+										<?php $numUnread = PostsUserRead::getUnreadReviews($category,Auth::user()->id);?>
+										@if($numUnread>0)
+											({{$numUnread}})
+										@endif
 									@endif </a>
 								</li>
 
@@ -132,8 +128,9 @@
 											<a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-wrench"></span> Admin Panel</a>
 										</li>
 										@endif
+										<?php $numNewMessage = PrivateMessage::newMessage(Auth::user() -> username); ?>
 										<li>
-											<a href="{{{ URL::to('message_service') }}}"><span class="glyphicon glyphicon-wrench"></span> Inbox</a>
+											<a href="{{{ URL::to('message_service') }}}"><span class="glyphicon glyphicon-wrench"></span> Inbox @if($numNewMessage>0) ({{$numNewMessage}}) @endif</a>
 										</li>
 										<li>
 											<a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Settings</a>

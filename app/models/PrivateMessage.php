@@ -12,7 +12,10 @@ class PrivateMessage extends Eloquent {
 	{
 		return $this->belongsTo('User', 'receiver');
 	}
-	
+	public static function newMessage($username)
+	{
+		return PrivateMessage::where('receiver', '=', $username)->where('read','=','new')->count();
+	}
 }
 
 ?>

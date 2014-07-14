@@ -1,4 +1,4 @@
-@extends('site.layouts.pm')
+@extends('site.layouts.default')
 
 {{-- Web site Title --}}
 @section('title')
@@ -26,7 +26,8 @@
 			<tr>
 				<th class="col-md-2">Subject</th>
 				<th class="col-md-2">From</th>
-				<th class="col-md-2">Date</th>
+				<th class="col-md-2">Date</th>				
+				<th class="col-md-2">Status</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>
 		</thead>

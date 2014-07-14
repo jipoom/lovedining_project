@@ -37,6 +37,15 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}">
 		<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}">
 		<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.png') }}}">
+				<!-- CSS -->
+		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/wysihtml5/prettify.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
+		
+		@yield('styles')
 	</head>
 
 	<body>
@@ -88,16 +97,12 @@
 								</li>
 								<?php $mode = CategoryOrder::getMode(); ?>
 								@foreach(CategoryOrder::getOrder($mode) as $category)
-								<li {{ (Request::is('category/'.$category->
-									id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
+								<li {{ (Request::is('category/'.$category-> id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
 									@if (Auth::check())
-									<?php
-									$unread = 0;
-									$unread = Post::where('category_id', '=', $category -> id) -> count() - PostsUserRead::where('user_id', '=', Auth::user() -> id) -> where('category_id', '=', $category -> id) -> count();
-									?>
-									@if($unread>0)
-									({{$unread}})
-									@endif
+										<?php $numUnread = PostsUserRead::getUnreadReviews($category,Auth::user()->id); ?>
+										@if($numUnread>0)
+											({{$numUnread}})
+										@endif
 									@endif </a>
 								</li>
 
@@ -115,8 +120,9 @@
 											<a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-wrench"></span> Admin Panel</a>
 										</li>
 										@endif
+										<?php $numNewMessage = PrivateMessage::newMessage(Auth::user() -> username); ?>
 										<li>
-											<a href="{{{ URL::to('message_service') }}}"><span class="glyphicon glyphicon-wrench"></span> Inbox</a>
+											<a href="{{{ URL::to('message_service') }}}"><span class="glyphicon glyphicon-wrench"></span> Inbox @if($numNewMessage>0) ({{$numNewMessage}}) @endif</a>
 										</li>
 										<li>
 											<a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
@@ -149,7 +155,6 @@
 					@include('notifications')
 					<!-- ./ notifications -->
 
-					@yield('sort')
 					<!-- Content -->
 					@yield('content')
 					<!-- ./ content -->
@@ -172,7 +177,14 @@
 			<!-- Javascripts
 			================================================== -->
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-			<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
+		<script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+		<script src="{{asset('assets/js/datatables-bootstrap.js')}}"></script>
+		<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
+		<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
+		<script src="{{asset('assets/js/prettify.js')}}"></script>
 			<script>
 				function searchAction(mode) {
 					var word = $("#keywords").val();
@@ -215,6 +227,52 @@
 					}(document, 'script', 'facebook-jssdk'));
 			</script>
 
+			<!-- TinyMCE -->
+		<script type="text/javascript" src="{{asset('assets/js/tiny_mce/tiny_mce.js')}}"></script>
+		<script type="text/javascript">
+			tinyMCE.init({
+
+				mode : "textareas",
+
+				// ===========================================
+				// Set THEME to ADVANCED
+				// ===========================================
+
+				theme : "advanced",
+
+				// ===========================================
+				// INCLUDE the PLUGIN
+				// ===========================================
+
+				plugins : "jbimages,autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
+
+				// ===========================================
+				// Set LANGUAGE to EN (Otherwise, you have to use plugin's translation file)
+				// ===========================================
+
+				language : "en",
+
+				theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+				theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,preview,|,forecolor,backcolor,|,jbimages,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions",
+
+				// ===========================================
+				// Put PLUGIN'S BUTTON on the toolbar
+				// ===========================================
+
+				theme_advanced_toolbar_location : "top",
+				theme_advanced_toolbar_align : "left",
+				theme_advanced_statusbar_location : "bottom",
+				theme_advanced_resizing : true,
+
+				// ===========================================
+				// Set RELATIVE_URLS to FALSE (This is required for images to display properly)
+				// ===========================================
+
+				relative_urls : false
+
+			});
+		</script>
+		<!-- /TinyMCE -->
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->

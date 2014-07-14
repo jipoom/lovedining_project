@@ -17,8 +17,7 @@ class PrivateMessageController extends BaseController {
 		// Title
 		$title = Lang::get('messages.title');
 		// Grab all the blog posts
-		$privateMessage = PrivateMessage::where('user_id_2', '=', Auth::user() -> id);
-
+		$privateMessage = PrivateMessage::where('receiver', '=', Auth::user() -> username);
 		// Show the page
 		return View::make('site/pm/index', compact('privateMessage', 'title'));
 	}
@@ -26,7 +25,8 @@ class PrivateMessageController extends BaseController {
 	public function getMessage($privateMessage) {
 		// Title
 		$title = Lang::get('messages.title');
-
+		$privateMessage -> read = 'read';
+		$privateMessage -> save();
 		// Show the page
 		return View::make('site/pm/detail', compact('privateMessage', 'title'));
 	}
@@ -175,7 +175,7 @@ class PrivateMessageController extends BaseController {
 	 */
 	public function postDelete($privateMessage) {
 		// Declare the rules for the form validation
-		if (Auth::user() -> username == $message -> receiver) {
+		if (Auth::user() -> username == $privateMessage -> receiver) {
 			$rules = array('id' => 'required|integer');
 			// Validate the inputs
 			$validator = Validator::make(Input::all(), $rules);
@@ -203,14 +203,16 @@ class PrivateMessageController extends BaseController {
 	 */
 	public function getData() {
 
-		$privateMessage = PrivateMessage::select(array('private_message.id', 'private_message.title', 'private_message.sender', 'private_message.created_at')) -> where('private_message.receiver', '=', Auth::user() -> username);
+		$privateMessage = PrivateMessage::select(array('private_message.id', 'private_message.title', 'private_message.sender', 'private_message.created_at','private_message.read')) -> where('private_message.receiver', '=', Auth::user() -> username);
 
 		//$posts = Post::leftjoin('category', 'posts.category_id', '=', 'category.id')
 		//->select(array('posts.id', 'posts.title', 'category.category_name as category ','posts.id as comments', 'posts.created_at'));
 
-		return Datatables::of($privateMessage) -> edit_column('title', '<a href="{{{ URL::to(\'message_service/view/\'. $id) }}}">{{{ Str::limit($title, 40, \'...\') }}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'message_service/reply/\' . $id) }}}" class="btn btn-default btn-xs iframe" >Reply</a>
-                <a href="{{{ URL::to(\'message_service/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
-            ') -> remove_column('id') -> make();
+		return Datatables::of($privateMessage) 
+		-> edit_column('title', '<a href="{{{ URL::to(\'message_service/view/\'. $id) }}}">{{{ Str::limit($title, 40, \'...\') }}}</a>') 
+		-> add_column('actions', '<a href="{{{ URL::to(\'message_service/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>') 
+        -> remove_column('id') 
+        -> make();
 	}
 
 	public function autocomplete() {
