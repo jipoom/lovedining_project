@@ -40,7 +40,6 @@ class UserController extends BaseController {
     {
         $this->user->username = Input::get( 'username' );
         $this->user->email = Input::get( 'email' );
-
         $password = Input::get( 'password' );
         $passwordConfirmation = Input::get( 'password_confirmation' );
 
@@ -68,6 +67,8 @@ class UserController extends BaseController {
         if ( $this->user->id )
         {
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.
+            $roles = array('0'=>'2');
+			$this->user->saveRoles($roles);
             return Redirect::to('user/login')
                 ->with( 'notice', Lang::get('user/user.user_account_created') );
         }
