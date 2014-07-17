@@ -252,51 +252,57 @@ $(function(){
 
 </script>
 <!-- TinyMCE -->
-<script type="text/javascript" src="{{asset('assets/js/tiny_mce/tiny_mce.js')}}"></script>
-<script type="text/javascript">
-	tinyMCE.init({
- 
-  mode : "textareas",
+<script type="text/javascript" src="{{asset('assets/js/tinymce/tinymce.min.js')}}"></script>
+<script>
+// This must be set to the absolute path from the site root.
+//var roxyFileman = '/fileman/index.html?integration=tinymce4';
+//var roxyFileman = '{{ URL::to('/assets/fileman/index.html?integration=tinymce4') }}';
+  $(function() {
+    tinymce.init({
+  selector: "textarea",
+  
+  // ===========================================
+  // INCLUDE THE PLUGIN
+  // ===========================================
+	
+  plugins: [
+    "advlist autolink lists link image charmap print preview anchor",
+    "searchreplace visualblocks code fullscreen",
+    "insertdatetime media table contextmenu paste emoticons"
+  ],
 	
   // ===========================================
-  // Set THEME to ADVANCED
+  // PUT PLUGIN'S BUTTON on the toolbar
   // ===========================================
 	
-  theme : "advanced",
+  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons",
 	
   // ===========================================
-  // INCLUDE the PLUGIN
+  // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
   // ===========================================
- 
-  plugins : "jbimages,autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
 	
-  // ===========================================
-  // Set LANGUAGE to EN (Otherwise, you have to use plugin's translation file)
-  // ===========================================
- 
-  language : "en",
-	 
-  theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
-  theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,preview,|,forecolor,backcolor,|,jbimages,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions",
-
- 
-  // ===========================================
-  // Put PLUGIN'S BUTTON on the toolbar
-  // ===========================================
- 
- 
-  theme_advanced_toolbar_location : "top",
-  theme_advanced_toolbar_align : "left",
-  theme_advanced_statusbar_location : "bottom",
-  theme_advanced_resizing : true,
-	
-  // ===========================================
-  // Set RELATIVE_URLS to FALSE (This is required for images to display properly)
-  // ===========================================
- 
-  relative_urls : false
+  relative_urls: false,
+  file_browser_callback : elFinderBrowser
 	
 });
+});
+
+function elFinderBrowser (field_name, url, type, win) {
+  tinymce.activeEditor.windowManager.open({
+
+    file: '{{URL::to('admin/elfinder/tinymce')}}',// use an absolute path!
+    //file: 'http://localhost/elfinder2_1/elfinder.html',
+    title: 'elFinder 2.0',
+    width: 900,
+    height: 450,
+    resizable: 'yes'
+  }, {
+    setUrl: function (url) {
+      win.document.getElementById(field_name).value = url;
+    }
+  });
+  return false;
+}
 </script>
 <!-- /TinyMCE -->
     @yield('scripts')

@@ -101,7 +101,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::get('introduction/{introduction}/delete', 'AdminCampaignController@getDelete');
     Route::post('introduction/{introduction}/delete', 'AdminCampaignController@postDelete');
     Route::controller('introduction', 'AdminCampaignIntroduction');*/
-
+	
+	#File Manager
+	Route::get('elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
+    Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
+	Route::get('elfinder/tinymce', 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4');
+	
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');
 });
@@ -168,6 +173,12 @@ Route::group(array('prefix' => 'search'), function()
 {
 	 Route::get('{keyword}', 'BlogController@searchReview');
 });
+
+
+Route::group(array('before' => 'auth'), function()
+    {
+        
+    });
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
