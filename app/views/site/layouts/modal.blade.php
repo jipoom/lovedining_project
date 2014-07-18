@@ -124,8 +124,6 @@
     <script src="{{asset('assets/js/prettify.js')}}"></script>
 	<script src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>
- 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 	
 	
  <script type="text/javascript">

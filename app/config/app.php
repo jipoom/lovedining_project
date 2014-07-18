@@ -138,6 +138,9 @@ return array(
     */
 
     'manifest' => storage_path() . '/meta',
+    
+	'image_path' => public_path(). '/images',
+	'banner_path' => public_path(). '/images/Banner',
 
     /*
     |--------------------------------------------------------------------------

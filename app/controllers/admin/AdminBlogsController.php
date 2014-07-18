@@ -82,7 +82,8 @@ class AdminBlogsController extends AdminController {
             'title'   => 'required|min:3',
             'restaurant_name'  => 'required|min:3',
             'content' => 'required|min:3',
-            'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i'
+            'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i',
+            'album_name' => 'required|unique:posts'
         );
 
         // Validate the inputs
@@ -106,6 +107,7 @@ class AdminBlogsController extends AdminController {
 			$this->post->province  = Input::get('province');
 			$this->post->zip  = Input::get('zip');
 			$this->post->category_id  = Input::get('category_id');
+			$this->post->album_name  = Input::get('album_name');
 			
             //$this->post->slug             = Str::slug(Input::get('title'));
             $this->post->content          = Input::get('content');
@@ -119,6 +121,8 @@ class AdminBlogsController extends AdminController {
             {
                 // Redirect to the new blog post page
                 //return Redirect::to('admin/blogs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+           		if(!file_exists(Config::get('app.image_path').'/'.Input::get('album_name')))
+           			mkdir(Config::get('app.image_path').'/'.Input::get('album_name'),0755);
            		return Redirect::to('admin/blogs/')->with('success', Lang::get('admin/blogs/messages.create.success'));
            
 		    }
@@ -180,7 +184,8 @@ class AdminBlogsController extends AdminController {
             'title'   => 'required|min:3',
             'restaurant_name'  => 'required|min:3',
             'content' => 'required|min:3',
-            'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i'
+            'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i',
+            'album_name' => 'required|unique:posts,album_name,'.$post->id.',id'
         );
 
 
@@ -191,6 +196,7 @@ class AdminBlogsController extends AdminController {
         if ($validator->passes())
         {
             // Update the blog post data
+            $oldImageDir = $post->album_name;
             $post->title            = Input::get('title');
             $post->restaurant_name  = Input::get('restaurant_name');
 			$post->tel  = Input::get('tel');
@@ -202,6 +208,7 @@ class AdminBlogsController extends AdminController {
 			$post->province  = Input::get('province');
 			$post->zip  = Input::get('zip');
 			$post->category_id  = Input::get('category_id');
+			$post->album_name  = Input::get('album_name');
             //$post->slug             = Str::slug(Input::get('title'));
             $post->content          = Input::get('content');
             $post->meta_title       = Input::get('meta-title');
@@ -212,9 +219,20 @@ class AdminBlogsController extends AdminController {
             if($post->save())
             {
                 // Redirect to the new blog post page
+                if(!file_exists(Config::get('app.image_path').'/'.Input::get('album_name')))
+           			mkdir(Config::get('app.image_path').'/'.Input::get('album_name'),0755);
                 PostsUserRead::where('post_id', '=', $post->id)->delete();
                 //return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
-           		return Redirect::to('admin/blogs/')->with('success', Lang::get('admin/blogs/messages.update.success'));
+           		$extension = null;
+           		//Check if admin update dir name
+           		if($oldImageDir!=Input::get('album_name') && $oldImageDir!=null)
+				{
+					//give admin a warning	
+					$extension = "<p><b>please update your image path on this review</b></p>";
+					//rename old dir
+					rename ( Config::get('app.image_path').'/'.$oldImageDir , Config::get('app.image_path').'/'.$oldImageDir.'_old_'.date('Y-m-d'));
+				}
+           		return Redirect::to('admin/blogs/')->with('success', Lang::get('admin/blogs/messages.update.success').$extension);
             }
 
             // Redirect to the blogs post management page

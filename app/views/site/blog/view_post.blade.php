@@ -71,6 +71,7 @@
 </h5>
 <input type="hidden" id="province" value= {{String::tidy($post->province) }}/>
 
+
    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
        <script>
 	var geocoder;
@@ -104,9 +105,10 @@
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
-
 <body onload="codeAddress({{'\''.$address.'\''}})">
 <div id="googleMap" style="width:400px;height:280px;"></div>
+<p></p>
+{{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
 <hr />
 <a id="comments"></a>
 <h4>{{{ $comments->count() }}} Comments</h4>
@@ -173,4 +175,10 @@ You don't have the correct permissions to add comments.
 @endif
 
 
+@stop
+
+@section('scripts')
+		<script type="text/javascript">
+			$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+		</script>	
 @stop

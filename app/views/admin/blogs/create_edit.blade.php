@@ -58,6 +58,10 @@
 					    {{ Form::text('province', Input::old('title', isset($post) ? $post->province : null), array('placeholder'=>'จังหวัด')) }} 
 					    {{ Form::text('zip', Input::old('title', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
                         
+                         <label class="control-label" for="title">ชื่ออัลบััมรูป(ภาษาอังกฤษหรือตัวเลขเท่านั้น)</label></P>
+                         {{ Form::text('album_name', Input::old('title', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม')) }} 
+                         {{{ $errors->first('album_name', ':message') }}}<p>
+                         	
 					</div>
 				</div>
 				<!-- ./ post title -->

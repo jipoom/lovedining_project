@@ -192,4 +192,14 @@ class BlogController extends BaseController {
         return View::make('site/blog/index', compact('posts','yetToPrint','mode','keyword'));
     
 	}
+	
+	public function getAlbum($postId)
+	{
+		// Get all the blog posts
+		$post = $this->post->where('id', '=', $postId)->first();
+		$album = Picture::directoryToArray(public_path().'/images/'.$post->album_name,true);
+		$title = 'Test Album';
+		// Show the page
+		return View::make('site/blog/album', compact('album','title','post'));
+	}
 }

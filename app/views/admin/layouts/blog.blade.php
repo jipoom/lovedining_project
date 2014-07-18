@@ -150,7 +150,11 @@
 								</li>
 
 								<li{{ (Request::is('admin/campaign*') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-list-alt"></span> Campaign</a></li>
+									<a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-list-alt"></span> Campaigns</a></li>
+									
+									<li{{ (Request::is('admin/elfinder*') ? ' class="active"' : '') }}>
+									<a href="{{{ URL::to('admin/elfinder') }}}" class="iframe"><span class="glyphicon glyphicon-list-alt"></span> Images and Banners</a></li>
+									
 									</ul>
 									<ul class="nav navbar-nav pull-right">
 
@@ -305,6 +309,10 @@ function elFinderBrowser (field_name, url, type, win) {
 }
 </script>
 <!-- /TinyMCE -->
+
+<script type="text/javascript">
+			$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+</script>
     @yield('scripts')
 
 </body>
