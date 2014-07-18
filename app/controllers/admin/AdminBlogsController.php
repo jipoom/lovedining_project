@@ -79,7 +79,7 @@ class AdminBlogsController extends AdminController {
 	{
         // Declare the rules for the form validation
         $rules = array(
-            'title'   => 'required|min:3',
+            'title'   => 'required|min:3|unique:posts',
             'restaurant_name'  => 'required|min:3',
             'content' => 'required|min:3',
             'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i',
@@ -181,11 +181,11 @@ class AdminBlogsController extends AdminController {
 
         // Declare the rules for the form validation
          $rules = array(
-            'title'   => 'required|min:3',
+            'title'   => 'required|min:3|unique:posts,title,'.$post->id.',id',
             'restaurant_name'  => 'required|min:3',
             'content' => 'required|min:3',
             'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i',
-            'album_name' => 'required|unique:posts,album_name,'.$post->id.',id'
+            'album_name' => 'required|Regex:/^[0-9a-zA-Z]*$/|unique:posts,album_name,'.$post->id.',id'
         );
 
 
@@ -216,14 +216,21 @@ class AdminBlogsController extends AdminController {
             $post->meta_keywords    = Input::get('meta-keywords');
 
             // Was the blog post updated?
+            
             if($post->save())
             {
-                // Redirect to the new blog post page
-                if(!file_exists(Config::get('app.image_path').'/'.Input::get('album_name')))
-           			mkdir(Config::get('app.image_path').'/'.Input::get('album_name'),0755);
+                $extension = null;
+				if($oldImageDir == null)
+				{
+					mkdir(Config::get('app.image_path').'/'.Input::get('album_name'), 0755);
+				}
+				else if(!file_exists(Config::get('app.image_path').'/'.Input::get('album_name')))
+				{
+					Picture::recursive_copy(Config::get('app.image_path').'/'.$oldImageDir , Config::get('app.image_path').'/'.Input::get('album_name'));
+				}	
                 PostsUserRead::where('post_id', '=', $post->id)->delete();
                 //return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
-           		$extension = null;
+           		
            		//Check if admin update dir name
            		if($oldImageDir!=Input::get('album_name') && $oldImageDir!=null)
 				{

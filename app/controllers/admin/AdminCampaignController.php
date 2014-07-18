@@ -146,7 +146,7 @@ class AdminCampaignController extends AdminController {
 		
         // Declare the rules for the form validation
          $rules = array(
-            'campaign'   => 'required|min:3',
+            'campaign'   => 'required|min:3|unique:campaign,name,'.$campaign->id.',id',
             'expiryDate' => 'required',
             'description' => 'required'
         );

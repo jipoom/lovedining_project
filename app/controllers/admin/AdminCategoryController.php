@@ -131,7 +131,7 @@ class AdminCategoryController extends AdminController {
 		
         // Declare the rules for the form validation
          $rules = array(
-            'category'   => 'required|min:3|unique:category,category_name',
+            'category'   => 'required|min:3|unique:category,category_name,'.$category->id.',id',
         );
 
 
