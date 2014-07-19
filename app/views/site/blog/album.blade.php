@@ -1,7 +1,16 @@
 @extends('site.layouts.default')
 @section('styles')
-		<style>
-			.galleria{ width: 700px; height: 400px; background: #000 }
+		<link rel="stylesheet" href="{{asset('assets/css/preettyphoto/prettyPhoto.css')}}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+		<style type="text/css" media="screen">
+
+			
+			p { font-size: 1.2em; }
+			
+			ul li { display: inline; }
+			
+
+			
+
 		</style>
 @stop
 @section('content')
@@ -13,21 +22,38 @@
 			 	
 			</div>
 		</h3>
-		<div class="galleria">
+		<!--<div class="galleria">-->
+		<div>
+			<ul class="gallery clearfix">
 			@foreach ($album as $picture)
 				
-				<a href='{{URL::to('/images/'.$post->album_name.'/'.$picture)}}'><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" data-title="My title" data-description="My description"></a>
+				<li><a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" width="20%" height="20%" alt="" /></a></li>
+			
+			@endforeach		
+				</ul>
 				
-			@endforeach			
 		</div>
 	
 
 @stop
 @section('scripts')
-        <script src="{{asset('assets/js/galleria-1.3.6.min.js')}}"></script>
-		<script>		
-			Galleria.loadTheme('{{asset('assets/js/galleria.classic.min.js')}}');
-			Galleria.configure('imageCrop', false);
-			Galleria.run('.galleria');			
-		</script>
+		<script src="{{asset('assets/js/jquery.prettyPhoto.js')}}" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function(){
+				$("area[rel^='LoveDining']").prettyPhoto();
+				
+				$(".gallery:first a[rel^='LoveDining']").prettyPhoto({animation_speed:'normal',theme:'light_square',slideshow:3000, autoplay_slideshow: false});
+				$(".gallery:gt(0) a[rel^='LoveDining']").prettyPhoto({animation_speed:'fast',slideshow:10000, hideflash: true});
+		
+				$("#custom_content a[rel^='LoveDining']:first").prettyPhoto({
+					custom_markup: '<div id="map_canvas" style="width:260px; height:265px"></div>',
+					changepicturecallback: function(){ initialize(); }
+				});
+
+				$("#custom_content a[rel^='LoveDining']:last").prettyPhoto({
+					custom_markup: '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+					changepicturecallback: function(){ _bsap.exec(); }
+				});
+			});
+			</script>       
 @stop

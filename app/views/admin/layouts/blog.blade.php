@@ -152,8 +152,8 @@
 								<li{{ (Request::is('admin/campaign*') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-list-alt"></span> Campaigns</a></li>
 									
-									<li{{ (Request::is('admin/elfinder*') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('admin/elfinder') }}}" class="iframe"><span class="glyphicon glyphicon-list-alt"></span> Images and Banners</a></li>
+									<li{{ (Request::is('admin/elfinder/tinymce*') ? ' class="active"' : '') }}>
+									<a href="{{{ URL::to('admin/elfinder/tinymce') }}}" class="iframe"><span class="glyphicon glyphicon-list-alt"></span> Images and Banners</a></li>
 									
 									</ul>
 									<ul class="nav navbar-nav pull-right">
