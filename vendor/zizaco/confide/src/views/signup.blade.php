@@ -1,22 +1,45 @@
 <form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
     <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
     <fieldset>
+        
         <div class="form-group">
-            <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}">
+            <label for="firstname">Firstname*</label>
+            <input class="form-control" placeholder="  ชื่อ" type="text" name="firstname" id="firstname" value="{{{ Input::old('firstname') }}}">
         </div>
         <div class="form-group">
-            <label for="email">{{{ Lang::get('confide::confide.e_mail') }}} <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small></label>
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
+            <label for="lastname">Lastname*</label>
+            <input class="form-control" placeholder="  นามสกุล" type="text" name="lastname" id="lastname" value="{{{ Input::old('lastname') }}}">
         </div>
         <div class="form-group">
-            <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
+            <label for="username">{{{ Lang::get('confide::confide.username') }}}*</label>
+            <input class="form-control" placeholder="  {{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}">
+        </div>
+        <div class="form-group">
+            <label for="email">{{{ Lang::get('confide::confide.e_mail') }}}* <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small></label>
+            <input class="form-control" placeholder="  {{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
+        </div>
+         <div class="form-group">
+            <label for="password">{{{ Lang::get('confide::confide.password') }}}*</label>
             <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
         </div>
-        <div class="form-group">
-            <label for="password_confirmation">{{{ Lang::get('confide::confide.password_confirmation') }}}</label>
+         <div class="form-group">
+            <label for="password_confirmation">{{{ Lang::get('confide::confide.password_confirmation') }}}*</label>
             <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
         </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+        	{{ Form::select('age', Age::getAllAgeArray(), '2', array('class'=>'input-block-level'))}}   
+        </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+        	 {{ Form::select('sex', Sex::getAllSexArray(), '1', array('class'=>'input-block-level'))}}
+        </div>
+        <div class="form-group">
+            <label for="income">Income</label>
+        	{{ Form::select('income', Income::getAllIncomeArray(), '1', array('class'=>'input-block-level'))}} 
+        </div>
+        
+        
 
         @if ( Session::get('error') )
             <div class="alert alert-error alert-danger">

@@ -103,5 +103,20 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
     {
         return $this->email;
     }
+	
+	public function age()
+	{
+		return $this->belongsTo('Age', 'age_id');
+	}
+	
+	public function sex()
+	{
+		return $this->belongsTo('Sex', 'sex_id');
+	}
+	
+	public function income()
+	{
+		return $this->belongsTo('Income', 'income_id');
+	}
 
 }

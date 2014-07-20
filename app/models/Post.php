@@ -55,7 +55,7 @@ class Post extends Eloquent {
 		return $this->hasMany('Campaign');
 	}
 	
-	public function cetagory()
+	public function category()
 	{
 		return $this->belongsTo('Category', 'category_id');
 	}

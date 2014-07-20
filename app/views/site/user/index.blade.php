@@ -8,10 +8,7 @@
 
 {{-- New Laravel 4 Feature in use --}}
 @section('styles')
-@parent
-body {
-	background: #f2f2f2;
-}
+
 @stop
 
 {{-- Content --}}
@@ -25,6 +22,24 @@ body {
     <!-- ./ csrf token -->
     <!-- General tab -->
     <div class="tab-pane active" id="tab-general">
+        <!-- firstname -->
+        <div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="firstname">Firstname</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="firstname" id="firstname" value="{{{ Input::old('firstname', $user->firstname) }}}" />
+                {{ $errors->first('firstname', '<span class="help-inline">:message</span>') }}
+            </div>
+        </div>
+        <!-- ./ firstname -->
+        <!-- lastname -->
+        <div class="form-group {{{ $errors->has('lastname') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="username">Lastname</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="lastname" id="lastname" value="{{{ Input::old('lastname', $user->lastname) }}}" />
+                {{ $errors->first('lastname', '<span class="help-inline">:message</span>') }}
+            </div>
+        </div>
+        <!-- ./ lastname -->
         <!-- username -->
         <div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
             <label class="col-md-2 control-label" for="username">Username</label>
@@ -64,6 +79,34 @@ body {
             </div>
         </div>
         <!-- ./ password confirm -->
+        
+        <!-- age -->
+        <div class="form-group {{{ $errors->has('age') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="username">Age</label>
+            <div class="col-md-10">
+                {{ Form::select('age', Age::getAllAgeArray(), Input::old('age', $user->age->id) , array('class'=>'input-block-level'))}}
+            </div>
+        </div>
+        <!-- ./ age -->
+        
+        <!-- sex -->
+        <div class="form-group {{{ $errors->has('sex') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="username">Sex</label>
+            <div class="col-md-10">
+            	{{ Form::select('sex', Sex::getAllSexArray(), Input::old('sex', $user->sex->id) , array('class'=>'input-block-level'))}}
+              
+            </div>
+        </div>
+        <!-- ./ sex -->
+        
+        <!-- income -->
+        <div class="form-group {{{ $errors->has('income') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="income">Income</label>
+            <div class="col-md-10">
+              	{{ Form::select('income', Income::getAllIncomeArray(), Input::old('income', $user->income->id) , array('class'=>'input-block-level'))}}
+            </div>
+        </div>
+        <!-- ./ income -->
     </div>
     <!-- ./ general tab -->
 

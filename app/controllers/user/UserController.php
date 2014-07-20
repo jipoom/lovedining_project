@@ -40,6 +40,11 @@ class UserController extends BaseController {
     {
         $this->user->username = Input::get( 'username' );
         $this->user->email = Input::get( 'email' );
+		$this->user->firstname = Input::get( 'firstname' );
+		$this->user->lastname = Input::get( 'lastname' );
+		$this->user->age_id = Input::get( 'age' );
+		$this->user->sex_id = Input::get( 'sex' );
+		$this->user->income_id = Input::get( 'income' );
         $password = Input::get( 'password' );
         $passwordConfirmation = Input::get( 'password_confirmation' );
 
@@ -98,6 +103,11 @@ class UserController extends BaseController {
             $oldUser = clone $user;
             $user->username = Input::get( 'username' );
             $user->email = Input::get( 'email' );
+			$user->firstname = Input::get( 'firstname' );
+			$user->lastname = Input::get( 'lastname' );
+			$user->age_id = Input::get( 'age' );
+			$user->sex_id = Input::get( 'sex' );
+			$user->income_id = Input::get( 'income' );
 
             $password = Input::get( 'password' );
             $passwordConfirmation = Input::get( 'password_confirmation' );
