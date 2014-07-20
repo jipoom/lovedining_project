@@ -2,12 +2,10 @@
 
 {{-- Content --}}
 @section('content')
-	<!-- Tabs -->
-		<ul class="nav nav-tabs">
+	
+	<!--<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-		</ul>
-	<!-- ./ tabs -->
-
+	</ul>-->
 	{{-- Edit Category Form --}}
 	<form class="form-horizontal" method="post" action="@if (isset($post)){{ URL::to('admin/blogs/' . $post->id . '/edit') }}@endif" autocomplete="off">
 		<!-- CSRF Token -->

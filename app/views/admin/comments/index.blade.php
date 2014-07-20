@@ -10,6 +10,7 @@
 	<div class="page-header">
 		<h3>
 			{{{ $title }}}
+			
 		</h3>
 	</div>
 
@@ -39,7 +40,7 @@
 				},
 				"bProcessing": true,
 		        "bServerSide": true,
-		        "sAjaxSource": "{{ URL::to('admin/comments/data') }}",
+		        "sAjaxSource": "{{ URL::to('admin/comments/data/') }}"+"/"+"{{$post}}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}

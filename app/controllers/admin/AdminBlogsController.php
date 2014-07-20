@@ -31,9 +31,17 @@ class AdminBlogsController extends AdminController {
 
         // Grab all the blog posts
         $posts = $this->post;
-
+		$category = "all";
         // Show the page
-        return View::make('admin/blogs/index', compact('posts', 'title'));
+        return View::make('admin/blogs/index', compact('posts', 'title','category'));
+    }
+	
+	public function getSelectedPosts($category)
+    {
+        // Title
+		 $title = Lang::get('admin/blogs/title.blog_management');
+        // Show the page
+       return View::make('admin/blogs/index', compact('comments', 'title','category'));
     }
 
 	/**
@@ -301,16 +309,23 @@ class AdminBlogsController extends AdminController {
         // There was a problem deleting the blog post
         return Redirect::to('admin/blogs')->with('error', Lang::get('admin/blogs/messages.delete.error'));
     }
-
+	
     /**
      * Show a list of all the blog posts formatted for Datatables.
      *
      * @return Datatables JSON
      */
-    public function getData()
+    public function getData($categoryId)
     {
-        $posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category' ,'posts.id as comments', 'posts.created_at'))
+        if($categoryId == "all")
+		{
+	    $posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category' ,'posts.id as comments', 'posts.created_at'))
 		->join('category', 'posts.category_id', '=', 'category.id');
+		}
+		else {
+			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category' ,'posts.id as comments', 'posts.created_at'))
+		->join('category', 'posts.category_id', '=', 'category.id')->where('category.id','=',$categoryId);
+		}
 
         //$posts = Post::leftjoin('category', 'posts.category_id', '=', 'category.id')
         //->select(array('posts.id', 'posts.title', 'category.category_name as category ','posts.id as comments', 'posts.created_at'));
@@ -318,6 +333,8 @@ class AdminBlogsController extends AdminController {
         return Datatables::of($posts)
 
         ->edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}')
+		
+		->edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>')
 
         ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>

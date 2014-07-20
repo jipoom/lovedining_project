@@ -42,6 +42,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 {
 
     # Comment Management
+    Route::get('comments/{postId}/view_comments', 'AdminCommentsController@getSelectedComments');
+	Route::get('comments/data/{postId}', 'AdminCommentsController@getData');
+  	Route::get('comments/{comment}/index', 'AdminCommentsController@getIndex');
     Route::get('comments/{comment}/edit', 'AdminCommentsController@getEdit');
     Route::post('comments/{comment}/edit', 'AdminCommentsController@postEdit');
     Route::get('comments/{comment}/delete', 'AdminCommentsController@getDelete');
@@ -49,6 +52,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('comments', 'AdminCommentsController');
 
     # Blog Management
+    Route::get('blogs/{catId}/view_blogs', 'AdminBlogsController@getSelectedPosts');
+	Route::get('blogs/data/{catId}', 'AdminBlogsController@getData');
     Route::get('blogs/{post}/show', 'AdminBlogsController@getShow');
     Route::get('blogs/{post}/edit', 'AdminBlogsController@getEdit');
     Route::post('blogs/{post}/edit', 'AdminBlogsController@postEdit');
@@ -79,6 +84,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('order', 'AdminOrderController');
 	
 	# Category Management
+	
 	Route::get('category/{category}/show', 'AdminCategoryController@getShow');
     Route::get('category/{category}/edit', 'AdminCategoryController@getEdit');
     Route::post('category/{category}/edit', 'AdminCategoryController@postEdit');

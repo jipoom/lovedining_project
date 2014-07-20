@@ -30,12 +30,21 @@ class AdminCommentsController extends AdminController
         $title = Lang::get('admin/comments/title.comment_management');
 
         // Grab all the comment posts
-        $comments = $this->comment;
-
+        //$comments = $this->comment;
+		$post = "all";
         // Show the page
-        return View::make('admin/comments/index', compact('comments', 'title'));
+        return View::make('admin/comments/index', compact('comments', 'title','post'));
     }
 
+    public function getSelectedComments($post)
+    {
+        // Title
+		  $title = Lang::get('admin/comments/title.comment_management');
+        // Show the page
+       //return Redirect::to('admin/comments/'.$comments->id.'/index');
+       return View::make('admin/comments/index', compact('comments', 'title','post'));
+    }
+   
     /**
      * Show the form for editing the specified resource.
      *
@@ -142,12 +151,21 @@ class AdminCommentsController extends AdminController
      *
      * @return Datatables JSON
      */
-    public function getData()
+    public function getData($postId)
     {
-        $comments = Comment::leftjoin('posts', 'posts.id', '=', 'comments.post_id')
+        	
+        if($postId == "all")
+		{
+        	$comments = Comment::leftjoin('posts', 'posts.id', '=', 'comments.post_id')
                         ->leftjoin('users', 'users.id', '=','comments.user_id' )
                         ->select(array('comments.id as id', 'posts.id as postid','users.id as userid', 'comments.content', 'posts.title as post_name', 'users.username as poster_name', 'comments.created_at'));
-
+		}
+		else {
+			$comments = Comment::leftjoin('posts', 'posts.id', '=', 'comments.post_id')->where('posts.id','=',$postId)
+                        ->leftjoin('users', 'users.id', '=','comments.user_id' )
+                        ->select(array('comments.id as id', 'posts.id as postid','users.id as userid', 'comments.content', 'posts.title as post_name', 'users.username as poster_name', 'comments.created_at'));
+	
+		}
         return Datatables::of($comments)
 
         ->edit_column('content', '<a href="{{{ URL::to(\'admin/comments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>')
@@ -165,6 +183,6 @@ class AdminCommentsController extends AdminController
         ->remove_column('userid')
 
         ->make();
-    }
+    }    
 
 }

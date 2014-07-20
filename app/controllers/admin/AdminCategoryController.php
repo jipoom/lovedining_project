@@ -223,6 +223,8 @@ class AdminCategoryController extends AdminController {
         return Datatables::of($category)
 
         ->edit_column('posts', '{{ DB::table(\'posts\')->where(\'category_id\', \'=\', $id)->count() }}')
+		
+		->edit_column('posts', '<a href="{{{ URL::to(\'admin/blogs/\'.$id.\'/view_blogs\' ) }}}">{{$posts}}</a>')
 
         ->add_column('actions', '<a href="{{{ URL::to(\'admin/category/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/category/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
