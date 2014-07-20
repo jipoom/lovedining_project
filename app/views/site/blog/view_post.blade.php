@@ -180,5 +180,50 @@ You don't have the correct permissions to add comments.
 @section('scripts')
 		<script type="text/javascript">
 			$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
-		</script>	
+		</script>
+		<!-- for facebook like and share -->
+			<script>
+				( function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id))
+							return;
+						js = d.createElement(s);
+						js.id = id;
+						js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=566292166825639&version=v2.0";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+			</script>	
+			<!-- TinyMCE -->
+		<script type="text/javascript" src="{{asset('assets/js/tinymce/tinymce.min.js')}}"></script>
+		<script type="text/javascript">
+			$(function() {
+    tinymce.init({
+  selector: "textarea",
+  
+  // ===========================================
+  // INCLUDE THE PLUGIN
+  // ===========================================
+	
+  plugins: [
+    "advlist autolink lists link image charmap print preview anchor",
+    "searchreplace visualblocks code fullscreen",
+    "insertdatetime media table contextmenu paste jbimages emoticons"
+  ],
+	
+  // ===========================================
+  // PUT PLUGIN'S BUTTON on the toolbar
+  // ===========================================
+	
+  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages emoticons",
+	
+  // ===========================================
+  // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
+  // ===========================================
+	
+  relative_urls: false
+	
+});
+});
+		</script>
+		<!-- /TinyMCE -->
 @stop

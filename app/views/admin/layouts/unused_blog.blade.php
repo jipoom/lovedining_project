@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
-	<link rel="stylesheet" href="{{asset('assets/css/jquery.simple-dtpicker.css')}}" />
+
 
 	<style>
 	.tab-pane {
@@ -220,7 +220,6 @@
     <script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
     <script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
     <script src="{{asset('assets/js/prettify.js')}}"></script>
-	<script src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>
 	
  <script type="text/javascript">
@@ -248,71 +247,10 @@ $('.wysihtml5').wysihtml5();
 $(prettyPrint)
 
 
-//DatePicker
-$(function(){
-		$('*[name=expiryDate]').appendDtpicker();
-});
 
 
 </script>
-<!-- TinyMCE -->
-<script type="text/javascript" src="{{asset('assets/js/tinymce/tinymce.min.js')}}"></script>
-<script>
-// This must be set to the absolute path from the site root.
-//var roxyFileman = '/fileman/index.html?integration=tinymce4';
-//var roxyFileman = '{{ URL::to('/assets/fileman/index.html?integration=tinymce4') }}';
-  $(function() {
-    tinymce.init({
-  selector: "textarea",
-  
-  // ===========================================
-  // INCLUDE THE PLUGIN
-  // ===========================================
-	
-  plugins: [
-    "advlist autolink lists link image charmap print preview anchor",
-    "searchreplace visualblocks code fullscreen",
-    "insertdatetime media table contextmenu paste emoticons"
-  ],
-	
-  // ===========================================
-  // PUT PLUGIN'S BUTTON on the toolbar
-  // ===========================================
-	
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons",
-	
-  // ===========================================
-  // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
-  // ===========================================
-	
-  relative_urls: false,
-  file_browser_callback : elFinderBrowser
-	
-});
-});
 
-function elFinderBrowser (field_name, url, type, win) {
-  tinymce.activeEditor.windowManager.open({
-
-    file: '{{URL::to('admin/elfinder/tinymce')}}',// use an absolute path!
-    //file: 'http://localhost/elfinder2_1/elfinder.html',
-    title: 'elFinder 2.0',
-    width: 900,
-    height: 450,
-    resizable: 'yes'
-  }, {
-    setUrl: function (url) {
-      win.document.getElementById(field_name).value = url;
-    }
-  });
-  return false;
-}
-</script>
-<!-- /TinyMCE -->
-
-<script type="text/javascript">
-			$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
-</script>
     @yield('scripts')
 
 </body>

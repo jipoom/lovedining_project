@@ -1,6 +1,9 @@
-@extends('admin.layouts.blog')
+@extends('admin.layouts.default')
 
 {{-- Content --}}
+@section('styles')
+	<link rel="stylesheet" href="{{asset('assets/css/jquery.simple-dtpicker.css')}}" />
+@stop
 @section('content')
 	<div class="page-header">
 		<h3>
@@ -59,7 +62,7 @@
 					    {{ Form::text('zip', Input::old('title', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
                         
                          <label class="control-label" for="title">ชื่ออัลบััมรูป(ภาษาอังกฤษหรือตัวเลขเท่านั้น)</label></P>
-                         {{ Form::text('album_name', Input::old('title', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม')) }} 
+                         {{ Form::text('album_name', Input::old('album_name', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม')) }} 
                          {{{ $errors->first('album_name', ':message') }}}<p>
                          	
 					</div>
@@ -129,4 +132,74 @@
 		</div>
 		<!-- ./ form actions -->
 	</form>
+@stop
+@section('scripts')
+<!-- DatePicker -->
+<script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>
+<script>
+//DatePicker
+$(function(){
+		$('*[name=expiryDate]').appendDtpicker();
+});
+</script>
+<!-- /DatePicker -->
+
+<!-- TinyMCE -->
+<script type="text/javascript" src="{{asset('assets/js/tinymce/tinymce.min.js')}}"></script>
+<script>
+// This must be set to the absolute path from the site root.
+//var roxyFileman = '/fileman/index.html?integration=tinymce4';
+//var roxyFileman = '{{ URL::to('/assets/fileman/index.html?integration=tinymce4') }}';
+  $(function() {
+    tinymce.init({
+  selector: "textarea",
+  
+  // ===========================================
+  // INCLUDE THE PLUGIN
+  // ===========================================
+	
+  plugins: [
+    "advlist autolink lists link image charmap print preview anchor",
+    "searchreplace visualblocks code fullscreen",
+    "insertdatetime media table contextmenu paste emoticons"
+  ],
+	
+  // ===========================================
+  // PUT PLUGIN'S BUTTON on the toolbar
+  // ===========================================
+	
+  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons",
+	
+  // ===========================================
+  // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
+  // ===========================================
+	
+  relative_urls: false,
+  file_browser_callback : elFinderBrowser
+	
+});
+});
+
+function elFinderBrowser (field_name, url, type, win) {
+  tinymce.activeEditor.windowManager.open({
+
+    file: '{{URL::to('admin/elfinder/tinymce')}}',// use an absolute path!
+    //file: 'http://localhost/elfinder2_1/elfinder.html',
+    title: 'elFinder 2.0',
+    width: 900,
+    height: 450,
+    resizable: 'yes'
+  }, {
+    setUrl: function (url) {
+      win.document.getElementById(field_name).value = url;
+    }
+  });
+  return false;
+}
+</script>
+<!-- /TinyMCE -->
+
+<script type="text/javascript">
+			$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+</script>
 @stop

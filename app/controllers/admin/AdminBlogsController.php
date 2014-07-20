@@ -197,6 +197,12 @@ class AdminBlogsController extends AdminController {
         {
             // Update the blog post data
             $oldImageDir = $post->album_name;
+			$content = Input::get('content');
+			if($oldImageDir != Input::get('album_name'))
+			{
+				//String replace to update picture path
+				$content = str_replace('/images/'.$oldImageDir.'/', '/images/'.Input::get('album_name').'/', Input::get('content'));
+			}
             $post->title            = Input::get('title');
             $post->restaurant_name  = Input::get('restaurant_name');
 			$post->tel  = Input::get('tel');
@@ -210,7 +216,7 @@ class AdminBlogsController extends AdminController {
 			$post->category_id  = Input::get('category_id');
 			$post->album_name  = Input::get('album_name');
             //$post->slug             = Str::slug(Input::get('title'));
-            $post->content          = Input::get('content');
+            $post->content          = $content;
             $post->meta_title       = Input::get('meta-title');
             $post->meta_description = Input::get('meta-description');
             $post->meta_keywords    = Input::get('meta-keywords');
@@ -219,7 +225,6 @@ class AdminBlogsController extends AdminController {
             
             if($post->save())
             {
-                $extension = null;
 				if($oldImageDir == null)
 				{
 					mkdir(Config::get('app.image_path').'/'.Input::get('album_name'), 0755);
@@ -234,12 +239,10 @@ class AdminBlogsController extends AdminController {
            		//Check if admin update dir name
            		if($oldImageDir!=Input::get('album_name') && $oldImageDir!=null)
 				{
-					//give admin a warning	
-					$extension = "<p><b>please update your image path on this review</b></p>";
 					//rename old dir
-					rename ( Config::get('app.image_path').'/'.$oldImageDir , Config::get('app.image_path').'/'.$oldImageDir.'_old_'.date('Y-m-d'));
+					Picture::deleteDir( Config::get('app.image_path').'/'.$oldImageDir);
 				}
-           		return Redirect::to('admin/blogs/')->with('success', Lang::get('admin/blogs/messages.update.success').$extension);
+           		return Redirect::to('admin/blogs/')->with('success', Lang::get('admin/blogs/messages.update.success'));
             }
 
             // Redirect to the blogs post management page

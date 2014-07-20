@@ -185,81 +185,8 @@
 		<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
 		<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
 		<script src="{{asset('assets/js/prettify.js')}}"></script>
-			<script>
-				function searchAction(mode) {
-					var word = $("#keywords").val();
-					if (mode == "") {
-						document.getElementById("txtHint").innerHTML = "";
-						return;
-					}
-					if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-					} else {// code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("reload").innerHTML = xmlhttp.responseText;
-						}
-					}
-					xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
-					xmlhttp.send();
-
-				}
-
-				function runScript(e) {
-					if (e.keyCode == 13) {
-						searchAction("go");
-					}
-				}
-			</script>
-			<!-- for facebook like and share -->
-			<script>
-				( function(d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id))
-							return;
-						js = d.createElement(s);
-						js.id = id;
-						js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=566292166825639&version=v2.0";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));
-			</script>
-
-			<!-- TinyMCE -->
-		<script type="text/javascript" src="{{asset('assets/js/tinymce/tinymce.min.js')}}"></script>
-		<script type="text/javascript">
-			$(function() {
-    tinymce.init({
-  selector: "textarea",
-  
-  // ===========================================
-  // INCLUDE THE PLUGIN
-  // ===========================================
-	
-  plugins: [
-    "advlist autolink lists link image charmap print preview anchor",
-    "searchreplace visualblocks code fullscreen",
-    "insertdatetime media table contextmenu paste jbimages emoticons"
-  ],
-	
-  // ===========================================
-  // PUT PLUGIN'S BUTTON on the toolbar
-  // ===========================================
-	
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages emoticons",
-	
-  // ===========================================
-  // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
-  // ===========================================
-	
-  relative_urls: false
-	
-});
-});
-		</script>
-		<!-- /TinyMCE -->
+			
+			
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->

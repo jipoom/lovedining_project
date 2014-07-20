@@ -90,6 +90,11 @@
 @endforeach
 {{ $posts->links() }}
 
+
+
+@stop
+@section('scripts')
+<!-- Sort Review -->
 <script>
 function showReviews(mode) {
   var categoryId = $("#category").val();
@@ -114,5 +119,37 @@ function showReviews(mode) {
 
 }
 </script>
+<!-- End Sort Review -->
+<!-- Search Review -->
+<script>
+				function searchAction(mode) {
+					var word = $("#keywords").val();
+					if (mode == "") {
+						document.getElementById("txtHint").innerHTML = "";
+						return;
+					}
+					if (window.XMLHttpRequest) {
+						// code for IE7+, Firefox, Chrome, Opera, Safari
+						xmlhttp = new XMLHttpRequest();
+					} else {// code for IE6, IE5
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange = function() {
+						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+							document.getElementById("reload").innerHTML = xmlhttp.responseText;
+						}
+					}
+					xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
+					xmlhttp.send();
+
+				}
+
+				function runScript(e) {
+					if (e.keyCode == 13) {
+						searchAction("go");
+					}
+				}
+			</script>
+			<!-- End Search Review -->
 
 @stop
