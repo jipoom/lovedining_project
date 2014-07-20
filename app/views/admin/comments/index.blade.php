@@ -19,7 +19,7 @@
 			<tr>
 				<th class="col-md-3">{{{ Lang::get('admin/comments/table.title') }}}</th>
 				<th class="col-md-3">{{{ Lang::get('admin/blogs/table.post_id') }}}</th>
-				<th class="col-md-2">{{{ Lang::get('admin/users/table.username') }}}</th>
+				<th class="col-md-2">Author</th>
 				<th class="col-md-2">{{{ Lang::get('admin/comments/table.created_at') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>

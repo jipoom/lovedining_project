@@ -2,10 +2,10 @@
 
 return array(
 
-	'title'      => 'Blog Title',
-	'categories'   => 'Categories',
+	'title'      => 'Review Title',
+	'categories'   => 'Category',
 	'comments'   => '# of Comments',
 	'created_at' => 'Created at',
-	'post_id' => 'Post Id',
+	'post_id' => 'Review Title',
 
 );

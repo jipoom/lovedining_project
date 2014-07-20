@@ -106,7 +106,7 @@
 									
 									
 									<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
-										<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-list-alt"></span> Blog</a></li>
+										<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-list-alt"></span> Reviews</a></li>
 										<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}>
 											<a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Comments</a></li>
 											<li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}">
