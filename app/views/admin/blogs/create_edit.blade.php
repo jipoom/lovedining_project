@@ -12,9 +12,9 @@
 			
 			<div class="pull-right">
 				@if (isset($post))
-					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-danger"><span class="glyphicon"</span> Cancel</a>
+					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-danger">Cancel</a>
 			 	@else
-			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new' }}" class="btn btn-danger"><span class="glyphicon"</span> Cancel</a>			 	
+			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new' }}" class="btn btn-danger">Cancel</a>			 	
 			 	@endif
 			</div>
 		</h3>
