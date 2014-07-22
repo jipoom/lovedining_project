@@ -30,14 +30,14 @@
 		<h3>
 			{{{ $title }}}
 			<div class="pull-right">
-				<button type="button" value = "name" class="btn btn-small btn-info iframe" onclick="changeOrder(this.value)"> เรียงตามตัวอักษร</button>
-				<button type="button" value = "numReviews" class="btn btn-small btn-info iframe" onclick="changeOrder(this.value)"> เรียงตามจำนวนรีวิว</button>
-				<button type="button" value = "popularity" class="btn btn-small btn-info iframe" onclick="changeOrder(this.value)"> เรียงตามความนิยม</button>
+				<button type="button" value = "name" class="btn btn-small btn-info" onclick="changeOrder(this.value)"> เรียงตามตัวอักษร</button>
+				<button type="button" value = "numReviews" class="btn btn-small btn-info" onclick="changeOrder(this.value)"> เรียงตามจำนวนรีวิว</button>
+				<button type="button" value = "popularity" class="btn btn-small btn-info" onclick="changeOrder(this.value)"> เรียงตามความนิยม</button>
 				<!--<a href="{{{ URL::to('admin/order/custom') }}}" class="btn btn-small btn-info iframe"> กำหนดรูปแบบเอง</a>-->
 				@if($mode!=null)
-					<button type="button" value = "{{$mode}}" class="btn btn-small btn-info iframe" onclick="saveOrder(this.value)"><span class="glyphicon glyphicon-plus-sign"></span> บันทึก</button>
+					<button type="button" value = "{{$mode}}" class="btn btn-small btn-info" onclick="saveOrder(this.value)"><span class="glyphicon glyphicon-plus-sign"></span> บันทึก</button>
 				@else
-					<button type="button" value = "name" class="btn btn-small btn-info iframe" onclick="saveOrder(this.value)"><span class="glyphicon glyphicon-plus-sign"></span> บันทึก</button>
+					<button type="button" value = "name" class="btn btn-small btn-info" onclick="saveOrder(this.value)"><span class="glyphicon glyphicon-plus-sign"></span> บันทึก</button>
 				@endif
 				
 			</div>

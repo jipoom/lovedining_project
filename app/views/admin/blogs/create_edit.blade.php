@@ -5,10 +5,7 @@
 	<link rel="stylesheet" href="{{asset('assets/css/jquery.simple-dtpicker.css')}}" />
 @stop
 @section('content')
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-			<li><a href="#tab-content" data-toggle="tab" onclick="mkDir()">Review Content</a></li>
-		</ul>
+		
 	<div class="page-header">
 		<h3>
 			{{{ $title }}}
@@ -22,6 +19,11 @@
 			</div>
 		</h3>
 	</div>
+	
+	<ul class="nav nav-tabs">
+			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
+			<li><a href="#tab-content" data-toggle="tab" onclick="mkDir()">Review Content</a></li>
+		</ul>
 
 
 	{{-- Edit Blog Form --}}
