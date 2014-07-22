@@ -46,8 +46,8 @@
 						{{{ $errors->first('restaurant_name', ':message') }}}
 						
 						 <label class="control-label" for="title">ประเภทร้านอาหาร</label>
-						
-						 {{ Form::select('category_id', $category, Input::old('title', isset($post) ? Category::find($post->category_id)->id : null)); }} </p>  
+
+						 {{ Form::select('category_id', $category, Input::old('title', (isset($post) && $post->category_id!=0)? Category::find($post->category_id)->id : null)); }} </p>  
 						
 						 <label class="control-label" for="title">เบอร์โทร</label>
 						{{ Form::text('tel', Input::old('title', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'เบอร์โทรศัพท์ (eg. 021234567, 0987654321)'))}} </p>

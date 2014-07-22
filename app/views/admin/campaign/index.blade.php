@@ -49,13 +49,18 @@
 					"sLengthMenu": "_MENU_ records per page"
 				},
 				"aaSorting": [[ 3, "desc" ]],
-				"bProcessing": true,
+				"bProcessing": false,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('admin/campaign/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}
 			});
+			setInterval( function () {
+    		oTable.fnReloadAjax();
+		}, 1000 );
 		});
+		
 	</script>
+
 @stop

@@ -350,9 +350,9 @@ class AdminBlogsController extends AdminController {
 	 */
 	public function getData($categoryId) {
 		if ($categoryId == "all") {
-			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> join('category', 'posts.category_id', '=', 'category.id');
+			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
 		} else {
-			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> join('category', 'posts.category_id', '=', 'category.id') -> where('category.id', '=', $categoryId);
+			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id') -> where('category.id', '=', $categoryId);
 		}
 
 		//$posts = Post::leftjoin('category', 'posts.category_id', '=', 'category.id')

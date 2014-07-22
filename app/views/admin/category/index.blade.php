@@ -45,13 +45,16 @@
 				"oLanguage": {
 					"sLengthMenu": "_MENU_ records per page"
 				},
-				"bProcessing": true,
+				"bProcessing": false,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('admin/category/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}
 			});
+			setInterval( function () {
+    		oTable.fnReloadAjax();
+		}, 1000 );
 		});
 	</script>
 @stop

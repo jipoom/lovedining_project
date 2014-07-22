@@ -39,13 +39,16 @@
 					"sLengthMenu": "_MENU_ records per page"
 				},
 				"aaSorting": [[ 1, "desc" ]],
-				"bProcessing": true,
+				"bProcessing": false,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('admin/comments/data/') }}"+"/"+"{{$post}}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}
 			});
+			setInterval( function () {
+    		oTable.fnReloadAjax();
+		}, 1000 );
 		});
 	</script>
 @stop

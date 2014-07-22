@@ -153,7 +153,7 @@ class AdminCommentsController extends AdminController
      */
     public function getData($postId)
     {
-        	
+        
         if($postId == "all")
 		{
         	$comments = Comment::leftjoin('posts', 'posts.id', '=', 'comments.post_id')
@@ -167,7 +167,8 @@ class AdminCommentsController extends AdminController
 	
 		}
         return Datatables::of($comments)
-
+		
+		->edit_column('content', '{{ preg_replace("(([<][/]*[a-z =/_{}\".-]*[>]*)+)", "", $content)}}')
 		
         ->edit_column('content', '<a href="{{{ URL::to(\'admin/comments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>')
 

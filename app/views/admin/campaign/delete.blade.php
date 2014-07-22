@@ -9,7 +9,7 @@
         </ul>
     <!-- ./ tabs -->
     {{-- Delete Category Form --}}
-    <form id="deleteForm" class="form-horizontal" method="post" action="@if (isset($campaign)){{ URL::to('admin/campaign/' . $campaign->id . '/delete') }}@endif" autocomplete="off">
+    <form class="form-horizontal" method="post" action="@if (isset($campaign)){{ URL::to('admin/campaign/' . $campaign->id . '/delete') }}@endif" autocomplete="off">
         
         <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -22,7 +22,7 @@
             <div class="controls">
                 Delete Campaign
                 <element class="btn-cancel close_popup"> Cancel</element>
-                <button type="submit" class="btn btn-danger"> Delete</button>
+                <button type="submit" class="btn btn-danger delete"> Delete</button>
             </div>
         </div>
         <!-- ./ form actions -->

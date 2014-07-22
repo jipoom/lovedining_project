@@ -215,30 +215,5 @@ class AdminCategoryController extends AdminController {
         return Redirect::to('admin/category')->with('error', Lang::get('admin/category/messages.delete.error'));
     }
 
-       /**
-     * Show a list of all the blog posts formatted for Datatables.
-     *
-     * @return Datatables JSON
-     */
-    public function getData()
-   {
-        	
-        
-        $category = Category::select(array('category.id', 'category.category_name', 'category.id as posts'));
-
-        return Datatables::of($category)
-
-        ->edit_column('posts', '{{ DB::table(\'posts\')->where(\'category_id\', \'=\', $id)->count() }}')
-		
-		->edit_column('posts', '<a href="{{{ URL::to(\'admin/blogs/\'.$id.\'/view_blogs\' ) }}}">{{$posts}}</a>')
-
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/category/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/category/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
-            ')
-
-        ->remove_column('id')
-
-        ->make();
-    }
 
 }
