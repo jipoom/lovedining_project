@@ -68,36 +68,47 @@
 								<span class="icon-bar"></span>
 							</button>
 						</div>
+						<!--
 						<div style="height: 45px;">
 
-							testttttttt
-							<!-- Searchbox -->
-							<div id="tfnewsearch">
+						testttttttt
 
-								<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder ="Search" size="15" maxlength="120" onkeypress="return runScript(event)">
-								<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
+						</div>   -->
 
-								<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
-								<option value="date">Recently published</option>
-								<option value="reviewName">Review Name</option>
-								<option value="restaurantName">Restaurant Name</option>
-								<option value="popularity">Popularity</option>
-								</select>	-->
+						<!-- Searchbox -->
+						<div id="tfnewsearch">
 
-								<div class="tfclear"></div>
-							</div>
+							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120" onkeypress="return runScript(event)">
+							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
 
+							<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
+							<option value="date">Recently published</option>
+							<option value="reviewName">Review Name</option>
+							<option value="restaurantName">Restaurant Name</option>
+							<option value="popularity">Popularity</option>
+							</select>	-->
+
+							<div class="tfclear"></div>
 						</div>
 
+</div>
+<div class="container">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
 
 							<ul class="nav navbar-nav">
-								<li {{ (Request::is('/') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('') }}}">Home</a>
-								</li>
+								
+								<li{{ (Request::is('/') ? ' class="active"' : '') }}>
+									<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+
+									
+								
+								
+								
+								
+								
 								<?php $mode = CategoryOrder::getMode(); ?>
 								@foreach(CategoryOrder::getOrder($mode) as $category)
-								<li {{ (Request::is('category/'.$category-> id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}
+								<li {{ (Request::is('category/'.$category-> id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
 									@if (Auth::check())
 										<?php $numUnread = PostsUserRead::getUnreadReviews($category,Auth::user()->id); ?>
 										@if($numUnread>0)

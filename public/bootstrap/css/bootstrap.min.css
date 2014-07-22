@@ -2920,7 +2920,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 .nav > li > a {
 	position: relative;
 	display: block;
-	padding: 10px 15px
+	padding: 1px 10px 1px 10px
 }
 .nav > li > a:hover, .nav > li > a:focus {
 	text-decoration: none;
@@ -2937,7 +2937,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
 	background-color: #eee;
-	border-color: #428bca
+	border-color: #ADADAD
 }
 .nav .nav-divider {
 	height: 1px;
@@ -3086,8 +3086,8 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 }
 .navbar {
 	position: relative;
-	min-height: 50px;
-	margin-bottom: 20px;
+	min-height: 30px;
+	margin-bottom: 10px;
 	border: 1px solid transparent
 }
 @media (min-width: 768px) {
@@ -3108,6 +3108,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	border-top: 1px solid transparent;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
 	-webkit-overflow-scrolling: touch
+	
 }
 .navbar-collapse.in {
 	overflow-y: auto
@@ -3218,10 +3219,18 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 .navbar-nav {
 	margin: 7.5px -15px
 }
+
+
+
+	
+	
+	
+	
 .navbar-nav > li > a {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	line-height: 20px
+	
 }
 @media (max-width: 767px) {
 	.navbar-nav .open .dropdown-menu {
@@ -3234,11 +3243,12 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 		box-shadow: none
 	}
 	.navbar-nav .open .dropdown-menu > li > a, .navbar-nav .open .dropdown-menu .dropdown-header {
-		padding: 5px 15px 5px 25px
+		padding: 1px 1px 1px 1px
 	}
 	.navbar-nav .open .dropdown-menu > li > a {
 		line-height: 20px
 	}
+	
 	.navbar-nav .open .dropdown-menu > li > a:hover, .navbar-nav .open .dropdown-menu > li > a:focus {
 		background-image: none
 	}
@@ -3252,11 +3262,11 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 		float: left
 	}
 	.navbar-nav > li > a {
-		padding-top: 15px;
-		padding-bottom: 15px
+		padding-top: 5px;
+		padding-bottom: 5px
 	}
 	.navbar-nav.navbar-right:last-child {
-		margin-right: -15px
+		margin-right: -5px
 	}
 }
 @media (min-width: 768px) {
@@ -3334,7 +3344,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 .navbar-nav > li > .dropdown-menu {
 	margin-top: 0;
 	border-top-right-radius: 0;
-	border-top-left-radius: 0
+	border-top-left-radius:0
 }
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
 	border-bottom-right-radius: 0;
@@ -3452,7 +3462,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	color: #999
 }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-	color: #fff;
+	color: #080808;
 	background-color: transparent
 }
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
@@ -4984,7 +4994,6 @@ button.close {
 	padding: 1px 5px;
 	font-size: 12px;
 	border: 1px solid #0076a3;
-	border-right: 0px;
 	border-radius: 5px 5px;
 }
 .tfbutton {

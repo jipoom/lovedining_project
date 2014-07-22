@@ -77,90 +77,110 @@
 								<span class="icon-bar"></span>
 							</button>
 						</div>
+
+						<!--
 						<div style="height: 45px;">
 
-							testttttttt
-							<!-- Searchbox -->
-							<div id="tfnewsearch">
+						testttttttt
 
-								<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120" onkeypress="return runScript(event)">
-								<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
+						</div>   -->
 
-								<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
-								<option value="date">Recently published</option>
-								<option value="reviewName">Review Name</option>
-								<option value="restaurantName">Restaurant Name</option>
-								<option value="popularity">Popularity</option>
-								</select>	-->
+						<!-- Searchbox -->
+						<div id="tfnewsearch">
 
-								<div class="tfclear"></div>
-							</div>
+							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120" onkeypress="return runScript(event)">
+							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
 
+							<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
+							<option value="date">Recently published</option>
+							<option value="reviewName">Review Name</option>
+							<option value="restaurantName">Restaurant Name</option>
+							<option value="popularity">Popularity</option>
+							</select>	-->
+
+							<div class="tfclear"></div>
 						</div>
+
+					</div>
+					<div class="container">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
 							<ul class="nav navbar-nav">
 								<li{{ (Request::is('admin') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-									
+
+
+
+
+
+
 									<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Introduce</a></li>
-									
-									
-									<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
-										<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-list-alt"></span> Reviews</a></li>
-										<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}>
-											<a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Comments</a></li>
-											<li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}">
-												<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/users') }}}"> <span class="glyphicon glyphicon-user"></span> Users <span class="caret"></span> </a>
-												<ul class="dropdown-menu">
-													<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}>
-														<a href="{{{ URL::to('admin/users') }}}"><span class="glyphicon glyphicon-user"></span> Users</a>
-											</li>
-											<li{{ (Request::is('admin/roles*') ? ' class="active"' : '') }}>
-												<a href="{{{ URL::to('admin/roles') }}}"><span class="glyphicon glyphicon-user"></span> Roles</a></li>
+										<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-book"></span> Introduce</a></li>
+
+										<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
+											<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-dashboard"></span> Reviews</a></li>
+											<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}>
+												<a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-comment"></span> Comments</a></li>
+												<li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}">
+													<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/users') }}}"> <span class="glyphicon glyphicon-user"></span> Users <span class="caret"></span> </a>
+													<ul class="dropdown-menu">
+														<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}>
+															<a href="{{{ URL::to('admin/users') }}}"><span class="glyphicon glyphicon-user"></span> Users</a>
+												</li>
+												<li{{ (Request::is('admin/roles*') ? ' class="active"' : '') }}>
+													<a href="{{{ URL::to('admin/roles') }}}"><span class="glyphicon glyphicon-heart"></span> Roles</a></li>
 							</ul>
 							</li>
+
+
+
+
 
 							<li class="dropdown{{ (Request::is('admin/category*|admin/order*') ? ' active' : '') }}">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/category') }}}"> <span class="glyphicon glyphicon-list-alt"></span> Category <span class="caret"></span> </a>
 								<ul class="dropdown-menu">
 									<li{{ (Request::is('admin/category*') ? ' class="active"' : '') }}>
-										<a href="{{{ URL::to('admin/category') }}}"><span class="glyphicon glyphicon-list-alt"></span> Manage</a>
+										<a href="{{{ URL::to('admin/category') }}}"><span class="glyphicon glyphicon-briefcase"></span> Manage</a>
 							</li>
 							<li{{ (Request::is('admin/order*') ? ' class="active"' : '') }}>
-								<a href="{{{ URL::to('admin/order') }}}"><span class="glyphicon glyphicon-list-alt"></span> Order</a></li>
+								<a href="{{{ URL::to('admin/order') }}}"><span class="glyphicon glyphicon-bookmark"></span> Order</a></li>
 								</ul>
 								</li>
 
 								<li{{ (Request::is('admin/campaign*') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-list-alt"></span> Campaigns</a></li>
-									
-									<li{{ (Request::is('admin/elfinder/tinymce*') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('admin/elfinder/tinymce') }}}" class="iframe"><span class="glyphicon glyphicon-list-alt"></span> Ads</a></li>
-									</ul>
-									<ul class="nav navbar-nav pull-right">
+									<a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-envelope"></span> Campaigns</a></li>
 
-										<li class="dropdown">
-											<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}} <span class="caret"></span> </a>
-											<ul class="dropdown-menu">
-												<li>
-													<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span> View Homepage</a>
-												</li>
-												<li class="divider-vertical"></li>
-												<li>
-													<a href="{{{ URL::to('user/settings') }}}"><span class="glyphicon"></span> Info</a>
-												</li>
-												<li>
-													<a href="{{{ URL::to('user') }}}"><span class="glyphicon"></span> Settings</a>
-												</li>
-												<li class="divider"></li>
-												<li>
-													<a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
+
+
+
+									<li{{ (Request::is('admin/elfinder/tinymce*') ? ' class="active"' : '') }}>
+										<a href="{{{ URL::to('admin/elfinder/tinymce') }}}" class="iframe"><span class="glyphicon glyphicon-bullhorn"></span> Ads</a></li>
+										
+										
+</ul>
+
+							<ul class="nav navbar-nav pull-right">
+											<li class="dropdown">
+												<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}} <span class="caret"></span> </a>
+												<ul class="dropdown-menu">
+													<li>
+														<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span> View Homepage</a>
+													</li>
+													<li class="divider-vertical"></li>
+													<li>
+														<a href="{{{ URL::to('user/settings') }}}"><span class="glyphicon"></span> Info</a>
+													</li>
+													<li>
+														<a href="{{{ URL::to('user') }}}"><span class="glyphicon"></span> Settings</a>
+													</li>
+													<li class="divider"></li>
+													<li>
+														<a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a>
+													</li>
+												</ul>
+											</li>
+										</ul>
 						</div>
+
 					</div>
 				</div>
 				<!-- ./ navbar -->
@@ -181,13 +201,12 @@
 				<div id="push"></div>
 			</div>
 			<!-- ./wrap -->
-				<!-- Footer -->
-				<footer class="clearfix">
-					@yield('footer')
-				</footer>
-				<!-- ./ Footer -->
+			<!-- Footer -->
+			<footer class="clearfix">
+				@yield('footer')
+			</footer>
+			<!-- ./ Footer -->
 
-			
 			<!-- ./ container -->
 		</div>
 		<!-- ./ showCategory -->
@@ -208,8 +227,12 @@
 			$(prettyPrint);
 		</script>
 		<script type="text/javascript">
-			$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
-		</script>	
+			$(".iframe").colorbox({
+				iframe : true,
+				width : "80%",
+				height : "80%"
+			});
+		</script>
 		@yield('scripts')
 
 	</body>
