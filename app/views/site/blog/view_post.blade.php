@@ -71,8 +71,8 @@
 </h5>
 <input type="hidden" id="province" value= {{String::tidy($post->province) }}/>
 
-
-   <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+@if($post->district!="" && $post->province!=null)
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
        <script>
 	var geocoder;
 	var map;
@@ -107,6 +107,7 @@
 
 <body onload="codeAddress({{'\''.$address.'\''}})">
 <div id="googleMap" style="width:400px;height:280px;"></div>
+@endif
 <p></p>
 {{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
 <hr />
