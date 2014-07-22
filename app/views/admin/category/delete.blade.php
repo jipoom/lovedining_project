@@ -4,9 +4,9 @@
 @section('content')
 
     <!-- Tabs -->
-        <ul class="nav nav-tabs">
+      <!--  <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-        </ul>
+      </ul> -->
     <!-- ./ tabs -->
     {{-- Delete Category Form --}}
     <form id="deleteForm" class="form-horizontal" method="post" action="@if (isset($category)){{ URL::to('admin/category/' . $category->id . '/delete') }}@endif" autocomplete="off">
@@ -20,9 +20,10 @@
         <!-- Form Actions -->
         <div class="form-group">
             <div class="controls">
-                Delete Category
-                <element class="btn-cancel close_popup"> Cancel</element>
-                <button type="submit" class="btn btn-danger"> Delete</button>
+               <p><label>Are you sure you want to delete "{{$category->category_name}}"?</labe></p>
+                <button class="btn btn-cancel close_popup">Cancel</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
             </div>
         </div>
         <!-- ./ form actions -->

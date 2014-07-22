@@ -3,9 +3,9 @@
 {{-- Content --}}
 @section('content')
     <!-- Tabs -->
-        <ul class="nav nav-tabs">
+      <!--  <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-        </ul>
+      </ul> -->
     <!-- ./ tabs -->
 
     {{-- Delete User Form --}}
@@ -18,7 +18,8 @@
         <!-- Form Actions -->
         <div class="form-group">
             <div class="controls">
-                <element class="btn-cancel close_popup">Cancel</element>
+                 <p><label>Are you sure you want to delete "{{$user->username}}"?</labe></p>
+                <button class="btn btn-cancel close_popup">Cancel</button>
                 <button type="submit" class="btn btn-danger">Delete</button>
             </div>
         </div>

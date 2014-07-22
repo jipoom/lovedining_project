@@ -1,22 +1,22 @@
 <?php
 
-class AdminCategoryController extends AdminController {
+class AdminIntroduction extends AdminController {
 
 
     /**
      * Post Model
      * @var Category
      */
-    protected $category;
+    protected $introduction;
 
     /**
      * Inject the models.
      * @param $category $category
      */
-    public function __construct(Category $category)
+    public function __construct(Introduction $introduction)
     {
         parent::__construct();
-        $this->category = $category;
+        $this->introduction = $introduction;
     }
 
     /**

@@ -204,17 +204,16 @@ You don't have the correct permissions to add comments.
   // INCLUDE THE PLUGIN
   // ===========================================
 	
+  menubar: false,	
   plugins: [
-    "advlist autolink lists link image charmap print preview anchor",
-    "searchreplace visualblocks code fullscreen",
-    "insertdatetime media table contextmenu paste jbimages emoticons"
+    "jbimages emoticons"
   ],
 	
   // ===========================================
   // PUT PLUGIN'S BUTTON on the toolbar
   // ===========================================
 	
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages emoticons",
+  toolbar: "jbimages emoticons",
 	
   // ===========================================
   // SET RELATIVE_URLS to FALSE (This is required for images to display properly)

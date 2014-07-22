@@ -55,21 +55,21 @@
 			</div>
 			<div class="col-md-6">
 				<p>
-					{{ String::tidy(Str::limit(preg_replace("/<img[^>]+\>/i", "", $post->content), 200)) }}
+					{{ String::tidy($post->restaurant_name) }}
 				</p>
-				<p><a class="btn btn-mini btn-default" href="{{{ $post->url() }}}">Read more</a></p>	
+				<p>
+					{{ String::tidy($post->district); }}, {{ String::tidy($post->province); }}
+				</p>
+				<p>
+					Tel:
+					{{ String::tidy($post->tel); }}
+				</p>		
 			</div>
 			
 		</div>
 		<!-- ./ post content -->
 
-		<!-- Post address -->
-		<div class="row">
-			<div class="col-md-8">
-				จังหวัด{{ String::tidy($post->province) }}	&nbsp
-			</div>
-		</div>
-		<!-- ./ post address -->
+		
 		
 		
 		<!-- Post Footer -->
