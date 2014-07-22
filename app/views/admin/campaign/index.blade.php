@@ -56,9 +56,6 @@
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		}
 			});
-			setInterval( function () {
-    		oTable.fnReloadAjax();
-		}, 1000 );
 		});
 		
 	</script>

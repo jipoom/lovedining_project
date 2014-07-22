@@ -80,7 +80,7 @@
 
 	</head>
 
-	<body>
+	<body onunload="reload()">
 		<!-- Container -->
 		<div class="container">
 
@@ -154,7 +154,12 @@
 			});
 		
 		</script>
-		
+		<script>
+		function reload()
+		{
+			parent.oTable.fnReloadAjax();
+		}
+		</script>
 		@yield('scripts')
 
 	</body>
