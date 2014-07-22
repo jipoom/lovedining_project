@@ -28,7 +28,7 @@ class AdminBlogsController extends AdminController {
 		{	
 			if($directory && file_exists(Config::get('app.image_path') . '/' . $directory) )
 			{ 
-				Picture::deleteDir(Config::get('app.image_path') . '/' . $directory);			
+				Picture::recursive_remove(Config::get('app.image_path') . '/' . $directory);			
 			}
 		}
 		// Title
@@ -228,7 +228,7 @@ class AdminBlogsController extends AdminController {
 				if ($oldImageDir != Input::get('album_name')) {
 					//rename old dir
 					Picture::recursive_copy(Config::get('app.image_path') . '/' . $oldImageDir, Config::get('app.image_path') . '/' . Input::get('album_name'));
-					Picture::deleteDir(Config::get('app.image_path') . '/' . $oldImageDir);
+					Picture::recursive_remove(Config::get('app.image_path') . '/' . $oldImageDir);
 				}
 				//If admin add more images
 				/* for($i=0;$i<count($image);$i++)
@@ -283,11 +283,13 @@ class AdminBlogsController extends AdminController {
 		if ($validator -> passes()) {
 			//delete image in albume
 			$id = $post -> id;
+			$albumName = $post -> album_name;
 			$post -> delete();
 			// Was the blog post deleted?
 			$post = Post::find($id);
 			if ((empty($post) && PostsUserRead::where('post_id', '=', $id) -> delete())) {
 				// Redirect to the blog posts management page
+				Picture::recursive_remove(Config::get('app.image_path') . '/' . $albumName);
 				return Redirect::to('admin/blogs') -> with('success', Lang::get('admin/blogs/messages.delete.success'));
 			}
 		}

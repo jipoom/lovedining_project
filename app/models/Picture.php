@@ -32,6 +32,8 @@ class Picture extends Eloquent {
     closedir($dir);
 	}
 	
+	//Unused
+	/*
 	public static function deleteDir($dirPath) {
 	    if (! is_dir($dirPath)) {
 	        throw new InvalidArgumentException("$dirPath must be a directory");
@@ -48,6 +50,19 @@ class Picture extends Eloquent {
 	        }
 	    }
 	    rmdir($dirPath);
-	}
+	}*/
+	
+   public static function recursive_remove($dir) { 
+   if (is_dir($dir)) { 
+     $objects = scandir($dir); 
+     foreach ($objects as $object) { 
+       if ($object != "." && $object != "..") { 
+         if (filetype($dir."/".$object) == "dir") self::recursive_remove($dir."/".$object); else unlink($dir."/".$object); 
+       } 
+     } 
+     reset($objects); 
+     rmdir($dir); 
+   } 
+ }
 
 }
