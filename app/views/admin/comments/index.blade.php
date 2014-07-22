@@ -14,7 +14,7 @@
 		</h3>
 	</div>
 
-	<table id="comments" class="table table-striped table-hover">
+	<table id="comments" class="display">
 		<thead>
 			<tr>
 				<th class="col-md-3">{{{ Lang::get('admin/comments/table.title') }}}</th>
@@ -38,6 +38,7 @@
 				"oLanguage": {
 					"sLengthMenu": "_MENU_ records per page"
 				},
+				"aaSorting": [[ 1, "desc" ]],
 				"bProcessing": true,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('admin/comments/data/') }}"+"/"+"{{$post}}",

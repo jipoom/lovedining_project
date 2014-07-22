@@ -168,6 +168,7 @@ class AdminCommentsController extends AdminController
 		}
         return Datatables::of($comments)
 
+		
         ->edit_column('content', '<a href="{{{ URL::to(\'admin/comments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>')
 
         ->edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $postid .\'/edit\') }}}">{{{ Str::limit($post_name, 40, \'...\') }}}</a>')

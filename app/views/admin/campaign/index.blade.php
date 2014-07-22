@@ -21,7 +21,7 @@
 		</h3>
 	</div>
 
-	<table id="campaign" class="table table-striped table-hover">
+	<table id="campaign" class="display">
 		<thead>
 			<tr>
 				<th class="col-md-2">{{{ Lang::get('admin/campaign/table.title') }}}</th>
@@ -48,6 +48,7 @@
 				"oLanguage": {
 					"sLengthMenu": "_MENU_ records per page"
 				},
+				"aaSorting": [[ 3, "desc" ]],
 				"bProcessing": true,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('admin/campaign/data') }}",

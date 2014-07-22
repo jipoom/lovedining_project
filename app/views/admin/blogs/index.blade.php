@@ -23,7 +23,7 @@
 		</h3>
 	</div>
 	
-	<table id="blogs" class="table table-striped table-hover">
+	<table id="blogs" class="display">
 		<thead>
 			
 			<tr>
@@ -50,6 +50,7 @@
 				"oLanguage": {
 					"sLengthMenu": "_MENU_ records per page"
 				},
+				"aaSorting": [[ 3, "desc" ]],
 				"bProcessing": true,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('admin/blogs/data') }}"+"/"+"{{$category}}",

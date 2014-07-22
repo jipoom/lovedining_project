@@ -21,10 +21,10 @@
 		</h3>
 	</div>
 
-	<table id="category" class="table table-striped table-hover">
+	<table id="category" class="display">
 		<thead>
 			<tr>
-				<th class="col-md-4">{{{ Lang::get('admin/category/table.title') }}}</th>
+				<th class="col-md-2">{{{ Lang::get('admin/category/table.title') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/category/table.comments') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>

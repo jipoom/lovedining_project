@@ -48,6 +48,7 @@
 		<link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
+		<link rel="stylesheet" href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
 
 		@yield('styles')
 
@@ -135,7 +136,7 @@
 									<a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-list-alt"></span> Campaigns</a></li>
 									
 									<li{{ (Request::is('admin/elfinder/tinymce*') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('admin/elfinder/tinymce') }}}" class="iframe"><span class="glyphicon glyphicon-list-alt"></span> Images and Banners</a></li>
+									<a href="{{{ URL::to('admin/elfinder/tinymce') }}}" class="iframe"><span class="glyphicon glyphicon-list-alt"></span> Ads</a></li>
 									</ul>
 									<ul class="nav navbar-nav pull-right">
 
@@ -143,14 +144,14 @@
 											<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}} <span class="caret"></span> </a>
 											<ul class="dropdown-menu">
 												<li>
-													<a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-wrench"></span> View Homepage</a>
+													<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span> View Homepage</a>
 												</li>
 												<li class="divider-vertical"></li>
 												<li>
-													<a href="{{{ URL::to('user/settings') }}}"><span class="glyphicon glyphicon-wrench"></span> Info</a>
+													<a href="{{{ URL::to('user/settings') }}}"><span class="glyphicon"></span> Info</a>
 												</li>
 												<li>
-													<a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
+													<a href="{{{ URL::to('user') }}}"><span class="glyphicon"></span> Settings</a>
 												</li>
 												<li class="divider"></li>
 												<li>

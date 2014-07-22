@@ -17,7 +17,7 @@
 		</h3>
 	</div>
 
-	<table id="users" class="table table-striped table-hover">
+	<table id="users" class="display">
 		<thead>
 			<tr>
 				<th class="col-md-2">{{{ Lang::get('admin/users/table.username') }}}</th>

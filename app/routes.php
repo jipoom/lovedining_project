@@ -59,6 +59,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('blogs/{post}/edit', 'AdminBlogsController@postEdit');
     Route::get('blogs/{post}/delete', 'AdminBlogsController@getDelete');
     Route::post('blogs/{post}/delete', 'AdminBlogsController@postDelete');
+	Route::get('blogs/makeDir/{new}/{postId}','AdminBlogsController@makeDir');
+	Route::get('blogs/create','AdminBlogsController@getCreate');
+	Route::get('blogs/{directory}/{postId}','AdminBlogsController@getIndex');	
     Route::controller('blogs', 'AdminBlogsController');
 
     # User Management
@@ -180,11 +183,6 @@ Route::group(array('prefix' => 'search'), function()
 	 Route::get('{keyword}', 'BlogController@searchReview');
 });
 
-
-Route::group(array('before' => 'auth'), function()
-    {
-        
-    });
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));

@@ -141,6 +141,7 @@ return array(
     
 	'image_path' => public_path(). '/images',
 	'banner_path' => public_path(). '/images/Banner',
+	'image_user_path' => public_path(). '/images/user',
 
     /*
     |--------------------------------------------------------------------------

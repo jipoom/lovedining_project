@@ -5,17 +5,20 @@
 	<link rel="stylesheet" href="{{asset('assets/css/jquery.simple-dtpicker.css')}}" />
 @stop
 @section('content')
-		<!--<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-	</ul>-->
+			<li><a href="#tab-content" data-toggle="tab" onclick="mkDir()">Review Content</a></li>
+		</ul>
 	<div class="page-header">
 		<h3>
 			{{{ $title }}}
 			
 			<div class="pull-right">
-				
-				<a href="{{{ URL::previous() }}}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
-			 	
+				@if (isset($post))
+					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
+			 	@else
+			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new' }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>			 	
+			 	@endif
 			</div>
 		</h3>
 	</div>
@@ -59,38 +62,57 @@
 					    {{ Form::text('province', Input::old('title', isset($post) ? $post->province : null), array('placeholder'=>'จังหวัด')) }} 
 					    {{ Form::text('zip', Input::old('title', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
                         
-                         <label class="control-label" for="title">ชื่ออัลบััมรูป(ภาษาอังกฤษหรือตัวเลขเท่านั้น)</label></P>
-                         {{ Form::text('album_name', Input::old('album_name', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม')) }} 
+                        <!-- <label class="control-label" for="title">ชื่ออัลบััมรูป(ภาษาอังกฤษหรือตัวเลขเท่านั้น)</label></P>
+                         {{ Form::text('album_name', Input::old('album_name', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม', 'id' => 'album_name')) }} 
                          {{{ $errors->first('album_name', ':message') }}}<p>
+                         -->	 
+                         	
+                         {{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
+                         {{ Form::hidden('post', Input::old('post', isset($post) ? $post : null), array('id'=>'post')) }} </p>  
+                         {{ Form::hidden('review_id', Input::old('review_id', isset($post) ? $post->id : 0), array('id'=>'review_id')) }} </p>  
+                        
                          	
 					</div>
 				</div>
 				<!-- ./ post title -->
 
-				<!-- Content -->
-				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
-					<div class="col-md-12">
-                        <label class="control-label" for="content">Content</label>
-						
-						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
-						{{{ $errors->first('content', ':message') }}}-->
-						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'25', 'cols' => '130'))}} </p>
-						{{{ $errors->first('content', ':message') }}}
-
-					</div>
-				</div>
-				<!-- ./ content -->
+				
 			
 			
 			</div>
 				<!-- ./ General tab -->
+				
+			<!-- Meta Data tab -->
+			<div class="tab-pane" id="tab-content">
+				<!-- Content -->
+				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
+					<div class="col-md-12">
+                        <p><label class="control-label" for="content">Content</label></p>
+                        <p><label class="control-label" for="content">Please upload images to "images/{{$randAlbumName}}"</label></p>
+						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
+						{{{ $errors->first('content', ':message') }}}-->
+						
+						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'25', 'cols' => '130'))}} </p>
+						{{{ $errors->first('content', ':message') }}}
+						
+
+					</div>
+				</div>
+				<!-- ./ content -->
+				</div>
+			<!-- ./ meta data tab -->	
+				
 		</div>
 		<!-- ./ tabs content -->
 
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-12">
-				<element class="btn-cancel close_popup">Cancel</element>
+				@if (isset($post))
+					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
+			 	@else
+			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new'  }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>			 	
+			 	@endif
 				<button type="reset" class="btn btn-default">Reset</button>
 				<button type="submit" class="btn btn-success">Update</button>
 			</div>
@@ -118,6 +140,8 @@ $(function(){
   $(function() {
     tinymce.init({
   selector: "textarea",
+   width: "300",
+   height: "500",
   
   // ===========================================
   // INCLUDE THE PLUGIN
@@ -126,14 +150,14 @@ $(function(){
   plugins: [
     "advlist autolink lists link image charmap print preview anchor",
     "searchreplace visualblocks code fullscreen",
-    "insertdatetime media table contextmenu paste emoticons"
+    "insertdatetime media table contextmenu paste emoticons jbimages"
   ],
 	
   // ===========================================
   // PUT PLUGIN'S BUTTON on the toolbar
   // ===========================================
 	
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons",
+  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages image emoticons",
 	
   // ===========================================
   // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
@@ -167,4 +191,30 @@ function elFinderBrowser (field_name, url, type, win) {
 <script type="text/javascript">
 			$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 </script>
+
+<!-- gen album name -->
+<script>
+	function mkDir() {
+		var newDir = $("#album_name").val();
+		var id = $("#review_id").val();
+		if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById("post").value = xmlhttp.responseText;
+			}
+		}
+
+		xmlhttp.open("GET", "{{ URL::to('admin/blogs/makeDir/') }}/"+ newDir+"/"+id , true);
+		xmlhttp.send();
+
+	}
+</script>
+<!-- gen album name -->
+
+
 @stop

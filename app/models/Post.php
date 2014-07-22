@@ -105,5 +105,30 @@ class Post extends Eloquent {
 	{
         return $this->date($this->updated_at);
 	}	
+	
+	public static function findImages($content)
+	{
+		$i = 0;
+			$end = 0;
+			$image = array();
+			while(true)
+			{
+				if(strpos($content,'/images/user/'))		
+				{
+					$start = strpos($content,'/images/user/')+13;
+					$stop = strpos($content,'" alt="');
+					$gap = $stop-$start;
+					$image[$i] =  substr($content,$start,$gap);
+					$content = substr($content,$stop+7);
+					$i++;
+				}
+				else
+				{
+					break;
+				}
+				
+			}
+			return $image;
+	}
 
 }

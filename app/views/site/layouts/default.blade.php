@@ -117,15 +117,15 @@
 									<ul class="dropdown-menu">
 										@if (Auth::user()->hasRole('admin'))
 										<li>
-											<a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-wrench"></span> Admin Panel</a>
+											<a href="{{{ URL::to('admin') }}}"><span class="glyphicon"></span> Admin Panel</a>
 										</li>
 										@endif
 										<?php $numNewMessage = PrivateMessage::newMessage(Auth::user() -> username); ?>
 										<li>
-											<a href="{{{ URL::to('message_service') }}}"><span class="glyphicon glyphicon-wrench"></span> Inbox @if($numNewMessage>0) ({{$numNewMessage}}) @endif</a>
+											<a href="{{{ URL::to('message_service') }}}"><span class="glyphicon"></span> Inbox @if($numNewMessage>0) ({{$numNewMessage}}) @endif</a>
 										</li>
 										<li>
-											<a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Settings</a>
+											<a href="{{{ URL::to('user') }}}"><span class="glyphicon"></span> Settings</a>
 										</li>
 										<li class="divider"></li>
 										<li>
