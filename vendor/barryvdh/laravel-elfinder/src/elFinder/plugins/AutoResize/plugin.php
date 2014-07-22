@@ -7,8 +7,8 @@ class elFinderPluginAutoResize {
 	public function __construct($opts) {
 		$defaults = array(
 			'enable'         => true,       // For control by volume driver
-			'maxWidth'       => 1024,       // Path to Water mark image
-			'maxHeight'      => 1024,       // Margin right pixel
+			'maxWidth'       => 750,       // Path to Water mark image
+			'maxHeight'      => 500,       // Margin right pixel
 			'quality'        => 95,         // JPEG image save quality
 			'targetType'     => IMG_GIF|IMG_JPG|IMG_PNG|IMG_WBMP // Target image formats ( bit-field )
 		);

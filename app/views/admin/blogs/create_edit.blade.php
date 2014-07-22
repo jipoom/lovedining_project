@@ -15,9 +15,9 @@
 			
 			<div class="pull-right">
 				@if (isset($post))
-					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
+					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-danger"><span class="glyphicon"</span> Cancel</a>
 			 	@else
-			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new' }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>			 	
+			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new' }}" class="btn btn-danger"><span class="glyphicon"</span> Cancel</a>			 	
 			 	@endif
 			</div>
 		</h3>
@@ -88,7 +88,6 @@
 				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <p><label class="control-label" for="content">Content</label></p>
-                        <p><label class="control-label" for="content">Please upload images to "images/{{$randAlbumName}}"</label></p>
 						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
 						{{{ $errors->first('content', ':message') }}}-->
 						
@@ -108,11 +107,6 @@
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-12">
-				@if (isset($post))
-					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
-			 	@else
-			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new'  }}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>			 	
-			 	@endif
 				<button type="reset" class="btn btn-default">Reset</button>
 				<button type="submit" class="btn btn-success">Update</button>
 			</div>
@@ -150,14 +144,14 @@ $(function(){
   plugins: [
     "advlist autolink lists link image charmap print preview anchor",
     "searchreplace visualblocks code fullscreen",
-    "insertdatetime media table contextmenu paste emoticons jbimages"
+    "insertdatetime media table contextmenu paste emoticons"
   ],
 	
   // ===========================================
   // PUT PLUGIN'S BUTTON on the toolbar
   // ===========================================
 	
-  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link jbimages image emoticons",
+  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image emoticons",
 	
   // ===========================================
   // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
@@ -172,7 +166,7 @@ $(function(){
 function elFinderBrowser (field_name, url, type, win) {
   tinymce.activeEditor.windowManager.open({
 
-    file: '{{URL::to('admin/elfinder/tinymce')}}',// use an absolute path!
+    file: '{{URL::to('admin/elfinder/tinymce')."/".$randAlbumName}}',// use an absolute path!
     //file: 'http://localhost/elfinder2_1/elfinder.html',
     title: 'elFinder 2.0',
     width: 900,

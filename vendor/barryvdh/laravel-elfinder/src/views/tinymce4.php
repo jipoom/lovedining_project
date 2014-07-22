@@ -40,7 +40,8 @@
             var elf = $('#elfinder').elfinder({
                 // set your elFinder options here
                 customData: {
-					_token: '<?php echo csrf_token(); ?>'
+					_token: '<?php echo csrf_token(); ?>',
+					_dirName:'<?php echo $dirName; ?>'
 					},
                 <?php if($locale){ ?>
                     lang: '<?= $locale ?>', // locale

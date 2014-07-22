@@ -153,7 +153,7 @@
 
 
 									<li{{ (Request::is('admin/elfinder/tinymce*') ? ' class="active"' : '') }}>
-										<a href="{{{ URL::to('admin/elfinder/tinymce') }}}" class="iframe"><span class="glyphicon glyphicon-bullhorn"></span> Ads</a></li>
+										<a href="{{{ URL::to('admin/elfinder/tinymce/Ads') }}}" class="iframe"><span class="glyphicon glyphicon-bullhorn"></span> Ads</a></li>
 										
 										
 </ul>

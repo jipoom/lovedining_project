@@ -38,7 +38,18 @@ class ElfinderController extends \BaseController
         {
             $locale = false;
         }
-        return View::make($this->package . '::tinymce4')->with(compact('dir', 'locale'));
+        return View::make($this->package . '::tinymce4')->with(compact('dir', 'locale','dirName'));
+    }
+	
+	public function showTinyMCE4Test($dirName = null)
+    {
+        $dir = 'packages/barryvdh/' . $this->package;
+        $locale = Config::get('app.locale');
+        if (!file_exists(public_path() . "/$dir/js/i18n/elfinder.$locale.js"))
+        {
+            $locale = false;
+        }
+        return View::make($this->package . '::tinymce4')->with(compact('dir', 'locale','dirName'));
     }
 
     public function showCKeditor4()
@@ -54,7 +65,7 @@ class ElfinderController extends \BaseController
 
     public function showConnector()
     {
-        $dir = Config::get($this->package . '::dir');
+        $dir = Config::get($this->package . '::dir'). "/" . $_REQUEST['_dirName'];
         $roots = Config::get($this->package . '::roots');
 
         if (!$roots)
@@ -62,7 +73,7 @@ class ElfinderController extends \BaseController
             $roots = array(
                 array(
                     'driver' => 'LocalFileSystem', // driver for accessing file system (REQUIRED)
-                    'path' => public_path() . DIRECTORY_SEPARATOR . $dir, // path to files (REQUIRED)
+                    'path' => public_path() . DIRECTORY_SEPARATOR . $dir , // path to files (REQUIRED)
                     'URL' => asset($dir), // URL to files (REQUIRED)
                     'accessControl' => Config::get($this->package . '::access') // filter callback (OPTIONAL)
                 )
@@ -72,6 +83,19 @@ class ElfinderController extends \BaseController
         // Documentation for connector options:
         // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
         $opts = array(
+        'bind' => array(
+	        'upload.presave' => array(
+	            'Plugin.AutoResize.onUpLoadPreSave'
+	        )
+	    ),
+	    'plugin' => array(
+	        'AutoResize' => array(
+	        'enable' => true,
+	        'maxWidth'  => 750,
+	        'maxHeight'  => 500,
+	        'quality' => 75
+	        )
+	    ),
             'roots' => $roots
         );
 

@@ -294,36 +294,8 @@ class AdminBlogsController extends AdminController {
 		// There was a problem deleting the blog post
 		return Redirect::to('admin/blogs') -> with('error', Lang::get('admin/blogs/messages.delete.error'));
 	}
-
-	public function makeDir($new,$postId) {
-		if ($postId == 0) {
-			mkdir(Config::get('app.image_path') . '/' . $new);
-			return $postId;
-			
-		} else {
-			$post = Post::find($postId);
-			if ($post -> temp_album_name == $new) {
-				return $post;
-			} else {
-
-				if ($post -> album_name != $post -> temp_album_name && $post -> temp_album_name != "") {
-
-					if (file_exists(Config::get('app.image_path') . '/' . $post -> temp_album_name)) {
-						Picture::deleteDir(Config::get('app.image_path') . '/' . $post -> temp_album_name);
-					}
-				}
-				$post -> temp_album_name = $new;
-				$post -> save();
-				if (!file_exists(Config::get('app.image_path') . '/' . $new)) {
-					mkdir(Config::get('app.image_path') . '/' . $new);
-				}
-				return $post;
-			}
-
-		}
-	}
 	
-	public function makeDirRandom($new,$postId) {
+	public function makeDir($new,$postId) {
 		if ($postId == 0) {
 			mkdir(Config::get('app.image_path') . '/' . $new);
 			return $postId;
