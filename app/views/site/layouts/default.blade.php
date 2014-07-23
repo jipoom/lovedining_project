@@ -37,14 +37,14 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}">
 		<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}">
 		<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.png') }}}">
-				<!-- CSS -->
+		<!-- CSS -->
 		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/wysihtml5/prettify.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
-		
+
 		@yield('styles')
 	</head>
 
@@ -91,38 +91,33 @@
 							<div class="tfclear"></div>
 						</div>
 
-</div>
-<div class="container">
+					</div>
+					<div class="container">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
 
 							<ul class="nav navbar-nav">
-								
+
 								<li{{ (Request::is('/') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 
-									
-								
-								
-								
-								
-								
-								<?php $mode = CategoryOrder::getMode(); ?>
-								@foreach(CategoryOrder::getOrder($mode) as $category)
-								<li {{ (Request::is('category/'.$category-> id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
-									@if (Auth::check())
-										<?php $numUnread = PostsUserRead::getUnreadReviews($category,Auth::user()->id); ?>
+									<?php $mode = CategoryOrder::getMode(); ?>
+									@foreach(CategoryOrder::getOrder($mode) as $category)
+									<li {{ (Request::is('category/'.$category->
+										id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
+										@if (Auth::check())
+										<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
 										@if($numUnread>0)
-											({{$numUnread}})
+										({{$numUnread}})
 										@endif
-									@endif </a>
-								</li>
+										@endif </a>
+									</li>
 
-								@endforeach
+									@endforeach
 							</ul>
 
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
-								<li class="divider-vertical"></li>
+
 								<li class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}} <span class="caret"></span> </a>
 									<ul class="dropdown-menu">
@@ -159,11 +154,22 @@
 					</div>
 				</div>
 				<!-- ./ navbar -->
+				<div class="ads-right ">
+
+					<div class="col-md-12">
+						<!-- Ads -->
+						<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+						<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+						<!-- ./ Ads -->
+
+					</div>
+				</div>
 
 				<!-- Container -->
 				<div class="container">
 					<!-- Notifications -->
 					@include('notifications')
+
 					<!-- ./ notifications -->
 
 					<!-- Content -->
@@ -188,16 +194,15 @@
 			<!-- Javascripts
 			================================================== -->
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-		<script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
-		<script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
-		<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-		<script src="{{asset('assets/js/datatables-bootstrap.js')}}"></script>
-		<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
-		<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
-		<script src="{{asset('assets/js/prettify.js')}}"></script>
-			
-			
+			<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+			<script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
+			<script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+			<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+			<script src="{{asset('assets/js/datatables-bootstrap.js')}}"></script>
+			<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
+			<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
+			<script src="{{asset('assets/js/prettify.js')}}"></script>
+
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->
