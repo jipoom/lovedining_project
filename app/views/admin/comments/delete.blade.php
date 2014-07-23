@@ -17,7 +17,7 @@
         <!-- Form Actions -->
         <div class="form-group">
             <div class="controls">
-                <p><label>Are you sure you want to delete this content?</labe></p>
+                <p><label>Are you sure you want to delete this comment?</labe></p>
                 <button class="btn btn-cancel close_popup">Cancel</button>
                 <button type="submit" class="btn btn-danger">Delete</button>
             </div>

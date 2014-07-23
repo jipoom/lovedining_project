@@ -51,7 +51,9 @@
     <link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/jquery.simple-dtpicker.css')}}" />
-	
+	<!-- AutoComplete -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+	<!-- /AutoComplete -->
 	<style>
 	.tab-pane {
 		padding-top: 20px;
@@ -113,7 +115,7 @@
 	<!-- ./ container -->
 
 	<!-- Javascripts -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
     <script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
@@ -124,8 +126,9 @@
     <script src="{{asset('assets/js/prettify.js')}}"></script>
 	<script src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>
-	
-	
+	<!-- AutoComplete -->
+	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<!-- /AutoComplete -->
  <script type="text/javascript">
 $(document).ready(function(){
 $('.close_popup').click(function(){

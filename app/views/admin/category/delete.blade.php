@@ -20,7 +20,7 @@
         <!-- Form Actions -->
         <div class="form-group">
             <div class="controls">
-               <p><label>Are you sure you want to delete "{{$category->category_name}}"?</labe></p>
+               <p><label>Are you sure you want to delete the category "{{$category->category_name}}"?</labe></p>
                 <button class="btn btn-cancel close_popup">Cancel</button>
                 <button type="submit" class="btn btn-danger">Delete</button>
             </div>
