@@ -21,7 +21,8 @@
 @if($yetToPrint)
 <!-- Sorting Menu goes here -->
 <div class="col-md-3 pull-right">
-	<form>
+	
+	<form class ="form-dropdown">
 		Sort by:
 		<select name="sort" id ="mode" onchange="showReviews(this.value)">
 			<option value="date">Recently published</option>
