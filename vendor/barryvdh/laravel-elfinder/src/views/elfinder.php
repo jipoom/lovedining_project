@@ -28,11 +28,20 @@
         $().ready(function() {
             $('#elfinder').elfinder({
                 // set your elFinder options here
+				 customData: {
+					_token: '<?php echo csrf_token(); ?>',
+					_dirName:'<?php echo $dirName; ?>'
+					},
                 <?php if($locale){ ?>
                     lang: '<?= $locale ?>', // locale
                 <?php } ?>
-                url : '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>'  // connector URL
-            });
+                url : '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',  // connector URL
+				 getFileCallback : function(file) {
+                        window.opener.processFile(file.url,file.name);
+                        window.close();
+                    },
+				resizable: true
+                });
         });
     </script>
 </head>

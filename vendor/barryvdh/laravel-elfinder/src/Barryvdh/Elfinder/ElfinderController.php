@@ -18,6 +18,17 @@ class ElfinderController extends \BaseController
         }
         return View::make($this->package . '::elfinder')->with(compact('dir', 'locale'));
     }
+	
+	public function showDefault($dirName = null)
+    {
+        $dir = 'packages/barryvdh/' . $this->package;
+        $locale = Config::get('app.locale');
+        if (!file_exists(public_path() . "/$dir/js/i18n/elfinder.$locale.js"))
+        {
+            $locale = false;
+        }
+        return View::make($this->package . '::elfinder')->with(compact('dir', 'locale','dirName'));
+    }
 
     public function showTinyMCE()
     {

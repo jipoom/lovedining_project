@@ -57,6 +57,7 @@ class AdminBlogsController extends AdminController {
 		// Title
 		$title = Lang::get('admin/blogs/title.create_a_new_blog');
 		$randAlbumName = date("YmdHis");
+		mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
 		//Category
 		$init_cat = Category::first();
 		$category = array($init_cat -> id => $init_cat -> category_name);
@@ -110,6 +111,7 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> zip = Input::get('zip');
 			$this -> post -> category_id = Input::get('category_id');
 			$this -> post -> album_name = Input::get('album_name');
+			$this -> post -> profile_picture_name = Input::get('profilePic');
 			//$this->post->slug             = Str::slug(Input::get('title'));
 			$this -> post -> content = Input::get('content');
 			$this -> post -> meta_title = Input::get('meta-title');
@@ -174,7 +176,10 @@ class AdminBlogsController extends AdminController {
 	public function postEdit($post) {
 
 		// Declare the rules for the form validation
-		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 'restaurant_name' => 'required|min:3', 'content' => 'required|min:3', 'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i');
+		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 
+		'restaurant_name' => 'required|min:3', 
+		'content' => 'required|min:3', 
+		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -203,6 +208,7 @@ class AdminBlogsController extends AdminController {
 			$post -> zip = Input::get('zip');
 			$post -> category_id = Input::get('category_id');
 			$post -> album_name = Input::get('album_name');
+			$post -> profile_picture_name = Input::get('profilePic');
 			//$post->slug             = Str::slug(Input::get('title'));
 			$post -> content = $content;
 			$post -> meta_title = Input::get('meta-title');
@@ -295,16 +301,6 @@ class AdminBlogsController extends AdminController {
 		}
 		// There was a problem deleting the blog post
 		return Redirect::to('admin/blogs') -> with('error', Lang::get('admin/blogs/messages.delete.error'));
-	}
-	
-	public function makeDir($new,$postId) {
-		if ($postId == 0) {
-			mkdir(Config::get('app.image_path') . '/' . $new);
-			return $postId;
-			
-		} else {
-			return $postId;
-		}
 	}
 
 	public function saveDraft() {

@@ -202,7 +202,8 @@
 			<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
 			<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
 			<script src="{{asset('assets/js/prettify.js')}}"></script>
-
+			
+		
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->

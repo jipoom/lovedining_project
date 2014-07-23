@@ -116,6 +116,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
 	Route::get('elfinder/tinymce', 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4');
 	Route::get('elfinder/tinymce/{dirName}', 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4Test');
+	Route::get('elfinder/default/{dirName}', 'Barryvdh\Elfinder\ElfinderController@showDefault');
 	
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');

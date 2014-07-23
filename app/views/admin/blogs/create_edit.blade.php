@@ -20,12 +20,13 @@
 		</h3>
 	</div>
 	
+	<!--
 	<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
 			<li><a href="#tab-content" data-toggle="tab" onclick="mkDir()">Review Content</a></li>
 		</ul>
 
-
+-->
 	{{-- Edit Blog Form --}}
 	<form class="form-horizontal" method="post" action="@if (isset($post)){{ URL::to('admin/blogs/' . $post->id . '/edit') }}@endif" autocomplete="off">
 		<!-- CSRF Token -->
@@ -72,8 +73,31 @@
                          {{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
                          {{ Form::hidden('post', Input::old('post', isset($post) ? $post : null), array('id'=>'post')) }} </p>  
                          {{ Form::hidden('review_id', Input::old('review_id', isset($post) ? $post->id : 0), array('id'=>'review_id')) }} </p>  
-                        
-                         	
+
+                          <div id="picture">
+                          	@if(isset($post) && $post->profile_picture_name!="")
+                          		{{ HTML::image('images/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('height'=>'200', 'width'=>'200')) }}
+                          	@else
+                          		<label class="control-label" for="content"><span>Please Select Profile picture</span></label>
+                          	@endif
+		                   
+		                </div>
+		                <div class="button-group">
+		                    <input type="text" id="featured_image" placeholder="Profile Picture" readonly name="profilePic" />
+		                    <button type="button" class="browse" id="imageUpload" > Browse </button>
+		                </div>
+                         
+                          <p><label class="control-label" for="content">Content</label></p>
+						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
+						{{{ $errors->first('content', ':message') }}}-->
+	
+               
+               
+         
+						
+						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'25', 'cols' => '130'))}} </p>
+						{{{ $errors->first('content', ':message') }}}
+		
 					</div>
 				</div>
 				<!-- ./ post title -->
@@ -89,6 +113,9 @@
 				<!-- Content -->
 				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
+						
+						
+						
                         <p><label class="control-label" for="content">Content</label></p>
 						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
 						{{{ $errors->first('content', ':message') }}}-->
@@ -211,6 +238,24 @@ function elFinderBrowser (field_name, url, type, win) {
 	}
 </script>
 <!-- gen album name -->
+	<script src="{{asset('assets/js/jquery.popupWindow.js')}}"></script>
+	 <script type="text/javascript"> 
+                    $(document).ready(function(){
+                        $('#imageUpload').popupWindow({ 
+                            windowURL:'{{URL::to('admin/elfinder/default')."/".$randAlbumName}}', 
+                            windowName:'Filebrowser',
+                            height:490, 
+                            width:950,
+                            centerScreen:1
+                        }); 
+                    });
+                    
+                    function processFile(url,name){
+                        $('#picture').html('<img src="' + url + '" height="200" width="200"/>');
+                        $('#featured_image').val(name);
+                    }
+                </script>
+
 
 
 @stop
