@@ -108,29 +108,6 @@
 			</div>
 				<!-- ./ General tab -->
 				
-			<!-- Meta Data tab -->
-			<div class="tab-pane" id="tab-content">
-				<!-- Content -->
-				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
-					<div class="col-md-12">
-						
-						
-						
-                        <p><label class="control-label" for="content">Content</label></p>
-						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
-						{{{ $errors->first('content', ':message') }}}-->
-						
-						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'25', 'cols' => '130'))}} </p>
-						{{{ $errors->first('content', ':message') }}}
-						
-
-					</div>
-				</div>
-				<!-- ./ content -->
-				</div>
-			<!-- ./ meta data tab -->	
-				
-		</div>
 		<!-- ./ tabs content -->
 
 		<!-- Form Actions -->
