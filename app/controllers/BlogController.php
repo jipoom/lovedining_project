@@ -47,16 +47,19 @@ class BlogController extends BaseController {
 	 *
 	 * @return View
 	 */
-	public function getCategory($category)
+	public function getCategory($categoryId)
 	{
 		// Get all the blog posts
+		$catName = Category::find($categoryId);
 		$mode = null;
-		if (Session::has('mode')){
+		if (Session::has('mode') && Session::get('catName') == $catName){
 			$mode = Session::get('mode');
-			$posts = Post::orderReview($mode,$category);
+			$posts = Post::orderReview($mode,$categoryId,$catName);
 		}
 		else {
-			$posts = $this->post->where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
+			Session::forget('mode');
+			Session::forget('catName');
+			$posts = $this->post->where('category_id', '=', $categoryId)->orderBy('created_at', 'DESC')->paginate(10);
 		}
 		
 		$yetToPrint = true;
@@ -66,10 +69,11 @@ class BlogController extends BaseController {
 	}
 	
 	
-	public function getCategoryMode($category, $mode)
+	public function getCategoryMode($categoryId, $mode)
 	{
 		// Get all the blog posts
-		$posts = Post::orderReview($mode,$category);
+		$catName = Category::find($categoryId);
+		$posts = Post::orderReview($mode,$categoryId,$catName);
 		
 		
 		
