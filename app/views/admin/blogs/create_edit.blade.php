@@ -231,7 +231,7 @@ function elFinderBrowser (field_name, url, type, win) {
                     
                     function processFile(url,name){
                         $('#picture').html('<img src="' + url + '" height="180" width="260"/>');
-                        $('#featured_image').val(name);
+                        $('#featured_image').val(url);
                     }
                 </script>
 

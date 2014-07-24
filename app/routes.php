@@ -109,8 +109,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::post('introduction', 'AdminIntroductionController@postCreate');
     Route::get('introduction/{introduction}/edit', 'AdminIntroductionController@getEdit');
     Route::post('introduction/{introduction}/edit', 'AdminIntroductionController@postEdit');
-    Route::get('introduction/{introduction}/delete', 'AdminIntroductionController@getDelete');
-    Route::post('introduction/{introduction}/delete', 'AdminIntroductionController@postDelete');
+    //Route::get('introduction/{introduction}/delete', 'AdminIntroductionController@getDelete');
+    //Route::post('introduction/{introduction}/delete', 'AdminIntroductionController@postDelete');
     Route::controller('introduction', 'AdminIntroductionController');
 	
 	#File Manager

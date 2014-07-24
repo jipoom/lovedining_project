@@ -80,7 +80,7 @@ category_id}}></input>
 
 <div class="col-md-6">
 @if($posts[$i]->profile_picture_name!="")	
-	<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="../images/{{$posts[$i]->album_name.'/'.$posts[$i]->profile_picture_name}}" alt=""></a>
+	<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="{{$posts[$i]->profile_picture_name}}" alt=""></a>
 @else
 	<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 @endif
@@ -131,8 +131,8 @@ Tel:
 <!-- Post Content -->
 
 <div class="col-md-6">
-@if($posts[$i+1]->profile_picture_name!="")	
-	<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="../images/{{$posts[$i+1]->album_name.'/'.$posts[$i+1]->profile_picture_name}}" alt=""></a>
+@if($posts[$i+1]->profile_picture_name!="")	     
+	<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="{{$posts[$i+1]->profile_picture_name}}" alt=""></a>
 @else
 	<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 @endif
@@ -205,36 +205,6 @@ Tel:
 	}
 </script>
 <!-- End Sort Review -->
-<!-- Search Review -->
-<script>
-	function searchAction(mode) {
-		var word = $("#keywords").val();
-		if (mode == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
-		}
-		if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				document.getElementById("reload").innerHTML = xmlhttp.responseText;
-			}
-		}
-		xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
-		xmlhttp.send();
 
-	}
-
-	function runScript(e) {
-		if (e.keyCode == 13) {
-			searchAction("go");
-		}
-	}
-</script>
-<!-- End Search Review -->
 
 @stop

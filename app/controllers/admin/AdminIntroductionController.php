@@ -166,14 +166,14 @@ class AdminIntroductionController extends AdminController {
      * @param $post
      * @return Response
      */
-    public function getDelete($category)
+   /* public function getDelete($category)
     {
         // Title
         $title = Lang::get('admin/category/title.category_delete');
 
         // Show the page
         return View::make('admin/category/delete', compact('category', 'title'));
-    }
+    }*/
 
     /**
      * Remove the specified resource from storage.
@@ -181,7 +181,7 @@ class AdminIntroductionController extends AdminController {
      * @param $post
      * @return Response
      */
-    public function postDelete($category)
+    /*public function postDelete($category)
     {
         // Declare the rules for the form validation
         $rules = array(
@@ -213,7 +213,7 @@ class AdminIntroductionController extends AdminController {
         }
         // There was a problem deleting the blog post
         return Redirect::to('admin/category')->with('error', Lang::get('admin/category/messages.delete.error'));
-    }
+    }*/
 
 
 }
