@@ -2681,7 +2681,7 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 }
 .form-dropdown select {
 	padding: 5px;
-	margin: 2px;
+	margin: 0 10px 10px 10px;
 	font-size: 14px;
 	background-color: #F5F5F5;
 	border: 1px solid #ccc;

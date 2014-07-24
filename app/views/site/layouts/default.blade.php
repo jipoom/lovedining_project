@@ -154,17 +154,20 @@
 					</div>
 				</div>
 				<!-- ./ navbar -->
+				
+				<!-- .Ads
 				<div class="ads-right ">
 
 					<div class="col-md-12">
-						<!-- Ads -->
+						
 						<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 						<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-						<!-- ./ Ads -->
+					
 
 					</div>
 				</div>
-
+				./ Ads -->
+				
 				<!-- Container -->
 				<div class="container">
 					<!-- Notifications -->
