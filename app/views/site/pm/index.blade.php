@@ -47,6 +47,7 @@
 				"oLanguage": {
 					"sLengthMenu": "_MENU_ records per page"
 				},
+				"aaSorting": [[ 2, "desc" ]],
 				"bProcessing": true,
 		        "bServerSide": true,
 		        "sAjaxSource": "{{ URL::to('message_service/data') }}",

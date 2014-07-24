@@ -3,10 +3,9 @@
 {{-- Content --}}
 @section('content')
 	<!-- Tabs -->
-		<ul class="nav nav-tabs">
+	<!--	<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-			<!--<li><a href="#tab-meta-data" data-toggle="tab">Meta data</a></li>-->
-		</ul>
+	</ul> -->
 	<!-- ./ tabs -->
 
 	{{-- Edit Blog Form --}}

@@ -79,7 +79,11 @@ category_id}}></input>
 <!-- Post Content -->
 
 <div class="col-md-6">
-<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+@if($posts[$i]->profile_picture_name!="")	
+	<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="../images/{{$posts[$i]->album_name.'/'.$posts[$i]->profile_picture_name}}" alt=""></a>
+@else
+	<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+@endif
 </div>
 <div class="col-md-6">
 <p>
@@ -127,7 +131,11 @@ Tel:
 <!-- Post Content -->
 
 <div class="col-md-6">
-<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+@if($posts[$i+1]->profile_picture_name!="")	
+	<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="../images/{{$posts[$i+1]->album_name.'/'.$posts[$i+1]->profile_picture_name}}" alt=""></a>
+@else
+	<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+@endif
 </div>
 <div class="col-md-6">
 <p>

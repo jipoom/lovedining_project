@@ -73,18 +73,20 @@
                          {{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
                          {{ Form::hidden('post', Input::old('post', isset($post) ? $post : null), array('id'=>'post')) }} </p>  
                          {{ Form::hidden('review_id', Input::old('review_id', isset($post) ? $post->id : 0), array('id'=>'review_id')) }} </p>  
-
+ 						
+ 						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
                           <div id="picture">
                           	@if(isset($post) && $post->profile_picture_name!="")
-                          		{{ HTML::image('images/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('height'=>'200', 'width'=>'200')) }}
+                          		{{ HTML::image('images/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('height'=>'180', 'width'=>'260')) }}
                           	@else
-                          		<label class="control-label" for="content"><span>Please Select Profile picture</span></label>
+                          		<img src="http://placehold.it/260x180" alt="">
                           	@endif
 		                   
 		                </div>
+		                   
 		                <div class="button-group">
-		                    <input type="text" id="featured_image" placeholder="Profile Picture" readonly name="profilePic" />
-		                    <button type="button" class="browse" id="imageUpload" > Browse </button>
+		                    <input type="hidden" id="featured_image" placeholder="Profile Picture" readonly name="profilePic" />
+		                    <button type="button" class="browse" id="imageUpload" > Browse Image</button>
 		                </div>
                          
                           <p><label class="control-label" for="content">Content</label></p>
@@ -228,7 +230,7 @@ function elFinderBrowser (field_name, url, type, win) {
                     });
                     
                     function processFile(url,name){
-                        $('#picture').html('<img src="' + url + '" height="200" width="200"/>');
+                        $('#picture').html('<img src="' + url + '" height="180" width="260"/>');
                         $('#featured_image').val(name);
                     }
                 </script>
