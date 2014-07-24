@@ -1,6 +1,6 @@
 <?php
 
-class AdminIntroduction extends AdminController {
+class AdminIntroductionController extends AdminController {
 
 
     /**
@@ -24,38 +24,21 @@ class AdminIntroduction extends AdminController {
      *
      * @return View
      */
-    public function getIndex()
+    public function getCreate()
     {
         // Title
-        if(Request::is('admin/category*'))
-		{
-        	$title = Lang::get('admin/category/title.category_management');
-		}
-		else if(Request::is('admin/order*'))
-		{
-			$title = Lang::get('admin/category/title.order_management');
-		}
-
+		/*$title = Lang::get('admin/introduction/title.introduction_management');
         // Grab all the blog posts
-        $category = $this->category;
-
+        $introduction = $this->introduction;
+		$randAlbumName = 'Introduction';
+		if(!file_exists(Config::get('app.image_path') . '/' . $randAlbumName))
+		{
+			mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
+		}
         // Show the page
-        return View::make('admin/category/index', compact('category', 'title'));
+        return View::make('admin/introduction/index', compact('introduction', 'title','randAlbumName'));*/
+        return View::make('error/404');
     }
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function getCreate()
-	{
-        // Title
-        $title = Lang::get('admin/category/title.category_update');
-		
-        // Show the page
-        return View::make('admin/category/create_edit', compact('title'));
-	}
 
 	/**
 	 * Store a newly created resource in storage.
@@ -65,8 +48,8 @@ class AdminIntroduction extends AdminController {
 	public function postCreate()
 	{
         // Declare the rules for the form validation
-         $rules = array(
-            'category'   => 'required|min:3|unique:category,category_name',
+        /* $rules = array(
+            'content'   => 'required|min:3',
         );
 
 
@@ -77,21 +60,21 @@ class AdminIntroduction extends AdminController {
         if ($validator->passes())
         {
             // Update the blog post data
-            $this->category->category_name  = Input::get('category');
+            $this->introduction->content  = Input::get('content');
 
             // Was the blog post updated?
-            if($this->category->save())
+            if($this->introduction->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/category/' . $this->category->id . '/edit')->with('success', Lang::get('admin/category/messages.create.success'));
+                return Redirect::to('admin/introduction/')->with('success', Lang::get('admin/introduction/messages.create.success'));
             }
 
             // Redirect to the blog post create page
-            return Redirect::to('admin/category/create')->with('error', Lang::get('admin/category/messages.create.error'));
+            return Redirect::to('admin/introduction')->with('error', Lang::get('admin/introduction/messages.create.error'));
         }
 
         // Form validation failed
-        return Redirect::to('admin/category/create')->withInput()->withErrors($validator);
+        return Redirect::to('admin/introduction')->withInput()->withErrors($validator);*/
     }
 
     /**
@@ -111,13 +94,30 @@ class AdminIntroduction extends AdminController {
      * @param $post
      * @return Response
      */
-	public function getEdit($category)
+	public function getEdit($introduction)
 	{
         // Title
-        $title = Lang::get('admin/category/title.category_update');
-		
+        $title = Lang::get('admin/introduction/title.introduction_management');
+		$randAlbumName = 'Introduction';
+		if(!file_exists(Config::get('app.image_path') . '/' . $randAlbumName))
+		{
+			mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
+		}
         // Show the page
-        return View::make('admin/category/create_edit', compact('category','title'));
+        return View::make('admin/introduction/index', compact('introduction', 'title','randAlbumName'));	
+			
+        // Title
+        
+        
+        
+        $title = Lang::get('admin/introduction/title.introduction_update');
+		$randAlbumName = 'Introduction';
+		if(!file_exists(Config::get('app.image_path') . '/' . $randAlbumName))
+		{
+			mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
+		}
+        // Show the page
+         return View::make('admin/introduction/index', compact('$introduction', 'title','randAlbumName'));	
 	}
 
     /**
@@ -126,12 +126,12 @@ class AdminIntroduction extends AdminController {
      * @param $post
      * @return Response
      */
-	public function postEdit($category)
+	public function postEdit($introduction)
 	{
 		
         // Declare the rules for the form validation
          $rules = array(
-            'category'   => 'required|min:3|unique:category,category_name,'.$category->id.',id',
+            'content'   => 'required|min:3',
         );
 
 
@@ -142,21 +142,21 @@ class AdminIntroduction extends AdminController {
         if ($validator->passes())
         {
             // Update the blog post data
-            $category->category_name  = Input::get('category');
+            $introduction->content  = Input::get('content');
 
             // Was the blog post updated?
-            if($category->save())
+            if($introduction->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/category/' . $category->id . '/edit')->with('success', Lang::get('admin/category/messages.update.success'));
+                return Redirect::to('admin/introduction/'.$introduction->id.'/edit')->with('success', Lang::get('admin/introduction/messages.update.success'));
             }
 
             // Redirect to the blogs post management page
-            return Redirect::to('admin/category/' . $category->id . '/edit')->with('error', Lang::get('admin/category/messages.update.error'));
+            return Redirect::to('admin/introduction/'.$introduction->id.'/edit')->with('error', Lang::get('admin/introduction/messages.update.error'));
         }
 
         // Form validation failed
-        return Redirect::to('admin/category/' . $category->id . '/edit')->withInput()->withErrors($validator);
+        return Redirect::to('admin/introduction/'.$introduction->id.'/edit')->withInput()->withErrors($validator);
 	}
 
 

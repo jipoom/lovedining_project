@@ -22,6 +22,7 @@ Route::model('category', 'Category');
 Route::model('campaign', 'Campaign');
 Route::model('role', 'Role');
 Route::model('message', 'PrivateMessage');
+Route::model('introduction', 'Introduction');
 
 /** ------------------------------------------
  *  Route constraint patterns
@@ -104,12 +105,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::controller('campaign', 'AdminCampaignController');
 	
 	# Introduction Management
-	/*Route::get('introduction/{introduction}/show', 'AdminCampaignController@getShow');
-    Route::get('introduction/{introduction}/edit', 'AdminCampaignController@getEdit');
-    Route::post('introduction/{introduction}/edit', 'AdminCampaignController@postEdit');
-    Route::get('introduction/{introduction}/delete', 'AdminCampaignController@getDelete');
-    Route::post('introduction/{introduction}/delete', 'AdminCampaignController@postDelete');
-    Route::controller('introduction', 'AdminCampaignIntroduction');*/
+	Route::get('introduction', 'AdminIntroductionController@getCreate');
+	Route::post('introduction', 'AdminIntroductionController@postCreate');
+    Route::get('introduction/{introduction}/edit', 'AdminIntroductionController@getEdit');
+    Route::post('introduction/{introduction}/edit', 'AdminIntroductionController@postEdit');
+    Route::get('introduction/{introduction}/delete', 'AdminIntroductionController@getDelete');
+    Route::post('introduction/{introduction}/delete', 'AdminIntroductionController@postDelete');
+    Route::controller('introduction', 'AdminIntroductionController');
 	
 	#File Manager
 	Route::get('elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
