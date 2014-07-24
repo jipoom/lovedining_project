@@ -130,5 +130,29 @@ class Post extends Eloquent {
 			}
 			return $image;
 	}
+	public static function orderReview($mode, $category)
+	{
+		if($mode == "date"){
+			Session::put('mode', 'date');
+			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
+			
+		}
+		else if ($mode == "reviewName"){
+			Session::put('mode', 'reviewName');
+			return Post::where('category_id', '=', $category)->orderBy('title', 'ASC')->paginate(10);
+			
+		}
+		else if ($mode == "restaurantName"){
+			Session::put('mode', 'restaurantName');
+			return Post::where('category_id', '=', $category)->orderBy('restaurant_name', 'ASC')->paginate(10);
+			
+		}
+		else if ($mode == "popularity"){
+			Session::put('mode', 'popularity');
+			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
+			
+		}
+		 
+	}
 
 }

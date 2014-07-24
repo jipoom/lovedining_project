@@ -16,8 +16,10 @@
 	@endif </h3>
 </div>
 
-@foreach ($posts as $post)
 
+<?php for($i=0;$i<count($posts);$i+=2)
+{
+?>
 @if($yetToPrint)
 <!-- Sorting Menu goes here -->
 <div class="col-md-3 pull-right">
@@ -25,16 +27,32 @@
 	<form class ="form-dropdown">
 		Sort by:
 		<select name="sort" id ="mode" onchange="showReviews(this.value)">
-			<option value="date">Recently published</option>
-			<option value="reviewName">Review Name</option>
-			<option value="restaurantName">Restaurant Name</option>
-			<option value="popularity">Popularity</option>
+			@if($mode == "date")
+				<option value="date" selected>Recently published</option>
+			@else
+				<option value="date">Recently published</option>
+			@endif	
+			@if($mode == "reviewName")
+				<option value="reviewName" selected>Review Name</option>
+			@else
+				<option value="reviewName">Review Name</option>
+			@endif
+			@if($mode == "restaurantName")
+				<option value="restaurantName" selected>Restaurant Name</option>
+			@else
+				<option value="restaurantName">Restaurant Name</option>
+			@endif
+			@if($mode == "popularity")
+				<option value="popularity" selected>Popularity</option>
+			@else
+				<option value="popularity">Popularity</option>
+			@endif
 		</select>
 	</form>
 
 </div>
 
-<input type ="hidden" id ="category" value= {{$post->
+<input type ="hidden" id ="category" value= {{$posts[$i]->
 category_id}}></input>
 <?php $yetToPrint = false; ?>
 @endif
@@ -46,7 +64,7 @@ category_id}}></input>
 		<!-- Post Title -->
 
 		<div class="col-md-12">
-			<h4><strong><a href="{{{ $post->url() }}}">{{ String::title($post->title) }}</a></strong></h4>
+			<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
 		</div>
 
 		<!-- ./ post title -->
@@ -54,18 +72,18 @@ category_id}}></input>
 		<!-- Post Content -->
 
 		<div class="col-md-6">
-			<a href="{{{ $post->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+			<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 		</div>
 		<div class="col-md-6">
 			<p>
-				{{ String::tidy($post->restaurant_name) }}
+				{{ String::tidy($posts[$i]->restaurant_name) }}
 			</p>
 			<p>
-				{{ String::tidy($post->district); }}, {{ String::tidy($post->province); }}
+				{{ String::tidy($posts[$i]->district); }}, {{ String::tidy($posts[$i]->province); }}
 			</p>
 			<p>
 				Tel:
-				{{ String::tidy($post->tel); }}
+				{{ String::tidy($posts[$i]->tel); }}
 			</p>
 		</div>
 
@@ -77,22 +95,24 @@ category_id}}></input>
 			<p></p>
 			<p>
 
-				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $post->author->username }}}</span>
+				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $posts[$i]->author->username }}}</span>
 				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
-				{{{ $post->date() }}}
-				| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $post->url() }}}#comments">{{$post->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $post->comments()->count()) }}</a>
+				{{{ $posts[$i]->date() }}}
+				| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $posts[$i]->url() }}}#comments">{{$posts[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i]->comments()->count()) }}</a>
 			</p>
 		</div>
 
 		<!-- ./ post footer -->
 	</div>
 
+	<!-- new Column -->
+	@if(($i+1)<count($posts))
 	<div class="col-md-6">
 
 		<!-- Post Title -->
 
 		<div class="col-md-12">
-			<h4><strong><a href="{{{ $post->url() }}}">{{ String::title($post->title) }}</a></strong></h4>
+			<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->title) }}</a></strong></h4>
 		</div>
 
 		<!-- ./ post title -->
@@ -100,18 +120,18 @@ category_id}}></input>
 		<!-- Post Content -->
 
 		<div class="col-md-6">
-			<a href="{{{ $post->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+			<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 		</div>
 		<div class="col-md-6">
 			<p>
-				{{ String::tidy($post->restaurant_name) }}
+				{{ String::tidy($posts[$i+1]->restaurant_name) }}
 			</p>
 			<p>
-				{{ String::tidy($post->district); }}, {{ String::tidy($post->province); }}
+				{{ String::tidy($posts[$i+1]->district); }}, {{ String::tidy($posts[$i+1]->province); }}
 			</p>
 			<p>
 				Tel:
-				{{ String::tidy($post->tel); }}
+				{{ String::tidy($posts[$i+1]->tel); }}
 			</p>
 		</div>
 
@@ -123,18 +143,24 @@ category_id}}></input>
 			<p></p>
 			<p>
 
-				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $post->author->username }}}</span>
+				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $posts[$i+1]->author->username }}}</span>
 				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
-				{{{ $post->date() }}}
-				| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $post->url() }}}#comments">{{$post->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $post->comments()->count()) }}</a>
+				{{{ $posts[$i+1]->date() }}}
+				| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $posts[$i+1]->url() }}}#comments">{{$posts[$i+1]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i+1]->comments()->count()) }}</a>
 			</p>
 		</div>
 
 		<!-- ./ post footer -->
 	</div>
+	
+	
+	@endif
+	<!-- /new Column -->
 </div>
 
-@endforeach
+<?php 
+}
+?>
 {{ $posts->links() }}
 
 @stop

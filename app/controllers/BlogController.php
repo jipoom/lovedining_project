@@ -50,9 +50,17 @@ class BlogController extends BaseController {
 	public function getCategory($category)
 	{
 		// Get all the blog posts
-		$posts = $this->post->where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
-		$yetToPrint = true;
 		$mode = null;
+		if (Session::has('mode')){
+			$mode = Session::get('mode');
+			$posts = Post::orderReview($mode,$category);
+		}
+		else {
+			$posts = $this->post->where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
+		}
+		
+		$yetToPrint = true;
+		
 		// Show the page
 		return View::make('site/blog/index', compact('posts','yetToPrint','mode'));
 	}
@@ -61,18 +69,8 @@ class BlogController extends BaseController {
 	public function getCategoryMode($category, $mode)
 	{
 		// Get all the blog posts
-		if($mode == "date"){
-			$posts = $this->post->where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
-		}
-		else if ($mode == "reviewName"){
-			$posts = $this->post->where('category_id', '=', $category)->orderBy('title', 'ASC')->paginate(10);
-		}
-		else if ($mode == "restaurantName"){
-			$posts = $this->post->where('category_id', '=', $category)->orderBy('restaurant_name', 'ASC')->paginate(10);
-		}
-		else if ($mode == "popularity"){
-			$posts = $this->post->where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
-		}
+		$posts = Post::orderReview($mode,$category);
+		
 		
 		
 		// this is a parameter to check if we need to show sort menu
