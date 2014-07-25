@@ -39,7 +39,8 @@ class BlogController extends BaseController {
 
 		// Show the page
 		//return View::make('site/blog/index', compact('posts'));
-		return View::make('site/introduction');
+		$randReviews = Post::getRandomReviews();
+		return View::make('site/home',compact('randReviews'));
 	}
 
 	/**

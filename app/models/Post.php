@@ -158,5 +158,30 @@ class Post extends Eloquent {
 		}
 		 
 	}
+	public static function getRandomReviews()
+	{
+		$posts = Post::where('profile_picture_name','<>','')->get();
+		if(count($posts) <= 5)
+		{
+			return $posts;
+		}
+		else
+		{
+			for($i=0;$i<5;$i++)
+			{
+				$index = rand(0,count($posts)-1);
+				if(empty($randReviewsTemp[$index]))
+				{
+					$randReviewsTemp[$index] = $posts[$index];
+					$randReviews[$i] = $posts[$index];
+				}
+				else
+				{
+					$i--;
+				}				
+			}
+			return $randReviews;
+		}
+	}
 
 }
