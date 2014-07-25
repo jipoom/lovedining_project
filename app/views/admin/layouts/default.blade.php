@@ -114,8 +114,11 @@
 
 
 									<li{{ (Request::is('admin/introduction*') ? ' class="active"' : '') }}>
+									 @if(Introduction::first())
 										<a href="{{ URL::to('admin/introduction') }}/{{Introduction::first()->id}}/edit"><span class="glyphicon glyphicon-book"></span> Introduce</a></li>
-
+									 @else
+									 	<a href="{{ URL::to('admin/introduction/create') }}"><span class="glyphicon glyphicon-book"></span> Introduce</a></li>
+									 @endif
 										<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
 											<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-dashboard"></span> Reviews</a></li>
 											<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}>

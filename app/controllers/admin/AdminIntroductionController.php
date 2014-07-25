@@ -27,17 +27,21 @@ class AdminIntroductionController extends AdminController {
     public function getCreate()
     {
         // Title
-		/*$title = Lang::get('admin/introduction/title.introduction_management');
-        // Grab all the blog posts
-        $introduction = $this->introduction;
-		$randAlbumName = 'Introduction';
-		if(!file_exists(Config::get('app.image_path') . '/' . $randAlbumName))
-		{
-			mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
-		}
-        // Show the page
-        return View::make('admin/introduction/index', compact('introduction', 'title','randAlbumName'));*/
-        return View::make('error/404');
+        if(Introduction::first())
+		   return View::make('error/404');
+		else {
+			$title = Lang::get('admin/introduction/title.introduction_management');
+	        // Grab all the blog posts
+	        $introduction = $this->introduction;
+			$randAlbumName = 'Introduction';
+			if(!file_exists(Config::get('app.image_path') . '/' . $randAlbumName))
+			{
+				mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
+			}
+	        // Show the page
+	        return View::make('admin/introduction/index', compact('introduction', 'title','randAlbumName'));
+		}		
+     
     }
 
 	/**
@@ -48,7 +52,7 @@ class AdminIntroductionController extends AdminController {
 	public function postCreate()
 	{
         // Declare the rules for the form validation
-        /* $rules = array(
+        $rules = array(
             'content'   => 'required|min:3',
         );
 
@@ -66,7 +70,7 @@ class AdminIntroductionController extends AdminController {
             if($this->introduction->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/introduction/')->with('success', Lang::get('admin/introduction/messages.create.success'));
+                return Redirect::to('admin/introduction/'.Introduction::first()->id.'/edit')->with('success', Lang::get('admin/introduction/messages.create.success'));
             }
 
             // Redirect to the blog post create page
@@ -74,7 +78,7 @@ class AdminIntroductionController extends AdminController {
         }
 
         // Form validation failed
-        return Redirect::to('admin/introduction')->withInput()->withErrors($validator);*/
+        return Redirect::to('admin/introduction')->withInput()->withErrors($validator);
     }
 
     /**
