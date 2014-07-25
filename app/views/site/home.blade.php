@@ -17,12 +17,14 @@ ul.bxslider {
 @stop
 {{-- Content --}}
 @section('content')
+@if(count($randReviews)>0)
 <ul class="bxslider">
 	@foreach($randReviews as $review)
   <li><a href="{{$review->id}}"><img src="{{$review->profile_picture_name}}" title="{{$review->title}}" height="500" width="750"/></a></li>
     @endforeach
 
 </ul>
+@endif
 {{{ Lang::get('site.introduction') }}}
 
 
@@ -42,14 +44,14 @@ autoHover: true,
 pause: 3000,
 autoControls: false,
 pager: true,
-pagerType: 'full',
-controls: true,
-captions: true,
-speed: 500,
-randomStart: true,
-responsive: true,
-slideWidth: 750
-});
-});
+pagerType: 'full'
+	, controls: true,
+	captions: true,
+	speed: 500,
+	randomStart: true,
+	responsive: true,
+	slideWidth: 750
+	});
+	});
 </script>
 @stop
