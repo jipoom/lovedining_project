@@ -23,6 +23,7 @@
 </div>
 <!-- ./ Ads -->
 <!-- Sorting Menu goes here -->
+{{ $posts->links() }}
 <div class="col-md-3 pull-right">
 
 	<form class ="form-dropdown">
@@ -114,8 +115,7 @@ category_id}}></input>
 	</div>
 
 	<!-- new Column -->
-	@if(($i+1)
-	<count($posts))
+	@if(($i+1)<count($posts))
 	<div class="col-md-6">
 
 		<!-- Post Title -->
@@ -173,7 +173,6 @@ category_id}}></input>
 <?php
 }
 ?>
-{{ $posts->links() }}
 
 @stop
 @section('scripts')

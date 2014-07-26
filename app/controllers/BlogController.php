@@ -39,6 +39,8 @@ class BlogController extends BaseController {
 
 		// Show the page
 		//return View::make('site/blog/index', compact('posts'));
+		Session::forget('mode');
+		Session::forget('catName');
 		$randReviews = Post::getRandomReviews();
 		return View::make('site/home',compact('randReviews'));
 	}
@@ -60,7 +62,7 @@ class BlogController extends BaseController {
 		else {
 			Session::forget('mode');
 			Session::forget('catName');
-			$posts = $this->post->where('category_id', '=', $categoryId)->orderBy('created_at', 'DESC')->paginate(10);
+			$posts = $this->post->where('category_id', '=', $categoryId)->orderBy('created_at', 'DESC')->paginate(8);
 		}
 		
 		$yetToPrint = true;
