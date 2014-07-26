@@ -78,12 +78,11 @@
 							</button>
 						</div>
 
-						<!--
-						<div style="height: 45px;">
+						<div class="slogan">
 
-						testttttttt
+							because we take food seriously...
 
-						</div>   -->
+						</div>  
 
 						<!-- Searchbox -->
 						<div id="tfnewsearch">

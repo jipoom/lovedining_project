@@ -9,7 +9,7 @@
 @import url(fonts1/th_mali_grade6.css);
 @import url(fonts2/th_koho.css);
 @import url(fonts4/th_kodchasal.css);
-@import url(http://fonts.googleapis.com/css?family=Sacramento);
+@import url(http://fonts.googleapis.com/css?family=Amatic+SC:700);
 html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
@@ -592,25 +592,21 @@ pre code {
 }
 .slogan {
 	position: absolute;
-	margin-top: 30px;
+	margin-top: 20px;
 	margin-left: 220px;
-	font-family: 'Sacramento', cursive;
+	font-family: 'Amatic SC', cursive;
 	font-size: 36px;
 	color: #FFFFFF;
-	font-weight: 500;
-	font-style:oblique;
-	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
-   -webkit-text-stroke-width: 1.5px;
-   -webkit-text-stroke-color: #656565;
-
-	
+	font-weight: 1500;
+	-webkit-text-stroke-width: 1.2px;
+	-webkit-text-stroke-color: #656565;
 }
 .ads-right {
 	margin-right: auto;
 	margin-top: 10px;
 	position: relative;
 	min-height: 1px;
-	padding-left:5px;
+	padding-left: 5px;
 	padding-right: 5px;
 	float: right;
 	width: 16%
