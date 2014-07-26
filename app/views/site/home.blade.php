@@ -26,7 +26,7 @@
 	</div>
 </div>
 <!-- ./ Ads -->
-
+{{{ Lang::get('site.introduction') }}}
 @if(count($randReviews)>0)
 <div class="col-md-10">
 	<ul class="bxslider">
@@ -39,7 +39,7 @@
 	</ul>
 </div>
 @endif
-{{{ Lang::get('site.introduction') }}}
+
 
 @stop
 

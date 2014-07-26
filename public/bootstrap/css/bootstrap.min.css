@@ -9,6 +9,7 @@
 @import url(fonts1/th_mali_grade6.css);
 @import url(fonts2/th_koho.css);
 @import url(fonts4/th_kodchasal.css);
+@import url(http://fonts.googleapis.com/css?family=Sacramento);
 html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
@@ -590,13 +591,18 @@ pre code {
 	padding-right: 15px
 }
 .slogan {
-	height: 45px;
-	margin-top: 40px;
-	margin-left: 40px;
-	padding-left: 45px;
-	font-size: 16px;
-	width: 50px;
-	color: #93A1A1
+	position: absolute;
+	margin-top: 30px;
+	margin-left: 220px;
+	font-family: 'Sacramento', cursive;
+	font-size: 36px;
+	color: #FFFFFF;
+	font-weight: 500;
+	font-style:oblique;
+	-webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1.5px;
+   -webkit-text-stroke-color: #656565;
+
 	
 }
 .ads-right {
