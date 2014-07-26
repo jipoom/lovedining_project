@@ -9,7 +9,7 @@
 @import url(fonts1/th_mali_grade6.css);
 @import url(fonts2/th_koho.css);
 @import url(fonts4/th_kodchasal.css);
-@import url(http://fonts.googleapis.com/css?family=Amatic+SC:700);
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
 html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
@@ -592,13 +592,14 @@ pre code {
 }
 .slogan {
 	position: absolute;
-	margin-top: 20px;
+	margin-top: 30px;
 	margin-left: 220px;
-	font-family: 'Amatic SC', cursive;
-	font-size: 36px;
+	font-family: 'Pacifico', cursive;
+	font-size: 26px;
 	color: #FFFFFF;
-	font-weight: 1500;
-	-webkit-text-stroke-width: 1.2px;
+	font-style:oblique;
+	letter-spacing:2.3px;
+	-webkit-text-stroke-width: .95px;
 	-webkit-text-stroke-color: #656565;
 }
 .ads-right {
