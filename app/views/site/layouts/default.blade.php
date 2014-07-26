@@ -68,12 +68,12 @@
 								<span class="icon-bar"></span>
 							</button>
 						</div>
-						<!--
-						<div style="height: 45px;">
+						
+						<div class="slogan">
 
-						testttttttt
+							Because we take food seriously
 
-						</div>   -->
+						</div>   
 
 						<!-- Searchbox -->
 						<div id="tfnewsearch">
@@ -154,20 +154,19 @@
 					</div>
 				</div>
 				<!-- ./ navbar -->
-				
+
 				<!-- .Ads
 				<div class="ads-right ">
 
-					<div class="col-md-12">
-						
-						<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-						<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-					
+				<div class="col-md-12">
 
-					</div>
+				<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+				<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+
+				</div>
 				</div>
 				./ Ads -->
-				
+
 				<!-- Container -->
 				<div class="container">
 					<!-- Notifications -->
@@ -189,7 +188,7 @@
 			<div id="footer">
 				<div class="container">
 					<p class="muted credit">
-						Lovedining
+						Lovedining testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 					</p>
 				</div>
 			</div>
@@ -205,38 +204,38 @@
 			<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
 			<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
 			<script src="{{asset('assets/js/prettify.js')}}"></script>
-			
+
 			<!-- Search Review -->
-<script>
-	function searchAction(mode) {
-		var word = $("#keywords").val();
-		if (mode == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
-		}
-		if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				document.getElementById("reload").innerHTML = xmlhttp.responseText;
-			}
-		}
-		xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
-		xmlhttp.send();
+			<script>
+				function searchAction(mode) {
+					var word = $("#keywords").val();
+					if (mode == "") {
+						document.getElementById("txtHint").innerHTML = "";
+						return;
+					}
+					if (window.XMLHttpRequest) {
+						// code for IE7+, Firefox, Chrome, Opera, Safari
+						xmlhttp = new XMLHttpRequest();
+					} else {// code for IE6, IE5
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange = function() {
+						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+							document.getElementById("reload").innerHTML = xmlhttp.responseText;
+						}
+					}
+					xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
+					xmlhttp.send();
 
-	}
+				}
 
-	function runScript(e) {
-		if (e.keyCode == 13) {
-			searchAction("go");
-		}
-	}
-</script>
-<!-- End Search Review -->
+				function runScript(e) {
+					if (e.keyCode == 13) {
+						searchAction("go");
+					}
+				}
+			</script>
+			<!-- End Search Review -->
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->

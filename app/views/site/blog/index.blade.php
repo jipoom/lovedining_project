@@ -15,15 +15,13 @@
 	เรียงลำดับตามความนิยม
 	@endif </h3>
 </div>
+<!-- .Ads -->
 <div class="ads-right pull-right">
-
 	<div class="col-md-12">
-
-		<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-		<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-
+		<a href="" class="thumbnail"><img src="http://placehold.it/260x800" alt=""></a>
 	</div>
 </div>
+<!-- ./ Ads -->
 <!-- Sorting Menu goes here -->
 <div class="col-md-3 pull-right">
 
@@ -66,107 +64,107 @@ category_id}}></input>
 
 <div class="col-md-10">
 
-<div class="col-md-6">
+	<div class="col-md-6">
 
-<!-- Post Title -->
+		<!-- Post Title -->
+		<div class="col-md-12">
+			<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
+		</div>
 
-<div class="col-md-12">
-<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
-</div>
+		<!-- ./ post title -->
 
-<!-- ./ post title -->
+		<!-- Post Content -->
 
-<!-- Post Content -->
+		<div class="col-md-6">
+			@if($posts[$i]->profile_picture_name!="")
+			<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="{{$posts[$i]->profile_picture_name}}" alt=""></a>
+			@else
+			<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+			@endif
+		</div>
+		<div class="col-md-6">
+			<p>
+				{{ String::tidy($posts[$i]->restaurant_name) }}
+			</p>
+			<p>
+				{{ String::tidy($posts[$i]->district); }}, {{ String::tidy($posts[$i]->province); }}
+			</p>
+			<p>
+				Tel:
+				{{ String::tidy($posts[$i]->tel); }}
+			</p>
+		</div>
 
-<div class="col-md-6">
-@if($posts[$i]->profile_picture_name!="")	
-	<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="{{$posts[$i]->profile_picture_name}}" alt=""></a>
-@else
-	<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-@endif
-</div>
-<div class="col-md-6">
-<p>
-{{ String::tidy($posts[$i]->restaurant_name) }}
-</p>
-<p>
-{{ String::tidy($posts[$i]->district); }}, {{ String::tidy($posts[$i]->province); }}
-</p>
-<p>
-Tel:
-{{ String::tidy($posts[$i]->tel); }}
-</p>
-</div>
+		<!-- ./ post content -->
 
-<!-- ./ post content -->
+		<!-- Post Footer -->
 
-<!-- Post Footer -->
+		<div class="col-md-12">
+			<p></p>
+			<p>
 
-<div class="col-md-12">
-<p></p>
-<p>
+				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $posts[$i]->author->username }}}</span>
+				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
+				{{{ $posts[$i]->date() }}}
+				| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $posts[$i]->url() }}}#comments">{{$posts[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i]->comments()->count()) }}</a>
+			</p>
+		</div>
 
-<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $posts[$i]->author->username }}}</span>
-| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
-{{{ $posts[$i]->date() }}}
-| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $posts[$i]->url() }}}#comments">{{$posts[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i]->comments()->count()) }}</a>
-</p>
-</div>
+		<!-- ./ post footer -->
+	</div>
 
-<!-- ./ post footer -->
-</div>
+	<!-- new Column -->
+	@if(($i+1)
+	<count($posts))
+	<div class="col-md-6">
 
-<!-- new Column -->
-@if(($i+1)<count($posts))
-<div class="col-md-6">
-
-<!-- Post Title -->
-
-<div class="col-md-12">
-<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->title) }}</a></strong></h4>
-</div>
-
-<!-- ./ post title -->
-
-<!-- Post Content -->
-
-<div class="col-md-6">
-@if($posts[$i+1]->profile_picture_name!="")	     
-	<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="{{$posts[$i+1]->profile_picture_name}}" alt=""></a>
-@else
-	<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-@endif
-</div>
-<div class="col-md-6">
-<p>
-{{ String::tidy($posts[$i+1]->restaurant_name) }}
-</p>
-<p>
-{{ String::tidy($posts[$i+1]->district); }}, {{ String::tidy($posts[$i+1]->province); }}
-</p>
-<p>
-Tel:
-{{ String::tidy($posts[$i+1]->tel); }}
-</p>
-</div>
-
-<!-- ./ post content -->
-
-<!-- Post Footer -->
-
-<div class="col-md-12">
-<p></p>
-<p>
-
-<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $posts[$i+1]->author->username }}}</span>
-| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
-{{{ $posts[$i+1]->date() }}}
-| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $posts[$i+1]->url() }}}#comments">{{$posts[$i+1]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i+1]->comments()->count()) }}</a>
-</p>
-</div>
-
-<!-- ./ post footer -->
-</div>
+		<!-- Post Title -->
+	
+		<div class="col-md-12">
+			<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
+			title) }}</a></strong></h4>
+		</div>
+	
+		<!-- ./ post title -->
+	
+		<!-- Post Content -->
+		<div class="col-md-6">
+			@if($posts[$i+1]->profile_picture_name!="")
+			<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="{{$posts[$i+1]->profile_picture_name}}" alt=""></a>
+			@else
+			<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+			@endif
+		</div>
+		<div class="col-md-6">
+			<p>
+				{{ String::tidy($posts[$i+1]->restaurant_name) }}
+			</p>
+			<p>
+				{{ String::tidy($posts[$i+1]->district); }}, {{ String::tidy($posts[$i+1]->province); }}
+			</p>
+			<p>
+				Tel:
+				{{ String::tidy($posts[$i+1]->tel); }}
+			</p>
+		</div>
+	
+		<!-- ./ post content -->
+	
+		<!-- Post Footer -->
+	
+		<div class="col-md-12">
+			<p></p>
+			<p>
+	
+				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $posts[$i+1]->author->username }}}</span>
+				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
+				{{{ $posts[$i+1]->date() }}}
+				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $posts[$i+1]->url() }}}#comments">{{$posts[$i+1]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i+1]->comments()->count()) }}</a>
+			</p>
+		</div>
+	
+		<!-- ./ post footer -->
+	</div>
 
 @endif
 <!-- /new Column -->
@@ -205,6 +203,5 @@ Tel:
 	}
 </script>
 <!-- End Sort Review -->
-
 
 @stop

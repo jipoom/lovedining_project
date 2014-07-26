@@ -589,7 +589,16 @@ pre code {
 	padding-left: 15px;
 	padding-right: 15px
 }
-
+.slogan {
+	height: 45px;
+	margin-top: 40px;
+	margin-left: 40px;
+	padding-left: 45px;
+	font-size: 16px;
+	width: 50px;
+	color: #93A1A1
+	
+}
 .ads-right {
 	margin-right: auto;
 	margin-top: 10px;
