@@ -53,7 +53,14 @@
 		        "sAjaxSource": "{{ URL::to('message_service/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
-	     		}
+	     		},
+	     		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+			        switch(aData[3]){
+			            case 'new':
+			                $(nRow).css('font-weight', 'bold')
+			                break;
+			        }
+			    }
 			});
 		});
 	</script>

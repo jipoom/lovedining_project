@@ -23,7 +23,7 @@
 </div>
 <!-- ./ Ads -->
 <!-- Sorting Menu goes here -->
-{{ $posts->links() }}
+
 <div class="col-md-3 pull-right">
 
 	<form class ="form-dropdown">
@@ -173,9 +173,13 @@ category_id}}></input>
 <?php
 }
 ?>
-
+<div class="col-md-8">
+{{ $posts->links() }}
+</div>
 @stop
+
 @section('scripts')
+
 <!-- Sort Review -->
 <script>
 	function showReviews(mode) {
