@@ -135,25 +135,25 @@ class Post extends Eloquent {
 		if($mode == "date"){
 			Session::put('mode', 'date');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
+			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(8);
 			
 		}
 		else if ($mode == "reviewName"){
 			Session::put('mode', 'reviewName');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('title', 'ASC')->paginate(10);
+			return Post::where('category_id', '=', $category)->orderBy('title', 'ASC')->paginate(8);
 			
 		}
 		else if ($mode == "restaurantName"){
 			Session::put('mode', 'restaurantName');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('restaurant_name', 'ASC')->paginate(10);
+			return Post::where('category_id', '=', $category)->orderBy('restaurant_name', 'ASC')->paginate(8);
 			
 		}
 		else if ($mode == "popularity"){
 			Session::put('mode', 'popularity');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(10);
+			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(8);
 			
 		}
 		 

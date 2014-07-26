@@ -21,7 +21,7 @@
 		</h3>
 	</div>
 
-	<table id="message" class="table table-striped table-hover">
+	<table id="message" class="display">
 		<thead>
 			<tr>
 				<th class="col-md-2">Subject</th>
