@@ -140,9 +140,9 @@ return array(
     'manifest' => storage_path() . '/meta',
     
 	'image_path' => public_path(). '/images',
-	'banner_path' => public_path(). '/images/Banner',
+	'ads_path' => public_path(). '/images/Ads',
 	'image_user_path' => public_path(). '/images/user',
-
+	'image_base_url' => 'http://192.168.1.104/lovedining_p1/images',
     /*
     |--------------------------------------------------------------------------
     | Class Aliases

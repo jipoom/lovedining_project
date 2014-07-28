@@ -20,9 +20,8 @@
 	img.resize{
     width:auto; /* you can use % */
     height: 500px;
-}
+	}
 	
-}
 </style>
 @stop
 
@@ -44,7 +43,7 @@
 	<ul class="bxslider">
 		@foreach($randReviews as $review)
 		<li>
-			<a href="{{$review->id}}"><img src="{{$review->profile_picture_name}}" title="{{$review->title}}" align="middle"/></a>
+			<a href="{{$review->id}}"><img src="{{Config::get('app.image_base_url').'/'.$review->album_name.'/'.$review->profile_picture_name}}" title="{{$review->title}}" align="middle"/></a>
 		</li>
 		@endforeach
 
