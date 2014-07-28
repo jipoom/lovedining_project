@@ -107,7 +107,7 @@ category_id}}></input>
 				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $posts[$i]->author->username }}}</span>
 				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
 				{{{ $posts[$i]->date() }}}
-				| <span class="glyphicon glyphicon-comment"></span><a href="{{{ $posts[$i]->url() }}}#comments">{{$posts[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i]->comments()->count()) }}</a>
+				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $posts[$i]->url() }}}#comments">{{$posts[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i]->comments()->count()) }}</a>
 			</p>
 		</div>
 
@@ -173,8 +173,8 @@ category_id}}></input>
 <?php
 }
 ?>
-<div class="col-md-8">
-{{ $posts->links() }}
+<div class="col-md-8 pull-right">
+	{{ $posts->links() }}
 </div>
 @stop
 

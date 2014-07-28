@@ -26,7 +26,9 @@
 	</div>
 </div>
 <!-- ./ Ads -->
+<h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
+</h4>
 @if(count($randReviews)>0)
 <div class="col-md-10">
 	<ul class="bxslider">

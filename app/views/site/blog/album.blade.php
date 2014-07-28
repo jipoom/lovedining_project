@@ -13,13 +13,16 @@
 </style>
 @stop
 @section('content')
-<h3 style="color: #1AC4BF">{{ link_to(URL::to($post->id), $post->title, $attributes = array(), $secure = null);}}
-<div class="pull-right">
-
-	<a href="{{{ URL::previous() }}}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
-
+<div class="col-md-10">
+	<h3 style="color: #1AC4BF;">{{ link_to(URL::to($post->id), $post->title, $attributes = array(), $secure = null);}}
+	
+	<div class="btn btn-default pull-right">
+	
+		<a href="{{{ URL::previous() }}}"> Back</a>
+	
 	</div>
 	</h3>
+</div>
 	<!--<div class="galleria">-->
 	<div>
 	<ul class="gallery clearfix">
