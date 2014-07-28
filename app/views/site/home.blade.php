@@ -13,6 +13,16 @@
 		margin: 0;
 		padding: 0;
 	}
+	
+	.bx-wrapper img {
+    margin: 0 auto;
+	}
+	img.resize{
+    width:auto; /* you can use % */
+    height: 500px;
+}
+	
+}
 </style>
 @stop
 
@@ -34,7 +44,7 @@
 	<ul class="bxslider">
 		@foreach($randReviews as $review)
 		<li>
-			<a href="{{$review->id}}"><img src="{{$review->profile_picture_name}}" title="{{$review->title}}" height="500" width="750"/></a>
+			<a href="{{$review->id}}"><img src="{{$review->profile_picture_name}}" title="{{$review->title}}" align="middle"/></a>
 		</li>
 		@endforeach
 
@@ -66,8 +76,10 @@
 			speed : 500,
 			randomStart : true,
 			responsive : true,
-			slideWidth : 750
+			slideWidth : 750,
+			adaptiveHeight: true
 		});
+		
 	}); 
 </script>
 @stop
