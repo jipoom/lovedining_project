@@ -21,7 +21,6 @@
     width:auto; /* you can use % */
     height: 500px;
 	}
-	
 </style>
 @stop
 
@@ -29,7 +28,7 @@
 @section('content')
 
 <!-- .Ads -->
-<div class="ads-right pull-right">
+<div class="ads-right pull-right checkscreen">
 	<div class="col-md-12">
 		<a href="" class="thumbnail"><img src="http://placehold.it/260x800" alt=""></a>
 	</div>
