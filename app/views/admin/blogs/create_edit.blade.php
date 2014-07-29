@@ -77,7 +77,7 @@
  						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
                           <div id="picture">
                           	@if(isset($post) && $post->profile_picture_name!="")
-                          		{{ HTML::image($post->profile_picture_name, 'profile picture',array('height'=>'180', 'width'=>'260')) }}
+                          		{{ HTML::image(Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('height'=>'180', 'width'=>'260')) }}
                           	@else
                           		<img src="http://placehold.it/260x180" alt="">
                           	@endif
@@ -85,7 +85,7 @@
 		                </div>
 		                   
 		                <div class="button-group">
-		                    <input type="hidden" id="featured_image" placeholder="Profile Picture" readonly name="profilePic" />
+		                  	 {{ Form::hidden('profilePic', Input::old('profilePic', isset($post) && $post->profile_picture_name!="" ? $post->profile_picture_name : $randAlbumName), array('id'=>'featured_image')) }} </p>
 		                    <button type="button" class="browse" id="imageUpload" > Browse Image</button>
 		                </div>
                          
