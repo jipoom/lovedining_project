@@ -186,10 +186,10 @@
 			</div>
 			<!-- ./wrap -->
 
-			<div id="footer">
+			<div id="footer" style="word-break: break-all;">
 				<div class="container">
 					<p class="muted credit">
-						Lovedining testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+						Lovedining testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt footerrrrrrr
 					</p>
 				</div>
 			</div>
