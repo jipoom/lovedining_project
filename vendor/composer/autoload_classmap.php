@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdminAdsController' => $baseDir . '/app/controllers/admin/AdminAdsController.php',
     'AdminBlogsController' => $baseDir . '/app/controllers/admin/AdminBlogsController.php',
     'AdminCampaignController' => $baseDir . '/app/controllers/admin/AdminCampaignController.php',
     'AdminCategoryController' => $baseDir . '/app/controllers/admin/AdminCategoryController.php',
@@ -401,6 +402,7 @@ return array(
     'PermissionsTableSeeder' => $baseDir . '/app/database/seeds/PermissionsTableSeeder.php',
     'Picture' => $baseDir . '/app/models/Picture.php',
     'Post' => $baseDir . '/app/models/Post.php',
+    'PostsCategory' => $baseDir . '/app/models/PostsCategory.php',
     'PostsTableSeeder' => $baseDir . '/app/database/seeds/PostsTableSeeder.php',
     'PostsUserRead' => $baseDir . '/app/models/PostsUserRead.php',
     'PrivateMessage' => $baseDir . '/app/models/PrivateMessage.php',

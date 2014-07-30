@@ -52,9 +52,9 @@ class AdminCategoryController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/category/title.category_update');
-		
+		$randAlbumName = date("YmdHis");
         // Show the page
-        return View::make('admin/category/create_edit', compact('title'));
+        return View::make('admin/category/create_edit', compact('title','randAlbumName'));
 	}
 
 	/**
@@ -78,11 +78,20 @@ class AdminCategoryController extends AdminController {
         {
             // Update the blog post data
             $this->category->category_name  = Input::get('category');
-
+ 			$this->category->album_name  = Input::get('album_name');;
             // Was the blog post updated?
             if($this->category->save())
             {
                 // Redirect to the new blog post page
+                		
+                if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$this->category->album_name))
+				{
+					mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$this->category->album_name);
+				}
+				if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$this->category->album_name))
+				{
+					mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$this->category->album_name);
+				}
                 return Redirect::to('admin/category/' . $this->category->id . '/edit')->with('success', Lang::get('admin/category/messages.create.success'));
             }
 
@@ -115,9 +124,14 @@ class AdminCategoryController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/category/title.category_update');
+		$randAlbumName = $category->album_name;
+		if($randAlbumName=="")
+		{
+			$randAlbumName = date("YmdHis");
+		}
 		
         // Show the page
-        return View::make('admin/category/create_edit', compact('category','title'));
+        return View::make('admin/category/create_edit', compact('category','title','randAlbumName'));
 	}
 
     /**
@@ -143,11 +157,19 @@ class AdminCategoryController extends AdminController {
         {
             // Update the blog post data
             $category->category_name  = Input::get('category');
-
+ 			$category->album_name  = Input::get('album_name');
             // Was the blog post updated?
             if($category->save())
             {
                 // Redirect to the new blog post page
+                if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$category->album_name))
+				{
+					mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$category->album_name);
+				}
+				if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$category->album_name))
+				{
+					mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$category->album_name);
+				}
                 return Redirect::to('admin/category/' . $category->id . '/edit')->with('success', Lang::get('admin/category/messages.update.success'));
             }
 
@@ -195,12 +217,13 @@ class AdminCategoryController extends AdminController {
         if ($validator->passes())
         {
             $id = $category->id;
-            $posts = Post::where('category_id','=',$id)->get();
+			$album_name = $category->album_name;
+            /*$posts = Post::where('category_id','=',$id)->get();
             foreach($posts as $post)
 			{
 				$post->category_id = 0;
 				$post->save();
-			}
+			}*/
             $category->delete();
 			
             // Was the blog post deleted?
@@ -208,11 +231,13 @@ class AdminCategoryController extends AdminController {
             if(empty($category))
             {
                 // Redirect to the blog posts management page
+                 Picture::recursive_remove(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$album_name);
+                Picture::recursive_remove(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$album_name);
                 return Redirect::to('admin/category')->with('success', Lang::get('admin/category/messages.delete.success'));
             }
         }
         // There was a problem deleting the blog post
-        return Redirect::to('admin/category')->with('error', Lang::get('admin/category/messages.delete.error'));
+        //return Redirect::to('admin/category')->with('error', Lang::get('admin/category/messages.delete.error'));
     }
 
        /**

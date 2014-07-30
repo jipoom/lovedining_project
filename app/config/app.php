@@ -143,6 +143,10 @@ return array(
 	'ads_path' => public_path(). '/images/Ads',
 	'image_user_path' => public_path(). '/images/user',
 	'image_base_url' => 'http://192.168.1.104/lovedining_p1/images',
+	
+	//Ads Directory Prefix
+	'ads_sidebar_prefix' => 'Ads_Sidebar_',
+	'ads_footer_prefix' => 'Ads_Footer_',
     /*
     |--------------------------------------------------------------------------
     | Class Aliases

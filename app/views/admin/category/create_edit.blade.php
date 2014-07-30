@@ -22,7 +22,8 @@
                         <label class="control-label" for="category">ชื่อ Category</label>
 						{{ Form::text('category',Input::old('category', isset($category) ? $category->category_name : null) , array('class'=>'form-control', 'placeholder'=>'Category name'))}} </p>
 						{{{ $errors->first('category', ':message') }}}
-
+						{{ Form::hidden('album_name', Input::old('album_name', isset($category) ? $category->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
+                        
 					</div>
 				</div>
 				<!-- ./ post title -->

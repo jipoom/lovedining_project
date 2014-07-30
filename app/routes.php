@@ -113,6 +113,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     //Route::post('introduction/{introduction}/delete', 'AdminIntroductionController@postDelete');
     Route::controller('introduction', 'AdminIntroductionController');
 	
+	# Ads Management
+    Route::controller('ads', 'AdminAdsController');
+	
 	#File Manager
 	Route::get('elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
     Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
