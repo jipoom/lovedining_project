@@ -45,13 +45,19 @@
 						{{{ $errors->first('title', ':message') }}}
                        
                         <label class="control-label" for="title">ชื่อร้านอาหาร</label>
-						{{ Form::text('restaurant_name', Input::old('title', isset($post) ? $post->restaurant_name : null), array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
+						{{ Form::text('restaurant_name', Input::old('restaurant_name', isset($post) ? $post->restaurant_name : null), array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
 						{{{ $errors->first('restaurant_name', ':message') }}}
 						
-						 <label class="control-label" for="title">ประเภทร้านอาหาร</label>
+						 <label class="control-label" for="title">ประเภทร้านอาหาร</label><p>
 
-						 {{ Form::select('category_id', $category, Input::old('title', (isset($post) && $post->category_id!=0)? Category::find($post->category_id)->id : null)); }} </p>  
-						
+					 	 <?php $i=0; ?>
+					 	 @foreach($category as $temp)
+					 	 {{ Form::checkbox('category_id_temp[]', $temp->id, Input::old('category_id_temp[]',(isset($post) && $selectedCategories[$i]==1)? true : null))}}
+					 	 	 {{ $temp->category_name}}
+							 <P>	 
+					 	 	 <?php $i++;?>
+					 	 @endforeach
+					 	 <p></p>
 						 <label class="control-label" for="title">เบอร์โทร</label>
 						{{ Form::text('tel', Input::old('title', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'เบอร์โทรศัพท์ (eg. 021234567, 0987654321)'))}} </p>
 						{{{ $errors->first('tel', ':message') }}}<p>
@@ -77,7 +83,7 @@
  						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
                           <div id="picture">
                           	@if(isset($post) && $post->profile_picture_name!="")
-                          		{{ HTML::image(Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('height'=>'180', 'width'=>'260')) }}
+                          		{{ HTML::image(Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('class'=>'180', 'width'=>'260')) }}
                           	@else
                           		<img src="http://placehold.it/260x180" alt="">
                           	@endif
@@ -85,7 +91,9 @@
 		                </div>
 		                   
 		                <div class="button-group">
-		                  	 {{ Form::hidden('profilePic', Input::old('profilePic', isset($post) && $post->profile_picture_name!="" ? $post->profile_picture_name : $randAlbumName), array('id'=>'featured_image')) }} </p>
+		                	 {{ Form::hidden('profilePic', Input::old('profilePic', isset($post) && $post->profile_picture_name!="" ? $post->profile_picture_name : $randAlbumName), array('id'=>'featured_image')) }} </p>  
+		             
+		                   <!-- <input type="hidden" id="featured_image" placeholder="Profile Picture" readonly name="profilePic" /> -->
 		                    <button type="button" class="browse" id="imageUpload" > Browse Image</button>
 		                </div>
                          

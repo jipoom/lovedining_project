@@ -57,33 +57,57 @@ class BlogController extends BaseController {
 		$mode = null;
 		if (Session::has('mode') && Session::get('catName') == $catName){
 			$mode = Session::get('mode');
-			$posts = Post::orderReview($mode,$categoryId,$catName);
+			$posts = Post::orderReview($this->post,$mode,$categoryId,$catName);
 		}
 		else {
 			Session::forget('mode');
 			Session::forget('catName');
-			$posts = $this->post->where('category_id', '=', $categoryId)->orderBy('created_at', 'DESC')->paginate(8);
+			//$posts = $this->post->where('category_id', '=', $categoryId)->orderBy('created_at', 'DESC')->paginate(8);
+			/*$posts = $this->post->leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id')
+			-> join('category', 'posts_category.category_id', '=', 'category.id')
+			-> where('category.id', '=', $categoryId)
+			-> orderBy('created_at', 'DESC')
+			->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
+			'posts.profile_picture_name','posts.content','posts.album_name',
+			'posts.restaurant_name','posts.category_id','posts.tel','posts.street_addr',
+			'posts.soi','posts.road','posts.subdistrict','posts.district','posts.district',
+			'posts.province','posts.zip','posts.created_at','posts.updated_at'));*/
+			$posts = Post::getReviewsbyCategory($this->post,$categoryId,'created_at','DESC');
+			
 		}
 		
 		$yetToPrint = true;
 		
 		// Show the page
-		return View::make('site/blog/index', compact('posts','yetToPrint','mode'));
+		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId'));
 	}
 	
 	
-	public function getCategoryMode($categoryId, $mode)
+	public function getCategoryMode($categoryId, $mode,$keyword=null)
 	{
 		// Get all the blog posts
-		$catName = Category::find($categoryId);
-		$posts = Post::orderReview($mode,$categoryId,$catName);
+		if($categoryId!="undefined")
+		{
+			$catName = Category::find($categoryId);
+			$posts = Post::orderReview($this->post,$mode,$categoryId,$catName);
+			
+		}
+		else {
+			
+			$posts = Post::search($keyword,true);
+			$posts = Post::orderReview($posts,$mode,$categoryId,"search");
+			/*foreach($posts as $post)
+			{
+				echo $post;
+			}*/
+		}
 		
 		
 		
 		// this is a parameter to check if we need to show sort menu
 		$yetToPrint = true;
 		// Show the page
-		return View::make('site/blog/index', compact('posts','yetToPrint','mode'));
+		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','keyword'));
 	}
 	/**
 	 * View a blog post.
@@ -122,12 +146,12 @@ class BlogController extends BaseController {
 		$postsUserRead = new PostsUserRead;
 		
 		//check if user is logged in and has not read this review yet.
-		if(Auth::check() && !($postsUserRead->where('post_id','=', $postId)->where('user_id','=', Auth::user()->id)->where('category_id','=',$post->category_id)->exists()))
+		if(Auth::check() && !($postsUserRead->where('post_id','=', $postId)->where('user_id','=', Auth::user()->id)->exists()))
 		{
 			
 			$postsUserRead->user_id = Auth::user()->id;
 			$postsUserRead->post_id = $postId;
-			$postsUserRead->category_id = $post->category_id;
+			//$postsUserRead->category_id = $post->category_id;
 			$postsUserRead->save();
 		}
 		
@@ -188,11 +212,7 @@ class BlogController extends BaseController {
 	{
 		$mode = null;
 		$yetToPrint = false;
-		$wordTemp = explode(' ', $keyword);
-		foreach($wordTemp as $term)
-	    {
-	        $posts = $this->post->where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->paginate(10);
-	    }
+		$posts = Post::search($keyword,false);
 		
         return View::make('site/blog/index', compact('posts','yetToPrint','mode','keyword'));
     

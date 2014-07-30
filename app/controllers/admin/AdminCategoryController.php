@@ -228,7 +228,7 @@ class AdminCategoryController extends AdminController {
 
         return Datatables::of($category)
 
-        ->edit_column('posts', '{{ DB::table(\'posts\')->where(\'category_id\', \'=\', $id)->count() }}')
+        ->edit_column('posts', '{{ DB::table(\'posts_category\')->where(\'category_id\', \'=\', $id)->count() }}')
 		
 		->edit_column('posts', '<a href="{{{ URL::to(\'admin/blogs/\'.$id.\'/view_blogs\' ) }}}">{{$posts}}</a>')
 

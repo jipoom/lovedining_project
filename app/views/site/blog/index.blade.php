@@ -58,8 +58,8 @@
 ?>
 @if($yetToPrint)
 
-<input type ="hidden" id ="category" value= {{$posts[$i]->
-category_id}}></input>
+<input type ="hidden" id ="category" value= {{$categoryId}}></input>
+
 <?php $yetToPrint = false; ?>
 @endif
 
@@ -180,31 +180,6 @@ category_id}}></input>
 
 @section('scripts')
 
-<!-- Sort Review -->
-<script>
-	function showReviews(mode) {
-		var categoryId = $("#category").val();
-		if (mode == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
-		}
-		if (window.XMLHttpRequest) {
-			// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				document.getElementById("reload").innerHTML = xmlhttp.responseText;
-				document.getElementById("mode").value = mode;
-			}
-		}
-		xmlhttp.open("GET", categoryId + "/" + mode, true);
-		xmlhttp.send();
 
-	}
-</script>
-<!-- End Sort Review -->
 
 @stop

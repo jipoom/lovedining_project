@@ -55,10 +55,6 @@ class Post extends Eloquent {
 		return $this->hasMany('Campaign');
 	}
 	
-	public function category()
-	{
-		return $this->belongsTo('Category', 'category_id');
-	}
     /**
      * Get the date the post was created.
      *
@@ -130,31 +126,34 @@ class Post extends Eloquent {
 			}
 			return $image;
 	}
-	public static function orderReview($mode, $category,$catName)
+	public static function orderReview($post,$mode, $category,$catName)
 	{	
 		if($mode == "date"){
 			Session::put('mode', 'date');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(8);
+			//return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(8);
+			return Post::getReviewsByCategory($post,$category,'created_at','DESC');
 			
 		}
 		else if ($mode == "reviewName"){
 			Session::put('mode', 'reviewName');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('title', 'ASC')->paginate(8);
+			//return Post::where('category_id', '=', $category)->orderBy('title', 'ASC')->paginate(8);
+			return Post::getReviewsByCategory($post,$category,'title','ASC');
 			
 		}
 		else if ($mode == "restaurantName"){
 			Session::put('mode', 'restaurantName');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('restaurant_name', 'ASC')->paginate(8);
+			//return Post::where('category_id', '=', $category)->orderBy('restaurant_name', 'ASC')->paginate(8);
+			return Post::getReviewsByCategory($post,$category,'restaurant_name','ASC');
 			
 		}
 		else if ($mode == "popularity"){
 			Session::put('mode', 'popularity');
 			Session::put('catName',$catName);
-			return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(8);
-			
+			//return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(8);
+			return Post::getReviewsByCategory($post,$category,'created_at','DESC');
 		}
 		 
 	}
@@ -183,5 +182,49 @@ class Post extends Eloquent {
 			return $randReviews;
 		}
 	}
+	public static function getReviewsByCategory($post,$categoryId,$orderBy,$mode)
+	{
+		
+		 if(!$post)
+		 	$post = new Post;
+		 if($categoryId!="undefined")	
+		 {	
+			 return $post->join('posts_category', 'posts.id', '=', 'posts_category.post_id')
+				-> join('category', 'posts_category.category_id', '=', 'category.id')
+				-> where('category.id', '=', $categoryId)
+				-> orderBy($orderBy, $mode)
+				->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
+				'posts.profile_picture_name','posts.content','posts.album_name',
+				'posts.restaurant_name','posts.tel','posts.street_addr',
+				'posts.soi','posts.road','posts.subdistrict','posts.district','posts.district',
+				'posts.province','posts.zip','posts.created_at','posts.updated_at'));
+		 }
+		 //If user searches with a keyword
+		 else {
+			 return $post->orderBy($orderBy, $mode)->paginate(8);
+		 }
+	}
+	
+	public static function search($keyword,$sort)
+	{
+
+		$wordTemp = explode(' ', $keyword);
+		if(!$sort)	
+		{
+			foreach($wordTemp as $term)
+			{
+			    $posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->paginate(8);
+			}
+		}
+		else {
+			foreach($wordTemp as $term)
+			{
+			    $posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->distinct();
+			}
+		}
+		return $posts;
+	}
+	
+	
 
 }

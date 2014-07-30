@@ -22,13 +22,11 @@ class AdminBlogsController extends AdminController {
 	 *
 	 * @return View
 	 */
-	public function getIndex($directory=null,$postId=null) {
-			
-		if($postId=="new")
-		{	
-			if($directory && file_exists(Config::get('app.image_path') . '/' . $directory) )
-			{ 
-				Picture::recursive_remove(Config::get('app.image_path') . '/' . $directory);			
+	public function getIndex($directory = null, $postId = null) {
+
+		if ($postId == "new") {
+			if ($directory && file_exists(Config::get('app.image_path') . '/' . $directory)) {
+				Picture::recursive_remove(Config::get('app.image_path') . '/' . $directory);
 			}
 		}
 		// Title
@@ -59,14 +57,15 @@ class AdminBlogsController extends AdminController {
 		$randAlbumName = date("YmdHis");
 		mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
 		//Category
-		$init_cat = Category::first();
+		/*$init_cat = Category::first();
 		$category = array($init_cat -> id => $init_cat -> category_name);
 		$categories = Category::all();
 		foreach ($categories as $temp) {
 
 			$category = array_add($category, $temp -> id, $temp -> category_name);
-		}
-
+		}*/
+		$category = Category::all();
+		$selectedCategories = array();
 		//Province
 		$init_province = Province::first();
 		$provinceTemp = array($init_province -> id => $init_province -> province_name);
@@ -74,9 +73,8 @@ class AdminBlogsController extends AdminController {
 		foreach ($provinces as $temp) {
 			$provinceTemp = array_add($provinceTemp, $temp -> id, $temp -> province_name);
 		}
-
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('title', 'category', 'provinceTemp','randAlbumName'));
+		return View::make('admin/blogs/create_edit', compact('title', 'category', 'provinceTemp', 'randAlbumName', 'selectedCategories'));
 	}
 
 	/**
@@ -109,7 +107,6 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> district = Input::get('district');
 			$this -> post -> province = Input::get('province');
 			$this -> post -> zip = Input::get('zip');
-			$this -> post -> category_id = Input::get('category_id');
 			$this -> post -> album_name = Input::get('album_name');
 			$this -> post -> profile_picture_name = Input::get('profilePic');
 			//$this->post->slug             = Str::slug(Input::get('title'));
@@ -122,7 +119,19 @@ class AdminBlogsController extends AdminController {
 			// Was the blog post created?
 
 			if ($this -> post -> save()) {
-
+				
+				
+				//Insert to PostsCategory Table		
+				if(Input::get('category_id_temp'))	
+				{	
+					foreach (Input::get('category_id_temp') as $selected) {
+						$postCategory = new PostsCategory;	
+						$postCategory -> post_id = $this -> post -> id;
+						$postCategory -> category_id = $selected;
+						$postCategory -> save();
+					}
+				}
+			
 				return Redirect::to('admin/blogs/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
 
 			}
@@ -156,15 +165,45 @@ class AdminBlogsController extends AdminController {
 		// Title
 		$title = Lang::get('admin/blogs/title.blog_update');
 		//Category
-		$init_cat = Category::first();
+		/*$init_cat = Category::first();
 		$category = array($init_cat -> id => $init_cat -> category_name);
 		$categories = Category::all();
 		foreach ($categories as $temp) {
 			$category = array_add($category, $temp -> id, $temp -> category_name);
+		}*/
+		$randAlbumName = $post -> album_name;
+		$category = Category::all();
+		$postCategory = PostsCategory::where('post_id', '=', $post -> id)->get();
+		
+		//get selected categories
+		$selectedCategories = array();
+		$i=0;
+		foreach($category as $choice)
+		{
+		    $check=0;	
+			foreach($postCategory as $selected)
+			{
+				if($selected->category_id == $choice->id)
+				{
+					$selectedCategories[$i] = 1;
+					$check = 1;
+					break;
+				}
+			}
+			if($check == 0)
+			{
+				$selectedCategories[$i]=0;
+			}
+			$i++;
 		}
-		$randAlbumName = $post->album_name;
+		
+		if(!file_exists(Config::get('app.image_path').'/'.$post -> album_name))
+		{
+			mkdir(Config::get('app.image_path').'/'.$post -> album_name);
+		}
+		
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('post', 'title', 'category','randAlbumName'));
+		return View::make('admin/blogs/create_edit', compact('post', 'title', 'category', 'randAlbumName', 'selectedCategories'));
 	}
 
 	/**
@@ -176,26 +215,24 @@ class AdminBlogsController extends AdminController {
 	public function postEdit($post) {
 
 		// Declare the rules for the form validation
-		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 
-		'restaurant_name' => 'required|min:3', 
-		'content' => 'required|min:3', 
-		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i');
+		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 'restaurant_name' => 'required|min:3', 'content' => 'required|min:3', 'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i');
 
+		
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Update the blog post data
-			$oldImageDir = $post -> album_name;
+			//$oldImageDir = $post -> album_name;
 
 			//$image = Post::findImages(Input::get('content'));
 
-			$content = str_replace('/images/user/', '/images/' . Input::get('album_name') . '/', Input::get('content'));
-			if ($oldImageDir != Input::get('album_name')) {
+			//$content = str_replace('/images/user/', '/images/' . Input::get('album_name') . '/', Input::get('content'));
+			/*if ($oldImageDir != Input::get('album_name')) {
 				//String replace to update picture path
 				$content = str_replace('/images/' . $oldImageDir . '/', '/images/' . Input::get('album_name') . '/', Input::get('content'));
-			}
+			}*/
 			$post -> title = Input::get('title');
 			$post -> restaurant_name = Input::get('restaurant_name');
 			$post -> tel = Input::get('tel');
@@ -206,14 +243,25 @@ class AdminBlogsController extends AdminController {
 			$post -> district = Input::get('district');
 			$post -> province = Input::get('province');
 			$post -> zip = Input::get('zip');
-			$post -> category_id = Input::get('category_id');
 			$post -> album_name = Input::get('album_name');
 			$post -> profile_picture_name = Input::get('profilePic');
 			//$post->slug             = Str::slug(Input::get('title'));
-			$post -> content = $content;
+			$post -> content = Input::get('content');
 			$post -> meta_title = Input::get('meta-title');
 			$post -> meta_description = Input::get('meta-description');
 			$post -> meta_keywords = Input::get('meta-keywords');
+
+			//Remove PostsCategory and reinsert
+			PostsCategory::where('post_id', '=', $post -> id) -> delete();
+			if(Input::get('category_id_temp'))
+			{
+				foreach (Input::get('category_id_temp') as $selected) {		
+						$postCategory = new PostsCategory;	
+						$postCategory -> post_id = $post -> id;
+						$postCategory -> category_id = $selected;
+						$postCategory -> save();			
+				}
+			}
 
 			// Was the blog post updated?
 
@@ -226,16 +274,16 @@ class AdminBlogsController extends AdminController {
 				 {
 				 Picture::recursive_copy(Config::get('app.image_path').'/'.$oldImageDir , Config::get('app.image_path').'/'.Input::get('album_name'));
 				 }	*/
-
+				// Delete so that everyone knows of its update
 				PostsUserRead::where('post_id', '=', $post -> id) -> delete();
 				//return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
 
 				//Check if admin update dir name
-				if ($oldImageDir != Input::get('album_name')) {
+				/*if ($oldImageDir != Input::get('album_name')) {
 					//rename old dir
 					Picture::recursive_copy(Config::get('app.image_path') . '/' . $oldImageDir, Config::get('app.image_path') . '/' . Input::get('album_name'));
 					Picture::recursive_remove(Config::get('app.image_path') . '/' . $oldImageDir);
-				}
+				}*/
 				//If admin add more images
 				/* for($i=0;$i<count($image);$i++)
 				 {
@@ -290,6 +338,7 @@ class AdminBlogsController extends AdminController {
 			//delete image in albume
 			$id = $post -> id;
 			$albumName = $post -> album_name;
+			PostsCategory::where('post_id', '=', $id) -> delete();
 			$post -> delete();
 			// Was the blog post deleted?
 			$post = Post::find($id);
@@ -307,7 +356,7 @@ class AdminBlogsController extends AdminController {
 		if ($postId == 0) {
 			mkdir(Config::get('app.image_path') . '/' . $new);
 			return $postId;
-			
+
 		} else {
 			return $postId;
 		}
@@ -320,17 +369,28 @@ class AdminBlogsController extends AdminController {
 	 */
 	public function getData($categoryId) {
 		if ($categoryId == "all") {
-			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
+			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
+			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) 
+			-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
+			-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
 		} else {
-			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id') -> where('category.id', '=', $categoryId);
+			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id') -> where('category.id', '=', $categoryId);
+			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) 
+			-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
+			-> join('category', 'posts_category.category_id', '=', 'category.id')
+			-> where('category.id', '=', $categoryId);
 		}
 
 		//$posts = Post::leftjoin('category', 'posts.category_id', '=', 'category.id')
 		//->select(array('posts.id', 'posts.title', 'category.category_name as category ','posts.id as comments', 'posts.created_at'));
 
-		return Datatables::of($posts) -> edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}') -> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') -> add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs" >{{{ Lang::get(\'button.edit\') }}}</a>
+		return Datatables::of($posts) 
+		-> edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}') 
+		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
+		-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
-            ') -> remove_column('id') -> make();
+            ') 
+        -> remove_column('id') -> make();
 
 	}
 

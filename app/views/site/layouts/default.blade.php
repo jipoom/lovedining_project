@@ -237,6 +237,43 @@
 				}
 			</script>
 			<!-- End Search Review -->
+			
+			<!-- Sort Review -->
+<script>
+	function showReviews(mode) {
+		var categoryId = $("#category").val();
+		var keyword = $("#keywords").val();
+		if (mode == "") {
+			document.getElementById("txtHint").innerHTML = "";
+			return;
+		}
+		if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById("reload").innerHTML = xmlhttp.responseText;
+				document.getElementById("mode").value = mode;
+			}
+		}
+		//xmlhttp.open("GET", categoryId + "/" + mode, true);
+		if(keyword!="")
+		{
+			xmlhttp.open("GET", "{{{ URL::to('category') }}}/"+categoryId + "/" + mode + "/" + keyword, true);
+		}
+		else
+		{
+			xmlhttp.open("GET", "{{{ URL::to('category') }}}/"+categoryId + "/" + mode, true);
+		}
+		xmlhttp.send();
+
+	}
+</script>
+<!-- End Sort Review -->
+			
 			@yield('scripts')
 		</div>
 		<!-- end div relaod -->

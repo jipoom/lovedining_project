@@ -176,7 +176,7 @@ Route::get('{postId}/album', 'BlogController@getAlbum');
 
 Route::group(array('prefix' => 'category'), function()
 {
-	 Route::get('{categoryId}/{mode}', 'BlogController@getCategoryMode');
+	 Route::get('{categoryId}/{mode}/{keyword?}', 'BlogController@getCategoryMode');
 	 Route::get('{categoryId}/', 'BlogController@getCategory');
 });
 
