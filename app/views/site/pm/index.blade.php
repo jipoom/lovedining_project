@@ -50,6 +50,9 @@
 				"aaSorting": [[ 2, "desc" ]],
 				"bProcessing": true,
 		        "bServerSide": true,
+		        "aoColumnDefs": [
+			      { "bSearchable": false, "aTargets": [ 3 ] }
+			    ],
 		        "sAjaxSource": "{{ URL::to('message_service/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});

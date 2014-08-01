@@ -116,6 +116,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	# Ads Management
     Route::controller('ads', 'AdminAdsController');
 	
+	# Stat Management
+	Route::get('stat/pageCount_data', 'AdminStatController@getPageCountData');
+	Route::get('stat/reviewCount_data', 'AdminStatController@getReviewCountData');
+	Route::get('stat/page_data', 'AdminStatController@getPageData');
+	Route::get('stat/review_data', 'AdminStatController@getReviewData');
+    Route::controller('stat', 'AdminStatController');
+	
 	#File Manager
 	Route::get('elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
     Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');

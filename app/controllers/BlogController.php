@@ -34,14 +34,15 @@ class BlogController extends BaseController {
 	 */
 	public function getIndex()
 	{
-		// Get all the blog posts
-		//$posts = $this->post->orderBy('created_at', 'DESC')->paginate(10);
 
-		// Show the page
-		//return View::make('site/blog/index', compact('posts'));
+		//Keep stat
+		Statistic::keepStat(0,"Home",0,Request::getClientIp());
+		
+		//Clear Session
 		Session::forget('mode');
 		Session::forget('catName');
-		$randReviews = Post::getRandomReviews();
+		//$randReviews = Post::getRandomReviews();
+		$randReviews = Post::getRecentReviews();
 		return View::make('site/home',compact('randReviews'));
 	}
 
@@ -52,10 +53,11 @@ class BlogController extends BaseController {
 	 */
 	public function getCategory($categoryId)
 	{
+		
 		// Get all the blog posts
 		$catName = Category::find($categoryId);
 		$mode = null;
-		if (Session::has('mode') && Session::get('catName') == $catName){
+		if (Session::has('mode') && Session::get('catName') == $catName->category_name){
 			$mode = Session::get('mode');
 			$posts = Post::orderReview($this->post,$mode,$categoryId,$catName);
 		}
@@ -76,6 +78,9 @@ class BlogController extends BaseController {
 			
 		}
 		
+		//Keep stat
+		Statistic::keepStat($categoryId,$catName->category_name,0,Request::getClientIp());
+		
 		$yetToPrint = true;
 		
 		// Show the page
@@ -89,7 +94,7 @@ class BlogController extends BaseController {
 		if($categoryId!="undefined")
 		{
 			$catName = Category::find($categoryId);
-			$posts = Post::orderReview($this->post,$mode,$categoryId,$catName);
+			$posts = Post::orderReview($this->post,$mode,$categoryId,$catName->category_name);
 			
 		}
 		else {
@@ -155,6 +160,12 @@ class BlogController extends BaseController {
 			$postsUserRead->save();
 		}
 		
+		//Keep stat
+		$categories = $post->find($postId)->category;
+		foreach($categories as $category)
+		{
+			Statistic::keepStat($category->id,$category->category_name,$postId,Request::getClientIp());
+		}
 		
 		// Show the page
 		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment', 'address'));

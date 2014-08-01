@@ -231,7 +231,7 @@ class AdminCategoryController extends AdminController {
             if(empty($category))
             {
                 // Redirect to the blog posts management page
-                 Picture::recursive_remove(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$album_name);
+                Picture::recursive_remove(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$album_name);
                 Picture::recursive_remove(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$album_name);
                 return Redirect::to('admin/category')->with('success', Lang::get('admin/category/messages.delete.success'));
             }

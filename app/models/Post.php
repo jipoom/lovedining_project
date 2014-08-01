@@ -55,6 +55,11 @@ class Post extends Eloquent {
 		return $this->hasMany('Campaign');
 	}
 	
+	public function category()
+	{
+		return $this->belongsToMany('Category','posts_category');
+	}
+	
     /**
      * Get the date the post was created.
      *
@@ -182,6 +187,13 @@ class Post extends Eloquent {
 			return $randReviews;
 		}
 	}
+	
+	public static function getRecentReviews()
+	{
+		$posts = Post::where('profile_picture_name','<>','')->orderBy('created_at','DESC')->take(5)->get();
+		return $posts;
+	}
+	
 	public static function getReviewsByCategory($post,$categoryId,$orderBy,$mode)
 	{
 		

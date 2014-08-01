@@ -150,7 +150,9 @@
 									<li{{ (Request::is('admin/ads*') ? ' class="active"' : '') }}>
 										<a href="{{{ URL::to('admin/ads') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Ads</a></li>
 								
-										
+									<li{{ (Request::is('admin/stat*') ? ' class="active"' : '') }}>
+										<a href="{{{ URL::to('admin/stat') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Stat</a></li>
+									
 </ul>
 
 							<ul class="nav navbar-nav pull-right">

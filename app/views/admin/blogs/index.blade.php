@@ -53,6 +53,9 @@
 				"aaSorting": [[ 3, "desc" ]],
 				"bProcessing": true,
 		        "bServerSide": true,
+				"aoColumnDefs": [
+			      { "bSearchable": false, "aTargets": [ 4 ] }
+			    ],
 		        "sAjaxSource": "{{ URL::to('admin/blogs/data') }}"+"/"+"{{$category}}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});

@@ -240,9 +240,7 @@ class AdminCampaignController extends AdminController {
       	$campaign = Campaign::select(array('campaign.id', 'campaign.post_id','campaign.name', 'posts.restaurant_name as restaurant' ,'campaign.description', 'campaign.created_at', 'campaign.expiry_date'))
 		->join('posts', 'posts.id', '=', 'campaign.post_id');
 
-        //$posts = Post::leftjoin('category', 'posts.category_id', '=', 'category.id')
-        //->select(array('posts.id', 'posts.title', 'category.category_name as category ','posts.id as comments', 'posts.created_at'));
-        
+		   
         return Datatables::of($campaign)
 		
 		->edit_column('restaurant', '<a href="{{{ URL::to(\'admin/blogs/\'. $post_id .\'/edit\') }}}">{{{ Str::limit($restaurant, 40, \'...\') }}}</a>')

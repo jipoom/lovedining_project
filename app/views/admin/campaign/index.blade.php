@@ -51,6 +51,9 @@
 				"aaSorting": [[ 3, "desc" ]],
 				"bProcessing": false,
 		        "bServerSide": true,
+		        "aoColumnDefs": [
+			      { "bSearchable": false, "aTargets": [ 4,5 ] }
+			    ],
 		        "sAjaxSource": "{{ URL::to('admin/campaign/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
