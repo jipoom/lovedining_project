@@ -41,9 +41,11 @@ class BlogController extends BaseController {
 		//Clear Session
 		Session::forget('mode');
 		Session::forget('catName');
+		$home = Post::where('isHome','=',1)->first();
 		//$randReviews = Post::getRandomReviews();
-		$randReviews = Post::getRecentReviews();
-		return View::make('site/home',compact('randReviews'));
+		//$randReviews = Post::getRecentReviews();
+		$banners = Picture::directoryToArray(Config::get('app.image_path').'/'.Config::get('app.banner'),true);
+		return View::make('site/home',compact('home','banners'));
 	}
 
 	/**
@@ -224,7 +226,7 @@ class BlogController extends BaseController {
 	{
 		// Get all the blog posts
 		$post = $this->post->where('id', '=', $postId)->first();
-		$album = Picture::directoryToArray(public_path().'/images/'.$post->album_name,true);
+		$album = Picture::directoryToArray(Config::get('app.image_path').$post->album_name,true);
 		$title = 'Test Album';
 		// Show the page
 		return View::make('site/blog/album', compact('album','title','post'));

@@ -13,6 +13,7 @@ return array(
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',
     'AdminDashboardController' => $baseDir . '/app/controllers/admin/AdminDashboardController.php',
+    'AdminHomeController' => $baseDir . '/app/controllers/admin/AdminHomeController.php',
     'AdminIntroductionController' => $baseDir . '/app/controllers/admin/AdminIntroductionController.php',
     'AdminOrderController' => $baseDir . '/app/controllers/admin/AdminOrderController.php',
     'AdminRolesController' => $baseDir . '/app/controllers/admin/AdminRolesController.php',

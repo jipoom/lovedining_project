@@ -33,8 +33,9 @@ class AdminStatController extends AdminController {
 		
 	public function getReviewData() {
 			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
-		$stat = Statistic::select(array('statistic.id', 'statistic.created_at', 'posts.title', 'statistic.ip_address'))
-		->join('posts','posts.id','=','statistic.post_id'); 
+		$stat = Statistic::select(array('statistic.id', 'statistic.created_at','category.category_name', 'statistic.ip_address','posts.title'))
+		->join('posts','posts.id','=','statistic.post_id')
+		->join('category','statistic.category_id','=','category.id'); 
 	
 
 		return Datatables::of($stat) 

@@ -37,12 +37,12 @@
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
 </h4>
-@if(count($randReviews)>0)
+@if(count($banners)>0)
 <div class="col-md-10">
 	<ul class="bxslider">
-		@foreach($randReviews as $review)
+		@foreach($banners as $banner)
 		<li>
-			<a href="{{$review->id}}"><img src="{{Config::get('app.image_base_url').'/'.$review->album_name.'/'.$review->profile_picture_name}}" title="{{$review->title}}" align="middle"/></a>
+			<a href="{{$home->id}}"><img src="{{Config::get('app.image_base_url').'/'.Config::get('app.banner').'/'.$banner}}" title="{{$home->title}}" align="middle"/></a>		
 		</li>
 		@endforeach
 

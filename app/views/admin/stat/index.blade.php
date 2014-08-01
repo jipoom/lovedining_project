@@ -33,9 +33,11 @@
 			
 			<tr>
 				<th class="col-md-2">Date</th>
-				<th class="col-md-2">Review</th>
+				<th class="col-md-2">Category</th>
 				<th class="col-md-2">IP Address</th>
+				<th class="col-md-2">Review</th>
 				<th class="col-md-2">Action</th>
+				
 			</tr>
 		</thead>
 		<tbody>

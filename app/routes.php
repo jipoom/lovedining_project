@@ -64,6 +64,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::get('blogs/create','AdminBlogsController@getCreate');
 	Route::get('blogs/{directory}/{postId}','AdminBlogsController@getIndex');	
     Route::controller('blogs', 'AdminBlogsController');
+	
+	 # Home Management
+	Route::get('home/highlight/{mode}', 'AdminHomeController@changeOrder');
+	Route::get('home/highlight/save/{mode}', 'AdminHomeController@saveOrder');
+	Route::post('home/setHome', 'AdminHomeController@setHome');
+    Route::controller('home', 'AdminHomeController');
 
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
