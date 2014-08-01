@@ -13,15 +13,16 @@ class AdminStatController extends AdminController {
         // Title
         $title = "LoveDining Statistic";
 		
-        // Grab all the blog posts
+        // Grab all the Statistics
         $stat = Statistic::all();
         // Show the page
         return View::make('admin/stat/index', compact('stat', 'title'));
     }
 	
 	public function getPageData() {
-			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
-		$stat = Statistic::select(array('statistic.id', 'statistic.created_at','statistic.page_view', 'statistic.ip_address')); 
+		//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
+		$stat = Statistic::select(array('statistic.id', 'statistic.created_at','category.category_name', 'statistic.ip_address'))
+		->join('category','statistic.category_id','=','category.id'); 
 		
 
 		return Datatables::of($stat) 
@@ -44,8 +45,8 @@ class AdminStatController extends AdminController {
 	
 	public function getPageCountData() {
 			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
-		$stat = Statistic::select(array('statistic.id', 'statistic.category_id','statistic.page_view', 'statistic.ip_address as access','statistic.created_at')) 
-		->join('category','category.id','=','statistic.category_id')->groupBy('page_view'); 
+		$stat = Statistic::select(array('statistic.id', 'statistic.category_id','category.category_name', 'statistic.ip_address as access','statistic.created_at')) 
+		->join('category','category.id','=','statistic.category_id')->groupBy('category_name'); 
 
 		return Datatables::of($stat) 
 		-> edit_column('created_at','{{ DB::table(\'statistic\')->where(\'category_id\', \'=\', $category_id)->orderBy(\'created_at\',\'DESC\')->first()->created_at }}')

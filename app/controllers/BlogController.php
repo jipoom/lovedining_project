@@ -36,7 +36,7 @@ class BlogController extends BaseController {
 	{
 
 		//Keep stat
-		Statistic::keepStat(0,"Home",0,Request::getClientIp());
+		//Statistic::keepStat(0,"Home",0,Request::getClientIp());
 		
 		//Clear Session
 		Session::forget('mode');
@@ -64,22 +64,12 @@ class BlogController extends BaseController {
 		else {
 			Session::forget('mode');
 			Session::forget('catName');
-			//$posts = $this->post->where('category_id', '=', $categoryId)->orderBy('created_at', 'DESC')->paginate(8);
-			/*$posts = $this->post->leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id')
-			-> join('category', 'posts_category.category_id', '=', 'category.id')
-			-> where('category.id', '=', $categoryId)
-			-> orderBy('created_at', 'DESC')
-			->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
-			'posts.profile_picture_name','posts.content','posts.album_name',
-			'posts.restaurant_name','posts.category_id','posts.tel','posts.street_addr',
-			'posts.soi','posts.road','posts.subdistrict','posts.district','posts.district',
-			'posts.province','posts.zip','posts.created_at','posts.updated_at'));*/
 			$posts = Post::getReviewsbyCategory($this->post,$categoryId,'created_at','DESC');
 			
 		}
 		
 		//Keep stat
-		Statistic::keepStat($categoryId,$catName->category_name,0,Request::getClientIp());
+		//Statistic::keepStat($categoryId,$catName->category_name,0,Request::getClientIp());
 		
 		$yetToPrint = true;
 		
@@ -164,7 +154,8 @@ class BlogController extends BaseController {
 		$categories = $post->find($postId)->category;
 		foreach($categories as $category)
 		{
-			Statistic::keepStat($category->id,$category->category_name,$postId,Request::getClientIp());
+			//Statistic::keepStat($category->id,$category->category_name,$postId,Request::getClientIp());
+			Statistic::keepStat($category->id,$postId,Request::getClientIp());
 		}
 		
 		// Show the page
