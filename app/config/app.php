@@ -147,6 +147,7 @@ return array(
 	//Ads Directory Prefix
 	'ads_sidebar_prefix' => 'Ads_Sidebar_',
 	'ads_footer_prefix' => 'Ads_Footer_',
+	
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
