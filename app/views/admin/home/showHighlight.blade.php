@@ -17,7 +17,7 @@
 
 		<!-- Post Title -->
 		<div class="col-md-12">
-			<h4><strong><a href="{{{ $highlight[$i]->url() }}}">{{ String::title($highlight[$i]->title) }}</a></strong></h4>
+			<h4><strong><a href="{{{ URL::to('admin/blogs').'/'.$highlight[$i]->id.'/edit' }}}">{{ String::title($highlight[$i]->title) }}</a></strong></h4>
 		</div>
 
 		<!-- ./ post title -->
@@ -26,23 +26,12 @@
 
 		<div class="col-md-6">
 			@if($highlight[$i]->profile_picture_name!="")
-			<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" alt=""></a>
+			<a href="{{{ URL::to('admin/blogs').'/'.$highlight[$i]->id.'/edit' }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" alt=""></a>
 			@else
-			<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+			<a href="{{{ URL::to('admin/blogs').'/'.$highlight[$i]->id.'/edit' }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 			@endif
 		</div>
-		<div class="col-md-6">
-			<p>
-				{{ String::tidy($highlight[$i]->restaurant_name) }}
-			</p>
-			<p>
-				{{ String::tidy($highlight[$i]->district); }}, {{ String::tidy($highlight[$i]->province); }}
-			</p>
-			<p>
-				Tel:
-				{{ String::tidy($highlight[$i]->tel); }}
-			</p>
-		</div>
+		
 
 		<!-- ./ post content -->
 
@@ -55,7 +44,7 @@
 				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $highlight[$i]->author->username }}}</span>
 				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
 				{{{ $highlight[$i]->date() }}}
-				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $highlight[$i]->url() }}}#comments">{{$highlight[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $highlight[$i]->comments()->count()) }}</a>
+				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ URL::to('admin/comments').'/'.$highlight[$i]->id.'/view_comments' }}}">{{$highlight[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $highlight[$i]->comments()->count()) }}</a>
 			</p>
 		</div>
 
@@ -69,7 +58,7 @@
 		<!-- Post Title -->
 	
 		<div class="col-md-12">
-			<h4><strong><a href="{{{ $highlight[$i+1]->url() }}}">{{ String::title($highlight[$i+1]->
+			<h4><strong><a href="{{{ URL::to('admin/blogs').'/'.$highlight[$i+1]->id.'/edit' }}}">{{ String::title($highlight[$i+1]->
 			title) }}</a></strong></h4>
 		</div>
 	
@@ -78,24 +67,12 @@
 		<!-- Post Content -->
 		<div class="col-md-6">
 			@if($highlight[$i+1]->profile_picture_name!="")
-			<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}" alt=""></a>
+			<a href="{{{ URL::to('admin/blogs').'/'.$highlight[$i+1]->id.'/edit' }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}" alt=""></a>
 			@else
-			<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+			<a href="{{{ URL::to('admin/blogs').'/'.$highlight[$i+1]->id.'/edit' }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 			@endif
 		</div>
-		<div class="col-md-6">
-			<p>
-				{{ String::tidy($highlight[$i+1]->restaurant_name) }}
-			</p>
-			<p>
-				{{ String::tidy($highlight[$i+1]->district); }}, {{ String::tidy($highlight[$i+1]->province); }}
-			</p>
-			<p>
-				Tel:
-				{{ String::tidy($highlight[$i+1]->tel); }}
-			</p>
-		</div>
-	
+		
 		<!-- ./ post content -->
 	
 		<!-- Post Footer -->
@@ -107,7 +84,7 @@
 				<span class="glyphicon glyphicon-user"></span> by <span class="muted">{{{ $highlight[$i+1]->author->username }}}</span>
 				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
 				{{{ $highlight[$i+1]->date() }}}
-				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $highlight[$i+1]->url() }}}#comments">{{$highlight[$i+1]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $highlight[$i+1]->comments()->count()) }}</a>
+				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ URL::to('admin/comments').'/'.$highlight[$i+1]->id.'/view_comments' }}}">{{$highlight[$i+1]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $highlight[$i+1]->comments()->count()) }}</a>
 			</p>
 		</div>
 	

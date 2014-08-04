@@ -91,7 +91,7 @@
 			</button>
 
 			<div id = "showHighlight">
-			@include('highlight')
+			@include('admin/home/showHighlight')
 			</div>
 			<!-- ./showHighlight-->
 
