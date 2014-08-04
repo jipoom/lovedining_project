@@ -99,7 +99,7 @@ class AdminHomeController extends AdminController {
 				$orderMode -> mode = $mode;
 				$orderMode -> user_id = $user->id;
 				if($orderMode -> save())
-					return Redirect::to('admin')->with('success', Lang::get('admin/highlight/messages.change.success'));
+					return Redirect::to('admin')->with('success', Lang::get('admin/home/messages.change.success'));
 			}
 		}
 		else {
@@ -108,7 +108,7 @@ class AdminHomeController extends AdminController {
 			$order-> user_id = $user->id;
 			echo $mode;
 			if($order->save())
-				return Redirect::to('admin')->with('success', Lang::get('admin/highlight/messages.change.success'));
+				return Redirect::to('admin')->with('success', Lang::get('admin/home/messages.change.success'));
 			
 		}
 		

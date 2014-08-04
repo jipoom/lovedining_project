@@ -12,7 +12,24 @@
 			
 		</h3>
 	</div>
-	
+	<ul class="nav nav-tabs">
+	<li class="active">
+		<a href="#tab-pageStat" data-toggle="tab">Page Stat</a>
+	</li>
+	<li>
+		<a href="#tab-reviewStat" data-toggle="tab">Review Stat</a>
+	</li>
+	<li>
+		<a href="#tab-pageAccess" data-toggle="tab">Page Access</a>
+	</li>
+	<li>
+		<a href="#tab-reviewAccess" data-toggle="tab">Review Access</a>
+	</li>
+</ul>
+	<!-- Tabs Content -->
+	<div class="tab-content">
+	<!-- Page tab -->
+	<div class="tab-pane active" id="tab-pageStat">
 	<p><h4>Page statistic</p></h4>
 	<table id="page" class="display">
 		<thead>
@@ -27,7 +44,10 @@
 		<tbody>
 		</tbody>
 	</table>
-	
+	</div>
+	<!-- Page tab -->
+	<!-- Review tab -->
+	<div class="tab-pane" id="tab-reviewStat">
 	<table id="review" class="display">
 		<thead>
 			
@@ -43,7 +63,10 @@
 		<tbody>
 		</tbody>
 	</table>
-	
+	</div>
+	<!-- Review tab -->
+	<!-- Page Access tab -->
+	<div class="tab-pane" id="tab-pageAccess">
 	<table id="pageCount" class="display">
 		<thead>
 			
@@ -56,7 +79,10 @@
 		<tbody>
 		</tbody>
 	</table>
-	
+	</div>
+	<!-- PageAccess tab -->
+	<!-- Review Access tab -->
+	<div class="tab-pane" id="tab-reviewAccess">
 	<table id="reviewCount" class="display">
 		<thead>
 			
@@ -69,7 +95,10 @@
 		<tbody>
 		</tbody>
 	</table>
-
+	</div>
+	<!-- Review Access tab -->
+	</div>
+	<!-- Tabs Content -->
 @stop
 
 {{-- Scripts --}}

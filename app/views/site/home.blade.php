@@ -47,9 +47,12 @@
 		@endforeach
 
 	</ul>
+	
 </div>
 @endif
-
+<div class="col-md-12">
+@include('highlight')
+</div>
 
 @stop
 
@@ -68,6 +71,30 @@
 			pause : 3000,
 			autoControls : false,
 			pager : true,
+			pagerType : 'full',
+			controls : true,
+			captions : true,
+			speed : 500,
+			randomStart : true,
+			responsive : true,
+			slideWidth : 750,
+			adaptiveHeight: true
+		});
+		
+	}); 
+</script>
+<script>
+	$(document).ready(function() {
+		$('.bxslider_hightlight').bxSlider({
+			mode : 'horizontal',
+			infiniteLoop : true,
+			auto : true,
+			autoStart : true,
+			autoDirection : 'next',
+			autoHover : true,
+			pause : 3000,
+			autoControls : false,
+			pager : false,
 			pagerType : 'full',
 			controls : true,
 			captions : true,

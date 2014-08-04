@@ -30,6 +30,23 @@
     height: auto;
     width: auto\9; /* ie8 */
 }</style>
+<link rel="stylesheet" href="{{asset('assets/css/preettyphoto/prettyPhoto.css')}}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+
+<link href="{{asset('assets/css/jquery.bxslider.css')}}" rel="stylesheet" />
+<style>
+	ul.bxslider {
+		margin: 0;
+		padding: 0;
+	}
+	
+	.bx-wrapper img {
+    margin: 0 auto;
+	}
+	img.resize{
+    width:auto; /* you can use % */
+    height: 400px;
+	}
+</style>
 
 @stop
 
@@ -133,6 +150,25 @@
 		@endif
 		<p></p>
 		{{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
+		
+		<!-- ./ picture album -->
+		<?php $album = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name,true); ?>
+
+		<!-- picture div -->
+		<div>
+
+		<ul class="gallery clearfix bxslider">
+			@foreach ($album as $picture)
+		
+			<li><a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" class = "thumbnail" rel="LoveDining"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" /></a></li>
+
+			@endforeach
+		</ul>
+		</div>
+		<!-- picture div -->
+		
+		<!-- ./ picture album -->
+		
 		<hr />
 		<a id="comments"></a>
 		<h4>{{{ $comments->count() }}} Comments</h4>
@@ -206,6 +242,7 @@
 @stop
 
 @section('scripts')
+
 <script type="text/javascript">
 	$(".iframe").colorbox({
 		iframe : true,
@@ -255,4 +292,58 @@
 	}); 
 </script>
 <!-- /TinyMCE -->
+<script src="{{asset('assets/js/jquery.bxslider.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery.prettyPhoto.js')}}" type="text/javascript" charset="utf-8"></script>
+<script>
+	$(document).ready(function() {
+		$('.bxslider').bxSlider({
+			mode : 'horizontal',
+			infiniteLoop : true,
+			auto : true,
+			autoStart : true,
+			autoDirection : 'next',
+			autoHover : true,
+			pause : 3000,
+			autoControls : false,
+			pager : false,
+			pagerType : 'full',
+			controls : true,
+			captions : true,
+			speed : 500,
+			randomStart : true,
+			responsive : true,
+			slideWidth : 300,
+			adaptiveHeight: true
+		});
+		$("area[rel^='LoveDining']").prettyPhoto();
+
+			$(".gallery:first a[rel^='LoveDining']").prettyPhoto({
+				animation_speed : 'normal',
+				theme : 'light_square',
+				slideshow : 3000,
+				autoplay_slideshow : false
+			});
+			$(".gallery:gt(0) a[rel^='LoveDining']").prettyPhoto({
+				animation_speed : 'fast',
+				slideshow : 10000,
+				hideflash : true
+			});
+
+			$("#custom_content a[rel^='LoveDining']:first").prettyPhoto({
+				custom_markup : '<div id="map_canvas" style="width:260px; height:265px"></div>',
+				changepicturecallback : function() {
+					initialize();
+				}
+			});
+
+			$("#custom_content a[rel^='LoveDining']:last").prettyPhoto({
+				custom_markup : '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+				changepicturecallback : function() {
+					_bsap.exec();
+				}
+			});
+	}); 
+</script>
+
+	
 @stop
