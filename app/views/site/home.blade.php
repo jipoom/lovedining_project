@@ -26,7 +26,6 @@
 
 {{-- Content --}}
 @section('content')
-
 <!-- .Ads -->
 <div class="ads-right pull-right checkscreen">
 	<div class="col-md-12">
@@ -51,7 +50,9 @@
 </div>
 @endif
 <div class="col-md-12">
+
 @include('highlight')
+
 </div>
 
 @stop

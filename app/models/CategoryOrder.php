@@ -21,17 +21,28 @@ class CategoryOrder extends Eloquent {
 								ON category.id=posts_category.category_id
 								group by category.id
 								order by counts desc'));
-		else if($mode == "popularity")		
-			return Category::all();
+		else if($mode == "popularity")	
+		{	
+			$popularIds = Statistic::getPopularCategories();
+			$categories = array();
+			$i=0;
+			foreach ($popularIds as $popularId)
+			{
+				$categories[$i] = Category::find($popularId);
+				$i++;
+			}		
+			return $categories;
+		}
 	}
 	public static function getMode()
 	{
-		$order = CategoryOrder::all();	
+		/*$order = CategoryOrder::all();	
 		$mode = null;
 		foreach ($order as $orderMode) {
 			$mode = $orderMode -> mode;
 		}
-		return $mode;
+		return $mode;*/
+		return CategoryOrder::first()->mode;	
 	}
 }
 

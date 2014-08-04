@@ -60,6 +60,15 @@ class Post extends Eloquent {
 		return $this->belongsToMany('Category','posts_category');
 	}
 	
+	public function read()
+	{
+		return $this->belongsToMany('User','posts_user_read');
+	}
+	
+	public function statistic()
+	{
+		return $this->belongsToMany('Category','statistic');
+	}
     /**
      * Get the date the post was created.
      *

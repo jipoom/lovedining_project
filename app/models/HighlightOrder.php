@@ -12,18 +12,29 @@ class HighlightOrder extends Eloquent {
 		{
 			return Post::orderByRaw("RAND()")->take(4)->get();
 		}
-		else if($mode == "popular")		
-			return Post::orderBy('created_at', 'DESC')->take(4)->get();
+		else if($mode == "popular")	
+		{
+			$popularIds = Statistic::get4PopularReviews();
+			$posts = array();
+			$i=0;
+			foreach ($popularIds as $popularId)
+			{
+				$posts[$i] = Post::find($popularId);
+				$i++;
+			}		
+			return $posts;
+		}
 	}
 	public static function getMode()
 	{
-		$order = HighlightOrder::all();	
+		/*$order = HighlightOrder::all();	
 		$mode = null;
 		foreach ($order as $orderMode) {
 			$mode = $orderMode -> mode;
 		}
-		return $mode;
-	}
+		return $mode;*/
+		return HighlightOrder::first()->mode;	
+	} 
 }
 
 ?>

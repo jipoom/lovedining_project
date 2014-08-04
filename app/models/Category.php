@@ -9,6 +9,10 @@ class Category extends Eloquent {
 	{
 		return $this->belongsToMany('Posts','posts_category');
 	}
+	public function statistic()
+	{
+		return $this->belongsToMany('Posts','statistic');
+	}
 }
 
 ?>
