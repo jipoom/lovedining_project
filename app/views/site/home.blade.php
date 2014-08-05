@@ -36,7 +36,7 @@
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
 </h4>
-@if(count($banners)>0)
+@if(count($banners)>0 && count($home) > 0)
 <div class="col-md-10">
 	<ul class="bxslider">
 		@foreach($banners as $banner)
