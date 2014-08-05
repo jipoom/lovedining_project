@@ -116,6 +116,19 @@ class Post extends Eloquent {
         return $this->date($this->updated_at);
 	}	
 	
+	public function tumbol()
+	{
+		return $this->belongsTo('Tumbol','tumbol_id');
+	}
+	public function province()
+	{
+		return $this->belongsTo('province','province_id');
+	}
+	public function amphur()
+	{
+		return $this->belongsTo('amphur','amphur_id');
+	}
+	
 	public static function findImages($content)
 	{
 		$i = 0;
@@ -217,7 +230,7 @@ class Post extends Eloquent {
 				->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
 				'posts.profile_picture_name','posts.content','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.street_addr',
-				'posts.soi','posts.road','posts.subdistrict','posts.district','posts.district',
+				'posts.soi','posts.road','posts.tumbol','posts.amphur',
 				'posts.province','posts.zip','posts.created_at','posts.updated_at'));
 		 }
 		 //If user searches with a keyword

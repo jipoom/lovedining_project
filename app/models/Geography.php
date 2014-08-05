@@ -1,9 +1,9 @@
 <?php
 
 
-class Province extends Eloquent {	
+class Geographhy extends Eloquent {	
 	public $timestamps = false;
-    protected $table = 'province';
+    protected $table = 'geography';
 	
 	public function amphur()
 	{
@@ -13,9 +13,9 @@ class Province extends Eloquent {
 	{
 		return $this->hasMany('Tumbol');
 	}
-	public function geo()
+	public function province()
 	{
-		return $this->belongsTo('Geography');
+		return $this->hasMany('Province');
 	}
 }
 

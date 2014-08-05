@@ -84,7 +84,14 @@ class AdminBlogsController extends AdminController {
 	 */
 	public function postCreate() {
 		// Declare the rules for the form validation
-		$rules = array('title' => 'required|min:3|unique:posts', 'restaurant_name' => 'required|min:3', 'content' => 'required|min:3', 'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i', 'album_name' => 'required|unique:posts');
+		$rules = array('title' => 'required|min:3|unique:posts', 
+		'restaurant_name' => 'required|min:3', 
+		'content' => 'required|min:3', 
+		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i', 
+		'album_name' => 'required|unique:posts',
+		'tumbol' => 'required|exists:tumbol,tumbol_name',
+		'amphur' => 'required|exists:amphur,amphur_name',
+		'province' => 'required|exists:province,province_name');
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -101,11 +108,15 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> restaurant_name = Input::get('restaurant_name');
 			$this -> post -> tel = Input::get('tel');
 			$this -> post -> street_addr = Input::get('street_addr');
-			$this -> post -> soi = Input::get('soi');
-			$this -> post -> road = Input::get('road');
-			$this -> post -> subdistrict = Input::get('subdistrict');
-			$this -> post -> district = Input::get('district');
+			//$this -> post -> soi = Input::get('soi');
+			//$this -> post -> road = Input::get('road');
+			//$this -> post -> subdistrict = Input::get('subdistrict');
+			//$this -> post -> district = Input::get('district');
+			//$this -> post -> province = Input::get('province');
 			$this -> post -> province = Input::get('province');
+			$this -> post -> amphur = Input::get('amphur');
+			$this -> post -> tumbol = Input::get('tumbol');
+			
 			$this -> post -> zip = Input::get('zip');
 			$this -> post -> album_name = Input::get('album_name');
 			$this -> post -> profile_picture_name = Input::get('profilePic');
@@ -201,9 +212,15 @@ class AdminBlogsController extends AdminController {
 		{
 			mkdir(Config::get('app.image_path').'/'.$post -> album_name);
 		}
+		$init_province = Province::first();
+		$province = array($init_province -> id => $init_province -> province_name);
+		$provinces = Province::all();
+		foreach ($provinces as $temp) {
+			$province = array_add($province, $temp -> id, $temp -> province_name);
+		}
 		
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('post', 'title', 'category', 'randAlbumName', 'selectedCategories'));
+		return View::make('admin/blogs/create_edit', compact('post', 'title', 'category', 'randAlbumName', 'selectedCategories','province'));
 	}
 
 	/**
@@ -239,8 +256,8 @@ class AdminBlogsController extends AdminController {
 			$post -> street_addr = Input::get('street_addr');
 			$post -> soi = Input::get('soi');
 			$post -> road = Input::get('road');
-			$post -> subdistrict = Input::get('subdistrict');
-			$post -> district = Input::get('district');
+			$post -> tumbol = Input::get('tumbol');
+			$post -> amphur = Input::get('amphur');
 			$post -> province = Input::get('province');
 			$post -> zip = Input::get('zip');
 			$post -> album_name = Input::get('album_name');
@@ -360,6 +377,43 @@ class AdminBlogsController extends AdminController {
 		} else {
 			return $postId;
 		}
+	}
+
+	public function getProvince() {
+		$match = '%' .Input::get('term') . '%';
+		$init_province =  Province::where('province_name', 'like', $match)->firstOrFail();
+		$results = array($init_province->id => $init_province->province_name);
+
+		$query = Province::where('province_name', 'like', $match)->get();
+		foreach($query as $province)
+		{
+			$results = array_add($results, $province->id, $province->province_name);
+		}
+		echo json_encode($results);
+	}
+	public function getAmphur() {
+		$match = '%' .Input::get('term') . '%';
+		$init_amphur =  Amphur::where('amphur_name', 'like', $match)->firstOrFail();
+		$results = array($init_amphur->id => $init_amphur->amphur_name);
+
+		$query = Amphur::where('amphur_name', 'like', $match)->get();
+		foreach($query as $amphur)
+		{
+			$results = array_add($results, $amphur->id, $amphur->amphur_name);
+		}
+		echo json_encode($results);
+	}
+	public function getTumbol() {
+		$match = '%' .Input::get('term') . '%';
+		$init_tumbol =  Tumbol::where('tumbol_name', 'like', $match)->firstOrFail();
+		$results = array($init_tumbol->id => $init_tumbol->tumbol_name);
+
+		$query = Tumbol::where('tumbol_name', 'like', $match)->get();
+		foreach($query as $tumbol)
+		{
+			$results = array_add($results, $tumbol->id, $tumbol->tumbol_name);
+		}
+		echo json_encode($results);
 	}
 
 	/**

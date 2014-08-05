@@ -63,6 +63,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::get('blogs/makeDir/{new}/{postId}','AdminBlogsController@makeDir');
 	Route::get('blogs/create','AdminBlogsController@getCreate');
 	Route::get('blogs/{directory}/{postId}','AdminBlogsController@getIndex');	
+	Route::get('find/province','AdminBlogsController@getProvince');
+	Route::get('find/amphur','AdminBlogsController@getAmphur');
+	Route::get('find/tumbol','AdminBlogsController@getTumbol');
     Route::controller('blogs', 'AdminBlogsController');
 	
 	 # Home Management

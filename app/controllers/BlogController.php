@@ -140,7 +140,7 @@ class BlogController extends BaseController {
             $canComment = $user->can('post_comment');
         }
 		//form phisical address
-		$address = $post->street_addr.' '.$post->soi.' '.$post->road.' '.$post->subdistrict.' '.$post->district.' '.$post->province;
+		$address = $post->street_addr.' '.$post->soi.' แขวง'.$post->tumbol.' '.$post->amphur.' '.$post->province;
 		
 		//add to the PostsUserRead
 		$postsUserRead = new PostsUserRead;

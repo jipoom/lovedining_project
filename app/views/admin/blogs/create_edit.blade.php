@@ -3,6 +3,9 @@
 {{-- Content --}}
 @section('styles')
 	<link rel="stylesheet" href="{{asset('assets/css/jquery.simple-dtpicker.css')}}" />
+	<!-- AutoComplete -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+	<!-- /AutoComplete -->
 @stop
 @section('content')
 		
@@ -43,11 +46,17 @@
                         <label class="control-label" for="title">ชื่อรีวิว</label>
 						{{ Form::text('title',Input::old('title', isset($post) ? $post->title : null) , array('class'=>'form-control', 'placeholder'=>'ชื่อรีวิว'))}} </p>
 						{{{ $errors->first('title', ':message') }}}
-                       
+                    </div>
+                </div>
+                <div class="form-group {{{ $errors->has('restaurant_name') ? 'error' : '' }}}">
+                    <div class="col-md-12">
                         <label class="control-label" for="title">ชื่อร้านอาหาร</label>
 						{{ Form::text('restaurant_name', Input::old('restaurant_name', isset($post) ? $post->restaurant_name : null), array('class'=>'form-control', 'placeholder'=>'ชื่อร้านอาหาร'))}} </p>
 						{{{ $errors->first('restaurant_name', ':message') }}}
-						
+					</div>
+				</div>
+				<div class="form-group">
+                    <div class="col-md-12">
 						 <label class="control-label" for="title">ประเภทร้านอาหาร</label><p>
 
 					 	 <?php $i=0; ?>
@@ -58,19 +67,39 @@
 					 	 	 <?php $i++;?>
 					 	 @endforeach
 					 	 <p></p>
+					 </div>
+				</div>
+				<div class="form-group {{{ $errors->has('tel') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                    	
 						 <label class="control-label" for="title">เบอร์โทร</label>
-						{{ Form::text('tel', Input::old('title', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'เบอร์โทรศัพท์ (eg. 021234567, 0987654321)'))}} </p>
+						{{ Form::text('tel', Input::old('tel', isset($post) ? $post->tel : null), array('class'=>'form-control', 'placeholder'=>'เบอร์โทรศัพท์ (eg. 021234567, 0987654321)'))}} </p>
 						{{{ $errors->first('tel', ':message') }}}<p>
-						
+					</div>
+				</div>
+				<div class="form-group">
+                    <div class="col-md-12">
 						 <label class="control-label" for="title">ที่อยู่</label></P>
-					    {{ Form::text('street_addr', Input::old('title', isset($post) ? $post->street_addr : null), array('placeholder'=>'เลขที่')) }} 
-					    {{ Form::text('soi', Input::old('title', isset($post) ? $post->soi : null), array('placeholder'=>'ซอย')) }} 
-					    {{ Form::text('road', Input::old('title', isset($post) ? $post->road : null), array('placeholder'=>'ถนน')) }} 
-					    {{ Form::text('subdistrict', Input::old('title', isset($post) ? $post->subdistrict : null), array('placeholder'=>'แขวง')) }} </p>  
-					    {{ Form::text('district', Input::old('title', isset($post) ? $post->district : null), array('placeholder'=>'เขต')) }}  
-					    {{ Form::text('province', Input::old('title', isset($post) ? $post->province : null), array('placeholder'=>'จังหวัด')) }} 
-					    {{ Form::text('zip', Input::old('title', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
+						 {{ Form::text('street_addr', Input::old('street_addr', isset($post) ? $post->street_addr : null), array('placeholder'=>'เลขที่')) }} 
+					    {{ Form::text('soi', Input::old('soi', isset($post) ? $post->soi : null), array('placeholder'=>'ซอย')) }} 
+					    {{ Form::text('road', Input::old('road', isset($post) ? $post->road : null), array('placeholder'=>'ถนน')) }} 
+					      </p>  
+					    				   
+                       	 	
+                      </P>
+                        {{ Form::text('tumbol', Input::old('tumbol', isset($post) ? $post->tumbol : null), array('placeholder'=>'แขวง', 'id' => 'tumbol')) }} </p>  
+					    {{{ $errors->first('tumbol', ':message') }}}<p>
+                      
+                        {{ Form::text('amphur', Input::old('amphur', isset($post) ? $post->amphur : null), array('placeholder'=>'เขต', 'id' => 'amphur')) }}  					  
+                        {{{ $errors->first('amphur', ':message') }}}<p>
                         
+                        {{ Form::text('province', Input::old('province', isset($post) ? $post->province : null), array('placeholder'=>'จังหวัด', 'id' => 'province')) }} 
+					    {{{ $errors->first('province', ':message') }}}<p>
+                        
+                        {{ Form::text('zip', Input::old('zip', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
+                     
+                      
+                      	
                         <!-- <label class="control-label" for="title">ชื่ออัลบััมรูป(ภาษาอังกฤษหรือตัวเลขเท่านั้น)</label></P>
                          {{ Form::text('album_name', Input::old('album_name', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม', 'id' => 'album_name')) }} 
                          {{{ $errors->first('album_name', ':message') }}}<p>
@@ -79,7 +108,10 @@
                          {{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
                          {{ Form::hidden('post', Input::old('post', isset($post) ? $post : null), array('id'=>'post')) }} </p>  
                          {{ Form::hidden('review_id', Input::old('review_id', isset($post) ? $post->id : 0), array('id'=>'review_id')) }} </p>  
- 						
+ 					</div>
+				</div> 	
+				<div class="form-group">
+                    <div class="col-md-12">
  						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
                           <div id="picture">
                           	@if(isset($post) && $post->profile_picture_name!="")
@@ -88,15 +120,17 @@
                           		<img src="http://placehold.it/260x180" alt="">
                           	@endif
 		                   
-		                </div>
-		                   
-		                <div class="button-group">
-		                	 {{ Form::hidden('profilePic', Input::old('profilePic', isset($post) && $post->profile_picture_name!="" ? $post->profile_picture_name : $randAlbumName), array('id'=>'featured_image')) }} </p>  
+		             	</div>
+		        	</div>
+				</div>  
+		        <div class="button-group">
+		                	 {{ Form::hidden('profilePic', Input::old('profilePic', isset($post) && $post->profile_picture_name!="" ? $post->profile_picture_name : null), array('id'=>'featured_image')) }} </p>  
 		             
 		                   <!-- <input type="hidden" id="featured_image" placeholder="Profile Picture" readonly name="profilePic" /> -->
 		                    <button type="button" class="browse" id="imageUpload" > Browse Image</button>
-		                </div>
-                         
+		        </div>
+                <div class="form-group {{{ $errors->has('tel') ? 'error' : '' }}}">
+                    <div class="col-md-12">
                           <p><label class="control-label" for="content">Content</label></p>
 						<!--{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('class'=>'ckeditor', 'rows'=>'10'))}} </p>
 						{{{ $errors->first('content', ':message') }}}-->
@@ -117,7 +151,7 @@
 			
 			</div>
 				<!-- ./ General tab -->
-				
+		</div>		
 		<!-- ./ tabs content -->
 
 		<!-- Form Actions -->
@@ -131,6 +165,32 @@
 	</form>
 @stop
 @section('scripts')
+<!-- AutoComplete -->
+	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<!-- /AutoComplete -->
+<script>
+$(function() {
+	var province = $("#province").val();
+	var amphur = $("#amphur").val();
+	$('#province').autocomplete(
+	{
+		 source:'{{URL::to("admin/find/province")}}',
+		 minLength: 2,
+	})
+	$('#amphur').autocomplete(
+	{
+		 source:'{{URL::to("admin/find/amphur")}}',
+		 minLength: 2,
+	})
+	$('#tumbol').autocomplete(
+	{
+		 source:'{{URL::to("admin/find/tumbol")}}',
+		 minLength: 2,
+	})
+
+});
+</script>
+
 <!-- DatePicker -->
 <script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>
 <script>

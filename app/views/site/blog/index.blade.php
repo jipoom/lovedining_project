@@ -88,7 +88,7 @@
 				{{ String::tidy($posts[$i]->restaurant_name) }}
 			</p>
 			<p>
-				{{ String::tidy($posts[$i]->district); }}, {{ String::tidy($posts[$i]->province); }}
+				{{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province); }}
 			</p>
 			<p>
 				Tel:

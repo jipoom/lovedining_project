@@ -88,12 +88,12 @@
 	ถนน{{$post->road}}
 	@endif
 	&nbsp
-	@if($post->subdistrict)
-	แขวง{{$post->subdistrict}}
+	@if($post->tumbol)
+	แขวง{{$post->tumbol}}
 	@endif
 	&nbsp
-	@if($post->district)
-	เขต{{$post->district}}
+	@if($post->amphur)
+	เขต{{$post->amphur}}
 	@endif
 	&nbsp
 	@if($post->province)
@@ -106,7 +106,8 @@
 	<input type="hidden" id="province" value= {{String::tidy($post->
 	province) }}/>
 
-	@if($post->district!="" && $post->province!=null)
+	{{$address}}
+	@if($post->amphur!="" && $post->province!=null)
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script>
 		var geocoder;
