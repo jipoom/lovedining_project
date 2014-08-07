@@ -110,7 +110,7 @@
                          {{{ $errors->first('album_name', ':message') }}}<p>
                          -->	
                          <!-- /In case admin enter invalid info --> 
-                         @if(!Input::old('album_name'))
+                         @if(!Input::old('album_name') && !isset($post))
  						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName);?>
  						 	{{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
                          @else
@@ -168,6 +168,7 @@
  						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
                           <div id="picture">
                           	@if(isset($post) && $post->profile_picture_name!="")
+                          		{{Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name}}
                           		{{ HTML::image(Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('class'=>'180', 'width'=>'260')) }}
                           	@else
                           		<img src="http://placehold.it/260x180" alt="">
@@ -296,9 +297,10 @@ $(function(){
 });
 
 function elFinderBrowser (field_name, url, type, win) {
+  var dir = $("#album_name").val();
   tinymce.activeEditor.windowManager.open({
 
-    file: '{{URL::to('admin/elfinder/tinymce')."/".$randAlbumName}}',// use an absolute path!
+    file: '{{URL::to('admin/elfinder/tinymce')."/"}}'+dir,// use an absolute path!
     //file: 'http://localhost/elfinder2_1/elfinder.html',
     title: 'elFinder 2.0',
     width: 900,
@@ -355,6 +357,7 @@ function elFinderBrowser (field_name, url, type, win) {
                     });
                     
                     function processFile(url,name){
+                    	alert(url);
                         $('#picture').html('<img src="' + url + '" height="180" width="260"/>');
                         $('#featured_image').val(name);
                     }

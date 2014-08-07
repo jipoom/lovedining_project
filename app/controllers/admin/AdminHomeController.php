@@ -54,10 +54,10 @@ class AdminHomeController extends AdminController {
 			//Set home to selected review
 			$post = Post::find(Input::get('setHome'));
 			//If set home to anthoer review
-			if($post->isHome == 0)
+			if($post->is_home == 0)
 			{
-				Post::where('isHome', '=', 1)->update(array('isHome' => 0));
-				$post->isHome = 1;
+				Post::where('is_home', '=', 1)->update(array('is_home' => 0));
+				$post->is_home = 1;
 				if($post->save()){
 					
 					//trigger elfinder to enable admin to upload images

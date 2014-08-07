@@ -402,14 +402,17 @@ class AdminBlogsController extends AdminController {
 			//delete image in albume
 			$id = $post -> id;
 			$albumName = $post -> album_name;
-			PostsCategory::where('post_id', '=', $id) -> delete();
+			
 			$post -> delete();
 			// Was the blog post deleted?
 			$post = Post::find($id);
-			if ((empty($post) && PostsUserRead::where('post_id', '=', $id) -> delete())) {
-				// Redirect to the blog posts management page
+			if (empty($post)) {
+				PostsCategory::where('post_id', '=', $id) -> delete();
+				PostsUserRead::where('post_id', '=', $id) -> delete();
 				Picture::recursive_remove(Config::get('app.image_path') . '/' . $albumName);
+				// Redirect to the blog posts management page				
 				return Redirect::to('admin/blogs') -> with('success', Lang::get('admin/blogs/messages.delete.success'));
+
 			}
 		}
 		// There was a problem deleting the blog post
