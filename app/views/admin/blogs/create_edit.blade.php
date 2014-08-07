@@ -114,7 +114,6 @@
  						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName);?>
  						 	{{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
                          @else
-                         	12312321312321
                          	{{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : Input::old('album_name')), array('id'=>'album_name')) }} </p>  
                          
  						 @endif 	
@@ -168,8 +167,9 @@
  						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
                           <div id="picture">
                           	@if(isset($post) && $post->profile_picture_name!="")
-                          		{{Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name}}
-                          		{{ HTML::image(Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name, 'profile picture',array('class'=>'180', 'width'=>'260')) }}
+
+                          		<img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name}}" height="180" width="260"/>
+                          		
                           	@else
                           		<img src="http://placehold.it/260x180" alt="">
                           	@endif
@@ -357,7 +357,6 @@ function elFinderBrowser (field_name, url, type, win) {
                     });
                     
                     function processFile(url,name){
-                    	alert(url);
                         $('#picture').html('<img src="' + url + '" height="180" width="260"/>');
                         $('#featured_image').val(name);
                     }
