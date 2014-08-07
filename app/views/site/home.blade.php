@@ -36,7 +36,19 @@
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
 </h4>
-@if(count($banners)>0 && count($home) > 0)
+@if(count($banners)==1 && count($home) > 0)
+<div class="col-md-10">
+	
+		@foreach($banners as $banner)
+		
+			<a href="{{$home->id}}"><img src="{{Config::get('app.image_base_url').'/'.Config::get('app.banner').'/'.$banner}}" title="{{$home->title}}" align="middle"/></a>		
+		
+		@endforeach
+
+	
+	
+</div>
+@elseif(count($banners)>0 && count($home) > 0)
 <div class="col-md-10">
 	<ul class="bxslider">
 		@foreach($banners as $banner)
@@ -48,6 +60,7 @@
 	</ul>
 	
 </div>
+
 @endif
 <div class="col-md-12">
 

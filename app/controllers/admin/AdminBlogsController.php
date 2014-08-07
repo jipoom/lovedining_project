@@ -134,20 +134,21 @@ class AdminBlogsController extends AdminController {
 				$date = new DateTime;
 				$this -> post -> published_at = $date;
 			}
-			if(Input::get('expiredAt'))
+			if(Input::get('radio2') == "specfied")
 			{
 				$this -> post -> expired_at = Input::get('expiredAt');
 				$this -> post -> is_permanent = 0;
+				
 			}
 			else {
-				$date = new DateTime;
-				$this -> post -> expired_at = $date;
+				$this -> post -> expired_at = "";
 				$this -> post -> is_permanent = 1;
 			}
 			// Was the blog post created?
 
 			if ($this -> post -> save()) {
 				
+				//Email to inform users of new review
 				
 				//Insert to PostsCategory Table		
 				if(Input::get('category_id_temp'))	
@@ -165,9 +166,7 @@ class AdminBlogsController extends AdminController {
 			}
 
 			// Redirect to the blog post create page
-			if (file_exists(Config::get('app.image_path') . '/' . Input::get('album_name'))) {
-				Picture::recursive_remove(Config::get('app.image_path') . '/' . Input::get('album_name'));
-			}
+	
 			return Redirect::to('admin/blogs/create') -> with('error', Lang::get('admin/blogs/messages.create.error'));
 
 		}
@@ -301,20 +300,21 @@ class AdminBlogsController extends AdminController {
 				$date = new DateTime;
 				$post -> published_at = $date;
 			}
-			if(Input::get('expiredAt'))
-			{
-					
+			if(Input::get('radio2') == "specified")
+			{					
 				$post -> is_permanent = 0;
+				$post -> expired_at = Input::get('expiredAt');	
 			}
 			else {
 				$post -> is_permanent = 1;
+				$post -> expired_at = "";
 				//$post -> expired_at = "";
 				/*$date = new DateTime;
 				$date->setTimestamp(2147483647);
 				$post -> expired_at = $date;
 				 * */
 			}
-			$post -> expired_at = Input::get('expiredAt');				
+						
 			//Remove PostsCategory and reinsert
 			PostsCategory::where('post_id', '=', $post -> id) -> delete();
 			if(Input::get('category_id_temp'))
