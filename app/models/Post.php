@@ -212,7 +212,7 @@ class Post extends Eloquent {
 	
 	public static function getRecentReviews()
 	{
-		$posts = Post::where('profile_picture_name','<>','')->orderBy('created_at','DESC')->take(5)->get();
+		$posts = Post::where('profile_picture_name','<>','')->active()->orderBy('created_at','DESC')->take(5)->get();
 		return $posts;
 	}
 	
@@ -223,9 +223,11 @@ class Post extends Eloquent {
 		 	$post = new Post;
 		 if($categoryId!="undefined")	
 		 {	
-			 return $post->join('posts_category', 'posts.id', '=', 'posts_category.post_id')
+			 return $post->active()->join('posts_category', 'posts.id', '=', 'posts_category.post_id')
 				-> join('category', 'posts_category.category_id', '=', 'category.id')
 				-> where('category.id', '=', $categoryId)
+				//where date > published_date
+				//where date < expired_date
 				-> orderBy($orderBy, $mode)
 				->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
 				'posts.profile_picture_name','posts.content','posts.album_name',
@@ -247,16 +249,43 @@ class Post extends Eloquent {
 		{
 			foreach($wordTemp as $term)
 			{
-			    $posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->paginate(8);
+			    //where date > published_date
+				//where date < expired_date	
+			    //$posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->paginate(8);
+				$posts =Post::active()->where(function($query) use ($term)
+	            {
+	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
+	                      ->orwhere('title', 'LIKE', '%'. $term .'%');
+	            })->paginate(8);
+				//$posts = Post::active()->search($term);
 			}
 		}
 		else {
 			foreach($wordTemp as $term)
 			{
-			    $posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->distinct();
+			   //where date > published_date
+				//where date < expired_date
+			    //$posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->distinct();
+				$posts =Post::active()->where(function($query) use ($term)
+	            {
+	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
+	                      ->orwhere('title', 'LIKE', '%'. $term .'%');
+	            })->distinct();
 			}
 		}
 		return $posts;
+	}
+	
+	
+	public function scopeActive($query)
+    {
+      
+	    return $query-> whereRaw('(UNIX_TIMESTAMP(published_at) <= UNIX_TIMESTAMP(now())) and (is_permanent = 1 or UNIX_TIMESTAMP(expired_at) > UNIX_TIMESTAMP(now()))');
+    }
+	public function scopeSearch($query,$term)
+    {
+	    	
+		return $query-> whereRaw('(title LIKE %'.$term.'%) or (restaurant_name LIKE %'.$term.'%)');      
 	}
 	
 	

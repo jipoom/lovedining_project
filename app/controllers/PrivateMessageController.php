@@ -25,7 +25,7 @@ class PrivateMessageController extends BaseController {
 	public function getMessage($privateMessage) {
 		// Title
 		$title = Lang::get('messages.title');
-		$privateMessage -> read = 'read';
+		$privateMessage -> read = 1;
 		$privateMessage -> save();
 		// Show the page
 		return View::make('site/pm/detail', compact('privateMessage', 'title'));

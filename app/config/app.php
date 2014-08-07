@@ -148,7 +148,7 @@ return array(
 	//Ads Directory Prefix
 	'ads_sidebar_prefix' => 'Ads_Sidebar_',
 	'ads_footer_prefix' => 'Ads_Footer_',
-	
+	'permanent_value' => 2147483647, //maximum unix timestamp
     /*
     |--------------------------------------------------------------------------
     | Class Aliases

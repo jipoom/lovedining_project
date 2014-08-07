@@ -27,10 +27,11 @@
 		<thead>
 			
 			<tr>
-				<th class="col-md-4">{{{ Lang::get('admin/blogs/table.title') }}}</th>
+				<th class="col-md-2">{{{ Lang::get('admin/blogs/table.title') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/blogs/table.categories') }}}</th>
-				<th class="col-md-2">{{{ Lang::get('admin/blogs/table.comments') }}}</th>
+				<th class="col-md-1">{{{ Lang::get('admin/blogs/table.comments') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/blogs/table.created_at') }}}</th>
+				<th class="col-md-2">Status</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>
 		</thead>
@@ -54,7 +55,7 @@
 				"bProcessing": true,
 		        "bServerSide": true,
 				"aoColumnDefs": [
-			      { "bSearchable": false, "aTargets": [ 4 ] }
+			      { "bSearchable": false, "aTargets": [ 4,5 ] }
 			    ],
 		        "sAjaxSource": "{{ URL::to('admin/blogs/data') }}"+"/"+"{{$category}}",
 		        "fnDrawCallback": function ( oSettings ) {

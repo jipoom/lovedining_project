@@ -41,7 +41,7 @@ class BlogController extends BaseController {
 		//Clear Session
 		Session::forget('mode');
 		Session::forget('catName');
-		$home = Post::where('isHome','=',1)->first();
+		$home = Post::active()->where('is_home','=',1)->first();
 		$mode = HighlightOrder::getMode();
 		$highlight = HighlightOrder::getOrder($mode);
 		
@@ -119,7 +119,7 @@ class BlogController extends BaseController {
 	public function getView($postId)
 	{
 		// Get this blog post data
-		$post = $this->post->where('id', '=', $postId)->first();
+		$post = $this->post->active()->where('id', '=', $postId)->first();
 		// Check if the blog post exists
 		if (is_null($post))
 		{
@@ -127,7 +127,8 @@ class BlogController extends BaseController {
 			// a page or a blog post didn't exist.
 			// So, this means that it is time for
 			// 404 error page.
-			return App::abort(404);
+			//return App::abort(404);
+			return View::make('error/404');
 		}
 	
 		// Get this post comments
@@ -184,7 +185,7 @@ class BlogController extends BaseController {
 		}
 
 		// Get this blog post data
-		$post = $this->post->where('id', '=', $postId)->first();
+		$post = $this->post->active()->where('id', '=', $postId)->first();
 		// Declare the rules for the form validation
 		$rules = array(
 			'comment' => 'required|min:3'
@@ -228,10 +229,14 @@ class BlogController extends BaseController {
 	public function getAlbum($postId)
 	{
 		// Get all the blog posts
-		$post = $this->post->where('id', '=', $postId)->first();
-		$album = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name,true);
-		$title = 'Test Album';
-		// Show the page
-		return View::make('site/blog/album', compact('album','title','post'));
+		$post = $this->post->active()->where('id', '=', $postId)->first();
+		if($post)
+		{
+			$album = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name,true);
+			$title = 'Test Album';
+			// Show the page
+			return View::make('site/blog/album', compact('album','title','post'));
+		}
+		return View::make('error/404');
 	}
 }

@@ -60,7 +60,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('blogs/{post}/edit', 'AdminBlogsController@postEdit');
     Route::get('blogs/{post}/delete', 'AdminBlogsController@getDelete');
     Route::post('blogs/{post}/delete', 'AdminBlogsController@postDelete');
-	Route::get('blogs/makeDir/{new}/{postId}','AdminBlogsController@makeDir');
+	Route::get('blogs/makeDir/{new}','AdminBlogsController@makeDir');
 	Route::get('blogs/create','AdminBlogsController@getCreate');
 	Route::get('blogs/{directory}/{postId}','AdminBlogsController@getIndex');	
 	Route::get('find/province','AdminBlogsController@getProvince');

@@ -55,7 +55,7 @@ class AdminBlogsController extends AdminController {
 		// Title
 		$title = Lang::get('admin/blogs/title.create_a_new_blog');
 		$randAlbumName = date("YmdHis");
-		mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
+		//mkdir(Config::get('app.image_path') . '/' . $randAlbumName);
 		//Category
 		/*$init_cat = Category::first();
 		$category = array($init_cat -> id => $init_cat -> category_name);
@@ -91,11 +91,13 @@ class AdminBlogsController extends AdminController {
 		'album_name' => 'required|unique:posts',
 		'tumbol' => 'required|exists:tumbol,tumbol_name',
 		'amphur' => 'required|exists:amphur,amphur_name',
-		'province' => 'required|exists:province,province_name');
+		'province' => 'required|exists:province,province_name',
+		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
+		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'));
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
-		$image = Post::findImages(Input::get('content'));
+		//$image = Post::findImages(Input::get('content'));
 		// Check if the form validates with success
 		if ($validator -> passes()) {
 			// Create a new blog post
@@ -126,7 +128,22 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> meta_description = Input::get('meta-description');
 			$this -> post -> meta_keywords = Input::get('meta-keywords');
 			$this -> post -> user_id = $user -> id;
-
+			if(Input::get('publishedAt'))
+				$this -> post -> published_at = Input::get('publishedAt');
+			else {
+				$date = new DateTime;
+				$this -> post -> published_at = $date;
+			}
+			if(Input::get('expiredAt'))
+			{
+				$this -> post -> expired_at = Input::get('expiredAt');
+				$this -> post -> is_permanent = 0;
+			}
+			else {
+				$date = new DateTime;
+				$this -> post -> expired_at = $date;
+				$this -> post -> is_permanent = 1;
+			}
 			// Was the blog post created?
 
 			if ($this -> post -> save()) {
@@ -148,11 +165,15 @@ class AdminBlogsController extends AdminController {
 			}
 
 			// Redirect to the blog post create page
+			if (file_exists(Config::get('app.image_path') . '/' . Input::get('album_name'))) {
+				Picture::recursive_remove(Config::get('app.image_path') . '/' . Input::get('album_name'));
+			}
 			return Redirect::to('admin/blogs/create') -> with('error', Lang::get('admin/blogs/messages.create.error'));
 
 		}
 
 		// Form validation failed
+
 		return Redirect::to('admin/blogs/create') -> withInput() -> withErrors($validator);
 	}
 
@@ -232,8 +253,15 @@ class AdminBlogsController extends AdminController {
 	public function postEdit($post) {
 
 		// Declare the rules for the form validation
-		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 'restaurant_name' => 'required|min:3', 'content' => 'required|min:3', 'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i');
-
+		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 
+		'restaurant_name' => 'required|min:3', 'content' => 'required|min:3', 
+		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i',
+		'tumbol' => 'required|exists:tumbol,tumbol_name',
+		'amphur' => 'required|exists:amphur,amphur_name',
+		'province' => 'required|exists:province,province_name',
+		'content' => 'required|min:3', 
+		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
+		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'));
 		
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -267,7 +295,26 @@ class AdminBlogsController extends AdminController {
 			$post -> meta_title = Input::get('meta-title');
 			$post -> meta_description = Input::get('meta-description');
 			$post -> meta_keywords = Input::get('meta-keywords');
-
+			if(Input::get('publishedAt'))
+				$post -> published_at = Input::get('publishedAt');
+			else {
+				$date = new DateTime;
+				$post -> published_at = $date;
+			}
+			if(Input::get('expiredAt'))
+			{
+					
+				$post -> is_permanent = 0;
+			}
+			else {
+				$post -> is_permanent = 1;
+				//$post -> expired_at = "";
+				/*$date = new DateTime;
+				$date->setTimestamp(2147483647);
+				$post -> expired_at = $date;
+				 * */
+			}
+			$post -> expired_at = Input::get('expiredAt');				
 			//Remove PostsCategory and reinsert
 			PostsCategory::where('post_id', '=', $post -> id) -> delete();
 			if(Input::get('category_id_temp'))
@@ -424,7 +471,7 @@ class AdminBlogsController extends AdminController {
 	public function getData($categoryId) {
 		if ($categoryId == "all") {
 			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
-			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) 
+			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at', 'posts.published_at', 'posts.expired_at', 'posts.is_permanent')) 
 			-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
 			-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
 			
@@ -436,7 +483,7 @@ class AdminBlogsController extends AdminController {
 		*/
 		} else {
 			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id') -> where('category.id', '=', $categoryId);
-			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) 
+			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at', 'posts.published_at', 'posts.expired_at', 'posts.is_permanent')) 
 			-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
 			-> leftjoin('category', 'posts_category.category_id', '=', 'category.id')
 			-> where('category.id', '=', $categoryId);
@@ -448,12 +495,21 @@ class AdminBlogsController extends AdminController {
 		return Datatables::of($posts) 
 		-> edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}') 
 		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
+		-> edit_column('published_at', '@if(strtotime($published_at) <= time() && ($is_permanent == 1 || strtotime($expired_at) > time())) active @else inactive @endif') 
 		-> edit_column('title', '{{{ Str::limit($title, 40, \'...\') }}}')
 		-> add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ') 
+		-> remove_column('expired_at')
+		-> remove_column('is_permanent')
         -> remove_column('id') -> make();
 
 	}
+	public function makeDir($directory) {
+		if(!file_exists(Config::get('app.image_path').'/'.$directory))
+		{
+			mkdir(Config::get('app.image_path').'/'.$directory);
+		}
+	}	
 
 }

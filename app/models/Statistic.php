@@ -18,7 +18,7 @@ class Statistic extends Eloquent {
 	{
 		$popularId = array();	
 		$i=0;			
-		$posts = Post::leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
+		$posts = Post::active()->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
                         ->select(DB::raw('posts.id as p_id, COUNT(*) AS total_posts'))
                         ->orderBy('total_posts', 'DESC')
                         ->groupBy('posts.id')

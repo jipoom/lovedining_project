@@ -8,16 +8,21 @@
 	<!-- /AutoComplete -->
 @stop
 @section('content')
-		
+	 <!-- /In case admin enter invalid info -->
+	 @if(!Input::old('album_name'))
+	 	<?php $dir = $randAlbumName;?>
+ 	 @else
+ 	 	<?php $dir = Input::old('album_name');?>
+	 @endif 		
 	<div class="page-header">
 		<h3>
 			{{{ $title }}}
 			
 			<div class="pull-right">
 				@if (isset($post))
-					<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/'.$post->id }}" class="btn btn-danger">Cancel</a>
+					<a href="{{ URL::to('admin/blogs').'/'.$dir.'/'.$post->id }}" class="btn btn-danger">Cancel</a>
 			 	@else
-			 		<a href="{{ URL::to('admin/blogs').'/'.$randAlbumName.'/new' }}" class="btn btn-danger">Cancel</a>			 	
+			 		<a href="{{ URL::to('admin/blogs').'/'.$dir.'/new' }}" class="btn btn-danger">Cancel</a>			 	
 			 	@endif
 			</div>
 		</h3>
@@ -103,13 +108,61 @@
                         <!-- <label class="control-label" for="title">ชื่ออัลบััมรูป(ภาษาอังกฤษหรือตัวเลขเท่านั้น)</label></P>
                          {{ Form::text('album_name', Input::old('album_name', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม', 'id' => 'album_name')) }} 
                          {{{ $errors->first('album_name', ':message') }}}<p>
-                         -->	 
-                         	
-                         {{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
+                         -->	
+                         <!-- /In case admin enter invalid info --> 
+                         @if(!Input::old('album_name'))
+ 						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName);?>
+ 						 	{{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
+                         @else
+                         	12312321312321
+                         	{{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : Input::old('album_name')), array('id'=>'album_name')) }} </p>  
+                         
+ 						 @endif 	
                          {{ Form::hidden('post', Input::old('post', isset($post) ? $post : null), array('id'=>'post')) }} </p>  
                          {{ Form::hidden('review_id', Input::old('review_id', isset($post) ? $post->id : 0), array('id'=>'review_id')) }} </p>  
+ 						
  					</div>
 				</div> 	
+				<div class="form-group">
+                    <div class="col-md-12"
+						 <!-- Selection Published Date -->
+						 <label class="control-label" for="timestamp">Published At</label>	
+						Now: <input type="radio" name="radio1" id="published_now" value="now">
+    					Specify: <input type="radio" name="radio1" id="published_specified" value="specified" checked="checked">																
+						{{ Form::text('publishedAt',Input::old('publishedAt', isset($post) ? $post->published_at : null), array('id'=>'publishedDate'))}} </p>
+						{{{ $errors->first('publishedAt', ':message') }}}
+					</div>
+				</div> 	
+				<div class="form-group">
+                    <div class="col-md-12"
+						 <!-- Selection Expiry Date -->
+						 <label class="control-label" for="timestamp">Expired At</label>						 
+						 @if(isset($post))
+						 	@if($post->is_permanent == 1)
+								Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" checked="checked">   						
+    							Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" >
+    							{{ Form::text('expiredAt',Input::old('expiredAt', null), array('id'=>'expiredDate'))}} </p>
+								{{{ $errors->first('expiredAt', ':message') }}}
+								{{ Form::hidden('expired_at', Input::old('expired_at', 1), array('id'=>'permanent')) }} </p>  
+                       
+    						@else	
+    							Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" >   						
+    							Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" checked="checked">
+    							{{ Form::text('expiredAt',Input::old('expiredAt', $post->expired_at), array('id'=>'expiredDate'))}} </p>
+								{{{ $errors->first('expiredAt', ':message') }}}
+								{{ Form::hidden('expired_at', Input::old('expired_at', 0), array('id'=>'permanent')) }} </p>
+    						@endif	
+    					 @else(!isset($post))
+    					 	Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" >
+    						Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" checked="checked">
+    						{{ Form::text('expiredAt',Input::old('expiredAt', null), array('id'=>'expiredDate'))}} </p>
+							{{{ $errors->first('expiredAt', ':message') }}}
+							{{ Form::hidden('expired_at', Input::old('expired_at', 0), array('id'=>'permanent')) }} </p>
+    					 @endif												
+						
+					</div>
+				</div> 	
+				 
 				<div class="form-group">
                     <div class="col-md-12">
  						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
@@ -194,10 +247,13 @@ $(function() {
 <!-- DatePicker -->
 <script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>
 <script>
+
 //DatePicker
 $(function(){
-		$('*[name=expiryDate]').appendDtpicker();
+		$('*[name=expiredAt]').appendDtpicker();
+		$('*[name=publishedAt]').appendDtpicker();
 });
+
 </script>
 <!-- /DatePicker -->
 
@@ -288,8 +344,9 @@ function elFinderBrowser (field_name, url, type, win) {
 	<script src="{{asset('assets/js/jquery.popupWindow.js')}}"></script>
 	 <script type="text/javascript"> 
                     $(document).ready(function(){
+                    	var dir = $("#album_name").val();
                         $('#imageUpload').popupWindow({ 
-                            windowURL:'{{URL::to('admin/elfinder/default')."/".$randAlbumName}}', 
+                            windowURL:'{{URL::to('admin/elfinder/default')."/"}}'+dir, 
                             windowName:'Filebrowser',
                             height:490, 
                             width:950,
@@ -301,6 +358,34 @@ function elFinderBrowser (field_name, url, type, win) {
                         $('#picture').html('<img src="' + url + '" height="180" width="260"/>');
                         $('#featured_image').val(name);
                     }
+                    /*new Date(unixTimestamp*1000);
+                    var expiry = $("#expired_date").val()
+                    if(expiry == 1)    
+                    	$("#publishedDate").hide();*/
+                   // $("#expiredDate").hide();
+                   var permanentSet = $("#permanent").val()
+                   if(permanentSet == 1)    
+                   {
+                    	$("#expiredDate").hide()
+                    	
+                    }
+				    $("#published_now").click(function () {
+				    	$("#publishedDate").val(null);
+				        $("#publishedDate").hide();
+				    });
+				    $("#published_specified").click(function () {
+				        $("#publishedDate").show();
+				    });
+				    
+				  
+				    $("#expired_unknown").click(function () {
+				    	$("#expiredDate").val(null);
+				        $("#expiredDate").hide();
+				    });
+				    $("#expired_specified").click(function () {	    	
+				        $("#expiredDate").show();
+				    });
+                    
                 </script>
 
 

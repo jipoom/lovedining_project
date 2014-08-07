@@ -7,10 +7,10 @@ class HighlightOrder extends Eloquent {
 	public static function getOrder($mode)
 	{
 		if($mode == "recent")			
-			return Post::orderBy('created_at', 'DESC')->take(4)->get();
+			return Post::orderBy('created_at', 'DESC')->active()->take(4)->get();
 		else if($mode == "random")			
 		{
-			return Post::orderByRaw("RAND()")->take(4)->get();
+			return Post::orderByRaw("RAND()")->active()->take(4)->get();
 		}
 		else if($mode == "popular")	
 		{

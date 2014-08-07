@@ -50,16 +50,20 @@
 				"aaSorting": [[ 2, "desc" ]],
 				"bProcessing": true,
 		        "bServerSide": true,
-		        "aoColumnDefs": [
-			      { "bSearchable": false, "aTargets": [ 3 ] }
-			    ],
+		        "aoColumnDefs" : [{
+					"bSearchable" : false,
+					"aTargets" : [3]
+				}, {
+					"bVisible" : false,
+					"aTargets" : [3]
+				}],
 		        "sAjaxSource": "{{ URL::to('message_service/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 	     		},
 	     		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			        switch(aData[3]){
-			            case 'new':
+			            case 0:
 			                $(nRow).css('font-weight', 'bold')
 			                break;
 			        }

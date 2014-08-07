@@ -14,7 +14,7 @@ class PrivateMessage extends Eloquent {
 	}
 	public static function newMessage($username)
 	{
-		return PrivateMessage::where('receiver', '=', $username)->where('read','=','new')->count();
+		return PrivateMessage::where('receiver', '=', $username)->where('read','=',0)->count();
 	}
 }
 
