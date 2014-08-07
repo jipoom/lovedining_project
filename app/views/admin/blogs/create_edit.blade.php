@@ -152,12 +152,12 @@
 								{{{ $errors->first('expiredAt', ':message') }}}
 								{{ Form::hidden('expired_at', Input::old('expired_at', 0), array('id'=>'permanent')) }} </p>
     						@endif	
-    					 @else(!isset($post))
-    					 	Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" >
-    						Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" checked="checked">
+    					 @else
+    					 	Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" checked="checked">
+    						Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" >
     						{{ Form::text('expiredAt',Input::old('expiredAt', null), array('id'=>'expiredDate'))}} </p>
 							{{{ $errors->first('expiredAt', ':message') }}}
-							{{ Form::hidden('expired_at', Input::old('expired_at', 0), array('id'=>'permanent')) }} </p>
+							{{ Form::hidden('expired_at', Input::old('expired_at', 1), array('id'=>'permanent')) }} </p>
     					 @endif												
 						
 					</div>
