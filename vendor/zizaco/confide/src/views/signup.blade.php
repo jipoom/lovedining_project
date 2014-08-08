@@ -38,7 +38,18 @@
             <label for="income">Income</label>
         	{{ Form::select('income', Income::getAllIncomeArray(), '1', array('class'=>'input-block-level'))}} 
         </div>
-        
+        <div class="form-group">
+            <label for="age">ประเภทอาหารที่ชอบ</label></br>
+        	 <?php 
+        	 $i=0; 
+        	 ?>
+			 @foreach(FoodType::all() as $temp)
+				{{ Form::checkbox('foodType_id_temp[]', $temp->id, null, array('class'=>'input-block-level'))}}
+				{{ $temp->name}}
+				<P>	 
+				<?php $i++;?>
+			@endforeach 
+        </div>
         
 
         @if ( Session::get('error') )

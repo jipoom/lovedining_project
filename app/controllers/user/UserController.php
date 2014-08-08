@@ -108,10 +108,10 @@ class UserController extends BaseController {
 			$user->age_id = Input::get( 'age' );
 			$user->sex_id = Input::get( 'sex' );
 			$user->income_id = Input::get( 'income' );
-
+			
             $password = Input::get( 'password' );
             $passwordConfirmation = Input::get( 'password_confirmation' );
-
+			
             if(!empty($password)) {
                 if($password === $passwordConfirmation) {
                     $user->password = $password;
@@ -129,7 +129,9 @@ class UserController extends BaseController {
             }
 
             $user->prepareRules($oldUser, $user);
-
+			// Save Favorite Food Type
+			if(Input::get('foodType_id_temp'))
+				$user->foodType()->sync(Input::get('foodType_id_temp'));
             // Save if valid. Password field will be hashed before save
             $user->amend();
         }

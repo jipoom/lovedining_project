@@ -142,7 +142,8 @@ class BlogController extends BaseController {
         }
 		//form phisical address
 		$address = $post->street_addr.' '.$post->soi.' แขวง'.$post->tumbol.' '.$post->amphur.' '.$post->province;
-		
+		//Convert address to google map format
+		$address = str_replace('/','%2F',$address);
 		//add to the PostsUserRead
 		$postsUserRead = new PostsUserRead;
 		

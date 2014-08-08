@@ -66,15 +66,23 @@ class AdminBlogsController extends AdminController {
 		}*/
 		$category = Category::all();
 		$selectedCategories = array();
+		$meal = Meal::all();
+		$selectedMeals = array();
+		$dressing = Dressing::all();
+		$selectedDressings = array();
+		$foodType = Foodtype::all();
+		$selectedFoodTypes = array();
 		//Province
-		$init_province = Province::first();
+		/*$init_province = Province::first();
 		$provinceTemp = array($init_province -> id => $init_province -> province_name);
 		$provinces = Province::all();
 		foreach ($provinces as $temp) {
 			$provinceTemp = array_add($provinceTemp, $temp -> id, $temp -> province_name);
-		}
+		}*/
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('title', 'category', 'provinceTemp', 'randAlbumName', 'selectedCategories'));
+		return View::make('admin/blogs/create_edit', 
+		compact('title', 'category', 'randAlbumName', 'selectedCategories',
+		'meal','selectedMeals','dressing','selectedDressings','foodType','selectedFoodTypes'));
 	}
 
 	/**
@@ -93,7 +101,10 @@ class AdminBlogsController extends AdminController {
 		'amphur' => 'required|exists:amphur,amphur_name',
 		'province' => 'required|exists:province,province_name',
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
-		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'));
+		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
+		'newFoodType' => 'min:3',
+		'newDressing' => 'min:3');
+		
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -153,14 +164,40 @@ class AdminBlogsController extends AdminController {
 				//Insert to PostsCategory Table		
 				if(Input::get('category_id_temp'))	
 				{	
-					foreach (Input::get('category_id_temp') as $selected) {
+					/*foreach (Input::get('category_id_temp') as $selected) {
 						$postCategory = new PostsCategory;	
 						$postCategory -> post_id = $this -> post -> id;
 						$postCategory -> category_id = $selected;
 						$postCategory -> save();
-					}
+					}*/
+					$this -> post->category()->sync(Input::get('category_id_temp'));
 				}
-			
+				if(Input::get('meal_id_temp'))	
+					$this -> post->meal()->sync(Input::get('meal_id_temp'));
+				
+				if(Input::get('foodType_id_temp'))
+					$this -> post->foodType()->sync(Input::get('foodType_id_temp'));
+				if(Input::get('dressing_id_temp'))
+					$this -> post->dressing()->sync(Input::get('dressing_id_temp'));
+				
+				
+				//Save new dressing 
+				if(Input::get('dressingSpecify') == 1 && Input::get('newDressing')){
+					$newDressing = new Dressing;
+					$newDressing->name = Input::get('newDressing');
+					if($newDressing->save())
+						$newDressing->post()->attach($this -> post -> id);
+					
+				} 
+				//Save new food type 
+				if(Input::get('foodTypeSpecify') == 1 && Input::get('newFoodType')){
+					$newFoodType = new FoodType;
+					$newFoodType->name = Input::get('newFoodType');
+					if($newFoodType->save())
+						$newFoodType->post()->attach($this -> post -> id);
+				} 
+				
+				
 				return Redirect::to('admin/blogs/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
 
 			}
@@ -204,10 +241,21 @@ class AdminBlogsController extends AdminController {
 		}*/
 		$randAlbumName = $post -> album_name;
 		$category = Category::all();
-		$postCategory = PostsCategory::where('post_id', '=', $post -> id)->get();
+		//$postCategory = PostsCategory::where('post_id', '=', $post -> id)->get();
 		
+		$meal = Meal::all();
+		$dressing = Dressing::all();
+		$foodType = FoodType::all();
+		$postCategory = $post->category;
+		$postMeal = $post->meal;
+		$postDressing = $post->dressing;
+		$postFoodType = $post->foodType;
 		//get selected categories
-		$selectedCategories = array();
+		$selectedCategories = Logic::preparePreselectedCheckBox($category,$postCategory);
+		$selectedMeals = Logic::preparePreselectedCheckBox($meal,$postMeal);
+		$selectedDressings = Logic::preparePreselectedCheckBox($dressing,$postDressing);
+		$selectedFoodTypes = Logic::preparePreselectedCheckBox($foodType,$postFoodType);
+		/*$selectedCategories = array();
 		$i=0;
 		foreach($category as $choice)
 		{
@@ -226,21 +274,25 @@ class AdminBlogsController extends AdminController {
 				$selectedCategories[$i]=0;
 			}
 			$i++;
-		}
+		}*/
+		
+		
 		
 		if(!file_exists(Config::get('app.image_path').'/'.$post -> album_name))
 		{
 			mkdir(Config::get('app.image_path').'/'.$post -> album_name);
 		}
-		$init_province = Province::first();
+		/*$init_province = Province::first();
 		$province = array($init_province -> id => $init_province -> province_name);
 		$provinces = Province::all();
 		foreach ($provinces as $temp) {
 			$province = array_add($province, $temp -> id, $temp -> province_name);
-		}
+		}*/
 		
 		// Show the page
-		return View::make('admin/blogs/create_edit', compact('post', 'title', 'category', 'randAlbumName', 'selectedCategories','province'));
+		return View::make('admin/blogs/create_edit', 
+		compact('post', 'title', 'category', 'randAlbumName', 'selectedCategories','meal','selectedMeals',
+		'foodType','selectedFoodTypes', 'dressing','selectedDressings'));
 	}
 
 	/**
@@ -260,7 +312,9 @@ class AdminBlogsController extends AdminController {
 		'province' => 'required|exists:province,province_name',
 		'content' => 'required|min:3', 
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
-		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'));
+		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
+		'newFoodType' => 'min:3',
+		'newDressing' => 'min:3');
 		
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -316,7 +370,7 @@ class AdminBlogsController extends AdminController {
 			}
 						
 			//Remove PostsCategory and reinsert
-			PostsCategory::where('post_id', '=', $post -> id) -> delete();
+			/*PostsCategory::where('post_id', '=', $post -> id) -> delete();
 			if(Input::get('category_id_temp'))
 			{
 				foreach (Input::get('category_id_temp') as $selected) {		
@@ -325,8 +379,17 @@ class AdminBlogsController extends AdminController {
 						$postCategory -> category_id = $selected;
 						$postCategory -> save();			
 				}
-			}
-
+			}*/
+			
+			if(Input::get('category_id_temp'))	
+				$post->category()->sync(Input::get('category_id_temp'));
+			if(Input::get('meal_id_temp'))	
+				$post->meal()->sync(Input::get('meal_id_temp'));	
+			if(Input::get('foodType_id_temp'))
+				$post->foodType()->sync(Input::get('foodType_id_temp'));
+			if(Input::get('dressing_id_temp'))
+				$post->dressing()->sync(Input::get('dressing_id_temp'));
+			
 			// Was the blog post updated?
 
 			if ($post -> save()) {
@@ -340,6 +403,21 @@ class AdminBlogsController extends AdminController {
 				 }	*/
 				// Delete so that everyone knows of its update
 				PostsUserRead::where('post_id', '=', $post -> id) -> delete();
+				//Save new dressing 
+				if(Input::get('dressingSpecify') == 1 && Input::get('newDressing')){
+					$newDressing = new Dressing;
+					$newDressing->name = Input::get('newDressing');
+					if($newDressing->save())
+						$newDressing->post()->attach($post -> id);
+					
+				} 
+				//Save new food type 
+				if(Input::get('foodTypeSpecify') == 1 && Input::get('newFoodType')){
+					$newFoodType = new FoodType;
+					$newFoodType->name = Input::get('newFoodType');
+					if($newFoodType->save())
+						$newFoodType->post()->attach($post -> id);
+				} 
 				//return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
 
 				//Check if admin update dir name

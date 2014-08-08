@@ -107,6 +107,25 @@
             </div>
         </div>
         <!-- ./ income -->
+        
+         <!-- Food Type -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="income">Income</label>
+            <div class="col-md-10">
+            	<?php 
+            	$i=0; 
+				$all = FoodType::all();
+            	$selectedFoodTypes = Logic::preparePreselectedCheckBox($all,$user->foodType)
+            	?>
+				@foreach($all as $temp)
+					{{ Form::checkbox('foodType_id_temp[]', $temp->id, Input::old('foodType_id_temp[]',($selectedFoodTypes[$i]==1)? true : null))}}
+					{{ $temp->name}}
+					<P>	 
+					 <?php $i++;?>
+				@endforeach  	
+            </div>
+        </div>
+        <!-- ./ Food Type -->
     </div>
     <!-- ./ general tab -->
 

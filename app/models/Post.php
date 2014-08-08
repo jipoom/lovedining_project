@@ -65,6 +65,21 @@ class Post extends Eloquent {
 		return $this->belongsToMany('User','posts_user_read');
 	}
 	
+	public function foodType()
+	{
+		return $this->belongsToMany('FoodType','posts_food_type');
+	}
+	
+	public function meal()
+	{
+		return $this->belongsToMany('Meal','posts_meal');
+	}
+	
+	public function dressing()
+	{
+		return $this->belongsToMany('Dressing','posts_dressing');
+	}
+	
 	public function statistic()
 	{
 		return $this->belongsToMany('Category','statistic');

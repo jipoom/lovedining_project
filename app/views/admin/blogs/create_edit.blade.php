@@ -60,14 +60,66 @@
 						{{{ $errors->first('restaurant_name', ':message') }}}
 					</div>
 				</div>
+				<!-- Category -->
 				<div class="form-group">
                     <div class="col-md-12">
-						 <label class="control-label" for="title">ประเภทร้านอาหาร</label><p>
+						 <label class="control-label" for="title">Review Category</label><p>
 
 					 	 <?php $i=0; ?>
 					 	 @foreach($category as $temp)
 					 	 {{ Form::checkbox('category_id_temp[]', $temp->id, Input::old('category_id_temp[]',(isset($post) && $selectedCategories[$i]==1)? true : null))}}
 					 	 	 {{ $temp->category_name}}
+							 <P>	 
+					 	 	 <?php $i++;?>
+					 	 @endforeach
+					 	 <p></p>
+					 </div>
+				</div>
+				<!-- Food Type -->
+				<div class="form-group">
+                    <div class="col-md-12">
+						 <label class="control-label" for="title">ประเภทอาหาร</label><p>
+
+					 	 <?php $i=0; ?>
+					 	 @foreach($foodType as $temp)
+					 	 {{ Form::checkbox('foodType_id_temp[]', $temp->id, Input::old('foodType_id_temp[]',(isset($post) && $selectedFoodTypes[$i]==1)? true : null))}}
+					 	 	 {{ $temp->name}}
+							 <P>	 
+					 	 	 <?php $i++;?>
+					 	 @endforeach
+					 	 {{Form::checkbox('foodTypeSpecify','1', null ,array('id'=>'foodTypeSpecify'))}} ระบุเอง
+					 	 {{ Form::text('newFoodType',Input::old('newFoodType', null), array('id'=>'newFoodType'))}} </p>
+						 {{{ $errors->first('newFoodType', ':message') }}}	
+					 	 <p></p>
+					 </div>
+				</div>
+				<!-- Dressing -->
+				<div class="form-group">
+                    <div class="col-md-12">
+						 <label class="control-label" for="title">การแต่งกาย</label><p>
+
+					 	 <?php $i=0; ?>
+					 	 @foreach($dressing as $temp)
+					 	 {{ Form::checkbox('dressing_id_temp[]', $temp->id, Input::old('dressing_id_temp[]',(isset($post) && $selectedDressings[$i]==1)? true : null))}}
+					 	 	 {{ $temp->name}}
+							 <P>	 
+					 	 	 <?php $i++;?>
+					 	 @endforeach
+					 	 {{Form::checkbox('dressingSpecify', '1',null, array('id'=>'dressingSpecify'))}} ระบุเอง
+					 	 {{ Form::text('newDressing',Input::old('newDressing', null), array('id'=>'newDressing'))}} </p>
+						 {{{ $errors->first('newDressing', ':message') }}}	
+					 	 <p></p>
+					 </div>
+				</div>
+				<!-- Meal -->
+				<div class="form-group">
+                    <div class="col-md-12">
+						 <label class="control-label" for="title">มื้ออาหาร</label><p>
+
+					 	 <?php $i=0; ?>
+					 	 @foreach($meal as $temp)
+					 	 {{ Form::checkbox('meal_id_temp[]', $temp->id, Input::old('meal_id_temp[]',(isset($post) && $selectedMeals[$i]==1)? true : null))}}
+					 	 	 {{ $temp->name}}
 							 <P>	 
 					 	 	 <?php $i++;?>
 					 	 @endforeach
@@ -365,9 +417,10 @@ function elFinderBrowser (field_name, url, type, win) {
                     if(expiry == 1)    
                     	$("#publishedDate").hide();*/
                    // $("#expiredDate").hide();
-                   var permanentSet = $("#permanent").val()
-                   if(permanentSet == 1)    
-                   {
+                    var permanentSet = $("#permanent").val()
+               
+                    if(permanentSet == 1)    
+                    {
                     	$("#expiredDate").hide()
                     	
                     }
@@ -387,7 +440,7 @@ function elFinderBrowser (field_name, url, type, win) {
 				    $("#expired_specified").click(function () {	    	
 				        $("#expiredDate").show();
 				    });
-                    
+                                       
                 </script>
 
 

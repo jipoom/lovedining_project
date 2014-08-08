@@ -111,10 +111,20 @@
 									 @else
 									 	<a href="{{ URL::to('admin/introduction/create') }}"><span class="glyphicon glyphicon-book"></span> Introduce</a></li>
 									 @endif
-										<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
-											<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-dashboard"></span> Reviews</a></li>
-											<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}>
-												<a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-comment"></span> Comments</a></li>
+										
+									 
+							<li class="dropdown{{ (Request::is('admin/blogs*|admin/comments*') ? ' active' : '') }}">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/blogs') }}}"> <span class="glyphicon glyphicon-list-alt"></span> Manage Reviews <span class="caret"></span> </a>
+								<ul class="dropdown-menu">
+									<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}>
+										<a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-briefcase"></span> Reviews</a>
+							</li>
+							<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}>
+								<a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-bookmark"></span> Comments</a></li>
+								</ul>
+							
+							
+								
 												<li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}">
 													<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/users') }}}"> <span class="glyphicon glyphicon-user"></span> Users <span class="caret"></span> </a>
 													<ul class="dropdown-menu">
@@ -124,8 +134,7 @@
 												<li{{ (Request::is('admin/roles*') ? ' class="active"' : '') }}>
 													<a href="{{{ URL::to('admin/roles') }}}"><span class="glyphicon glyphicon-heart"></span> Roles</a></li>
 							</ul>
-							</li>
-
+							
 
 
 
@@ -153,6 +162,18 @@
 									<li{{ (Request::is('admin/stat*') ? ' class="active"' : '') }}>
 										<a href="{{{ URL::to('admin/stat') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Stat</a></li>
 									
+					<li class="dropdown{{ (Request::is('admin/dressing*|admin/foodtype*|admin/meal*') ? ' active' : '') }}">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/blogs') }}}"> <span class="glyphicon glyphicon-list-alt"></span> Misc. <span class="caret"></span> </a>
+								<ul class="dropdown-menu">
+									<li{{ (Request::is('admin/meal*') ? ' class="active"' : '') }}>
+										<a href="{{{ URL::to('admin/meal') }}}"><span class="glyphicon glyphicon-briefcase"></span> Meal</a>
+							</li>
+							<li{{ (Request::is('admin/dressing*') ? ' class="active"' : '') }}>
+								<a href="{{{ URL::to('admin/dressing') }}}"><span class="glyphicon glyphicon-bookmark"></span> Dressing Style</a></li>
+							<li{{ (Request::is('admin/foodtype*') ? ' class="active"' : '') }}>
+								<a href="{{{ URL::to('admin/foodtype') }}}"><span class="glyphicon glyphicon-bookmark"></span> Food Type</a></li>	
+								</ul>
+
 </ul>
 
 							<ul class="nav navbar-nav pull-right">

@@ -105,8 +105,13 @@
 	@endif </h5>
 	<input type="hidden" id="province" value= {{String::tidy($post->
 	province) }}/>
-
-	{{$address}}
+	@if(Auth::user()->hasRole('admin'))
+		<h5>Category:
+		@foreach($post->category as $cat_name)
+			<li>{{$cat_name['category_name']}}</li>
+		@endforeach
+		</h5>
+	@endif
 	@if($post->amphur!="" && $post->province!=null)
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script>
@@ -149,6 +154,7 @@
 	<body onload="codeAddress({{'\''.$address.'\''}})">
 		<div id="googleMap" style="width:400px;height:280px;"></div>
 		@endif
+		<a href="https://www.google.com/maps/place/{{$address}}">View Map in full screen</a>
 		<p></p>
 		{{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
 		
@@ -157,7 +163,7 @@
 
 		<!-- picture div -->
 		<div>
-
+		
 		<ul class="gallery clearfix bxslider">
 			@foreach ($album as $picture)
 		
