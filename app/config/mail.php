@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'ebiz.sec@gmail.com', 'name' => 'DiningLover'),
+	'from' => array('address' => 'ebiz.sec@gmail.com', 'name' => 'LoveDining'),
 
 	/*
 	|--------------------------------------------------------------------------

@@ -75,6 +75,7 @@
  *          beStrictAboutTestsThatDoNotTestAnything="false"
  *          beStrictAboutOutputDuringTests="false"
  *          beStrictAboutTestSize="false"
+ *          beStrictAboutTodoAnnotatedTests="false"
  *          checkForUnintentionallyCoveredCode="false"
  *          verbose="false">
  *   <testsuites>
@@ -356,7 +357,7 @@ class PHPUnit_Util_Configuration
             $file      = '';
             $arguments = array();
 
-            if ($listener->hasAttribute('file')) {
+            if ($listener->getAttribute('file')) {
                 $file = $this->toAbsolutePath(
                   (string) $listener->getAttribute('file'), true
                 );
@@ -398,10 +399,13 @@ class PHPUnit_Util_Configuration
 
         foreach ($this->xpath->query('logging/log') as $log) {
             $type = (string) $log->getAttribute('type');
+            $target = (string) $log->getAttribute('target');
 
-            $target = $this->toAbsolutePath(
-              (string) $log->getAttribute('target')
-            );
+            if (!$target) {
+                continue;
+            }
+
+            $target = $this->toAbsolutePath($target);
 
             if ($type == 'coverage-html') {
                 if ($log->hasAttribute('lowUpperBound')) {
@@ -463,8 +467,9 @@ class PHPUnit_Util_Configuration
 
         foreach ($this->xpath->query('php/includePath') as $includePath) {
             $path = (string) $includePath->nodeValue;
-
-            $result['include_path'][] = $this->toAbsolutePath($path);
+            if ($path) {
+                $result['include_path'][] = $this->toAbsolutePath($path);
+            }
         }
 
         foreach ($this->xpath->query('php/ini') as $ini) {
@@ -600,7 +605,7 @@ class PHPUnit_Util_Configuration
             );
         }
 
-        if ($root->hasAttribute('bootstrap')) {
+        if ($root->getAttribute('bootstrap')) {
             $result['bootstrap'] = $this->toAbsolutePath(
               (string) $root->getAttribute('bootstrap')
             );
@@ -679,7 +684,7 @@ class PHPUnit_Util_Configuration
             );
         }
 
-        if ($root->hasAttribute('testSuiteLoaderFile')) {
+        if ($root->getAttribute('testSuiteLoaderFile')) {
             $result['testSuiteLoaderFile'] = $this->toAbsolutePath(
               (string) $root->getAttribute('testSuiteLoaderFile')
             );
@@ -691,7 +696,7 @@ class PHPUnit_Util_Configuration
             );
         }
 
-        if ($root->hasAttribute('printerFile')) {
+        if ($root->getAttribute('printerFile')) {
             $result['printerFile'] = $this->toAbsolutePath(
               (string) $root->getAttribute('printerFile')
             );
@@ -739,15 +744,22 @@ class PHPUnit_Util_Configuration
             );
         }
 
+        if ($root->hasAttribute('beStrictAboutTodoAnnotatedTests')) {
+            $result['disallowTodoAnnotatedTests'] = $this->getBoolean(
+                (string) $root->getAttribute('beStrictAboutTodoAnnotatedTests'), false
+            );
+        }
+
         if ($root->hasAttribute('strict')) {
             $flag = $this->getBoolean(
                 (string) $root->getAttribute('strict'), false
             );
 
-            $result['reportUselessTests'] = $flag;
-            $result['strictCoverage']     = $flag;
-            $result['disallowTestOutput'] = $flag;
-            $result['enforceTimeLimit']   = $flag;
+            $result['reportUselessTests']         = $flag;
+            $result['strictCoverage']             = $flag;
+            $result['disallowTestOutput']         = $flag;
+            $result['enforceTimeLimit']           = $flag;
+            $result['disallowTodoAnnotatedTests'] = $flag;
         }
 
         if ($root->hasAttribute('verbose')) {
@@ -856,9 +868,10 @@ class PHPUnit_Util_Configuration
         $exclude = array();
 
         foreach ($testSuiteNode->getElementsByTagName('exclude') as $excludeNode) {
-            $exclude[] = $this->toAbsolutePath(
-              (string) $excludeNode->nodeValue
-            );
+            $excludeFile = (string) $excludeNode->nodeValue;
+            if ($excludeFile) {
+                $exclude[] = $this->toAbsolutePath($excludeFile);
+            }
         }
 
         $fileIteratorFacade = new File_Iterator_Facade;
@@ -997,6 +1010,12 @@ class PHPUnit_Util_Configuration
         $directories = array();
 
         foreach ($this->xpath->query($query) as $directory) {
+            $directoryPath = (string) $directory->nodeValue;
+
+            if (!$directoryPath) {
+                continue;
+            }
+
             if ($directory->hasAttribute('prefix')) {
                 $prefix = (string) $directory->getAttribute('prefix');
             } else {
@@ -1016,7 +1035,7 @@ class PHPUnit_Util_Configuration
             }
 
             $directories[] = array(
-              'path'   => $this->toAbsolutePath((string) $directory->nodeValue),
+              'path'   => $this->toAbsolutePath($directoryPath),
               'prefix' => $prefix,
               'suffix' => $suffix,
               'group'  => $group
@@ -1036,7 +1055,10 @@ class PHPUnit_Util_Configuration
         $files = array();
 
         foreach ($this->xpath->query($query) as $file) {
-            $files[] = $this->toAbsolutePath((string) $file->nodeValue);
+            $filePath = (string) $file->nodeValue;
+            if ($filePath) {
+                $files[] = $this->toAbsolutePath($filePath);
+            }
         }
 
         return $files;
