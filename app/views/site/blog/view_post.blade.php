@@ -105,7 +105,7 @@
 	@endif </h5>
 	<input type="hidden" id="province" value= {{String::tidy($post->
 	province) }}/>
-	@if(Auth::user()->hasRole('admin'))
+	@if(Auth::user() && Auth::user()->hasRole('admin'))
 		<h5>Category:
 		@foreach($post->category as $cat_name)
 			<li>{{$cat_name['category_name']}}</li>
