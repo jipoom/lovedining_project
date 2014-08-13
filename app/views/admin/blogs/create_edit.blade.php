@@ -134,9 +134,26 @@
 						{{{ $errors->first('tel', ':message') }}}<p>
 					</div>
 				</div>
+										 <label class="control-label" for="title">ที่อยู่</label></P>
+				<div class="form-group {{{ $errors->has('latitude') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                    	
+						 <label class="control-label" for="title">latitude</label>
+						{{ Form::text('latitude', Input::old('latitude', isset($post) ? $post->latitude : null), array('class'=>'form-control', 'placeholder'=>'latitude'))}} </p>
+						{{{ $errors->first('latitude', ':message') }}}<p>
+					</div>
+				</div>
+				<div class="form-group {{{ $errors->has('latitude') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                    	
+						 <label class="control-label" for="title">longitude</label>
+						{{ Form::text('longitude', Input::old('longitude', isset($post) ? $post->longitude : null), array('class'=>'form-control', 'placeholder'=>'longitude'))}} </p>
+						{{{ $errors->first('longitude', ':message') }}}<p>
+					</div>
+				</div>
 				<div class="form-group">
                     <div class="col-md-12">
-						 <label class="control-label" for="title">ที่อยู่</label></P>
+
 						 {{ Form::text('street_addr', Input::old('street_addr', isset($post) ? $post->street_addr : null), array('placeholder'=>'เลขที่')) }} 
 					    {{ Form::text('soi', Input::old('soi', isset($post) ? $post->soi : null), array('placeholder'=>'ซอย')) }} 
 					    {{ Form::text('road', Input::old('road', isset($post) ? $post->road : null), array('placeholder'=>'ถนน')) }} 

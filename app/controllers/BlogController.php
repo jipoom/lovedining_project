@@ -142,9 +142,9 @@ class BlogController extends BaseController {
             $canComment = $user->can('post_comment');
         }
 		//form phisical address
-		$address = $post->street_addr.' '.$post->soi.' แขวง'.$post->tumbol.' '.$post->amphur.' '.$post->province;
+		//$address = $post->street_addr.' '.$post->soi.' แขวง'.$post->tumbol.' '.$post->amphur.' '.$post->province;
 		//Convert address to google map format
-		$address = str_replace('/','%2F',$address);
+		//$address = str_replace('/','%2F',$address);
 		//add to the PostsUserRead
 		$postsUserRead = new PostsUserRead;
 		
@@ -167,7 +167,7 @@ class BlogController extends BaseController {
 		}
 		
 		// Show the page
-		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment', 'address'));
+		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
 	}
 	
 	/**

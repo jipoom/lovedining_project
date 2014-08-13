@@ -103,7 +103,10 @@ class AdminBlogsController extends AdminController {
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'newFoodType' => 'min:3',
-		'newDressing' => 'min:3');
+		'newDressing' => 'min:3',
+		'latitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',
+		'longitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)'
+		);
 		
 
 		// Validate the inputs
@@ -133,6 +136,8 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> zip = Input::get('zip');
 			$this -> post -> album_name = Input::get('album_name');
 			$this -> post -> profile_picture_name = Input::get('profilePic');
+			$this -> post -> latitude = Input::get('latitude');
+			$this -> post -> longitude = Input::get('longitude');
 			//$this->post->slug             = Str::slug(Input::get('title'));
 			$this -> post -> content = Input::get('content');
 			$this -> post -> meta_title = Input::get('meta-title');
@@ -319,7 +324,10 @@ class AdminBlogsController extends AdminController {
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'newFoodType' => 'min:3',
-		'newDressing' => 'min:3');
+		'newDressing' => 'min:3',
+		'newDressing' => 'min:3',
+		'latitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',
+		'longitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',);
 		
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -348,6 +356,8 @@ class AdminBlogsController extends AdminController {
 			$post -> zip = Input::get('zip');
 			$post -> album_name = Input::get('album_name');
 			$post -> profile_picture_name = Input::get('profilePic');
+			$post -> latitude = Input::get('latitude');
+			$post -> longitude = Input::get('longitude');
 			//$post->slug             = Str::slug(Input::get('title'));
 			$post -> content = Input::get('content');
 			$post -> meta_title = Input::get('meta-title');

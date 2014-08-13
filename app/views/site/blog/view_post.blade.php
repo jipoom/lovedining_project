@@ -112,49 +112,65 @@
 		@endforeach
 		</h5>
 	@endif
-	@if($post->amphur!="" && $post->province!=null)
-	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script>
-		var geocoder;
-		var map;
-		function initialize() {
-			geocoder = new google.maps.Geocoder();
-			var latlng = new google.maps.LatLng(13.7500, 100.4833);
-			var mapOptions = {
-				zoom : 16,
-				center : latlng
-			}
-
-			map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-		}
-
-		function codeAddress(location) {
-			// var address = document.getElementById('address').value;
-			//var address = 'Arlington, VA';
-			var address = location;
-			geocoder.geocode({
-				'address' : address
-			}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
-						map : map,
-						position : results[0].geometry.location
-					});
-				} else {
-					alert('Geocode was not successful for the following reason: ' + status);
+	@if($post->latitude!="" && $post->longitude!=null)
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script>
+			/*var geocoder;
+			var map;
+			function initialize() {
+				geocoder = new google.maps.Geocoder();
+				var latlng = new google.maps.LatLng(13.7500, 100.4833);
+				var mapOptions = {
+					zoom : 16,
+					center : latlng
 				}
-			});
-		}
-
-
-		google.maps.event.addDomListener(window, 'load', initialize);
-	</script>
-
-	<body onload="codeAddress({{'\''.$address.'\''}})">
-		<div id="googleMap" style="width:400px;height:280px;"></div>
-		@endif
-		<a href="https://www.google.com/maps/place/{{$address}}">View Map in full screen</a>
+	
+				map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+			}
+	
+			function codeAddress(location) {
+				// var address = document.getElementById('address').value;
+				//var address = 'Arlington, VA';
+				var address = location;
+				geocoder.geocode({
+					'address' : address
+				}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						map.setCenter(results[0].geometry.location);
+						var marker = new google.maps.Marker({
+							map : map,
+							position : results[0].geometry.location
+						});
+					} else {
+						alert('Geocode was not successful for the following reason: ' + status);
+					}
+				});
+			}
+	
+	
+			google.maps.event.addDomListener(window, 'load', initialize);
+			*/
+			function initialize() {
+			  var myLatlng = new google.maps.LatLng({{$post->latitude}},{{$post->longitude}});
+			  var mapOptions = {
+			    zoom: 16,
+			    center: myLatlng
+			  }
+			  var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+			
+			  var marker = new google.maps.Marker({
+			      position: myLatlng,
+			      map: map
+			  });
+			}
+			
+			google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
+	
+			<div id="googleMap" style="width:400px;height:280px;"></div>
+			
+			<a href="http://maps.google.com/?q={{$post->latitude}},{{$post->longitude}}">View Map in full screen</a>
+	@endif
 		<p></p>
 		{{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
 		
@@ -167,7 +183,7 @@
 		<ul class="gallery clearfix bxslider">
 			@foreach ($album as $picture)
 		
-			<li><a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" class = "thumbnail" rel="LoveDining"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" /></a></li>
+			<li><a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" /></a></li>
 
 			@endforeach
 		</ul>
