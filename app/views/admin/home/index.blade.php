@@ -22,9 +22,6 @@
 	<li>
 		<a href="#tab-highlight" data-toggle="tab">Highlight</a>
 	</li>
-	<li>
-		<a href="{{{ URL::to('admin/elfinder/tinymce')."/".Config::get('app.banner') }}}" class="iframe">Upload banner images</a>
-	</li>
 </ul>
 <p></p>
 <form class="form-horizontal" method="post" action="{{URL::to('admin/home/setHome')}}" autocomplete="off">
