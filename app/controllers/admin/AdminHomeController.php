@@ -120,18 +120,20 @@ class AdminHomeController extends AdminController {
 
 		//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
 		$timestamp = time(); 
-		$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at', 'posts.is_home')) 
-		-> active()
-		-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
-		-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
+		$posts = Post::select(array('posts.id', 'posts.title as post_name', 'posts.id as comments', 'posts.created_at', 'posts.is_home')) 
+		-> active();
+		//-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
+		//-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
 
 			
 		
 		return Datatables::of($posts) 
+		
 		-> edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}') 
 		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
-		-> edit_column('title', '{{{ Str::limit($title, 40, \'...\') }}}')
-		-> add_column('actions', '{{Form::radio(\'setHome\', $id)}}')  
+		-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $id .\'/edit\') }}}">{{{ Str::limit($post_name, 40, \'...\') }}}</a>')
+
+		-> add_column('actions', '@if($is_home == 0){{Form::radio(\'setHome\', $id)}} @else {{Form::radio(\'setHome\', $id, true)}} @endif')  
         -> remove_column('id') -> make();
 
 	}

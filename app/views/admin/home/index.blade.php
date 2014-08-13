@@ -45,7 +45,6 @@
 							<tr>
 
 								<th class="col-md-2">{{{ Lang::get('admin/blogs/table.title') }}}</th>
-								<th class="col-md-2">{{{ Lang::get('admin/blogs/table.categories') }}}</th>
 								<th class="col-md-2">{{{ Lang::get('admin/blogs/table.comments') }}}</th>
 								<th class="col-md-2">{{{ Lang::get('admin/blogs/table.created_at') }}}</th>
 								<th class="col-md-2">Home</th>
@@ -192,10 +191,10 @@
 
 			"aoColumnDefs" : [{
 				"bSearchable" : false,
-				"aTargets" : [4]
+				"aTargets" : [3]
 			}, {
 				"bVisible" : false,
-				"aTargets" : [4]
+				"aTargets" : [3]
 			}],
 			"sAjaxSource" : "{{ URL::to('admin/home/data') }}",
 			"fnDrawCallback" : function(oSettings) {
@@ -206,7 +205,7 @@
 				});
 			},
 			"fnRowCallback" : function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-				if (aData[4] == 1) {
+				if (aData[3] == 1) {
 					$(nRow).css('font-weight', 'bold');
 				}
 			}
