@@ -80,7 +80,7 @@
 
 						<div class="slogan navbar-fixed-top">
 
-							because we take food seriously...
+
 
 						</div>  
 
@@ -89,6 +89,13 @@
 
 							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120" onkeypress="return runScript(event)">
 							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
+
+							<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
+							<option value="date">Recently published</option>
+							<option value="reviewName">Review Name</option>
+							<option value="restaurantName">Restaurant Name</option>
+							<option value="popularity">Popularity</option>
+							</select>	-->
 
 							<div class="tfclear"></div>
 						</div>

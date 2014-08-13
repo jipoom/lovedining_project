@@ -9,7 +9,7 @@
 @import url(fonts1/th_mali_grade6.css);
 @import url(fonts2/th_koho.css);
 @import url(fonts4/th_kodchasal.css);
-@import url(http://fonts.googleapis.com/css?family=Pacifico);
+
 html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
@@ -594,13 +594,12 @@ pre code {
 	position: absolute;
 	margin-top: 30px;
 	margin-left: 220px;
-	font-family: 'Pacifico', cursive;
-	font-size: 26px;
-	color: #FFFFFF;
+
+	font-size: 16px;
+	color: #656565;
 	font-style:oblique;
 	letter-spacing:2.3px;
-	-webkit-text-stroke-width: .95px;
-	-webkit-text-stroke-color: #656565;
+
 }
 .ads-right {
 	margin-right: auto;
@@ -3263,7 +3262,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	}
 }
 .navbar-nav {
-	margin: 7.5px -15px
+	margin: 7.5px -15px;
 }
 
 .navbar-nav > li > a {
@@ -3279,7 +3278,8 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 		margin-top: 0;
 		background-color: transparent;
 		border: 0;
-		box-shadow: none
+		box-shadow: none;
+		padding-top: 10px;
 	}
 	.navbar-nav .open .dropdown-menu > li > a, .navbar-nav .open .dropdown-menu .dropdown-header {
 		padding: 1px 1px 1px 1px

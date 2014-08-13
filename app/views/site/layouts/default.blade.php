@@ -72,7 +72,7 @@
 						
 						<div class="slogan">
 
-							because we take food seriously...
+							
 
 						</div>   
 

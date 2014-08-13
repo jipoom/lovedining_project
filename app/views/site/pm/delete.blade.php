@@ -1,4 +1,4 @@
-@extends('admin.layouts.modal')
+@extends('site.layouts.modal')
 
 {{-- Content --}}
 

@@ -6,12 +6,13 @@
 		<h3>
 			{{{ $title }}}
 			
-			<div class="pull-right">
+			
+		</h3>
+		<div class="pull-right">
 				
-				<a href="{{{ URL::previous() }}}" class="btn btn-small"><span class="glyphicon glyphicon-circle-arrow-left"</span> Back</a>
+				
 			 	
 			</div>
-		</h3>
 	</div>
 
 	{{-- Edit Blog Form --}}
@@ -49,8 +50,15 @@
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-12">
+				
+				
+				
+				
+				<a href="{{{ URL::previous() }}}" class="btn btn-default btn-small btn-inverse close_popup"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+				
 				<a href="{{{ URL::to('message_service/'.$privateMessage->id.'/delete') }}}" class="btn btn-small btn-danger iframe"> Remove</a>
 				<a href="{{{ URL::to('message_service/reply/'.$privateMessage->id) }}}" class="btn btn-small btn-success iframe"> Reply</a>
+			
 			</div>
 		</div>
 		<!-- ./ form actions -->
