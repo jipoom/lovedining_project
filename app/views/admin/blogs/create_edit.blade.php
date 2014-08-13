@@ -164,6 +164,7 @@
                          <!-- /In case admin enter invalid info --> 
                          @if(!Input::old('album_name') && !isset($post))
  						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName);?>
+ 						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName.'/banner');?>
  						 	{{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
                          @else
                          	{{ Form::hidden('album_name', Input::old('album_name', isset($post) ? $post->album_name : Input::old('album_name')), array('id'=>'album_name')) }} </p>  

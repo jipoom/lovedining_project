@@ -41,14 +41,15 @@ class BlogController extends BaseController {
 		//Clear Session
 		Session::forget('mode');
 		Session::forget('catName');
-		$home = Post::active()->where('is_home','=',1)->first();
+		$home = Post::active()->where('is_home','=',1)->get();
+		
 		$mode = HighlightOrder::getMode();
 		$highlight = HighlightOrder::getOrder($mode);
 		
 		//$randReviews = Post::getRandomReviews();
 		//$randReviews = Post::getRecentReviews();
-		$banners = Picture::directoryToArray(Config::get('app.image_path').'/'.Config::get('app.banner'),true);
-		return View::make('site/home',compact('home','banners','highlight'));
+		
+		return View::make('site/home',compact('home','highlight'));
 	}
 
 	/**

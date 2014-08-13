@@ -281,6 +281,11 @@ class AdminBlogsController extends AdminController {
 		if(!file_exists(Config::get('app.image_path').'/'.$post -> album_name))
 		{
 			mkdir(Config::get('app.image_path').'/'.$post -> album_name);
+			mkdir(Config::get('app.image_path').'/'.$post -> album_name.'/banner');
+		}
+		else if(!file_exists(Config::get('app.image_path').'/'.$post -> album_name.'/banner'))
+		{
+			mkdir(Config::get('app.image_path').'/'.$post -> album_name.'/banner');
 		}
 		/*$init_province = Province::first();
 		$province = array($init_province -> id => $init_province -> province_name);

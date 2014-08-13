@@ -49,32 +49,35 @@ class AdminHomeController extends AdminController {
 
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
+		
 		// Check if the form validates with success
 		if ($validator -> passes()) {
-			//Set home to selected review
-			$post = Post::find(Input::get('setHome'));
-			//If set home to anthoer review
-			if($post->is_home == 0)
+			
+			//reset all to non-banner	
+			Post::where('is_home', '=', 1)->update(array('is_home' => 0));
+			foreach(Input::get('setHome') as $banner)
 			{
-				Post::where('is_home', '=', 1)->update(array('is_home' => 0));
-				$post->is_home = 1;
-				if($post->save()){
-					
-					//trigger elfinder to enable admin to upload images
-					return Redirect::to('admin/home/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
+				
+				//Set home to selected review
+				$post = Post::find($banner);
+				//If set home to anthoer review
+				if($post->is_home == 0)
+				{					
+					$post->is_home = 1;
+					$post->save();				
 				}
+				
 			}
+				return Redirect::to('admin/home/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
 		}
 		//If set home to the old review
 		else
 		{
-				//no update
-			//trigger elfinder to allow enable to upload images but does not remove Banner directory
 			return Redirect::to('admin/home/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
 		}
 		
 		// There was a problem deleting the blog post
-		return Redirect::to('admin/home') -> with('error', Lang::get('admin/blogs/messages.delete.error'));
+		//return Redirect::to('admin/home') -> with('error', Lang::get('admin/blogs/messages.delete.error'));
 	}
 
 	public function changeOrder($mode) {
@@ -133,7 +136,7 @@ class AdminHomeController extends AdminController {
 		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
 		-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $id .\'/edit\') }}}">{{{ Str::limit($post_name, 40, \'...\') }}}</a>')
 
-		-> add_column('actions', '@if($is_home == 0){{Form::radio(\'setHome\', $id)}} @else {{Form::radio(\'setHome\', $id, true)}} @endif')  
+		-> add_column('actions', '@if($is_home == 0){{Form::checkbox(\'setHome[]\', $id)}} @else {{Form::checkbox(\'setHome[]\', $id, true)}} @endif')  
         -> remove_column('id') -> make();
 
 	}

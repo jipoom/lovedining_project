@@ -36,25 +36,33 @@
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
 </h4>
-@if(count($banners)==1 && count($home) > 0)
+@if(count($home) == 1)
 <div class="col-md-10">
 	
-		@foreach($banners as $banner)
-		
-			<a href="{{$home->id}}"><img src="{{Config::get('app.image_base_url').'/'.Config::get('app.banner').'/'.$banner}}" title="{{$home->title}}" align="middle"/></a>		
-		
+		@foreach($home as $post)
+			<?php 
+			$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name.'/banner/',true);
+			?>
+			@if(count($banner) > 0)
+				<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province}}" align="middle"/></a>		
+			@endif
 		@endforeach
 
 	
 	
 </div>
-@elseif(count($banners)>0 && count($home) > 0)
+@elseif(count($home) > 1)
 <div class="col-md-10">
 	<ul class="bxslider">
-		@foreach($banners as $banner)
-		<li>
-			<a href="{{$home->id}}"><img src="{{Config::get('app.image_base_url').'/'.Config::get('app.banner').'/'.$banner}}" title="{{$home->title}}" align="middle"/></a>		
-		</li>
+		@foreach($home as $post)
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name.'/banner/',true);
+			?>
+			@if(count($banner) > 0)
+				<li>
+					<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province}}" align="middle"/></a>		
+				</li>
+			@endif
 		@endforeach
 
 	</ul>
@@ -76,7 +84,7 @@
 <script>
 	$(document).ready(function() {
 		$('.bxslider').bxSlider({
-			mode : 'horizontal',
+			mode : 'fade',
 			infiniteLoop : true,
 			auto : true,
 			autoStart : true,
@@ -86,7 +94,7 @@
 			autoControls : false,
 			pager : true,
 			pagerType : 'full',
-			controls : true,
+			controls : false,
 			captions : true,
 			speed : 500,
 			randomStart : true,
@@ -95,12 +103,8 @@
 			adaptiveHeight: true
 		});
 		
-	}); 
-</script>
-<script>
-	$(document).ready(function() {
-		$('.bxslider_hightlight').bxSlider({
-			mode : 'horizontal',
+		$('.bxslider_highlight').bxSlider({
+			mode : 'fade',
 			infiniteLoop : true,
 			auto : true,
 			autoStart : true,
@@ -110,7 +114,7 @@
 			autoControls : false,
 			pager : false,
 			pagerType : 'full',
-			controls : true,
+			controls : false,
 			captions : true,
 			speed : 500,
 			randomStart : true,
@@ -121,4 +125,5 @@
 		
 	}); 
 </script>
+
 @stop

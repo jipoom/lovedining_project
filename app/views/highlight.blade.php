@@ -25,10 +25,10 @@
 			<strong><a href="{{{ $highlight[$i]->url() }}}">{{ String::title($highlight[$i]->title) }}</a></strong>		
 			<?php $hightlightPics = Picture::directoryToArray(Config::get('app.image_path').'/'.$highlight[$i]->album_name,true); ?>
 			@if(count($hightlightPics) > 1)
-			<ul class="bxslider_hightlight">
+			<ul class="bxslider_highlight bx-wrapper">
 				@foreach($hightlightPics as $hightlightPic)
 				<li>
-					<a href="{{{ $highlight[$i]->url() }}}" class = "thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$hightlightPic}}" align="middle"/></a>		
+					<a href="{{{ $highlight[$i]->url() }}}"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$hightlightPic}}" align="middle"/></a>		
 				</li>
 				@endforeach
 		
@@ -63,10 +63,10 @@
 			title) }}</a></strong>
 			<?php $hightlightPics = Picture::directoryToArray(Config::get('app.image_path').'/'.$highlight[$i+1]->album_name,true); ?>
 			@if(count($hightlightPics)>1)
-			<ul class="bxslider_hightlight">
+			<ul class="bxslider_highlight bx-wrapper">
 				@foreach($hightlightPics as $hightlightPic)
 				<li>
-					<a href="{{{ $highlight[$i]->url() }}}"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$hightlightPic}}" align="middle"/></a>		
+					<a href="{{{ $highlight[$i+1]->url() }}}"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$hightlightPic}}" /></a>		
 				</li>
 				@endforeach
 		
