@@ -124,7 +124,7 @@
 									<ul class="dropdown-menu">
 										@if (Auth::user()->hasRole('admin'))
 										<li>
-											<a href="{{{ URL::to('admin') }}}"><span class="glyphicon"></span> Admin Panel</a>
+											<a href="{{{ URL::to('admin/home') }}}"><span class="glyphicon"></span> Admin Panel</a>
 										</li>
 										@endif
 										<?php $numNewMessage = PrivateMessage::newMessage(Auth::user() -> username); ?>

@@ -49,7 +49,7 @@
 								<th class="col-md-2">{{{ Lang::get('admin/blogs/table.comments') }}}</th>
 								<th class="col-md-2">{{{ Lang::get('admin/blogs/table.created_at') }}}</th>
 								<th class="col-md-2">Home</th>
-								<th class="col-md-2">Set to Home</th>
+								<th class="col-md-2">Set to Banner</th>
 
 							</tr>
 						</thead>
