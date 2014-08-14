@@ -567,9 +567,9 @@ class AdminBlogsController extends AdminController {
 	public function getData($categoryId) {
 		if ($categoryId == "all") {
 			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
-			$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at', 'posts.published_at', 'posts.expired_at', 'posts.is_permanent')) 
-			-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
-			-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
+			$posts = Post::select(array('posts.id', 'posts.title', 'posts.is_home as category', 'posts.id as comments', 'posts.created_at', 'posts.published_at', 'posts.expired_at', 'posts.is_permanent'));
+			//-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
+			//-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
 			
 			//$posts = Post::select(array('posts.id', 'posts.title', 'posts.updated_at', 'posts.id as comments', 'posts.created_at')); 
 
@@ -589,6 +589,20 @@ class AdminBlogsController extends AdminController {
 		//->select(array('posts.id', 'posts.title', 'category.category_name as category ','posts.id as comments', 'posts.created_at'));
 
 		return Datatables::of($posts) 
+		-> edit_column('category', '<?php $post_cat = DB::table(\'posts_category\')
+			-> leftjoin(\'category\', \'posts_category.category_id\', \'=\', \'category.id\')
+			-> where(\'posts_category.post_id\',\'=\',$id)->get(); 
+			$i=0;
+			?>
+			@foreach($post_cat as $cat)
+			<?php $i++; ?>
+				@if($i < count($post_cat)) 
+					{{$cat->category_name}},
+				@else
+					{{$cat->category_name}}
+				@endif
+			@endforeach
+			') 
 		-> edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}') 
 		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
 		-> edit_column('published_at', '@if(strtotime($published_at) <= time() && ($is_permanent == 1 || strtotime($expired_at) > time())) active @else inactive @endif') 
