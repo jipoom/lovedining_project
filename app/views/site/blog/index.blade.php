@@ -66,12 +66,22 @@
 <div class="col-md-10">
 
 	<div class="col-md-6">
-
 		<!-- Post Title -->
-		<div class="col-md-12">
-			<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
-		</div>
-
+		@if(Auth::check()) 
+			@if(User::checkIfUserRead($postUserRead,$posts[$i]->id))
+			<div class="col-md-12">
+				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
+			</div>
+			@else
+			<div class="col-md-12">
+				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }} (new)</a></strong></h4>
+			</div>
+			@endif
+		@else 
+			<div class="col-md-12">
+				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
+			</div>
+		@endif
 		<!-- ./ post title -->
 
 		<!-- Post Content -->
@@ -117,14 +127,27 @@
 	<!-- new Column -->
 	@if(($i+1)<count($posts))
 	<div class="col-md-6">
-
+		
 		<!-- Post Title -->
-	
-		<div class="col-md-12">
+		@if(Auth::check()) 
+			@if(User::checkIfUserRead($postUserRead,$posts[$i+1]->id))
+				<div class="col-md-12">
+					<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
+					title) }}</a></strong></h4>
+				</div>
+			@else
+				<div class="col-md-12">
+				<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
+				title) }} (new)</a></strong></h4>
+				</div>
+			@endif
+		@else
+			<div class="col-md-12">
 			<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
 			title) }}</a></strong></h4>
-		</div>
-	
+			</div>
+		@endif
+
 		<!-- ./ post title -->
 	
 		<!-- Post Content -->

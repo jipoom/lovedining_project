@@ -126,5 +126,18 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
 	{
 		return $this->belongsToMany('FoodType','user_food_type');
 	}
+	
+	public static function checkIfUserRead($postUserRead,$postId)
+	{
+		foreach($postUserRead as $read)
+		{		
+			if($read->post_id == $postId)
+			{
+
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

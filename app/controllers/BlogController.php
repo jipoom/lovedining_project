@@ -45,7 +45,7 @@ class BlogController extends BaseController {
 		
 		$mode = HighlightOrder::getMode();
 		$highlight = HighlightOrder::getOrder($mode);
-		
+
 		//$randReviews = Post::getRandomReviews();
 		//$randReviews = Post::getRecentReviews();
 		
@@ -62,6 +62,7 @@ class BlogController extends BaseController {
 		
 		// Get all the blog posts
 		$catName = Category::find($categoryId);
+		
 		$mode = null;
 		if (Session::has('mode') && Session::get('catName') == $catName->category_name){
 			$mode = Session::get('mode');
@@ -78,9 +79,9 @@ class BlogController extends BaseController {
 		//Statistic::keepStat($categoryId,$catName->category_name,0,Request::getClientIp());
 		
 		$yetToPrint = true;
-		
+		$postUserRead = PostsUserRead::where('user_id','=',Auth::id())->get();
 		// Show the page
-		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId'));
+		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','postUserRead'));
 	}
 	
 	
@@ -107,8 +108,9 @@ class BlogController extends BaseController {
 		
 		// this is a parameter to check if we need to show sort menu
 		$yetToPrint = true;
+		$postUserRead = PostsUserRead::where('user_id','=',Auth::id())->get();
 		// Show the page
-		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','keyword'));
+		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','keyword','postUserRead'));
 	}
 	/**
 	 * View a blog post.
@@ -223,8 +225,8 @@ class BlogController extends BaseController {
 		$mode = null;
 		$yetToPrint = false;
 		$posts = Post::search($keyword,false);
-		
-        return View::make('site/blog/index', compact('posts','yetToPrint','mode','keyword'));
+		$postUserRead = PostsUserRead::where('user_id','=',Auth::id())->get();
+        return View::make('site/blog/index', compact('posts','yetToPrint','mode','keyword','postUserRead'));
     
 	}
 	
