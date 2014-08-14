@@ -71,6 +71,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	 # Home Management
 	Route::get('home/highlight/{mode}', 'AdminHomeController@changeOrder');
 	Route::get('home/highlight/save/{mode}', 'AdminHomeController@saveOrder');
+	Route::get('home/custom_highlight', 'AdminHomeController@highlightCustom');
+	Route::post('home/custom_highlight', 'AdminHomeController@postHighlightCustom');
 	Route::post('home/setHome', 'AdminHomeController@setHome');
     Route::controller('home', 'AdminHomeController');
 

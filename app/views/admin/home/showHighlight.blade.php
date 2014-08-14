@@ -5,6 +5,8 @@
 			แสดงแบบสุ่ม
 			@elseif($mode == "popular")
 			แสดงตามความนิยม
+			@elseif($mode == "custom")
+			กำหนดเอง
 			@endif
 			</h3>
 <?php for($i=0;$i<count($highlight);$i+=2)

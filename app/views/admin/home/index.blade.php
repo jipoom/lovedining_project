@@ -80,7 +80,7 @@
 			<button type="button" value = "popular" class="btn btn-small btn-info" onclick="changeOrder(this.value)">
 			แสดงตามความนิยม
 			</button>
-			<!--<a href="{{{ URL::to('admin/order/custom') }}}" class="btn btn-small btn-info iframe"> กำหนดรูปแบบเอง</a>-->
+			<a href="{{{ URL::to('admin/home/custom_highlight') }}}" class="btn btn-small btn-info iframe"> กำหนดรูปแบบเอง</a>
 
 			<button type="button" value = "{{$mode}}" class="btn btn-small btn-info" onclick="saveOrder(this.value)">
 			<span class="glyphicon glyphicon-plus-sign"></span> บันทึก

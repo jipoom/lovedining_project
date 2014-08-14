@@ -32,13 +32,21 @@ class AdminHomeController extends AdminController {
 		// Grab all the blog posts
 		$posts = $this -> post;
 		
-		if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.banner')))
+		/*if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.banner')))
 		{
 			//Create new banner Directory
 			mkdir(Config::get('app.image_path').'/'.Config::get('app.banner'));
-		}
+		}*/
 		// Show the page
 		return View::make('admin/home/index', compact('posts', 'title','mode','highlight'));
+	}
+	
+	public function highlightCustom() {
+
+		// Title
+		$title = "Customize LoveDining Highlight";		
+		// Show the page
+		return View::make('admin/home/custom_highlight', compact('title'));
 	}
 	
 	public function setHome() {
@@ -74,6 +82,65 @@ class AdminHomeController extends AdminController {
 		else
 		{
 			return Redirect::to('admin/home/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
+		}
+		
+		// There was a problem deleting the blog post
+		//return Redirect::to('admin/home') -> with('error', Lang::get('admin/blogs/messages.delete.error'));
+	}
+
+	public function postHighlightCustom() {
+
+		// Title
+		$rules = array('setHighlight' => 'required');
+
+		// Validate the inputs
+		$validator = Validator::make(Input::all(), $rules);
+		
+		// Check if the form validates with success
+		if ($validator -> passes()) {
+			
+			//reset all to non-banner	
+			Post::where('is_highlight', '=', 1)->update(array('is_highlight' => 0));
+			foreach(Input::get('setHighlight') as $highlight)
+			{
+				
+				//Set home to selected review
+				$post = Post::find($highlight);
+				//If set home to anthoer review
+				if($post->is_highlight == 0)
+				{					
+					$post->is_highlight = 1;
+					$post->save();				
+				}
+				
+			}
+			// Save Highlight Order
+			//update Highlight Order
+			$order = HighlightOrder::all();
+			$user = Auth::user();
+			if($order->count()>0)
+			{
+				foreach ($order as $orderMode) {
+					$orderMode -> mode = "custom";
+					$orderMode -> user_id = $user->id;
+					if($orderMode -> save())
+						break;
+				}
+			}
+			else {
+				$order = new HighlightOrder;
+				$order-> mode = "custom";
+				$order-> user_id = $user->id;
+				$order->save();
+				
+			}
+			
+			return Redirect::to('admin/home/custom_highlight') -> with('success', "Success");
+		}
+		//If set home to the old review
+		else
+		{
+			return Redirect::to('admin/home/custom_highlight') -> with('success', "Success");
 		}
 		
 		// There was a problem deleting the blog post
@@ -137,6 +204,29 @@ class AdminHomeController extends AdminController {
 		-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $id .\'/edit\') }}}">{{{ Str::limit($post_name, 40, \'...\') }}}</a>')
 
 		-> add_column('actions', '@if($is_home == 0){{Form::checkbox(\'setHome[]\', $id)}} @else {{Form::checkbox(\'setHome[]\', $id, true)}} @endif')  
+        -> remove_column('id') -> make();
+
+	}
+		
+	public function getCustomhighlight() {
+
+		//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
+		$timestamp = time(); 
+		$posts = Post::select(array('posts.id', 'posts.title as post_name', 'posts.id as comments', 'posts.created_at', 'posts.is_highlight')) 
+		-> active()
+		-> where('is_home','=','0');
+		//-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
+		//-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
+
+			
+		
+		return Datatables::of($posts) 
+		
+		-> edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}') 
+		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
+		-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $id .\'/edit\') }}}">{{{ Str::limit($post_name, 40, \'...\') }}}</a>')
+
+		-> add_column('actions', '@if($is_highlight == 0){{Form::checkbox(\'setHighlight[]\', $id)}} @else {{Form::checkbox(\'setHighlight[]\', $id, true)}} @endif')  
         -> remove_column('id') -> make();
 
 	}

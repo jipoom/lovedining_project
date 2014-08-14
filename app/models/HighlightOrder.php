@@ -24,6 +24,10 @@ class HighlightOrder extends Eloquent {
 			}		
 			return $posts;
 		}
+		else if($mode == "custom")	
+		{
+			return Post::where('is_highlight','=','1')->get();
+		}
 	}
 	public static function getMode()
 	{
