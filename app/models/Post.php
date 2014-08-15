@@ -194,8 +194,15 @@ class Post extends Eloquent {
 		else if ($mode == "popularity"){
 			Session::put('mode', 'popularity');
 			Session::put('catName',$catName);
-			//return Post::where('category_id', '=', $category)->orderBy('created_at', 'DESC')->paginate(8);
-			return Post::getReviewsByCategory($post,$category,'created_at','DESC');
+			return Statistic::getPopularReviews();
+			/*$posts = array();
+			$i=0;
+			foreach ($popularIds as $popularId)
+			{
+				$posts[$i] = Post::find($popularId);
+				$i++;
+			}		
+			return $posts;*/
 		}
 		 
 	}
@@ -270,7 +277,11 @@ class Post extends Eloquent {
 				$posts =Post::active()->where(function($query) use ($term)
 	            {
 	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
-	                      ->orwhere('title', 'LIKE', '%'. $term .'%');
+	                      ->orwhere('title', 'LIKE', '%'. $term .'%')
+						  ->orwhere('province', 'LIKE', '%'. $term .'%')
+						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
+						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%')
+						  ->orwhere('road', 'LIKE', '%'. $term .'%');
 	            })->paginate(8);
 				//$posts = Post::active()->search($term);
 			}
@@ -284,7 +295,11 @@ class Post extends Eloquent {
 				$posts =Post::active()->where(function($query) use ($term)
 	            {
 	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
-	                      ->orwhere('title', 'LIKE', '%'. $term .'%');
+	                      ->orwhere('title', 'LIKE', '%'. $term .'%')
+						  ->orwhere('province', 'LIKE', '%'. $term .'%')
+						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
+						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%')
+						  ->orwhere('road', 'LIKE', '%'. $term .'%');
 	            })->distinct();
 			}
 		}

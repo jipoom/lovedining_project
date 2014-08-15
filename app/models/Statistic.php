@@ -47,6 +47,27 @@ class Statistic extends Eloquent {
 		} 
 		return $popularId;
 	}
+	public static function getPopularReviews()
+	{
+		$popularId = array();	
+		$i=0;			
+		$posts = Post::active()->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
+                        ->select(DB::raw('posts.id as p_id, posts.user_id, posts.title, 
+							posts.profile_picture_name,posts.content,posts.album_name,
+							posts.restaurant_name,posts.tel,posts.street_addr,
+							posts.soi,posts.road,posts.tumbol,posts.amphur,
+							posts.province,posts.zip,posts.created_at,posts.updated_at, COUNT(*) AS total_posts'))
+                        ->orderBy('total_posts', 'DESC')
+                        ->groupBy('posts.id')
+						->paginate(8);
+		/*foreach ($posts as $post)
+		{
+			$popularId[$i] = $post->p_id;
+			$i++;
+		} 
+		return $popularId;*/
+		return $posts;
+	}
 }
 
 ?>

@@ -79,7 +79,7 @@
 						<!-- Searchbox -->
 						<div id="tfnewsearch">
 
-							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}"size="15" maxlength="120" onkeypress="return runScript(event)">
+							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "ค้าหา ชื่อร้าน ชื่อรีวิว หรือสถานที่"size="25" maxlength="120" onkeypress="return runScript(event)">
 							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)">
 
 							<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
