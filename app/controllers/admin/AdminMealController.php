@@ -74,8 +74,9 @@ class AdminMealController extends AdminController {
             {
                 // Redirect to the new blog post page
 
-                return Redirect::to('admin/meal/' . $this->meal->id . '/edit')->with('success', Lang::get('admin/meal/messages.create.success'));
-            }
+                //return Redirect::to('admin/meal/' . $this->meal->id . '/edit')->with('success', Lang::get('admin/meal/messages.create.success'));
+           		return View::make('admin/close');
+			}
 
             // Redirect to the blog post create page
             return Redirect::to('admin/meal/create')->with('error', Lang::get('admin/meal/messages.create.error'));
@@ -138,8 +139,9 @@ class AdminMealController extends AdminController {
             if($meal->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/meal/' . $meal->id . '/edit')->with('success', Lang::get('admin/meal/messages.update.success'));
-            }
+                //return Redirect::to('admin/meal/' . $meal->id . '/edit')->with('success', Lang::get('admin/meal/messages.update.success'));
+            	return View::make('admin/close');
+			}
 
             // Redirect to the blogs post management page
             return Redirect::to('admin/meal/' . $meal->id . '/edit')->with('error', Lang::get('admin/meal/messages.update.error'));

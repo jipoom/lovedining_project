@@ -23,7 +23,7 @@
         <div class="form-group">
             <div class="controls">
                 
-               <p><label>Are you sure you want to delete the message "{{$privateMessage->title}}"?</labe></p>
+               <p><label>Are you sure you want to delete "{{$privateMessage->title}}"?</labe></p>
                 <button class="btn btn-cancel close_popup">Cancel</button>
                 <button type="submit" class="btn btn-danger">Delete</button>
             </div>

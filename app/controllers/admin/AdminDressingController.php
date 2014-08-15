@@ -74,8 +74,9 @@ class AdminDressingController extends AdminController {
             {
                 // Redirect to the new blog post page
 
-                return Redirect::to('admin/dressing/' . $this->dressing->id . '/edit')->with('success', Lang::get('admin/dressing/messages.create.success'));
-            }
+                //return Redirect::to('admin/dressing/' . $this->dressing->id . '/edit')->with('success', Lang::get('admin/dressing/messages.create.success'));
+            	return View::make('closeme');
+			}
 
             // Redirect to the blog post create page
             return Redirect::to('admin/dressing/create')->with('error', Lang::get('admin/dressing/messages.create.error'));
@@ -138,8 +139,9 @@ class AdminDressingController extends AdminController {
             if($dressing->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/dressing/' . $dressing->id . '/edit')->with('success', Lang::get('admin/dressing/messages.update.success'));
-            }
+                //return Redirect::to('admin/dressing/' . $dressing->id . '/edit')->with('success', Lang::get('admin/dressing/messages.update.success'));
+            	return View::make('closeme');
+			}
 
             // Redirect to the blogs post management page
             return Redirect::to('admin/dressing/' . $dressing->id . '/edit')->with('error', Lang::get('admin/dressing/messages.update.error'));

@@ -74,8 +74,9 @@ class AdminFoodTypeController extends AdminController {
             {
                 // Redirect to the new blog post page
 
-                return Redirect::to('admin/foodtype/' . $this->foodtype->id . '/edit')->with('success', Lang::get('admin/foodtype/messages.create.success'));
-            }
+                //return Redirect::to('admin/foodtype/' . $this->foodtype->id . '/edit')->with('success', Lang::get('admin/foodtype/messages.create.success'));
+            	return View::make('closeme');
+			}
 
             // Redirect to the blog post create page
             return Redirect::to('admin/foodtype/create')->with('error', Lang::get('admin/foodtype/messages.create.error'));
@@ -138,8 +139,10 @@ class AdminFoodTypeController extends AdminController {
             if($foodtype->save())
             {
                 // Redirect to the new blog post page
-                return Redirect::to('admin/foodtype/' . $foodtype->id . '/edit')->with('success', Lang::get('admin/foodtype/messages.update.success'));
-            }
+               // return Redirect::to('admin/foodtype/' . $foodtype->id . '/edit')->with('success', Lang::get('admin/foodtype/messages.update.success'));
+            	return View::make('closeme');
+           
+			}
 
             // Redirect to the blogs post management page
             return Redirect::to('admin/foodtype/' . $foodtype->id . '/edit')->with('error', Lang::get('admin/foodtype/messages.update.error'));

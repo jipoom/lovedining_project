@@ -92,8 +92,9 @@ class AdminCategoryController extends AdminController {
 				{
 					mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$this->category->album_name);
 				}
-                return Redirect::to('admin/category/' . $this->category->id . '/edit')->with('success', Lang::get('admin/category/messages.create.success'));
-            }
+                //return Redirect::to('admin/category/' . $this->category->id . '/edit')->with('success', Lang::get('admin/category/messages.create.success'));
+            	return View::make('closeme');
+			}
 
             // Redirect to the blog post create page
             return Redirect::to('admin/category/create')->with('error', Lang::get('admin/category/messages.create.error'));
@@ -170,8 +171,10 @@ class AdminCategoryController extends AdminController {
 				{
 					mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$category->album_name);
 				}
-                return Redirect::to('admin/category/' . $category->id . '/edit')->with('success', Lang::get('admin/category/messages.update.success'));
-            }
+                
+                //return Redirect::to('admin/category/' . $category->id . '/edit')->with('success', Lang::get('admin/category/messages.update.success'));
+            	return View::make('closeme');
+			}
 
             // Redirect to the blogs post management page
             return Redirect::to('admin/category/' . $category->id . '/edit')->with('error', Lang::get('admin/category/messages.update.error'));
