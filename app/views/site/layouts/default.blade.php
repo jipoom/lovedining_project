@@ -185,7 +185,7 @@
 				<div id="push"></div>
 			</div>
 			<!-- ./wrap -->
-
+<div class="panel-footer">
 			<div id="footer" style="word-break: break-all;">
 				<div class="container">
 					<p class="muted credit">
@@ -193,7 +193,7 @@
 					</p>
 				</div>
 			</div>
-
+</div>
 			<!-- Javascripts
 			================================================== -->
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

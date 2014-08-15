@@ -30,17 +30,20 @@
 {{-- Content --}}
 @section('content')
 <!-- .Ads -->
-<div class="ads-right checkscreen">
+<div class="ads-right checkscreen" style="background-color: #D43F3A;">
 	<div class="col-md-12">
 		<a href="" class="thumbnail"><img src="http://placehold.it/260x800" alt=""></a>
 	</div>
 </div>
 <!-- ./ Ads -->
+<div class="col-md-10">
+
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
 </h4>
 
-<div class="col-md-10">
+
+<div class="col-md-12">
 	<ul class="bxslider">
 		@foreach($home as $post)
 			<?php
@@ -54,15 +57,11 @@
 		@endforeach
 
 	</ul>
-	
-</div>
-
-<div class="col-md-12">
 
 @include('highlight')
 
 </div>
-
+</div>
 @stop
 
 @section('scripts')

@@ -234,7 +234,14 @@ body {
 	font-size: 15px;
 	line-height: 1.42857143;
 	color: #333333;
-	background-color: #fff
+	
+	background-color:#FFFFFF;
+	background-image: radial-gradient(#fbfbfb 10%, transparent 50%);
+	radial-gradient(#fbfbfb 10%, transparent 20%);
+	background-size: 30px 30px;
+	background-position: 0 0, 15px 15px;
+	
+	
 }
 input, button, select, textarea {
 	font-family: inherit;
@@ -4176,8 +4183,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 }
 .panel-footer {
 	padding: 10px 15px;
-	background-color: #f5f5f5;
-	border-top: 1px solid #ddd;
+	background-color: #E7E7E7;
+	border-top: 1px solid #DCDCDC;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px
 }

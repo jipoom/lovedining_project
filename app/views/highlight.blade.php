@@ -13,7 +13,7 @@
 {
 ?>
 <input type="hidden" name="newMode" id = "newMode" value="{{isset($mode) ? $mode : null}}" />
-<div class="col-md-10">
+<div class="col-md-12">
 
 
 		<!-- Post Content -->
