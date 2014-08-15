@@ -64,13 +64,13 @@ class AdminBlogsController extends AdminController {
 
 			$category = array_add($category, $temp -> id, $temp -> category_name);
 		}*/
-		$category = Category::all();
+		$category = Category::getAllCategoryArray();
 		$selectedCategories = array();
-		$meal = Meal::all();
+		$meal = Meal::getAllMealArray();
 		$selectedMeals = array();
-		$dressing = Dressing::all();
+		$dressing = Dressing::getAllDressingArray();
 		$selectedDressings = array();
-		$foodType = Foodtype::all();
+		$foodType = Foodtype::getAllFoodTypeArray();
 		$selectedFoodTypes = array();
 		//Province
 		/*$init_province = Province::first();
@@ -81,8 +81,8 @@ class AdminBlogsController extends AdminController {
 		}*/
 		// Show the page
 		return View::make('admin/blogs/create_edit', 
-		compact('title', 'category', 'randAlbumName', 'selectedCategories',
-		'meal','selectedMeals','dressing','selectedDressings','foodType','selectedFoodTypes'));
+		compact('title', 'category', 'randAlbumName',
+		'meal','dressing','foodType'));
 	}
 
 	/**
@@ -245,21 +245,21 @@ class AdminBlogsController extends AdminController {
 			$category = array_add($category, $temp -> id, $temp -> category_name);
 		}*/
 		$randAlbumName = $post -> album_name;
-		$category = Category::all();
+		$category = Category::getAllCategoryArray();
 		//$postCategory = PostsCategory::where('post_id', '=', $post -> id)->get();
 		
-		$meal = Meal::all();
-		$dressing = Dressing::all();
-		$foodType = FoodType::all();
-		$postCategory = $post->category;
-		$postMeal = $post->meal;
-		$postDressing = $post->dressing;
-		$postFoodType = $post->foodType;
+		$meal = Meal::getAllMealArray();
+		$dressing = Dressing::getAllDressingArray();
+		$foodType = FoodType::getAllFoodTypeArray();
 		//get selected categories
-		$selectedCategories = Logic::preparePreselectedCheckBox($category,$postCategory);
-		$selectedMeals = Logic::preparePreselectedCheckBox($meal,$postMeal);
-		$selectedDressings = Logic::preparePreselectedCheckBox($dressing,$postDressing);
-		$selectedFoodTypes = Logic::preparePreselectedCheckBox($foodType,$postFoodType);
+		//$selectedCategories = Logic::preparePreselectedCheckBox($category,$postCategory);
+		$selectedCategories = Logic::preparePreselectedSelect($post->category);
+		//$selectedMeals = Logic::preparePreselectedCheckBox($meal,$postMeal);
+		$selectedMeals = Logic::preparePreselectedSelect($post->meal);
+		//$selectedDressings = Logic::preparePreselectedCheckBox($dressing,$postDressing);
+		$selectedDressings = Logic::preparePreselectedSelect($post->dressing);
+		//$selectedFoodTypes = Logic::preparePreselectedCheckBox($foodType,$postFoodType);
+		$selectedFoodTypes = Logic::preparePreselectedSelect($post->foodType);
 		/*$selectedCategories = array();
 		$i=0;
 		foreach($category as $choice)
@@ -398,12 +398,24 @@ class AdminBlogsController extends AdminController {
 			
 			if(Input::get('category_id_temp'))	
 				$post->category()->sync(Input::get('category_id_temp'));
+			else {
+				$post->category()->detach();
+			}
 			if(Input::get('meal_id_temp'))	
 				$post->meal()->sync(Input::get('meal_id_temp'));	
+			else {
+				$post->meal()->detach();
+			}
 			if(Input::get('foodType_id_temp'))
 				$post->foodType()->sync(Input::get('foodType_id_temp'));
+			else {
+				$post->foodType()->detach();
+			}
 			if(Input::get('dressing_id_temp'))
 				$post->dressing()->sync(Input::get('dressing_id_temp'));
+			else {
+				$post->dressing()->detach();
+			}
 			
 			// Was the blog post updated?
 
@@ -419,7 +431,7 @@ class AdminBlogsController extends AdminController {
 				// Delete so that everyone knows of its update
 				PostsUserRead::where('post_id', '=', $post -> id) -> delete();
 				//Save new dressing 
-				if(Input::get('dressingSpecify') == 1 && Input::get('newDressing')){
+				/*if(Input::get('dressingSpecify') == 1 && Input::get('newDressing')){
 					$newDressing = new Dressing;
 					$newDressing->name = Input::get('newDressing');
 					if($newDressing->save())
@@ -432,7 +444,7 @@ class AdminBlogsController extends AdminController {
 					$newFoodType->name = Input::get('newFoodType');
 					if($newFoodType->save())
 						$newFoodType->post()->attach($post -> id);
-				} 
+				} */
 				//return Redirect::to('admin/blogs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
 
 				//Check if admin update dir name

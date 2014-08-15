@@ -13,6 +13,20 @@ class FoodType extends Eloquent {
 	{
 		return $this->belongsToMany('User','user_food_type');
 	}
+	
+	public static function getAllFoodTypeArray()
+	{
+		$foodType= array('0' => 'All');	
+		$init_foodType = FoodType::first();
+		$foodType = array_add($foodType,$init_foodType->id, $init_foodType->name);
+		$allfoodType = FoodType::all();
+		foreach($allfoodType as $temp)
+		{
+				
+			$foodType = array_add($foodType, $temp->id, $temp->name);
+		}
+		return $foodType;
+	}
 }
 
 ?>

@@ -6,6 +6,10 @@
 	<!-- AutoComplete -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 	<!-- /AutoComplete -->
+	<!-- Dropdown Checklist -->
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/smoothness-1.8.13/jquery-ui-1.8.13.custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/ui.dropdownchecklist.themeroller.css')}}">
+    <!-- /Dropdown Checklist -->
 @stop
 @section('content')
 	 <!-- /In case admin enter invalid info -->
@@ -60,72 +64,44 @@
 						{{{ $errors->first('restaurant_name', ':message') }}}
 					</div>
 				</div>
-				<!-- Category -->
-				<div class="form-group">
+				
+				<!-- Category -->					 
+			   <div class="form-group">
                     <div class="col-md-12">
-						 <label class="control-label" for="title">Review Category</label><p>
-
-					 	 <?php $i=0; ?>
-					 	 @foreach($category as $temp)
-					 	 {{ Form::checkbox('category_id_temp[]', $temp->id, Input::old('category_id_temp[]',(isset($post) && $selectedCategories[$i]==1)? true : null))}}
-					 	 	 {{ $temp->category_name}}
-							 <P>	 
-					 	 	 <?php $i++;?>
-					 	 @endforeach
-					 	 <p></p>
-					 </div>
+						 <label class="control-label" for="title">ประเภทอาหาร</label><p>  						 	
+			    		{{Form::select('category_id_temp[]', $category, Input::old('category_id_temp[]',(isset($post))? $selectedCategories : null) , array('id' => 's12','class' => 's12', 'multiple'));}}    
+				 	</div>
 				</div>
-				<!-- Food Type -->
-				<div class="form-group">
+				<!-- /Category -->	
+				
+				<!-- Food Type -->					 
+			   <div class="form-group">
                     <div class="col-md-12">
-						 <label class="control-label" for="title">ประเภทอาหาร</label><p>
-
-					 	 <?php $i=0; ?>
-					 	 @foreach($foodType as $temp)
-					 	 {{ Form::checkbox('foodType_id_temp[]', $temp->id, Input::old('foodType_id_temp[]',(isset($post) && $selectedFoodTypes[$i]==1)? true : null))}}
-					 	 	 {{ $temp->name}}
-							 <P>	 
-					 	 	 <?php $i++;?>
-					 	 @endforeach
-					 	 {{Form::checkbox('foodTypeSpecify','1', null ,array('id'=>'foodTypeSpecify'))}} ระบุเอง
-					 	 {{ Form::text('newFoodType',Input::old('newFoodType', null), array('id'=>'newFoodType'))}} </p>
-						 {{{ $errors->first('newFoodType', ':message') }}}	
-					 	 <p></p>
-					 </div>
+						 <label class="control-label" for="title">ประเภทอาหาร</label><p>  
+						 	
+			    		{{Form::select('foodType_id_temp[]', $foodType, Input::old('foodType_id_temp[]',(isset($post))? $selectedFoodTypes : null) , array('id' => 's12','class' => 's12', 'multiple'));}}    
+				 	</div>
 				</div>
-				<!-- Dressing -->
-				<div class="form-group">
+				<!-- /Food Type -->	
+				
+				<!-- Dressing -->					 
+			   <div class="form-group">
                     <div class="col-md-12">
-						 <label class="control-label" for="title">การแต่งกาย</label><p>
-
-					 	 <?php $i=0; ?>
-					 	 @foreach($dressing as $temp)
-					 	 {{ Form::checkbox('dressing_id_temp[]', $temp->id, Input::old('dressing_id_temp[]',(isset($post) && $selectedDressings[$i]==1)? true : null))}}
-					 	 	 {{ $temp->name}}
-							 <P>	 
-					 	 	 <?php $i++;?>
-					 	 @endforeach
-					 	 {{Form::checkbox('dressingSpecify', '1',null, array('id'=>'dressingSpecify'))}} ระบุเอง
-					 	 {{ Form::text('newDressing',Input::old('newDressing', null), array('id'=>'newDressing'))}} </p>
-						 {{{ $errors->first('newDressing', ':message') }}}	
-					 	 <p></p>
-					 </div>
+						 <label class="control-label" for="title">การแต่งกาย</label><p>   
+			    		{{Form::select('dressing_id_temp[]', $dressing, Input::old('dressing_id_temp[]',(isset($post))? $selectedDressings : null) , array('id' => 's12','class' => 's12', 'multiple'));}}    
+				 	</div>
 				</div>
-				<!-- Meal -->
-				<div class="form-group">
+				<!-- /Dressing -->	
+				
+				
+				<!-- Meal -->					 
+			   <div class="form-group">
                     <div class="col-md-12">
-						 <label class="control-label" for="title">มื้ออาหาร</label><p>
-
-					 	 <?php $i=0; ?>
-					 	 @foreach($meal as $temp)
-					 	 {{ Form::checkbox('meal_id_temp[]', $temp->id, Input::old('meal_id_temp[]',(isset($post) && $selectedMeals[$i]==1)? true : null))}}
-					 	 	 {{ $temp->name}}
-							 <P>	 
-					 	 	 <?php $i++;?>
-					 	 @endforeach
-					 	 <p></p>
-					 </div>
+						 <label class="control-label" for="title">มื้ออาหาร</label><p>   
+			    		{{Form::select('meal_id_temp[]', $meal, Input::old('meal_id_temp[]',(isset($post))? $selectedMeals : null) , array('id' => 's12','class' => 's12', 'multiple'));}}    
+				 	</div>
 				</div>
+				<!-- /Meal -->	
 				<div class="form-group {{{ $errors->has('tel') ? 'error' : '' }}}">
                     <div class="col-md-12">
                     	
@@ -134,7 +110,8 @@
 						{{{ $errors->first('tel', ':message') }}}<p>
 					</div>
 				</div>
-										 <label class="control-label" for="title">ที่อยู่</label></P>
+	
+				<label class="control-label" for="title">ที่อยู่</label></P>
 				<div class="form-group {{{ $errors->has('latitude') ? 'error' : '' }}}">
                     <div class="col-md-12">
                     	
@@ -231,7 +208,7 @@
 						
 					</div>
 				</div> 	
-				 
+				
 				<div class="form-group">
                     <div class="col-md-12">
  						<p><label class="control-label" for="profilePic">Profile Picture</label></p>
@@ -412,6 +389,9 @@ function elFinderBrowser (field_name, url, type, win) {
 
 	}
 </script>
+
+<!-- dropdown checklist js -->
+<script type="text/javascript" src="{{asset('assets/js/ui.dropdownchecklist.js')}}"></script>   
 <!-- gen album name -->
 	<script src="{{asset('assets/js/jquery.popupWindow.js')}}"></script>
 	 <script type="text/javascript"> 
@@ -424,6 +404,9 @@ function elFinderBrowser (field_name, url, type, win) {
                             width:950,
                             centerScreen:1
                         }); 
+                        // <!-- Apply dropdown check list to the selected items  -->
+                        $(".s11").dropdownchecklist( { firstItemChecksAll: true } );		
+                        $(".s12").dropdownchecklist( { firstItemChecksAll: true } );	
                     });
                     
                     function processFile(url,name){

@@ -27,6 +27,18 @@ class Logic {
 		}
 		return $selectedArray;
 	}
+	
+	public static function preparePreselectedSelect($allSelected)
+	{
+		$selectedArray = array();
+		$i=0;
+		foreach($allSelected as $selected)
+		{
+		   $selectedArray[$i] = $selected->id;
+		   $i++;
+		}
+		return $selectedArray;
+	}
 }
 
 ?>

@@ -13,6 +13,20 @@ class Category extends Eloquent {
 	{
 		return $this->belongsToMany('Posts','statistic');
 	}
+	
+	public static function getAllCategoryArray()
+	{
+		$category= array('0' => 'All');	
+		$init_category = Category::first();
+		$category = array_add($category,$init_category->id, $init_category->category_name);
+		$allcategory = Category::all();
+		foreach($allcategory as $temp)
+		{
+				
+			$category = array_add($category, $temp->id, $temp->category_name);
+		}
+		return $category;
+	}
 }
 
 ?>
