@@ -68,7 +68,7 @@
 				<!-- Category -->					 
 			   <div class="form-group">
                     <div class="col-md-12">
-						 <label class="control-label" for="title">ประเภทอาหาร</label><p>  						 	
+						 <label class="control-label" for="title">Category</label><p>  						 	
 			    		{{Form::select('category_id_temp[]', $category, Input::old('category_id_temp[]',(isset($post))? $selectedCategories : null) , array('id' => 's12','class' => 's12', 'multiple'));}}    
 				 	</div>
 				</div>

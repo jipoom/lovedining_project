@@ -21,6 +21,9 @@
     width:950px; /* you can use % */
     height: auto;
 	}
+
+    
+}
 </style>
 @stop
 
@@ -45,7 +48,7 @@
 			?>
 			@if(count($banner) > 0)
 				<li>
-					<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province}}" align="middle"/></a>		
+					<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province}}" align="middle" class="resize"/></a>		
 				</li>
 			@endif
 		@endforeach
@@ -88,7 +91,7 @@
 		});
 		
 		$('.bxslider_highlight').bxSlider({
-			mode : 'fade',
+			mode : 'horizontal',
 			infiniteLoop : true,
 			auto : true,
 			autoStart : true,
@@ -104,8 +107,10 @@
 			randomStart : true,
 			responsive : true,
 			slideWidth : 950,
-			adaptiveHeight: true
+			adaptiveHeight: true,
+			moveSlides: 1
 		});
+
 		
 	}); 
 </script>

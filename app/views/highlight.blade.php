@@ -32,7 +32,7 @@
 			<ul class="bxslider_highlight bx-wrapper">
 				@foreach($hightlightPics as $hightlightPic)
 				<li>
-					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$hightlightPic}}" align="middle"/></a>		
+					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$hightlightPic}}" align="" /></a>		
 				</li>
 				@endforeach
 		
