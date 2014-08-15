@@ -18,8 +18,8 @@
     margin: 0 auto;
 	}
 	img.resize{
-    width:auto; /* you can use % */
-    height: 500px;
+    width:950px; /* you can use % */
+    height: auto;
 	}
 </style>
 @stop
@@ -27,7 +27,7 @@
 {{-- Content --}}
 @section('content')
 <!-- .Ads -->
-<div class="ads-right pull-right checkscreen">
+<div class="ads-right checkscreen">
 	<div class="col-md-12">
 		<a href="" class="thumbnail"><img src="http://placehold.it/260x800" alt=""></a>
 	</div>
@@ -36,22 +36,7 @@
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
 </h4>
-@if(count($home) == 1)
-<div class="col-md-10">
-	
-		@foreach($home as $post)
-			<?php 
-			$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name.'/banner/',true);
-			?>
-			@if(count($banner) > 0)
-				<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province}}" align="middle"/></a>		
-			@endif
-		@endforeach
 
-	
-	
-</div>
-@elseif(count($home) > 1)
 <div class="col-md-10">
 	<ul class="bxslider">
 		@foreach($home as $post)
@@ -69,7 +54,6 @@
 	
 </div>
 
-@endif
 <div class="col-md-12">
 
 @include('highlight')
@@ -99,7 +83,7 @@
 			speed : 500,
 			randomStart : true,
 			responsive : true,
-			slideWidth : 750,
+			slideWidth : 950,
 			adaptiveHeight: true
 		});
 		
@@ -119,7 +103,7 @@
 			speed : 500,
 			randomStart : true,
 			responsive : true,
-			slideWidth : 750,
+
 			adaptiveHeight: true
 		});
 		

@@ -67,33 +67,30 @@
 
 	<div class="col-md-6">
 		<!-- Post Title -->
-		@if(Auth::check()) 
-			@if(User::checkIfUserRead($postUserRead,$posts[$i]->id))
-			<div class="col-md-12">
+		<div class="col-md-12">
 				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
 			</div>
-			@else
-			<div class="col-md-12">
-				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }} (new)</a></strong></h4>
-			</div>
-			@endif
-		@else 
-			<div class="col-md-12">
-				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
-			</div>
-		@endif
 		<!-- ./ post title -->
 
 		<!-- Post Content -->
 
-		<div class="col-md-6">
-			@if($posts[$i]->profile_picture_name!="")
+		<div class="col-md-12">
+			
+		@if(Auth::check()) 
+				
+			@if($posts[$i]->profile_picture_name!="")			
 			<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$posts[$i]->album_name.'/'.$posts[$i]->profile_picture_name}}" alt=""></a>
 			@else
 			<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 			@endif
+				
+			@if(User::checkIfUserRead($postUserRead,$posts[$i]->id))
+			@else
+				<div class="ribbon-wrapper-green"><div class="ribbon-green">NEW</div></div>		
+			@endif		
+		@endif	
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-12" style="font-size: 13px">
 			<p>
 				{{ String::tidy($posts[$i]->restaurant_name) }}
 			</p>
@@ -118,6 +115,7 @@
 				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
 				{{{ $posts[$i]->date() }}}
 				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $posts[$i]->url() }}}#comments">{{$posts[$i]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i]->comments()->count()) }}</a>
+			<hr />
 			</p>
 		</div>
 
@@ -129,41 +127,33 @@
 	<div class="col-md-6">
 		
 		<!-- Post Title -->
-		@if(Auth::check()) 
-			@if(User::checkIfUserRead($postUserRead,$posts[$i+1]->id))
-				<div class="col-md-12">
-					<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
-					title) }}</a></strong></h4>
-				</div>
-			@else
-				<div class="col-md-12">
-				<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
-				title) }} (new)</a></strong></h4>
-				</div>
-			@endif
-		@else
-			<div class="col-md-12">
+		<div class="col-md-12">
 			<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
 			title) }}</a></strong></h4>
 			</div>
-		@endif
-
 		<!-- ./ post title -->
 	
 		<!-- Post Content -->
-		<div class="col-md-6">
-			@if($posts[$i+1]->profile_picture_name!="")
-			<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$posts[$i+1]->album_name.'/'.$posts[$i+1]->profile_picture_name}}" alt=""></a>
-			@else
-			<a href="{{{ $posts[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-			@endif
+		<div class="col-md-12">
+			@if(Auth::check()) 
+				@if($posts[$i+1]->profile_picture_name!="")			
+				<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$posts[$i+1]->album_name.'/'.$posts[$i+1]->profile_picture_name}}" alt=""></a>
+				@else
+				<a href="{{{ $posts[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+				@endif
+					
+				@if(User::checkIfUserRead($postUserRead,$posts[$i+1]->id))
+				@else
+					<div class="ribbon-wrapper-green"><div class="ribbon-green">NEW</div></div>		
+				@endif		
+			@endif	
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-12" style="font-size: 13px">
 			<p>
 				{{ String::tidy($posts[$i+1]->restaurant_name) }}
 			</p>
 			<p>
-				{{ String::tidy($posts[$i+1]->district); }}, {{ String::tidy($posts[$i+1]->province); }}
+				{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province); }}
 			</p>
 			<p>
 				Tel:
@@ -183,6 +173,7 @@
 				| <span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
 				{{{ $posts[$i+1]->date() }}}
 				| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $posts[$i+1]->url() }}}#comments">{{$posts[$i+1]->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $posts[$i+1]->comments()->count()) }}</a>
+			<hr />
 			</p>
 		</div>
 	
@@ -191,6 +182,7 @@
 
 @endif
 <!-- /new Column -->
+
 </div>
 
 <?php

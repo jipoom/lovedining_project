@@ -5,10 +5,9 @@
  */
 
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
-@import url(fonts/th_baijam.css);
-@import url(fonts1/th_mali_grade6.css);
-@import url(fonts2/th_koho.css);
+
 @import url(fonts4/th_kodchasal.css);
+@import url(fonts5/stylesheet.css);
 
 html {
 	font-family: sans-serif;
@@ -234,7 +233,7 @@ body {
 	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 	font-size: 15px;
 	line-height: 1.42857143;
-	color: #333;
+	color: #333333;
 	background-color: #fff
 }
 input, button, select, textarea {
@@ -243,11 +242,11 @@ input, button, select, textarea {
 	line-height: inherit
 }
 a {
-	color: #11AFAA;
+	color: #333333;
 	text-decoration: none
 }
 a:hover, a:focus {
-	color: #1BD1CB;
+	color: #121212;
 	text-decoration: underline
 }
 a:focus {
@@ -300,9 +299,10 @@ hr {
 	clip: rect(0,0,0,0);
 	border: 0
 }
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
-	font-family: 'THKodchasal', sans-serif;
+	font-family: 'wdb_bangnaregular';
 	font-weight: 1000;
 	line-height: 1.5;
 	color: inherit
@@ -611,6 +611,16 @@ pre code {
 	float: right;
 	width: 16%
 }
+.t_t {
+    font-family: 'wdb_bangnaregular';
+    font-weight: bold;
+    font-style: oblique;
+    position: relative;  
+    font-size: 22px;
+    line-height: 30px;
+    color: #000000;
+    
+}
 @media only screen and (max-width: 500px) {
     .slogan {
         display: none;
@@ -647,7 +657,7 @@ pre code {
 	margin-right: -15px
 }
 
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-md-6_5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
 	position: relative;
 	min-height: 1px;
 	padding-left: 15px;
@@ -969,7 +979,7 @@ pre code {
 	}
 }
 @media (min-width: 992px) {
-	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6_5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
 		float: left
 	}
 	.col-md-12 {
@@ -992,6 +1002,9 @@ pre code {
 	}
 	.col-md-6 {
 		width: 50%
+	}
+	.col-md-6_5 {
+		width: 47%
 	}
 	.col-md-5 {
 		width: 41.66666667%
@@ -5064,4 +5077,54 @@ button.close {
 .tfclear {
 	clear: both;
 }
+/* ribbon new*/
+.ribbon-wrapper-green {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: 12px;
+}
 
+.ribbon-green {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #BFDC7A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); 
+  color: #6a6340;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon-green:before, .ribbon-green:after {
+  content: "";
+  border-top:   3px solid #6e8900;   
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-green:before {
+  left: 0;
+}
+.ribbon-green:after {
+  right: 0;
+}​

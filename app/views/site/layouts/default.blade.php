@@ -19,7 +19,7 @@
 		================================================== -->
 		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap-theme.min.css')}}">
-
+		<link rel="stylesheet" href="{{asset('bootstrap/css/ribbon.css')}}">
 		<style>
 			@section('styles')
 			@show
