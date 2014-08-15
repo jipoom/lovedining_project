@@ -16,7 +16,7 @@
 			{{{ $title }}}
 
 			<div class="pull-right">
-				<a href="{{{ URL::to('admin/category/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+				<a href="{{{ URL::to('admin/dressing/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
 			</div>
 		</h3>
 	</div>
@@ -24,8 +24,7 @@
 	<table id="category" class="display">
 		<thead>
 			<tr>
-				<th class="col-md-2">{{{ Lang::get('admin/category/table.title') }}}</th>
-				<th class="col-md-2">{{{ Lang::get('admin/category/table.comments') }}}</th>
+				<th class="col-md-2">การแต่งกาย</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>
 		</thead>
@@ -47,7 +46,7 @@
 				},
 				"bProcessing": false,
 		        "bServerSide": true,
-		        "sAjaxSource": "{{ URL::to('admin/category/data') }}",
+		        "sAjaxSource": "{{ URL::to('admin/dressing/data') }}",
 		        "fnDrawCallback": function ( oSettings ) {
 	           		$(".iframe").colorbox({iframe:true, width:"60%", height:"60%"});
 	     		}
