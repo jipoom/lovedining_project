@@ -22,7 +22,7 @@
                         <label class="control-label" for="category">ประเภทอาหาร</label>
 						{{ Form::text('foodtype',Input::old('foodtype', isset($foodtype) ? $foodtype->name : null) , array('class'=>'form-control', 'placeholder'=>'ประเภทอาหาร'))}} </p>
 						{{{ $errors->first('foodtype', ':message') }}}
-						 
+                        
 					</div>
 				</div>
 				<!-- ./ post title -->

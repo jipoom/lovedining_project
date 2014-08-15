@@ -94,7 +94,8 @@ class PrivateMessageController extends BaseController {
 			// Was the blog post updated?
 			if ($this -> privateMessage -> save() && $messageSender -> save()) {
 				// Redirect to the new blog post page
-				return Redirect::to('message_service/create') -> with('success', Lang::get('messages.success'));
+				//return Redirect::to('message_service/create') -> with('success', Lang::get('messages.success'));
+				return View::make('closeme');
 			}
 
 			// Redirect to the blog post create page
@@ -135,7 +136,8 @@ class PrivateMessageController extends BaseController {
 			// Was the blog post updated?
 			if ($this -> privateMessage -> save() && $messageSender -> save()) {
 				// Redirect to the new blog post page
-				return Redirect::to('message_service/reply/' . $privateMessage -> id) -> with('success', Lang::get('messages.success'));
+				//return Redirect::to('message_service/reply/' . $privateMessage -> id) -> with('success', Lang::get('messages.success'));
+				return View::make('closemenoparent');
 			}
 
 			// Redirect to the blog post create page

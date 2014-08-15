@@ -130,34 +130,33 @@
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<!-- /AutoComplete -->
  <script type="text/javascript">
-$(document).ready(function(){
-$('.close_popup').click(function(){
-parent.oTable.fnReloadAjax();
-parent.jQuery.fn.colorbox.close();
-return false;
-});
-$('#deleteForm').submit(function(event) {
-var form = $(this);
-$.ajax({
-type: form.attr('method'),
-url: form.attr('action'),
-data: form.serialize()
-}).done(function() {
-parent.jQuery.colorbox.close();
-parent.oTable.fnReloadAjax();
-}).fail(function() {
-});
-event.preventDefault();
-});
-});
-$('.wysihtml5').wysihtml5();
-$(prettyPrint)
+		$(document).ready(function() {
+				$('.close_popup').click(function() {
+					parent.jQuery.fn.colorbox.close();
+					return false;
+				});
+				$('#deleteForm').submit(function(event) {
+					var form = $(this);
+					$.ajax({
+						type : form.attr('method'),
+						url : form.attr('action'),
+						data : form.serialize()
+					}).done(function() {
+						parent.jQuery.colorbox.close();
+						parent.oTable.fnReloadAjax();
+					}).fail(function() {
+					});
+					event.preventDefault();
+				});
+			});
+			$('.wysihtml5').wysihtml5();
+			$(prettyPrint)
 
 
-//DatePicker
-$(function(){
-		$('*[name=expiryDate]').appendDtpicker();
-});
+			//DatePicker
+			$(function(){
+					$('*[name=expiryDate]').appendDtpicker();
+			});
 
 
 </script>
