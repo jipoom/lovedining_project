@@ -1,13 +1,14 @@
 @import url(fonts5/stylesheet.css);
 .ribbon {
-   width: 410px;
+   width: 100%;
  
    text-align: center;
     font-family: 'wdb_bangnaregular';
    font-size: 20px!important;
    font-weight: bold;
-   background: #EDEDED;
    
+  line-height: 170%;
+  background: #EDEDED;
    box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
    
    }
