@@ -19,6 +19,9 @@ Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('category', 'Category');
+Route::model('meal', 'Meal');
+Route::model('foodtype', 'FoodType');
+Route::model('dressing', 'Dressing');
 Route::model('campaign', 'Campaign');
 Route::model('role', 'Role');
 Route::model('message', 'PrivateMessage');
@@ -106,6 +109,31 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::get('category/{category}/delete', 'AdminCategoryController@getDelete');
     Route::post('category/{category}/delete', 'AdminCategoryController@postDelete');
     Route::controller('category', 'AdminCategoryController');
+	
+	# Meal Management	
+	Route::get('meal/{meal}/show', 'AdminMealController@getShow');
+    Route::get('meal/{meal}/edit', 'AdminMealController@getEdit');
+    Route::post('meal/{meal}/edit', 'AdminMealController@postEdit');
+    Route::get('meal/{meal}/delete', 'AdminMealController@getDelete');
+    Route::post('meal/{meal}/delete', 'AdminMealController@postDelete');
+    Route::controller('meal', 'AdminMealController');
+	
+	# FoodType Management	
+	Route::get('foodtype/{foodtype}/show', 'AdminFoodTypeController@getShow');
+    Route::get('foodtype/{foodtype}/edit', 'AdminFoodTypeController@getEdit');
+    Route::post('foodtype/{foodtype}/edit', 'AdminFoodTypeController@postEdit');
+    Route::get('foodtype/{foodtype}/delete', 'AdminFoodTypeController@getDelete');
+    Route::post('foodtype/{foodtype}/delete', 'AdminFoodTypeController@postDelete');
+    Route::controller('foodtype', 'AdminFoodTypeController');
+	
+	# Dressing Management	
+	Route::get('dressing/{dressing}/show', 'AdminDressingController@getShow');
+    Route::get('dressing/{dressing}/edit', 'AdminDressingController@getEdit');
+    Route::post('dressing/{dressing}/edit', 'AdminDressingController@postEdit');
+    Route::get('dressing/{dressing}/delete', 'AdminDressingController@getDelete');
+    Route::post('dressing/{dressing}/delete', 'AdminDressingController@postDelete');
+    Route::controller('dressing', 'AdminDressingController');
+	
 	
 	# Campaign Management
 	Route::get('campaign/{campaign}/show', 'AdminCampaignController@getShow');

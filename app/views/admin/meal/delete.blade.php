@@ -2,25 +2,28 @@
 
 {{-- Content --}}
 @section('content')
+
     <!-- Tabs -->
       <!--  <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
       </ul> -->
     <!-- ./ tabs -->
-
-    {{-- Delete User Form --}}
-    <form id="deleteForm" class="form-horizontal" method="post" action="@if (isset($user)){{ URL::to('admin/users/' . $user->id . '/delete') }}@endif" autocomplete="off">
+    {{-- Delete Category Form --}}
+    <form id="deleteForm" class="form-horizontal" method="post" action="@if (isset($category)){{ URL::to('admin/meal/' . $meal->id . '/delete') }}@endif" autocomplete="off">
+        
         <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-        <input type="hidden" name="id" value="{{ $user->id }}" />
+        <input type="hidden" name="id" value="{{ $meal->id }}" />
+        <!-- <input type="hidden" name="_method" value="DELETE" /> -->
         <!-- ./ csrf token -->
 
         <!-- Form Actions -->
         <div class="form-group">
             <div class="controls">
-                 <p><label>Are you sure you want to delete "{{$user->username}}"?</labe></p>
+               <p><label>Are you sure you want to delete "{{$meal->name}}"?</labe></p>
                 <button class="btn btn-cancel close_popup">Cancel</button>
                 <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
             </div>
         </div>
         <!-- ./ form actions -->
