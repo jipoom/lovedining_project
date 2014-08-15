@@ -369,7 +369,7 @@ function elFinderBrowser (field_name, url, type, win) {
 
 <!-- gen album name -->
 <script>
-	function mkDir() {
+	/*function mkDir() {
 		var newDir = $("#album_name").val();
 		var id = $("#review_id").val();
 		if (window.XMLHttpRequest) {
@@ -387,7 +387,7 @@ function elFinderBrowser (field_name, url, type, win) {
 		xmlhttp.open("GET", "{{ URL::to('admin/blogs/makeDir/') }}/"+ newDir+"/"+id , true);
 		xmlhttp.send();
 
-	}
+	}*/
 </script>
 
 <!-- dropdown checklist js -->
@@ -404,8 +404,7 @@ function elFinderBrowser (field_name, url, type, win) {
                             width:950,
                             centerScreen:1
                         }); 
-                        // <!-- Apply dropdown check list to the selected items  -->
-                        $(".s11").dropdownchecklist( { firstItemChecksAll: true } );		
+                        // <!-- Apply dropdown check list to the selected items  -->	
                         $(".s12").dropdownchecklist( { firstItemChecksAll: true } );	
                     });
                     
