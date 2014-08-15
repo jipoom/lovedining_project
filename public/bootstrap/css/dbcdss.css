@@ -1,0 +1,11 @@
+.movieinfo {
+	border: 2px solid #fcfafa;
+	padding: 20px;
+	width: 350px;
+	height: 400px;
+	background-color: #ededed;
+	margin: 2px 0 0 2px;
+	-moz-box-shadow: 0 20px 40px #888;
+	-webkit-box-shadow: 0 20px 40px #888;
+}
+

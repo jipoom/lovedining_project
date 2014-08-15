@@ -73,6 +73,9 @@
 	<hr />
 	<p></p>
 
+
+<div class="movieinfo">
+
 	<h4>ร้านอาหาร: {{ $post->restaurant_name }}</h4>
 	<h5>โทร: {{ $post->tel }}</h5>
 	<h5>ที่อยู่:
@@ -112,6 +115,8 @@
 		@endforeach
 		</h5>
 	@endif
+	
+	
 	@if($post->latitude!="" && $post->longitude!=null)
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script>
@@ -167,10 +172,17 @@
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 	
-			<div id="googleMap" style="width:400px;height:280px;"></div>
+			<div id="googleMap" style="width:200px;height:140px;"></div>
 			
 			<a href="http://maps.google.com/?q={{$post->latitude}},{{$post->longitude}}">View Map in full screen</a>
 	@endif
+	
+	
+	
+	
+	</div>
+
+	
 		<p></p>
 		{{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
 		
