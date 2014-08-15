@@ -404,8 +404,11 @@ function elFinderBrowser (field_name, url, type, win) {
                             width:950,
                             centerScreen:1
                         }); 
-                        // <!-- Apply dropdown check list to the selected items  -->	
-                        $(".s12").dropdownchecklist( { firstItemChecksAll: true } );	
+                        // <!-- Apply dropdown check list to the selected items  -->
+                        $(".s12").dropdownchecklist( { 
+                        	firstItemChecksAll: true,
+                        	emptyText: "Please select ...", width: 150 
+                        	} );	
                     });
                     
                     function processFile(url,name){
