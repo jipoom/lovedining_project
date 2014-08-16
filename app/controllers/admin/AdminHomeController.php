@@ -213,8 +213,7 @@ class AdminHomeController extends AdminController {
 		//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
 		$timestamp = time(); 
 		$posts = Post::select(array('posts.id', 'posts.title as post_name', 'posts.id as comments', 'posts.created_at', 'posts.is_highlight')) 
-		-> active()
-		-> where('is_home','=','0');
+		-> active();
 		//-> leftjoin('posts_category', 'posts.id', '=', 'posts_category.post_id') 
 		//-> leftjoin('category', 'posts_category.category_id', '=', 'category.id');
 
