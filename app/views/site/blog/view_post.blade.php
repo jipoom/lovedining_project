@@ -25,11 +25,13 @@
 @stop
 
 @section('styles')
-<style>img {
-    max-width: 100%;
-    height: auto;
-    width: auto\9; /* ie8 */
-}</style>
+<style>
+	img {
+		max-width: 100%;
+		height: auto;
+		width: auto\9; /* ie8 */
+	}
+</style>
 <link rel="stylesheet" href="{{asset('assets/css/preettyphoto/prettyPhoto.css')}}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 
 <link href="{{asset('assets/css/jquery.bxslider.css')}}" rel="stylesheet" />
@@ -38,13 +40,13 @@
 		margin: 0;
 		padding: 0;
 	}
-	
+
 	.bx-wrapper img {
-    margin: 0 auto;
+		margin: 0 auto;
 	}
-	img.resize{
-    width:auto; /* you can use % */
-    height: 400px;
+	img.resize {
+		width: auto; /* you can use % */
+		height: 400px;
 	}
 </style>
 
@@ -60,150 +62,148 @@
 </div>
 <!-- ./ Ads -->
 <div class="col-md-10">
+
 	<h3 style="color: #1AC4BF">{{ $post->title }}</h3>
 	<div>
 		<span class="badge badge-info pull-right">Posted {{{ $post->date() }}}</span>
 	</div>
 	<br>
-	<p>
-		{{ $post->content() }}
-	</p>
-	<div class="fb-like" data-href="{{Request::url()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	<div class="col-md-3" >
+		<div class="movieinfo">
 
-	<hr />
-	<p></p>
+			<h4>{{ $post->restaurant_name }}</h4>
+			<h5>โทร: {{ $post->tel }}</h5>
+			<h5> @if($post->street_addr)
+			{{$post->street_addr}}
+			@endif
 
+			@if($post->soi)
+			ซอย{{$post->soi}}
+			@endif
 
-<div class="movieinfo">
+			@if($post->road)
+			ถนน{{$post->road}}
+			@endif
 
-	<h4>{{ $post->restaurant_name }}</h4>
-	<h5>โทร: {{ $post->tel }}</h5>
-	<h5>
-	@if($post->street_addr)
-	{{$post->street_addr}}
-	@endif
-	&nbsp
-	@if($post->soi)
-	ซอย{{$post->soi}}
-	@endif
-	&nbsp
-	@if($post->road)
-	ถนน{{$post->road}}
-	@endif
-	&nbsp
-	@if($post->tumbol)
-	แขวง{{$post->tumbol}}
-	@endif
-	&nbsp
-	@if($post->amphur)
-	เขต{{$post->amphur}}
-	@endif
-	&nbsp
-	@if($post->province)
-	{{$post->province}}
-	@endif
-	&nbsp
-	@if($post->zip)
-	{{$post->zip}}
-	@endif </h5>
-	<input type="hidden" id="province" value= {{String::tidy($post->
-	province) }}/>
-	@if(Auth::user() && Auth::user()->hasRole('admin'))
-		<h5>Category:
-		@foreach($post->category as $cat_name)
-			<li>{{$cat_name['category_name']}}</li>
-		@endforeach
-		</h5>
-	@endif
-	
-	
-	@if($post->latitude!="" && $post->longitude!=null)
-		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-		<script>
-			/*var geocoder;
-			var map;
-			function initialize() {
+			@if($post->tumbol)
+			แขวง{{$post->tumbol}}
+			@endif
+
+			@if($post->amphur)
+			เขต{{$post->amphur}}
+			@endif
+
+			@if($post->province)
+			{{$post->province}}
+			@endif
+
+			@if($post->zip)
+			{{$post->zip}}
+			@endif </h5>
+			<input type="hidden" id="province" value= {{String::tidy($post->
+			province) }}/>
+			@if(Auth::user() && Auth::user()->hasRole('admin'))
+			<h5>Category:
+			@foreach($post->category as $cat_name)
+			<li>
+				{{$cat_name['category_name']}}
+			</li> @endforeach </h5>
+			@endif
+
+			@if($post->latitude!="" && $post->longitude!=null)
+			<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+			<script>
+								/*var geocoder;
+				var map;
+				function initialize() {
 				geocoder = new google.maps.Geocoder();
 				var latlng = new google.maps.LatLng(13.7500, 100.4833);
 				var mapOptions = {
-					zoom : 16,
-					center : latlng
+				zoom : 16,
+				center : latlng
 				}
-	
+
 				map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-			}
-	
-			function codeAddress(location) {
+				}
+
+				function codeAddress(location) {
 				// var address = document.getElementById('address').value;
 				//var address = 'Arlington, VA';
 				var address = location;
 				geocoder.geocode({
-					'address' : address
+				'address' : address
 				}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						map.setCenter(results[0].geometry.location);
-						var marker = new google.maps.Marker({
-							map : map,
-							position : results[0].geometry.location
-						});
-					} else {
-						alert('Geocode was not successful for the following reason: ' + status);
-					}
+				if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				var marker = new google.maps.Marker({
+				map : map,
+				position : results[0].geometry.location
 				});
-			}
-	
-	
-			google.maps.event.addDomListener(window, 'load', initialize);
-			*/
-			function initialize() {
-			  var myLatlng = new google.maps.LatLng({{$post->latitude}},{{$post->longitude}});
-			  var mapOptions = {
-			    zoom: 16,
-			    center: myLatlng
-			  }
-			  var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-			
-			  var marker = new google.maps.Marker({
-			      position: myLatlng,
-			      map: map
-			  });
-			}
-			
-			google.maps.event.addDomListener(window, 'load', initialize);
-		</script>
-	
-			<div id="googleMap" style="width:200px;height:140px;"></div>
-			
-			<a href="http://maps.google.com/?q={{$post->latitude}},{{$post->longitude}}">View Map in full screen</a>
-	@endif
-	
-	
-	
-	
-	</div>
+				} else {
+				alert('Geocode was not successful for the following reason: ' + status);
+				}
+				});
+				}
 
-	
+				google.maps.event.addDomListener(window, 'load', initialize);
+				*/
+				function initialize() {
+				var myLatlng = new google.maps.LatLng({{$post->latitude}},{{$post->longitude}});
+				var mapOptions = {
+				zoom: 16,
+				center: myLatlng
+				}
+				var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+
+				var marker = new google.maps.Marker({
+				position: myLatlng,
+				map: map
+				});
+				}
+
+				google.maps.event.addDomListener(window, 'load', initialize);
+			</script>
+
+			<div id="googleMap" style="width:160px;height:140px;"></div>
+
+			<a href="http://maps.google.com/?q={{$post->latitude}},{{$post->longitude}}"><img src="{{{ asset('assets/img/map.png') }}}" title="View map in full screen"></a>
+
+			@endif
+		</div>
+
+		<!-- ./ picture album -->
+		<div class="movieinfo">
+			<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $post -> album_name, true); ?>
+
+			<!-- picture div -->
+			<div>
+
+				<ul class="gallery clearfix bxslider">
+					@foreach ($album as $picture)
+
+					<li>
+						<a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" /></a>
+					</li>
+
+					@endforeach
+				</ul>
+			</div>
+			<!-- picture div -->
+		</div>
+		<!-- ./ picture album -->
+	</div>
+	<div class="col-md-9">
+		<p>
+			{{ $post->content() }}
+		</p>
+		<div class="fb-like" data-href="{{Request::url()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+
+		<hr />
+		<p></p>
+
 		<p></p>
 		{{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
-		
-		<!-- ./ picture album -->
-		<?php $album = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name,true); ?>
 
-		<!-- picture div -->
-		<div>
-		
-		<ul class="gallery clearfix bxslider">
-			@foreach ($album as $picture)
-		
-			<li><a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" /></a></li>
-
-			@endforeach
-		</ul>
-		</div>
-		<!-- picture div -->
-		
-		<!-- ./ picture album -->
-		
 		<hr />
 		<a id="comments"></a>
 		<h4>{{{ $comments->count() }}} Comments</h4>
@@ -261,8 +261,10 @@
 
 		<form  method="post" action="{{{ URL::to($post->id) }}}">
 			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
-			<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>
+			<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>						
 			
+
+
 
 
 			<div class="form-group">
@@ -273,6 +275,7 @@
 		</form>
 		@endif
 
+	</div>
 </div>
 @stop
 
@@ -348,37 +351,36 @@
 			randomStart : true,
 			responsive : true,
 			slideWidth : 300,
-			adaptiveHeight: true
+			adaptiveHeight : true
 		});
 		$("area[rel^='LoveDining']").prettyPhoto();
 
-			$(".gallery:first a[rel^='LoveDining']").prettyPhoto({
-				animation_speed : 'normal',
-				theme : 'light_square',
-				slideshow : 3000,
-				autoplay_slideshow : false
-			});
-			$(".gallery:gt(0) a[rel^='LoveDining']").prettyPhoto({
-				animation_speed : 'fast',
-				slideshow : 10000,
-				hideflash : true
-			});
+		$(".gallery:first a[rel^='LoveDining']").prettyPhoto({
+			animation_speed : 'normal',
+			theme : 'light_square',
+			slideshow : 3000,
+			autoplay_slideshow : false
+		});
+		$(".gallery:gt(0) a[rel^='LoveDining']").prettyPhoto({
+			animation_speed : 'fast',
+			slideshow : 10000,
+			hideflash : true
+		});
 
-			$("#custom_content a[rel^='LoveDining']:first").prettyPhoto({
-				custom_markup : '<div id="map_canvas" style="width:260px; height:265px"></div>',
-				changepicturecallback : function() {
-					initialize();
-				}
-			});
+		$("#custom_content a[rel^='LoveDining']:first").prettyPhoto({
+			custom_markup : '<div id="map_canvas" style="width:260px; height:265px"></div>',
+			changepicturecallback : function() {
+				initialize();
+			}
+		});
 
-			$("#custom_content a[rel^='LoveDining']:last").prettyPhoto({
-				custom_markup : '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
-				changepicturecallback : function() {
-					_bsap.exec();
-				}
-			});
+		$("#custom_content a[rel^='LoveDining']:last").prettyPhoto({
+			custom_markup : '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+			changepicturecallback : function() {
+				_bsap.exec();
+			}
+		});
 	}); 
 </script>
 
-	
 @stop
