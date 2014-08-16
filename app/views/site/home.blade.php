@@ -21,6 +21,7 @@
     width:950px; /* you can use % */
     height: auto;
 	}
+	
 
     
 }
