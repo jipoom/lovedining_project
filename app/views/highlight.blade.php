@@ -18,7 +18,7 @@
 
 		<!-- Post Content -->
 
-		<div class="col-md-6_5 pull-left thumbnail" style="padding: 5 5 5 0; margin: 5 0 5 0;">	
+		<div class="col-md-6_5 thumbnail" style="padding: 5 5 5 0; margin: 5 0 5 0;">	
 		
 <div class="non-semantic-protector"> 
    <!-- ribbons and other content in here -->
@@ -61,7 +61,7 @@
 		
 	
 		<!-- Post Content -->
-		<div class="col-md-6_5 pull-right thumbnail" style="padding: 5 0 5 5; margin: 5 0 5 0;" >
+		<div class="col-md-6_5 thumbnail" style="padding: 5 0 5 5; margin: 5 0 5 0;" >
 			<div class="non-semantic-protector"> 
    <!-- ribbons and other content in here -->
 
