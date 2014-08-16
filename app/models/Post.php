@@ -137,11 +137,11 @@ class Post extends Eloquent {
 	}
 	public function province()
 	{
-		return $this->belongsTo('province','province_id');
+		return $this->belongsTo('Province','province_id');
 	}
 	public function amphur()
 	{
-		return $this->belongsTo('amphur','amphur_id');
+		return $this->belongsTo('Amphur','amphur_id');
 	}
 	
 	public static function findImages($content)
@@ -253,9 +253,9 @@ class Post extends Eloquent {
 				-> orderBy($orderBy, $mode)
 				->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
 				'posts.profile_picture_name','posts.content','posts.album_name',
-				'posts.restaurant_name','posts.tel','posts.street_addr',
-				'posts.soi','posts.road','posts.tumbol','posts.amphur',
-				'posts.province','posts.zip','posts.created_at','posts.updated_at'));
+				'posts.restaurant_name','posts.tel','posts.address1',
+				'posts.address2','posts.tumbol','posts.amphur',
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
 		 }
 		 //If user searches with a keyword
 		 else {
@@ -274,14 +274,14 @@ class Post extends Eloquent {
 			    //where date > published_date
 				//where date < expired_date	
 			    //$posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->paginate(8);
-				$posts =Post::active()->where(function($query) use ($term)
+				$posts =Post::active()->join('province','province.id','=','posts.province_id')->where(function($query) use ($term)
 	            {
 	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
 	                      ->orwhere('title', 'LIKE', '%'. $term .'%')
-						  ->orwhere('province', 'LIKE', '%'. $term .'%')
+						  ->orwhere('province.province_name', 'LIKE', '%'. $term .'%')
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
-						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%')
-						  ->orwhere('road', 'LIKE', '%'. $term .'%');
+						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
+
 	            })->paginate(8);
 				//$posts = Post::active()->search($term);
 			}
@@ -292,14 +292,13 @@ class Post extends Eloquent {
 			   //where date > published_date
 				//where date < expired_date
 			    //$posts = Post::where('title', 'LIKE', '%'. $term .'%')->orwhere('restaurant_name', 'LIKE', '%'. $term .'%')->distinct();
-				$posts =Post::active()->where(function($query) use ($term)
+				$posts =Post::active()->join('province','province.id','=','posts.province_id')->where(function($query) use ($term)
 	            {
 	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
 	                      ->orwhere('title', 'LIKE', '%'. $term .'%')
-						  ->orwhere('province', 'LIKE', '%'. $term .'%')
+						  ->orwhere('province.province_name', 'LIKE', '%'. $term .'%')
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
-						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%')
-						  ->orwhere('road', 'LIKE', '%'. $term .'%');
+						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
 	            })->distinct();
 			}
 		}

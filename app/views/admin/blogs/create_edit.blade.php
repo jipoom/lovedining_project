@@ -131,21 +131,22 @@
 				<div class="form-group">
                     <div class="col-md-12">
 
-						 {{ Form::text('street_addr', Input::old('street_addr', isset($post) ? $post->street_addr : null), array('placeholder'=>'เลขที่')) }} 
-					    {{ Form::text('soi', Input::old('soi', isset($post) ? $post->soi : null), array('placeholder'=>'ซอย')) }} 
-					    {{ Form::text('road', Input::old('road', isset($post) ? $post->road : null), array('placeholder'=>'ถนน')) }} 
+						 {{ Form::text('address1', Input::old('address1', isset($post) ? $post->address1 : null), array('placeholder'=>'address line 1')) }} 
+					    {{ Form::text('address2', Input::old('address2', isset($post) ? $post->address2 : null), array('placeholder'=>'address line 2')) }} 
 					      </p>  
 					    				   
                        	 	
                       </P>
-                        {{ Form::text('tumbol', Input::old('tumbol', isset($post) ? $post->tumbol : null), array('placeholder'=>'แขวง', 'id' => 'tumbol')) }} </p>  
-					    {{{ $errors->first('tumbol', ':message') }}}<p>
+                        {{ Form::text('tumbol', Input::old('tumbol', isset($post) ? $post->tumbol : null), array('placeholder'=>'แขวง', 'id' => 'tumbol')) }} 
+					    {{{ $errors->first('tumbol', ':message') }}}
                       
                         {{ Form::text('amphur', Input::old('amphur', isset($post) ? $post->amphur : null), array('placeholder'=>'เขต', 'id' => 'amphur')) }}  					  
-                        {{{ $errors->first('amphur', ':message') }}}<p>
-                        
-                        {{ Form::text('province', Input::old('province', isset($post) ? $post->province : null), array('placeholder'=>'จังหวัด', 'id' => 'province')) }} 
-					    {{{ $errors->first('province', ':message') }}}<p>
+                        {{{ $errors->first('amphur', ':message') }}}<p> </P>
+                        	
+                    
+                        {{Form::select('province', $allProvince, Input::old('province',isset($post)? $post->province : null));}}    
+				 		
+                       
                         
                         {{ Form::text('zip', Input::old('zip', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
                      

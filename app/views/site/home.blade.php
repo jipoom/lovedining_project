@@ -53,7 +53,7 @@
 			@if(count($banner) > 0)
 				<li>
 					<div class="crop">
-					<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province}}" align="middle" class="resize"/></a>		
+					<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province->province_name}}" align="middle" class="resize"/></a>		
 					</div>
 				</li>
 			@endif

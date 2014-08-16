@@ -17,6 +17,7 @@ class Amphur extends Eloquent {
 	{
 		return $this->belongsTo('geography','geo_id');
 	}
+	
 }
 
 ?>

@@ -65,13 +65,14 @@ class AdminBlogsController extends AdminController {
 			$category = array_add($category, $temp -> id, $temp -> category_name);
 		}*/
 		$category = Category::getAllCategoryArray();
-		$selectedCategories = array();
+		//$selectedCategories = array();
 		$meal = Meal::getAllMealArray();
-		$selectedMeals = array();
+		//$selectedMeals = array();
 		$dressing = Dressing::getAllDressingArray();
-		$selectedDressings = array();
+		//$selectedDressings = array();
 		$foodType = Foodtype::getAllFoodTypeArray();
-		$selectedFoodTypes = array();
+		//$selectedFoodTypes = array();
+		$allProvince = Province::getAllProvinceArray();
 		//Province
 		/*$init_province = Province::first();
 		$provinceTemp = array($init_province -> id => $init_province -> province_name);
@@ -82,7 +83,7 @@ class AdminBlogsController extends AdminController {
 		// Show the page
 		return View::make('admin/blogs/create_edit', 
 		compact('title', 'category', 'randAlbumName',
-		'meal','dressing','foodType'));
+		'meal','dressing','foodType','allProvince'));
 	}
 
 	/**
@@ -97,9 +98,8 @@ class AdminBlogsController extends AdminController {
 		'content' => 'required|min:3', 
 		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i', 
 		'album_name' => 'required|unique:posts',
-		'tumbol' => 'required|exists:tumbol,tumbol_name',
-		'amphur' => 'required|exists:amphur,amphur_name',
-		'province' => 'required|exists:province,province_name',
+		'tumbol' => 'exists:tumbol,tumbol_name',
+		'amphur' => 'exists:amphur,amphur_name',
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'newFoodType' => 'min:3',
@@ -123,13 +123,14 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> title = Input::get('title');
 			$this -> post -> restaurant_name = Input::get('restaurant_name');
 			$this -> post -> tel = Input::get('tel');
-			$this -> post -> street_addr = Input::get('street_addr');
+			$this -> post -> address1 = Input::get('address1');
+			$this -> post -> address2 = Input::get('address2');
 			//$this -> post -> soi = Input::get('soi');
 			//$this -> post -> road = Input::get('road');
 			//$this -> post -> subdistrict = Input::get('subdistrict');
 			//$this -> post -> district = Input::get('district');
 			//$this -> post -> province = Input::get('province');
-			$this -> post -> province = Input::get('province');
+			$this -> post -> province_id = Input::get('province');
 			$this -> post -> amphur = Input::get('amphur');
 			$this -> post -> tumbol = Input::get('tumbol');
 			
@@ -251,6 +252,7 @@ class AdminBlogsController extends AdminController {
 		$meal = Meal::getAllMealArray();
 		$dressing = Dressing::getAllDressingArray();
 		$foodType = FoodType::getAllFoodTypeArray();
+		$allProvince = Province::getAllProvinceArray();
 		//get selected categories
 		//$selectedCategories = Logic::preparePreselectedCheckBox($category,$postCategory);
 		$selectedCategories = Logic::preparePreselectedSelect($post->category);
@@ -302,7 +304,7 @@ class AdminBlogsController extends AdminController {
 		// Show the page
 		return View::make('admin/blogs/create_edit', 
 		compact('post', 'title', 'category', 'randAlbumName', 'selectedCategories','meal','selectedMeals',
-		'foodType','selectedFoodTypes', 'dressing','selectedDressings'));
+		'foodType','selectedFoodTypes', 'dressing','selectedDressings','allProvince'));
 	}
 
 	/**
@@ -317,9 +319,8 @@ class AdminBlogsController extends AdminController {
 		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 
 		'restaurant_name' => 'required|min:3', 'content' => 'required|min:3', 
 		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i',
-		'tumbol' => 'required|exists:tumbol,tumbol_name',
-		'amphur' => 'required|exists:amphur,amphur_name',
-		'province' => 'required|exists:province,province_name',
+		'tumbol' => 'exists:tumbol,tumbol_name',
+		'amphur' => 'exists:amphur,amphur_name',
 		'content' => 'required|min:3', 
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
@@ -347,12 +348,12 @@ class AdminBlogsController extends AdminController {
 			$post -> title = Input::get('title');
 			$post -> restaurant_name = Input::get('restaurant_name');
 			$post -> tel = Input::get('tel');
-			$post -> street_addr = Input::get('street_addr');
-			$post -> soi = Input::get('soi');
-			$post -> road = Input::get('road');
+			$post -> address1 = Input::get('address1');
+			$post -> address2 = Input::get('address2');
+			//$post -> road = Input::get('road');
 			$post -> tumbol = Input::get('tumbol');
 			$post -> amphur = Input::get('amphur');
-			$post -> province = Input::get('province');
+			$post -> province_id = Input::get('province');
 			$post -> zip = Input::get('zip');
 			$post -> album_name = Input::get('album_name');
 			$post -> profile_picture_name = Input::get('profilePic');
