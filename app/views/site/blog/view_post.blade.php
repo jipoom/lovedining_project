@@ -190,7 +190,8 @@
 				</ul>
 			</div>
 			<!-- picture div -->
-			{{ link_to(URL::to($post->id.'/album'), 'View All Images', $secure = null);}}
+			<a href="{{{ URL::to($post->id.'/album') }}}"><img src="{{{ asset('assets/img/GalleryIcon.png') }}}" title="View full album"></a>
+
 		</div>
 		<!-- ./ picture album -->
 	</div>
@@ -206,7 +207,7 @@
 		<p></p>
 		
 
-		<hr />
+		
 		<a id="comments"></a>
 		<h4>{{{ $comments->count() }}} Comments</h4>
 
@@ -234,10 +235,10 @@
 				</div>
 			</div>
 		</div>
-		<hr />
+		
 		@endforeach
 		@else
-		<hr />
+		
 		@endif
 
 		@if ( ! Auth::check())
