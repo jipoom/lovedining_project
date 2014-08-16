@@ -76,9 +76,9 @@
 
 <div class="movieinfo">
 
-	<h4>ร้านอาหาร: {{ $post->restaurant_name }}</h4>
+	<h4>{{ $post->restaurant_name }}</h4>
 	<h5>โทร: {{ $post->tel }}</h5>
-	<h5>ที่อยู่:
+	<h5>
 	@if($post->street_addr)
 	{{$post->street_addr}}
 	@endif
