@@ -32,14 +32,14 @@
 			<ul class="bxslider_highlight bx-wrapper">
 				@foreach($hightlightPics as $hightlightPic)
 				<li>
-					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$hightlightPic}}" align="" /></a>		
+					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$hightlightPic}}" align="center" class ="highlight"/></a>		
 				</li>
 				@endforeach
 		
 			</ul>
 			@else
 				@if($highlight[$i]->profile_picture_name!="")
-				<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" alt=""></a>
+				<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" align="center" class ="single_highlight"></a>
 				@else
 				<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 				@endif
@@ -75,14 +75,14 @@
 			<ul class="bxslider_highlight bx-wrapper">
 				@foreach($hightlightPics as $hightlightPic)
 				<li>
-					<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$hightlightPic}}" /></a>		
+					<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$hightlightPic}}"  align="center" class ="highlight"/></a>		
 				</li>
 				@endforeach
 		
 			</ul>
 			@else
 				@if($highlight[$i+1]->profile_picture_name!="")
-				<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}" alt=""></a>
+				<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}" align="center" class ="single_highlight"></a>
 				@else
 				<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 				@endif

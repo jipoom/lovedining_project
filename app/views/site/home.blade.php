@@ -6,7 +6,7 @@
 @stop
 
 @section('styles')
-
+<link href="{{asset('bootstrap/css/image.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/css/jquery.bxslider.css')}}" rel="stylesheet" />
 <style>
 	ul.bxslider {
@@ -44,6 +44,7 @@
 
 
 <div class="col-md-12">
+	
 	<ul class="bxslider">
 		@foreach($home as $post)
 			<?php
@@ -51,7 +52,9 @@
 			?>
 			@if(count($banner) > 0)
 				<li>
+					<div class="crop">
 					<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}} {{$post->province}}" align="middle" class="resize"/></a>		
+					</div>
 				</li>
 			@endif
 		@endforeach
@@ -65,10 +68,26 @@
 @stop
 
 @section('scripts')
-
+<!-- .crop -->
+<script src="{{asset('assets/js/jquery.resizecrop-1.0.3.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.bxslider.min.js')}}"></script>
 <script>
 	$(document).ready(function() {
+		$('.banner').resizecrop({
+	      width:950,
+	      height:500
+
+	    });
+		$('.highlight').resizecrop({
+	      width:500,
+	      height:300
+
+	    });  
+	    $('.single_highlight').resizecrop({
+	      width:383,
+	      height:300
+
+	    });  
 		$('.bxslider').bxSlider({
 			mode : 'fade',
 			infiniteLoop : true,
@@ -109,6 +128,8 @@
 			adaptiveHeight: true,
 			moveSlides: 1
 		});
+		
+		
 
 		
 	}); 
