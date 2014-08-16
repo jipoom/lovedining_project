@@ -73,29 +73,20 @@
 
 			<h4>{{ $post->restaurant_name }}</h4>
 			<h5>โทร: {{ $post->tel }}</h5>
-			<h5> @if($post->street_addr)
-			{{$post->street_addr}}
-			@endif
+			<h5> 
+			{{$post->address2}}
 
-			@if($post->soi)
-			ซอย{{$post->soi}}
-			@endif
-
-			@if($post->road)
-			ถนน{{$post->road}}
-			@endif
+			{{$post->address1}}
 
 			@if($post->tumbol)
 			แขวง{{$post->tumbol}}
 			@endif
 
 			@if($post->amphur)
-			เขต{{$post->amphur}}
+			{{$post->amphur}}
 			@endif
 
-			@if($post->province)
-			{{$post->province}}
-			@endif
+			{{$post->province->province_name}}
 
 			@if($post->zip)
 			{{$post->zip}}
