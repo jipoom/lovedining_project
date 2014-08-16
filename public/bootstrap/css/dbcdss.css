@@ -15,3 +15,42 @@
   }
 }
 
+.polaroid{
+	width:auto;
+	background-color: #fff;
+	border: 1px solid #c2c2c2;
+	
+	/* CSS3 box shadow */
+	-moz-box-shadow:0 0 20px #292929;
+	-webkit-box-shadow:2px 5px 8px #292929;
+	box-shadow:2px 5px 8px #292929;
+	/* fine box shadow */
+	
+	padding: 5px 5px 50px 5px;
+
+	float: left;
+	position: relative;
+	
+	/* setto la trasformazione per i vari browser che lo supportano*/
+	-webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+
+.polaroid:last-child{
+	margin-right: 0 !important;
+}
+
+.polaroid img{
+	border: 1px solid #222;
+	background: #000;
+	width: auto;
+	height: auto;
+}
+
+.polaroid span{
+	position: absolute;
+	bottom: 20px;
+	left: 10px;
+	font-style: italic;
+}

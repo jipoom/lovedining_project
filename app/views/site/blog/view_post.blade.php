@@ -164,7 +164,7 @@
 				google.maps.event.addDomListener(window, 'load', initialize);
 			</script>
 
-			<div id="googleMap" style="width:160px;height:140px;"></div>
+			<div id="googleMap" style="width:auto;height:140px;"></div>
 
 			<a href="http://maps.google.com/?q={{$post->latitude}},{{$post->longitude}}"><img src="{{{ asset('assets/img/map.png') }}}" title="View map in full screen"></a>
 
@@ -172,7 +172,8 @@
 		</div>
 
 		<!-- ./ picture album -->
-		<div class="movieinfo">
+		
+		<div class="movieinfo" style="padding: 5px 0px 50px 10px; margin: 30px 0px 30px 0px" >
 			<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $post -> album_name, true); ?>
 
 			<!-- picture div -->
