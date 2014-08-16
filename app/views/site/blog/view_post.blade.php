@@ -183,13 +183,14 @@
 					@foreach ($album as $picture)
 
 					<li>
-						<a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" /></a>
+						<a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" class ="album"/></a>
 					</li>
 
 					@endforeach
 				</ul>
 			</div>
 			<!-- picture div -->
+			{{ link_to(URL::to($post->id.'/album'), 'View All Images', $secure = null);}}
 		</div>
 		<!-- ./ picture album -->
 	</div>
@@ -203,7 +204,7 @@
 		<p></p>
 
 		<p></p>
-		{{ link_to(URL::to($post->id.'/album'), 'Gallery', $attributes = array('class' => 'btn btn-default'), $secure = null);}}
+		
 
 		<hr />
 		<a id="comments"></a>
@@ -330,11 +331,17 @@
 		});
 	}); 
 </script>
+<!-- .crop -->
+<script src="{{asset('assets/js/jquery.resizecrop-1.0.3.min.js')}}"></script>
 <!-- /TinyMCE -->
 <script src="{{asset('assets/js/jquery.bxslider.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.prettyPhoto.js')}}" type="text/javascript" charset="utf-8"></script>
 <script>
 	$(document).ready(function() {
+		$('.album').resizecrop({
+	      width:'220',
+	      height:'220'
+	    });  
 		$('.bxslider').bxSlider({
 			mode : 'horizontal',
 			infiniteLoop : true,
