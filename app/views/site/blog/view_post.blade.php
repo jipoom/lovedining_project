@@ -87,10 +87,14 @@
 			@endif
 
 			{{$post->province->province_name}}
-
-			@if($post->zip)
+			
 			{{$post->zip}}
-			@endif </h5>
+			
+			@if($post->route)
+			<p></p>
+			การเดินทาง: {{$post->route}}
+			@endif
+			</h5>
 			<input type="hidden" id="province" value= {{String::tidy($post->
 			province) }}/>
 			@if(Auth::user() && Auth::user()->hasRole('admin'))

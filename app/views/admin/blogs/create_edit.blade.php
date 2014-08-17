@@ -111,7 +111,7 @@
 					</div>
 				</div>
 	
-				<label class="control-label" for="title">ที่อยู่</label></P>
+
 				<div class="form-group {{{ $errors->has('latitude') ? 'error' : '' }}}">
                     <div class="col-md-12">
                     	
@@ -128,6 +128,7 @@
 						{{{ $errors->first('longitude', ':message') }}}<p>
 					</div>
 				</div>
+				<label class="control-label" for="title">ที่อยู่</label></P>
 				<div class="form-group">
                     <div class="col-md-12">
 
@@ -148,9 +149,11 @@
 				 		
                        
                         
-                        {{ Form::text('zip', Input::old('zip', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }} </p>  
+                        {{ Form::text('zip', Input::old('zip', isset($post) ? $post->zip : null), array('placeholder'=>'รหัสไปรษณีย์')) }}<p> </P>
                      
-                      
+                         <label class="control-label" for="title">วิธีการเดินทาง</label>
+                      	{{ Form::text('route', Input::old('zip', isset($post) ? $post->route : null), array('class'=>'form-control','placeholder'=>'วิธีการเดินทาง')) }} </p>  
+                     
                       	
                         <!-- <label class="control-label" for="title">ชื่ออัลบััมรูป(ภาษาอังกฤษหรือตัวเลขเท่านั้น)</label></P>
                          {{ Form::text('album_name', Input::old('album_name', isset($post) ? $post->album_name : null), array('placeholder'=>'ชื่ออัลบั้ม', 'id' => 'album_name')) }} 

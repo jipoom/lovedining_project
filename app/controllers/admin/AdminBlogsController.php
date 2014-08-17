@@ -139,6 +139,7 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> profile_picture_name = Input::get('profilePic');
 			$this -> post -> latitude = Input::get('latitude');
 			$this -> post -> longitude = Input::get('longitude');
+			$this -> post -> route = Input::get('route');
 			//$this->post->slug             = Str::slug(Input::get('title'));
 			$this -> post -> content = Input::get('content');
 			$this -> post -> meta_title = Input::get('meta-title');
@@ -359,6 +360,7 @@ class AdminBlogsController extends AdminController {
 			$post -> profile_picture_name = Input::get('profilePic');
 			$post -> latitude = Input::get('latitude');
 			$post -> longitude = Input::get('longitude');
+			$post -> route = Input::get('route');
 			//$post->slug             = Str::slug(Input::get('title'));
 			$post -> content = Input::get('content');
 			$post -> meta_title = Input::get('meta-title');
