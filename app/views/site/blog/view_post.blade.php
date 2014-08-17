@@ -331,8 +331,8 @@
 <script>
 	$(document).ready(function() {
 		$('.album').resizecrop({
-	      width:'220',
-	      height:'220'
+	      width:'300',
+	      height:'300'
 	    });  
 		$('.bxslider').bxSlider({
 			mode : 'horizontal',
