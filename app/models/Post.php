@@ -259,7 +259,11 @@ class Post extends Eloquent {
 		 }
 		 //If user searches with a keyword
 		 else {
-			 return $post->orderBy($orderBy, $mode)->paginate(8);
+			 return $post->orderBy($orderBy, $mode)->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
+				'posts.profile_picture_name','posts.content','posts.album_name',
+				'posts.restaurant_name','posts.tel','posts.address1',
+				'posts.address2','posts.tumbol','posts.amphur',
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
 		 }
 	}
 	
@@ -282,7 +286,11 @@ class Post extends Eloquent {
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
 						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
 
-	            })->paginate(8);
+	            })->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
+				'posts.profile_picture_name','posts.content','posts.album_name',
+				'posts.restaurant_name','posts.tel','posts.address1',
+				'posts.address2','posts.tumbol','posts.amphur',
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
 				//$posts = Post::active()->search($term);
 			}
 		}
@@ -299,7 +307,7 @@ class Post extends Eloquent {
 						  ->orwhere('province.province_name', 'LIKE', '%'. $term .'%')
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
 						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
-	            })->distinct();
+	            });
 			}
 		}
 		return $posts;

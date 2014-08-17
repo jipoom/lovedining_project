@@ -14,8 +14,8 @@
         "zizaco/confide": "3.2.*",
         "zizaco/entrust": "1.2.*",
         "bllim/datatables": "1.3.*",
-	"laravelbook/ardent": "dev-master",
-	"barryvdh/laravel-elfinder": "0.1.x"
+		"laravelbook/ardent": "dev-master",
+		"barryvdh/laravel-elfinder": "0.1.x"
     },
     "require-dev": {
         "way/generators": "~2.6",

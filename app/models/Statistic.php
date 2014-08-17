@@ -52,11 +52,11 @@ class Statistic extends Eloquent {
 		$popularId = array();	
 		$i=0;			
 		$posts = Post::active()->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
-                        ->select(DB::raw('posts.id as p_id, posts.user_id, posts.title, 
+                        ->select(DB::raw('posts.id, posts.user_id, posts.title, 
 							posts.profile_picture_name,posts.content,posts.album_name,
-							posts.restaurant_name,posts.tel,posts.street_addr,
-							posts.soi,posts.road,posts.tumbol,posts.amphur,
-							posts.province,posts.zip,posts.created_at,posts.updated_at, COUNT(*) AS total_posts'))
+							posts.restaurant_name,posts.tel,posts.address1,
+							posts.address2,posts.tumbol,posts.amphur,
+							posts.province_id,posts.zip,posts.created_at,posts.updated_at, COUNT(*) AS total_posts'))
                         ->orderBy('total_posts', 'DESC')
                         ->groupBy('posts.id')
 						->paginate(8);

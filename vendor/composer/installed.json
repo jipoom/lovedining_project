@@ -1636,63 +1636,6 @@
         ]
     },
     {
-        "name": "ocramius/instantiator",
-        "version": "1.1.1",
-        "version_normalized": "1.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Ocramius/Instantiator.git",
-            "reference": "8aa99efa86c51319afc26d23254fe6a8b5a5144a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/8aa99efa86c51319afc26d23254fe6a8b5a5144a",
-            "reference": "8aa99efa86c51319afc26d23254fe6a8b5a5144a",
-            "shasum": ""
-        },
-        "require": {
-            "ocramius/lazy-map": "1.0.*",
-            "php": "~5.3"
-        },
-        "require-dev": {
-            "athletic/athletic": "~0.1.8",
-            "ext-pdo": "*",
-            "ext-phar": "*",
-            "phpunit/phpunit": "~4.0",
-            "squizlabs/php_codesniffer": "2.0.*@ALPHA"
-        },
-        "time": "2014-08-11 23:48:35",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Instantiator\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Marco Pivetta",
-                "email": "ocramius@gmail.com",
-                "homepage": "http://ocramius.github.com/"
-            }
-        ],
-        "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
-        "homepage": "https://github.com/Ocramius/Instantiator",
-        "keywords": [
-            "constructor",
-            "instantiate"
-        ]
-    },
-    {
         "name": "phpunit/phpunit-mock-objects",
         "version": "2.2.0",
         "version_normalized": "2.2.0.0",
@@ -3134,6 +3077,63 @@
             "phpdoc",
             "phpstorm",
             "sublime"
+        ]
+    },
+    {
+        "name": "ocramius/instantiator",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Ocramius/Instantiator.git",
+            "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Ocramius/Instantiator/zipball/a7abbb5fc9df6e7126af741dd6c140d1a7369435",
+            "reference": "a7abbb5fc9df6e7126af741dd6c140d1a7369435",
+            "shasum": ""
+        },
+        "require": {
+            "ocramius/lazy-map": "1.0.*",
+            "php": "~5.3"
+        },
+        "require-dev": {
+            "athletic/athletic": "~0.1.8",
+            "ext-pdo": "*",
+            "ext-phar": "*",
+            "phpunit/phpunit": "~4.0",
+            "squizlabs/php_codesniffer": "2.0.*@ALPHA"
+        },
+        "time": "2014-08-14 15:10:55",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Instantiator\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Marco Pivetta",
+                "email": "ocramius@gmail.com",
+                "homepage": "http://ocramius.github.com/"
+            }
+        ],
+        "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
+        "homepage": "https://github.com/Ocramius/Instantiator",
+        "keywords": [
+            "constructor",
+            "instantiate"
         ]
     }
 ]

@@ -97,6 +97,7 @@ class BlogController extends BaseController {
 		else {
 			
 			$posts = Post::search($keyword,true);
+
 			$posts = Post::orderReview($posts,$mode,$categoryId,"search");
 			/*foreach($posts as $post)
 			{
