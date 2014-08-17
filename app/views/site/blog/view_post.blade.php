@@ -57,7 +57,7 @@
 <!-- .Ads -->
 <div class="ads-right pull-right">
 	<div class="col-md-12">
-		<a href="" class="thumbnail"><img src="http://placehold.it/260x800" alt=""></a>
+		<a href="" class="thumbnail"><img src="{{$adsSide}}" alt=""></a>
 	</div>
 </div>
 <!-- ./ Ads -->

@@ -33,9 +33,9 @@ class AdminStatController extends AdminController {
 		
 	public function getReviewData() {
 			//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');
-		$stat = Statistic::select(array('statistic.id', 'statistic.created_at','category.category_name', 'statistic.ip_address','posts.title'))
+		$stat = Statistic::select(array('statistic.id', 'statistic.created_at', 'statistic.ip_address','posts.title'))
 		->join('posts','posts.id','=','statistic.post_id')
-		->join('category','statistic.category_id','=','category.id'); 
+		->join('category','statistic.category_id','=','category.id')->groupBy('statistic.created_at'); 
 	
 
 		return Datatables::of($stat) 
@@ -66,7 +66,7 @@ class AdminStatController extends AdminController {
 
 		return Datatables::of($stat) 
 		-> edit_column('created_at','{{ DB::table(\'statistic\')->where(\'post_id\', \'=\', $post_id)->orderBy(\'created_at\',\'DESC\')->first()->created_at }}')
-		-> edit_column('access','{{ DB::table(\'statistic\')->where(\'post_id\', \'=\', $post_id)->count() }}')
+		-> edit_column('access','{{ DB::table(\'statistic\')->where(\'post_id\', \'=\', $post_id) ->count() }}')
         -> remove_column('id') 
 		-> remove_column('post_id') 
         -> make();

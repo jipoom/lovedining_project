@@ -26,6 +26,12 @@
 		<li><a href="{{{ URL::to('admin/elfinder/tinymce')."/".Config::get('app.ads_footer_prefix').$category->album_name }}}" class="iframe"><span class="glyphicon glyphicon-bullhorn"></span> Footer</a></li>					
 	</ul>
 	@endforeach
+	
+	<p><h4>Review Page</p></h4>
+	<ul>
+		<li><a href="{{{ URL::to('admin/elfinder/tinymce')."/".Config::get('app.ads_sidebar_prefix')."Review" }}}" class="iframe"><span class="glyphicon glyphicon-bullhorn"></span> Side Bar</a></li>					
+		<li><a href="{{{ URL::to('admin/elfinder/tinymce')."/".Config::get('app.ads_footer_prefix')."Review" }}}" class="iframe"><span class="glyphicon glyphicon-bullhorn"></span> Footer</a></li>					
+	</ul>
 
 @stop
 	

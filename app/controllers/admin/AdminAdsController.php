@@ -25,6 +25,15 @@ class AdminAdsController extends AdminController {
 		{
 			mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix')."Home");
 		}
+		//create review ads dir
+		if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix')."Review"))
+		{
+			mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix')."Review");
+		}
+		if(!file_exists(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix')."Review"))
+		{
+			mkdir(Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix')."Review");
+		}
 
         // Show the page
         return View::make('admin/ads/index', compact('categories', 'title'));

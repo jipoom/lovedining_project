@@ -64,5 +64,42 @@ class Picture extends Eloquent {
      rmdir($dir); 
    } 
  }
+   public static function getRandomPicture($pictureArray)
+   {
+   		$n = count($pictureArray);
+		$index = rand(0,$n-1);
+		return $pictureArray[$index];
+   }
+   
+   public static function getAdsSide($album_name)
+   {
+   		$adsSideDir = Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix').$album_name;
+		$allSideAds = Picture::directoryToArray($adsSideDir,false);
+		if(!file_exists($adsSideDir) || count($allSideAds) == 0){
+			
+			$adsSide = "http://placehold.it/260x800";
+		}
+		else {
+			//$allSideAds = Picture::directoryToArray($adsHomeSideDir,false);
+			$ads = Picture::getRandomPicture($allSideAds);
+			$adsSide = Config::get('app.image_base_url').'/'.Config::get('app.ads_sidebar_prefix').$album_name.'/'.$ads;
+		}
+		return $adsSide;
+   }
+    public static function getAdsFoot($album_name)
+   {
+		$adsFootDir = Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix').$album_name;
+		$allFootAds = Picture::directoryToArray($adsFootDir,false);
+
+		if(!file_exists($adsFootDir) || count($allFootAds) == 0){
+			$adsFoot = "http://placehold.it/260x800";
+		}
+		else {
+			$ads = Picture::getRandomPicture($allFootAds);
+			$adsFoot = Config::get('app.image_base_url').'/'.Config::get('app.ads_footer_prefix').$album_name.'/'.$ads;
+		}
+		return $adsFoot;
+   }
+   
 
 }

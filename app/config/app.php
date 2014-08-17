@@ -142,6 +142,8 @@ return array(
 	'image_path' => public_path(). '/images',
 	'ads_path' => public_path(). '/images/Ads',
 	'banner' => 'Banner',
+	'home' => 'Home',
+	'review' => 'Review',
 	'image_user_path' => public_path(). '/images/user',
 	'image_base_url' => 'http://192.168.1.104/lovedining_project/public/images',
 	

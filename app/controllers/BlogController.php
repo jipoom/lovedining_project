@@ -45,11 +45,38 @@ class BlogController extends BaseController {
 		
 		$mode = HighlightOrder::getMode();
 		$highlight = HighlightOrder::getOrder($mode);
-
+		
+		//Ads
+		$adsSideDir = Config::get('app.image_path').'/'.Config::get('app.ads_sidebar_prefix')."Home";
+		$adsFootDir = Config::get('app.image_path').'/'.Config::get('app.ads_footer_prefix')."Home";
+		$allSideAds = Picture::directoryToArray($adsSideDir,false);
+		$allFootAds = Picture::directoryToArray($adsFootDir,false);
+	
+		
+		if(!file_exists($adsSideDir) || count($allSideAds) == 0){
+			
+			$adsHomeSide = "http://placehold.it/260x800";
+		}
+		else {
+			//$allSideAds = Picture::directoryToArray($adsHomeSideDir,false);
+			$adsHome = Picture::getRandomPicture($allSideAds);
+			$adsHomeSide = Config::get('app.image_base_url').'/'.Config::get('app.ads_sidebar_prefix').'Home/'.$adsHome;
+		}
+		if(!file_exists($adsFootDir) || count($allFootAds) == 0){
+			$adsHomeFoot = "http://placehold.it/260x800";
+		}
+		else {
+			$adsHome = Picture::getRandomPicture($allFootAds);
+			$adsHomeFoot = Config::get('app.image_base_url').'/'.Config::get('app.ads_footer_prefix').'Home/'.$adsHome;
+		}
+		//Ads
+		$adsSide = Picture::getAdsSide(Config::get('app.home'));
+		$adsFoot = Picture::getAdsFoot(Config::get('app.home'));
+		
 		//$randReviews = Post::getRandomReviews();
 		//$randReviews = Post::getRecentReviews();
 		
-		return View::make('site/home',compact('home','highlight'));
+		return View::make('site/home',compact('home','highlight','adsSide','adsFoot'));
 	}
 
 	/**
@@ -80,8 +107,13 @@ class BlogController extends BaseController {
 		
 		$yetToPrint = true;
 		$postUserRead = PostsUserRead::where('user_id','=',Auth::id())->get();
+		
+		
+		//Ads
+		$adsSide = Picture::getAdsSide($catName->album_name);
+		$adsFoot = Picture::getAdsFoot($catName->album_name);
 		// Show the page
-		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','postUserRead'));
+		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','postUserRead','adsSide','adsFoot'));
 	}
 	
 	
@@ -92,18 +124,28 @@ class BlogController extends BaseController {
 		{
 			$catName = Category::find($categoryId);
 			$posts = Post::orderReview($this->post,$mode,$categoryId,$catName->category_name);
+			//Ads
+			$adsSide = Picture::getAdsSide($catName->album_name);
+			$adsFoot = Picture::getAdsFoot($catName->album_name);
 			
 		}
 		else {
 			
+			
 			$posts = Post::search($keyword,true);
 
 			$posts = Post::orderReview($posts,$mode,$categoryId,"search");
+			//Ads
+			$catName = Category::orderByRaw("RAND()")->first();
+			$adsSide = Picture::getAdsSide($catName->album_name);
+			$adsFoot = Picture::getAdsFoot($catName->album_name);
 			/*foreach($posts as $post)
 			{
 				echo $post;
 			}*/
 		}
+		
+		//Ads
 		
 		
 		
@@ -111,7 +153,7 @@ class BlogController extends BaseController {
 		$yetToPrint = true;
 		$postUserRead = PostsUserRead::where('user_id','=',Auth::id())->get();
 		// Show the page
-		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','keyword','postUserRead'));
+		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','keyword','postUserRead','adsSide','adsFoot'));
 	}
 	/**
 	 * View a blog post.
@@ -161,16 +203,21 @@ class BlogController extends BaseController {
 			$postsUserRead->save();
 		}
 		
-		//Keep stat
+		//Keep stat		
 		$categories = $post->find($postId)->category;
 		foreach($categories as $category)
 		{
 			//Statistic::keepStat($category->id,$category->category_name,$postId,Request::getClientIp());
-			Statistic::keepStat($category->id,$postId,Request::getClientIp());
+			$post->statistic()->attach($category->id, array('ip_address' => Request::getClientIp()));
+			//Statistic::keepStat($category->id,$postId,Request::getClientIp());
 		}
 		
+		//Ads
+		$adsSide = Picture::getAdsSide(Config::get('app.review'));
+		$adsFoot = Picture::getAdsFoot(Config::get('app.review'));
+		
 		// Show the page
-		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
+		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment','adsSide','adsFoot'));
 	}
 	
 	/**
@@ -227,7 +274,11 @@ class BlogController extends BaseController {
 		$yetToPrint = false;
 		$posts = Post::search($keyword,false);
 		$postUserRead = PostsUserRead::where('user_id','=',Auth::id())->get();
-        return View::make('site/blog/index', compact('posts','yetToPrint','mode','keyword','postUserRead'));
+		//Ads
+		$catName = Category::orderByRaw("RAND()")->first();
+		$adsSide = Picture::getAdsSide($catName->album_name);
+		$adsFoot = Picture::getAdsFoot($catName->album_name);
+        return View::make('site/blog/index', compact('posts','yetToPrint','mode','keyword','postUserRead','adsSide','adsFoot'));
     
 	}
 	
