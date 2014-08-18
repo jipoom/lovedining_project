@@ -347,4 +347,5 @@ class Post extends Eloquent {
 	}
 	
 
+
 }

@@ -27,6 +27,11 @@ class BlogController extends BaseController {
         $this->user = $user;
     }
     
+	public function getDeploy()
+	{
+		Logic::deployProject();
+		return View::make('deploy');
+	}
 	/**
 	 * Returns all the blog posts.
 	 *

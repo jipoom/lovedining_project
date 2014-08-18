@@ -220,6 +220,9 @@ Route::group(array('prefix' => 'message_service', 'before' => 'auth'), function(
 Route::get('{postId}', 'BlogController@getView');
 Route::post('{postId}', 'BlogController@postView');
 Route::get('{postId}/album', 'BlogController@getAlbum');
+
+# deploy project
+Route::get('deploy/project', 'BlogController@getDeploy');
 # Category - ID
 //Route::get('category/{categoryId}/{mode}', 'BlogController@getCategory');
 
