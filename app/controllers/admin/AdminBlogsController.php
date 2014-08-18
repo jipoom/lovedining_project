@@ -70,7 +70,7 @@ class AdminBlogsController extends AdminController {
 		//$selectedMeals = array();
 		$dressing = Dressing::getAllDressingArray();
 		//$selectedDressings = array();
-		$foodType = Foodtype::getAllFoodTypeArray();
+		$foodType = FoodType::getAllFoodTypeArray();
 		//$selectedFoodTypes = array();
 		$allProvince = Province::getAllProvinceArray();
 		//Province
