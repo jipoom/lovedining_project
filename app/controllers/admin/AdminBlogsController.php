@@ -166,7 +166,7 @@ class AdminBlogsController extends AdminController {
 
 			if ($this -> post -> save()) {
 				
-				//Email to inform users of new review
+				
 				
 				//Insert to PostsCategory Table		
 				if(Input::get('category_id_temp'))	
@@ -204,7 +204,18 @@ class AdminBlogsController extends AdminController {
 						$newFoodType->post()->attach($this -> post -> id);
 				} 
 				
-				
+				//Email to inform users of new review
+				$users = User::where('confirmed','=','1')->get();
+				if(!Input::get('radio1') == "now")
+					$publishedDate = Input::get('publishedAt');
+				else {
+					$publishedDate = "now";
+				}
+				foreach($users as $user)
+				{
+					//echo $user->firstname;
+					Post::sendEmail("New Review","We have new review available for you",$this->post,$user,$publishedDate);
+				}
 				return Redirect::to('admin/blogs/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
 
 			}
@@ -467,6 +478,17 @@ class AdminBlogsController extends AdminController {
 				 $images->save();
 				 }
 				 }*/
+				 
+				 //Inform users of updated review
+				 $users = User::where('confirmed','=','1')->get();
+				 foreach($users as $user)
+				{
+					//echo $user->firstname;
+					Post::sendEmail("Review updated!","We have updated a review and would like you to check it out",$post,$user,$post->published_at);
+		
+				}
+				 
+				 
 				return Redirect::to('admin/blogs/') -> with('success', Lang::get('admin/blogs/messages.update.success'));
 			}
 

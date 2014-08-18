@@ -146,7 +146,7 @@ return array(
 	'review' => 'Review',
 	'image_user_path' => public_path(). '/images/user',
 	'image_base_url' => 'http://192.168.1.104/lovedining_project/public/images',
-	
+	'host_name' => 'http://192.168.1.104/lovedining_project/public',
 	//Ads Directory Prefix
 	'ads_sidebar_prefix' => 'Ads_Sidebar_',
 	'ads_footer_prefix' => 'Ads_Footer_',

@@ -139,5 +139,19 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
 		}
 		return false;
 	}
+	
+	public static function getAllEmailArray()
+	{
+		$allUser = User::where('confirmed','=','1')->get();
+		$i=0;
+		$user = array();
+		foreach($allUser as $temp)
+		{
+				
+			$user[$i] = $temp->email;
+			$i++;
+		}
+		return $user;
+	}
 
 }

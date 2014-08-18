@@ -325,6 +325,26 @@ class Post extends Eloquent {
 		return $query-> whereRaw('(title LIKE %'.$term.'%) or (restaurant_name LIKE %'.$term.'%)');      
 	}
 	
+	public static function sendEmail($subject,$emailTitle, $post,$user,$publishedDate)
+	{
+		$data = array(
+						'emailTitle' => $emailTitle, 
+						'url' => Config::get('app.host_name').'/'.$post->id,
+						'firstname'=>$user->firstname,
+						'postTitle'=>$post->title,
+						'album_name'=>$post->album_name,
+						'profile_picture_name'=>$post->profile_picture_name,
+						'postTitle'=>$post->title,
+						'restaurant'=>$post->restaurant_name,
+						'publishedDate'=>$publishedDate
+						
+						);
+					Mail::queue('emails.review.information', $data, function($message) use ($user,$subject)
+					{
+					  $message->to($user->email)
+					          ->subject($subject);
+					});
+	}
 	
 
 }
