@@ -185,8 +185,9 @@
 				</ul>
 			</div>
 			<!-- picture div -->
-			<a href="{{{ URL::to($post->id.'/album') }}}"><img src="{{{ asset('assets/img/GalleryIcon.png') }}}" title="View full album"></a>
-
+			<div align="center">
+			<a href="{{{ URL::to($post->id.'/album') }}}"><img src="{{{ asset('assets/img/GalleryIcon.png') }}}" title="View full album" width="150px"></a>
+			</div>
 		</div>
 		<!-- ./ picture album -->
 	</div>
