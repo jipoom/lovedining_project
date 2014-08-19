@@ -206,6 +206,7 @@ class AdminBlogsController extends AdminController {
 				
 				//Email to inform users of new review
 				$users = User::where('confirmed','=','1')->get();
+				
 				if(!Input::get('radio1') == "now")
 					$publishedDate = Input::get('publishedAt');
 				else {

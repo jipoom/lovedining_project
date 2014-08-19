@@ -28,6 +28,7 @@ return array(
 	|
 	*/
 
+	//'host' => 'mail.lovedinings.com',
 	'host' => 'smtp.gmail.com',
 
 	/*
@@ -53,7 +54,7 @@ return array(
 	| used globally for all e-mails that are sent by your application.
 	|
 	*/
-
+	//'from' => array('address' => 'alpha@lovedinings.com', 'name' => 'LoveDining'),
 	'from' => array('address' => 'ebiz.sec@gmail.com', 'name' => 'LoveDining'),
 
 	/*
@@ -80,6 +81,7 @@ return array(
 	|
 	*/
 
+	//'username' => 'alpha@lovedinings.com',
 	'username' => 'ebiz.sec',
 
 	/*
@@ -93,6 +95,7 @@ return array(
 	|
 	*/
 
+	//'password' => 'iOiFRsE7',
 	'password' => 'e.business',
 
 	/*
