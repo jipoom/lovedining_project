@@ -73,14 +73,11 @@
 <script src="{{asset('assets/js/jquery.bxslider.min.js')}}"></script>
 <script>
 	$(document).ready(function() {
-		$('.banner').resizecrop({
-	      width:950,
-	      height:500
-
-	    });
 		$('.highlight').resizecrop({
-	      width:500,
-	      height:300
+	      width:'400',
+	      height:'250',
+	      vertical : 'center',
+		  horizontal : 'center'
 
 	    });  
 	    $('.single_highlight').resizecrop({
