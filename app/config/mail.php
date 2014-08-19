@@ -95,7 +95,6 @@ return array(
 	|
 	*/
 
-	//'password' => 'iOiFRsE7',
 	'password' => 'e.business',
 
 	/*
