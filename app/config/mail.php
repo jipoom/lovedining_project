@@ -82,7 +82,7 @@ return array(
 	*/
 
 	//'username' => 'alpha@lovedinings.com',
-	'username' => 'ebiz.sec',
+	'username' => 'ebiz.sec@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------

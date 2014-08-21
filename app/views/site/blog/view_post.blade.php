@@ -94,6 +94,26 @@
 			<p></p>
 			การเดินทาง: {{$post->route}}
 			@endif
+			
+			@if(count($post->foodType)>0)
+				<h5>ประเทภอาหาร:
+				@foreach($post->foodType as $temp)
+				<li>
+					{{$temp['name']}}
+				</li> 
+				@endforeach </h5>
+			@endif
+			
+			@if(count($post->dressing)>0)
+				<h5>การแต่งกาย:
+				@foreach($post->dressing as $dress)
+				<li>
+					{{$dress['name']}}
+				</li> 
+				@endforeach </h5>
+			@endif
+			
+			
 			</h5>
 			<input type="hidden" id="province" value= {{String::tidy($post->
 			province) }}/>
