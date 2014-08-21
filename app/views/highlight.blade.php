@@ -24,7 +24,7 @@
 					<div class="ribbon-stitches-top"></div>
 					<div class="ribbon-content">
 						
-						<a href="{{{ $highlight[$i]->url() }}}">{{ Str::limit($highlight[$i]->title, 45, "...") }}</a>
+						<a href="{{{ $highlight[$i]->url() }}}">{{ Str::limit($highlight[$i]->title, 35, "...") }}</a>
 					</div><div class="ribbon-stitches-bottom"></div>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 				<div class="ribbon">
 					<div class="ribbon-stitches-top"></div>
 					<div class="ribbon-content">
-						<a href="{{{ $highlight[$i+1]->url() }}}">{{ Str::limit($highlight[$i+1]->title, 45, "...") }}</a>
+						<a href="{{{ $highlight[$i+1]->url() }}}">{{ Str::limit($highlight[$i+1]->title, 35, "...") }}</a>
 					</div><div class="ribbon-stitches-bottom"></div>
 				</div>
 			</div>
