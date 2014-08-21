@@ -30,12 +30,13 @@
 {{-- Content --}}
 @section('content')
 <!-- .Ads -->
-<div class="ads-right checkscreen" style="background-color: #D43F3A;">
+<div class="ads-right checkscreen">
 	<div class="col-md-12">
 		<a href="" class="thumbnail"><img src="{{$adsSide}}" alt=""></a>
 	</div>
 </div>
 <!-- ./ Ads -->
+
 <div class="col-md-10">
 
 <h4 style="color: #282828">
@@ -65,7 +66,17 @@
 @include('highlight')
 
 </div>
+
+<!-- . Ads -->
+<div class="ads-foot">
+	<div class="col-md-12">
+		<a href="" class="thumbnail"><img src="{{$adsFoot}}" alt=""></a>
+	</div>
 </div>
+<!-- ./ Ads -->
+
+</div>
+
 @stop
 
 @section('scripts')

@@ -618,15 +618,14 @@ pre code {
 	float: right;
 	width: 16%
 }
-.t_t {
-    font-family: 'wdb_bangnaregular';
-    font-weight: bold;
-    font-style: oblique;
-    position: relative;  
-    font-size: 22px;
-    line-height: 30px;
-    color: #000000;
-    
+.ads-foot {
+	bottom: 0px;
+	position: relative;
+	min-height: 1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	
+	width: 100%
 }
 @media only screen and (max-width: 500px) {
     .slogan {
