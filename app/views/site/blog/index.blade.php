@@ -193,6 +193,14 @@
 <div class="col-md-8 pull-right">
 	{{ $posts->links() }}
 </div>
+<!-- . Ads -->
+<div class="ads-foot">
+	<div class="col-md-12">
+		<a href="" class="thumbnail"><img src="{{$adsFoot}}" alt=""></a>
+	</div>
+</div>
+<!-- ./ Ads -->
+
 @stop
 
 @section('scripts')

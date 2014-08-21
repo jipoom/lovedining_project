@@ -92,7 +92,7 @@ class Picture extends Eloquent {
 		$allFootAds = Picture::directoryToArray($adsFootDir,false);
 
 		if(!file_exists($adsFootDir) || count($allFootAds) == 0){
-			$adsFoot = "http://placehold.it/260x800";
+			$adsFoot = "http://placehold.it/750x300";
 		}
 		else {
 			$ads = Picture::getRandomPicture($allFootAds);

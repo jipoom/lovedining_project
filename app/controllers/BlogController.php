@@ -58,7 +58,7 @@ class BlogController extends BaseController {
 		$allFootAds = Picture::directoryToArray($adsFootDir,false);
 	
 		
-		if(!file_exists($adsSideDir) || count($allSideAds) == 0){
+		/*if(!file_exists($adsSideDir) || count($allSideAds) == 0){
 			
 			$adsHomeSide = "http://placehold.it/260x800";
 		}
@@ -68,12 +68,12 @@ class BlogController extends BaseController {
 			$adsHomeSide = Config::get('app.image_base_url').'/'.Config::get('app.ads_sidebar_prefix').'Home/'.$adsHome;
 		}
 		if(!file_exists($adsFootDir) || count($allFootAds) == 0){
-			$adsHomeFoot = "http://placehold.it/260x800";
+			$adsHomeFoot = "http://placehold.it/750x300";
 		}
 		else {
 			$adsHome = Picture::getRandomPicture($allFootAds);
 			$adsHomeFoot = Config::get('app.image_base_url').'/'.Config::get('app.ads_footer_prefix').'Home/'.$adsHome;
-		}
+		}*/
 		//Ads
 		$adsSide = Picture::getAdsSide(Config::get('app.home'));
 		$adsFoot = Picture::getAdsFoot(Config::get('app.home'));
