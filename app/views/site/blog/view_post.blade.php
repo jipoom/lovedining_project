@@ -72,7 +72,7 @@
 		<div class="movieinfo">
 
 			<h4>{{ $post->restaurant_name }}</h4>
-			<h5>โทร: {{ $post->tel }}</h5>
+			<h5>Tel: {{ $post->tel }}</h5>
 			<h5> 
 			{{$post->address2}}
 
@@ -86,17 +86,35 @@
 			{{$post->amphur}}
 			@endif
 
-			{{$post->province->province_name}}
+			{{$post->province->province_name_en}}
 			
 			{{$post->zip}}
 			
-			@if($post->route)
-			<p></p>
-			การเดินทาง: {{$post->route}}
-			@endif
-			
+			@if(Session::get('Lang') == 'TH')
+				@if($post->route)
+					<p></p>
+					การเดินทาง: {{$post->route}}
+				@endif
+			@elseif(Session::get('Lang') == 'EN')
+				@if($post->route_en)
+					<p></p>
+					Travel: {{$post->route_en}}
+				@endif
+			@elseif(Session::get('Lang') == 'CN')	
+				@if($post->route_cn)
+					<p></p>
+					Travel: {{$post->route_cn}}
+				@endif
+			@endif	
 			@if(count($post->foodType)>0)
-				<h5>ประเทภอาหาร:
+				<h5>
+				@if(Session::get('Lang') == 'TH')
+					ประเทภอาหาร:
+				@elseif(Session::get('Lang') == 'EN')
+					Cuisine:
+				@elseif(Session::get('Lang') == 'CN')
+					Cuisine:
+				@endif	
 				@foreach($post->foodType as $temp)
 				<li>
 					{{$temp['name']}}
@@ -105,7 +123,14 @@
 			@endif
 			
 			@if(count($post->dressing)>0)
-				<h5>การแต่งกาย:
+				<h5>
+				@if(Session::get('Lang') == 'TH')
+					การแต่งกาย:
+				@elseif(Session::get('Lang') == 'EN')
+					Attire:
+				@elseif(Session::get('Lang') == 'CN')
+					Attire:
+				@endif	
 				@foreach($post->dressing as $dress)
 				<li>
 					{{$dress['name']}}
@@ -213,7 +238,21 @@
 	</div>
 	<div class="col-md-9">
 		<p>
-			{{ $post->content() }}
+			@if(Session::get('Lang') == 'TH')
+				{{ $post->content() }}
+			@elseif(Session::get('Lang') == 'EN')
+				@if($post->content_en() == "")
+					No content available in English!!
+				@else
+					{{ $post->content_en() }}
+				@endif	
+			@elseif(Session::get('Lang') == 'CN')
+				@if($post->content_cn() == "")
+					No content available in Chinese!!
+				@else
+					{{ $post->content_cn() }}
+				@endif	
+			@endif
 		</p>
 		<div class="fb-like" data-href="{{Request::url()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 

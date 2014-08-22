@@ -238,6 +238,9 @@ Route::group(array('prefix' => 'search'), function()
 {
 	 Route::get('{keyword}', 'BlogController@searchReview');
 });
+# Lang
+
+Route::get('lang/{lang}', 'BlogController@changeLang');
 
 
 # Index Page - Last route, no matches

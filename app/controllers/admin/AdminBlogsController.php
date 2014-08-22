@@ -98,8 +98,8 @@ class AdminBlogsController extends AdminController {
 		'content' => 'required|min:3', 
 		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i', 
 		'album_name' => 'required|unique:posts',
-		'tumbol' => 'exists:tumbol,tumbol_name',
-		'amphur' => 'exists:amphur,amphur_name',
+		//'tumbol' => 'exists:tumbol,tumbol_name',
+		//'amphur' => 'exists:amphur,amphur_name',
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'newFoodType' => 'min:3',
@@ -140,8 +140,12 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> latitude = Input::get('latitude');
 			$this -> post -> longitude = Input::get('longitude');
 			$this -> post -> route = Input::get('route');
+			$this -> post -> route_en = Input::get('route_en');
+			$this -> post -> route_cn = Input::get('route_cn');
 			//$this->post->slug             = Str::slug(Input::get('title'));
 			$this -> post -> content = Input::get('content');
+			$this -> post -> content_en = Input::get('content_en');
+			$this -> post -> content_cn = Input::get('content_cn');
 			$this -> post -> meta_title = Input::get('meta-title');
 			$this -> post -> meta_description = Input::get('meta-description');
 			$this -> post -> meta_keywords = Input::get('meta-keywords');
@@ -332,8 +336,8 @@ class AdminBlogsController extends AdminController {
 		$rules = array('title' => 'required|min:3|unique:posts,title,' . $post -> id . ',id', 
 		'restaurant_name' => 'required|min:3', 'content' => 'required|min:3', 
 		'tel' => 'required|Regex:/^[0-9]{9,}([,][ ][0-9]{9,})*+$/i',
-		'tumbol' => 'exists:tumbol,tumbol_name',
-		'amphur' => 'exists:amphur,amphur_name',
+		//'tumbol' => 'exists:tumbol,tumbol_name',
+		//'amphur' => 'exists:amphur,amphur_name',
 		'content' => 'required|min:3', 
 		'publishedAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
 		'expiredAt' => array('regex:([2][0]([0-2][0-9]|3[0-8])[-](0[1-9]|1[0-2])[-][0-3][0-9][ ]([0-1][0-9]|2[0-3])[:][0-5][0-9])'),
@@ -373,8 +377,12 @@ class AdminBlogsController extends AdminController {
 			$post -> latitude = Input::get('latitude');
 			$post -> longitude = Input::get('longitude');
 			$post -> route = Input::get('route');
+			$post -> route_en = Input::get('route_en');
+			$post -> route_cn = Input::get('route_cn');
 			//$post->slug             = Str::slug(Input::get('title'));
 			$post -> content = Input::get('content');
+			$post -> content_en = Input::get('content_en');
+			$post -> content_cn = Input::get('content_cn');
 			$post -> meta_title = Input::get('meta-title');
 			$post -> meta_description = Input::get('meta-description');
 			$post -> meta_keywords = Input::get('meta-keywords');

@@ -29,6 +29,14 @@ class Post extends Eloquent {
 	{
 		return nl2br($this->content);
 	}
+	public function content_en()
+	{
+		return nl2br($this->content_en);
+	}
+	public function content_cn()
+	{
+		return nl2br($this->content_cn);
+	}
 
 	/**
 	 * Get the post's author.

@@ -77,7 +77,8 @@ class Picture extends Eloquent {
 		$allSideAds = Picture::directoryToArray($adsSideDir,false);
 		if(!file_exists($adsSideDir) || count($allSideAds) == 0){
 			
-			$adsSide = "http://placehold.it/260x800";
+			//$adsSide = "http://placehold.it/260x800";
+			$adsSide = "";
 		}
 		else {
 			//$allSideAds = Picture::directoryToArray($adsHomeSideDir,false);
@@ -92,7 +93,8 @@ class Picture extends Eloquent {
 		$allFootAds = Picture::directoryToArray($adsFootDir,false);
 
 		if(!file_exists($adsFootDir) || count($allFootAds) == 0){
-			$adsFoot = "http://placehold.it/750x300";
+			$adsFoot = "";	
+			//$adsFoot = "http://placehold.it/750x300";
 		}
 		else {
 			$ads = Picture::getRandomPicture($allFootAds);

@@ -32,13 +32,20 @@
 		</h3>
 	</div>
 	
-	<!--
+	
 	<ul class="nav nav-tabs">
-			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-			<li><a href="#tab-content" data-toggle="tab" onclick="mkDir()">Review Content</a></li>
+			<li class="active">
+				<a href="#tab-general" data-toggle="tab">General</a>
+			</li>
+			<li>
+				<a href="#tab-en" data-toggle="tab">English</a>
+			</li>
+			<li>
+				<a href="#tab-cn" data-toggle="tab">Chinese</a>
+			</li>
 		</ul>
 
--->
+
 	{{-- Edit Blog Form --}}
 	<form class="form-horizontal" method="post" action="@if (isset($post)){{ URL::to('admin/blogs/' . $post->id . '/edit') }}@endif" autocomplete="off">
 		<!-- CSRF Token -->
@@ -244,7 +251,7 @@
                
          
 						
-						{{ Form::textarea('content', Input::old('title', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'25', 'cols' => '130'))}} </p>
+						{{ Form::textarea('content', Input::old('content', isset($post) ? $post->content : null), array('id'=>'elm1', 'rows'=>'25', 'cols' => '130'))}} </p>
 						{{{ $errors->first('content', ':message') }}}
 		
 					</div>
@@ -255,7 +262,25 @@
 			
 			
 			</div>
-				<!-- ./ General tab -->
+			<!-- ./ General tab -->
+			<!-- / en tab -->
+			<div class="tab-pane" id="tab-en">
+				<p></p>
+				 <label class="control-label" for="title">Describe how to travel to the restaurant</label>
+                      	{{ Form::text('route_en', Input::old('route_en', isset($post) ? $post->route_en : null), array('class'=>'form-control','placeholder'=>'Describe how to travel to the restaurant')) }} </p>  
+                 <label class="control-label" for="title">Content in English</label>    
+				{{ Form::textarea('content_en', Input::old('content_en', isset($post) ? $post->content_en : null), array('id'=>'elm2', 'rows'=>'25', 'cols' => '130'))}} </p>
+			</div>	
+			<!-- ./ en tab -->
+			<!-- / cn tab -->
+			<div class="tab-pane" id="tab-cn">
+				<p></p>
+				 <label class="control-label" for="title">Describe how to travel to the restaurant (in Chinese)</label>
+                      	{{ Form::text('route_cn', Input::old('route_cn', isset($post) ? $post->route_cn : null), array('class'=>'form-control','placeholder'=>'Describe how to travel to the restaurant (in Chinese)')) }} </p>  
+                 <label class="control-label" for="title">Content in Chinese</label>       
+				{{ Form::textarea('content_cn', Input::old('content_cn', isset($post) ? $post->content_cn : null), array('id'=>'elm3', 'rows'=>'25', 'cols' => '130'))}} </p>
+			</div>	
+			<!-- ./ cn tab -->
 		</div>		
 		<!-- ./ tabs content -->
 

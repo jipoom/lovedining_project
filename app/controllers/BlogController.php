@@ -26,6 +26,12 @@ class BlogController extends BaseController {
         $this->post = $post;
         $this->user = $user;
     }
+	
+	public function changeLang($lang)
+	{
+		Session::put('Lang',$lang);
+		return Redirect::to(URL::previous());
+	}
     
 	public function getDeploy()
 	{
@@ -44,6 +50,10 @@ class BlogController extends BaseController {
 		//Statistic::keepStat(0,"Home",0,Request::getClientIp());
 		
 		//Clear Session
+		if(!Session::has('Lang'))
+		{
+			Session::put('Lang','TH');
+		}
 		Session::forget('mode');
 		Session::forget('catName');
 		$home = Post::active()->where('is_home','=',1)->get();
@@ -93,6 +103,10 @@ class BlogController extends BaseController {
 	{
 		
 		// Get all the blog posts
+		if(!Session::has('Lang'))
+		{
+			Session::put('Lang','TH');
+		}
 		$catName = Category::find($categoryId);
 		
 		$mode = null;
@@ -125,6 +139,10 @@ class BlogController extends BaseController {
 	public function getCategoryMode($categoryId, $mode,$keyword=null)
 	{
 		// Get all the blog posts
+		if(!Session::has('Lang'))
+		{
+			Session::put('Lang','TH');
+		}
 		if($categoryId!="undefined")
 		{
 			$catName = Category::find($categoryId);
@@ -170,6 +188,10 @@ class BlogController extends BaseController {
 	public function getView($postId)
 	{
 		// Get this blog post data
+		if(!Session::has('Lang'))
+		{
+			Session::put('Lang','TH');
+		}
 		$post = $this->post->active()->where('id', '=', $postId)->first();
 		// Check if the blog post exists
 		if (is_null($post))
