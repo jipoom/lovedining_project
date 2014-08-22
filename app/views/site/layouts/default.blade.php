@@ -89,10 +89,9 @@
 							<option value="restaurantName">Restaurant Name</option>
 							<option value="popularity">Popularity</option>
 							</select>	-->
-							<a href="{{{ URL::to('lang/TH') }}}"><span class="glyphicon"></span> TH</a></li>
-							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> EN</a></li>
-							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> CN</a></li><p></p>
-							Now: {{Session::get('Lang');}}
+							<a href="{{{ URL::to('lang/TH') }}}"><span class="glyphicon"></span>{{(Session::get('Lang') == 'TH') ? '<b>TH</b>': 'TH'}} </a></li>
+							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
+							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li><p></p>
 							<div class="tfclear"></div>
 						</div>
 						

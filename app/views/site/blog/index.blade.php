@@ -96,7 +96,11 @@
 				{{ String::tidy($posts[$i]->restaurant_name) }}
 			</p>
 			<p>
-				{{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name); }}
+				@if(Session::get('Lang') == 'TH')
+					{{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name); }}
+				@else
+					{{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name_en); }}
+				@endif
 			</p>
 			<p>
 				Tel:
@@ -155,7 +159,11 @@
 				{{ String::tidy($posts[$i+1]->restaurant_name) }}
 			</p>
 			<p>
-				{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name); }}
+				@if(Session::get('Lang') == 'TH')
+					{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name); }}
+				@else
+					{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name_en); }}
+				@endif
 			</p>
 			<p>
 				Tel:

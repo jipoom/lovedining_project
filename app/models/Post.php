@@ -260,17 +260,17 @@ class Post extends Eloquent {
 				//where date < expired_date
 				-> orderBy($orderBy, $mode)
 				->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
-				'posts.profile_picture_name','posts.content','posts.album_name',
+				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
-				'posts.address2','posts.tumbol','posts.amphur',
+				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
 				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
 		 }
 		 //If user searches with a keyword
 		 else {
 			 return $post->orderBy($orderBy, $mode)->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
-				'posts.profile_picture_name','posts.content','posts.album_name',
+				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
-				'posts.address2','posts.tumbol','posts.amphur',
+				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
 				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
 		 }
 	}
@@ -295,9 +295,9 @@ class Post extends Eloquent {
 						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
 
 	            })->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
-				'posts.profile_picture_name','posts.content','posts.album_name',
+				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
-				'posts.address2','posts.tumbol','posts.amphur',
+				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
 				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
 				//$posts = Post::active()->search($term);
 			}
