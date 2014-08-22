@@ -291,6 +291,7 @@ class Post extends Eloquent {
 	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
 	                      ->orwhere('title', 'LIKE', '%'. $term .'%')
 						  ->orwhere('province.province_name', 'LIKE', '%'. $term .'%')
+						  ->orwhere('province.province_name_en', 'LIKE', '%'. $term .'%')
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
 						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
 
@@ -313,6 +314,7 @@ class Post extends Eloquent {
 	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
 	                      ->orwhere('title', 'LIKE', '%'. $term .'%')
 						  ->orwhere('province.province_name', 'LIKE', '%'. $term .'%')
+						  ->orwhere('province.province_name_en', 'LIKE', '%'. $term .'%')
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
 						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
 	            });
