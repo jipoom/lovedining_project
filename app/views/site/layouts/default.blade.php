@@ -79,9 +79,20 @@
 
 						<!-- Searchbox -->
 						<div id="tfnewsearch">
-
+							<!--
+							<a href="{{{ URL::to('lang/TH') }}}"><span class="glyphicon"></span>{{(Session::get('Lang') == 'TH') ? '<b>TH</b>': 'TH'}} </a></li>
+							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
+							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li>
+							-->
+							<a href="{{{ URL::to('lang/TH') }}}"><img src="{{{ asset('assets/img/th.png') }}}" title="Thai"></a></li>
+							<a href="{{{ URL::to('lang/EN') }}}"><img src="{{{ asset('assets/img/en.png') }}}" title="English"></a></li>
+							<a href="{{{ URL::to('lang/CN') }}}"><img src="{{{ asset('assets/img/cn.png') }}}" title="Chinese"></a></li>
+							&nbsp;
+							&nbsp;
 							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
 							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+							
+							
 							
 							<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
 							<option value="date">Recently published</option>
@@ -89,9 +100,8 @@
 							<option value="restaurantName">Restaurant Name</option>
 							<option value="popularity">Popularity</option>
 							</select>	-->
-							<a href="{{{ URL::to('lang/TH') }}}"><span class="glyphicon"></span>{{(Session::get('Lang') == 'TH') ? '<b>TH</b>': 'TH'}} </a></li>
-							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
-							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li><p></p>
+							
+							
 							<div class="tfclear"></div>
 						</div>
 						
