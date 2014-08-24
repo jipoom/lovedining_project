@@ -168,7 +168,7 @@ class AdminCommentsController extends AdminController
 		}
         return Datatables::of($comments)
 		
-		->edit_column('content', '{{ preg_replace("(([<][/]*[a-z =/_{}\".-]*[>]*)+)", "", $content)}}')
+		->edit_column('content', '{{ preg_replace("(([<][/]*[a-zA-Z0-9 =/_{}:\".-]*[>]*)+)", "", $content)}}')
 		
         ->edit_column('content', '<a href="{{{ URL::to(\'admin/comments/\'. $id .\'/edit\') }}}" class="iframe cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>')
 

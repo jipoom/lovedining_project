@@ -11,7 +11,7 @@
 		<meta name="author" content="Jon Doe" />
 		<meta name="description" content="" />
 		@if(isset($post))
-			<meta property="og:description" content="{{Str::limit(preg_replace('(([<][/]*[a-z =/_{}\".-]*[>]*)+)', '', $post->content()), 50, '...')}}" />
+			<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 100, '...')}}" />
 		@endif
 		<!-- Mobile Specific Metas
 		================================================== -->
