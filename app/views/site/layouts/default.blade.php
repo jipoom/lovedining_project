@@ -9,8 +9,10 @@
 			@show </title>
 		<meta name="keywords" content="your, awesome, keywords, here" />
 		<meta name="author" content="Jon Doe" />
-		<meta name="description" content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei." />
-
+		<meta name="description" content="" />
+		@if(isset($post))
+			<meta property="og:description" content="{{Str::limit(preg_replace('(([<][/]*[a-z =/_{}\".-]*[>]*)+)', '', $post->content()), 200, '...')}}" />
+		@endif
 		<!-- Mobile Specific Metas
 		================================================== -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">

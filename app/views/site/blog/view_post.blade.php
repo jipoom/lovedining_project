@@ -5,7 +5,6 @@
 {{{ String::title($post->title) }}} ::
 @parent
 @stop
-
 {{-- Update the Meta Title --}}
 @section('meta_title')
 @parent
@@ -54,6 +53,7 @@
 
 {{-- Content --}}
 @section('content')
+
 <!-- .Ads -->
 <div class="ads-right pull-right">
 	<div class="col-md-12">
