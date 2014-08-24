@@ -5,7 +5,7 @@
 		================================================== -->
 		<meta charset="utf-8" />
 		<title> @section('title')
-			Laravel 4 Sample Site
+			LoveDinings
 			@show </title>
 		<meta name="keywords" content="your, awesome, keywords, here" />
 		<meta name="author" content="Jon Doe" />
@@ -84,11 +84,13 @@
 							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
 							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li>
 							-->
-							<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src="{{{ asset('assets/img/th.png') }}}" title="Thai">': '<img src="{{{ asset('assets/img/th2.png') }}}" title="Thai">'}} </a></li>
+							<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/th.png').' title="Thai">': '<img src='.asset('assets/img/th2.png').' title="Thai">'}} </a></li>
 							/
-							<a href="{{{ URL::to('lang/EN') }}}"><img src="{{{ asset('assets/img/en.png') }}}" title="English"></a></li>
+							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/en.png').' title="Thai">': '<img src='.asset('assets/img/en2.png').' title="English">'}} </a></li>
 							/
-							<a href="{{{ URL::to('lang/CN') }}}"><img src="{{{ asset('assets/img/cn.png') }}}" title="Chinese"></a></li>
+							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cn.png').' title="Thai">': '<img src='.asset('assets/img/cn2.png').' title="Chinese">'}} </a></li>
+							
+
 							&nbsp;
 							&nbsp;
 							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">

@@ -1,5 +1,7 @@
 @extends('site.layouts.default')
-
+	<title> @section('title')
+			LoveDining - {{Category::find($categoryId)->category_name}}
+			@show </title>
 @section('sort')
 
 {{-- Content --}}
