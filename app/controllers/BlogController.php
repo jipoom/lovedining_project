@@ -185,7 +185,7 @@ class BlogController extends BaseController {
 	 * @return View
 	 * @throws NotFoundHttpException
 	 */
-	public function getView($postId,$lang)
+	public function getView($postId)
 	{
 		// Get this blog post data
 		if(!Session::has('Lang'))
