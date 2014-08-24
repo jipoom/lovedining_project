@@ -84,11 +84,9 @@
 							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
 							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li>
 							-->
-							<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/th.png').' title="Thai">': '<img src='.asset('assets/img/th2.png').' title="Thai">'}} </a></li>
-							/
-							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/en.png').' title="Thai">': '<img src='.asset('assets/img/en2.png').' title="English">'}} </a></li>
-							/
-							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cn.png').' title="Thai">': '<img src='.asset('assets/img/cn2.png').' title="Chinese">'}} </a></li>
+							<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai">': '<img src='.asset('assets/img/th.png').' title="Thai">'}} </a></li>
+							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai">': '<img src='.asset('assets/img/en.png').' title="English">'}} </a></li>
+							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai">': '<img src='.asset('assets/img/cn.png').' title="Chinese">'}} </a></li>
 							
 
 							&nbsp;
