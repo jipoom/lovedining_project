@@ -1,6 +1,6 @@
 @extends('site.layouts.default')
 	<title> @section('title')
-			@if(isset($categoryId))
+			@if(isset($categoryId) && $categoryId != "undefined")
 				LoveDining - {{Category::find($categoryId)->category_name}}
 			@else
 				LoveDining - Search Result

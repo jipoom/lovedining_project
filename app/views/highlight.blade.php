@@ -28,24 +28,14 @@
 					</div><div class="ribbon-stitches-bottom"></div>
 				</div>
 			</div>
-			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i]->album_name)) === 0))
-				<?php $hightlightPics = Picture::directoryToArray(Config::get('app.image_path').'/'.$highlight[$i]->album_name,true); ?>
-				@if(count($hightlightPics) > 1)
-				<ul class="bxslider_highlight bx-wrapper">
-					@foreach($hightlightPics as $hightlightPic)
-					<li>
-						<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$hightlightPic}}" align="center" class ="highlight"/></a>		
-					</li>
-					@endforeach
-			
-				</ul>
-				@else
-					@if($highlight[$i]->profile_picture_name!="")
+			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i]->album_name)) === 0))				
+				@if($highlight[$i]->profile_picture_name!="")
 					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}"></a>
-					@else
-					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-					@endif
-				@endif	
+				@else
+					<a href="{{{ $highlight[$i]->url() }}}" class=""><img src="http://placehold.it/260x180" alt=""></a>
+				@endif
+				
+				
 			@endif
 		</div>
 		<!-- ./ post content -->
@@ -65,22 +55,11 @@
 			</div>
 	
 			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+1]->album_name)) === 0))
-				<?php $hightlightPics = Picture::directoryToArray(Config::get('app.image_path').'/'.$highlight[$i+1]->album_name,true); ?>
-				@if(count($hightlightPics)>1)
-				<ul class="bxslider_highlight bx-wrapper">
-					@foreach($hightlightPics as $hightlightPic)
-					<li>
-						<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$hightlightPic}}"  align="center" class ="highlight"/></a>		
-					</li>
-					@endforeach
-			
-				</ul>
+	
+				@if($highlight[$i+1]->profile_picture_name!="")
+					<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}"/></a>
 				@else
-					@if($highlight[$i+1]->profile_picture_name!="")
-					<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}" /></a>
-					@else
-					<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-					@endif
+					<a href="{{{ $highlight[$i+1]->url() }}}" class=""><img src="http://placehold.it/260x180" alt=""></a>
 				@endif
 			@endif
 		</div>
