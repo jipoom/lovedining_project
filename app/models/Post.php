@@ -114,7 +114,7 @@ class Post extends Eloquent {
 	 */
 	public function url()
 	{
-		return Url::to($this->id);
+		return Url::to("review/".$this->id."/".Session::get('Lang'));
 	}
 
 	/**
@@ -339,7 +339,7 @@ class Post extends Eloquent {
 	{
 		$data = array(
 						'emailTitle' => $emailTitle, 
-						'url' => Config::get('app.host_name').'/'.$post->id,
+						'url' => Config::get('app.host_name').'/review'.$post->id."/TH",
 						'firstname'=>$user->firstname,
 						'postTitle'=>$post->title,
 						'album_name'=>$post->album_name,

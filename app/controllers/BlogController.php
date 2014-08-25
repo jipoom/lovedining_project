@@ -30,6 +30,9 @@ class BlogController extends BaseController {
 	public function changeLang($lang)
 	{
 		Session::put('Lang',$lang);
+
+		if(Session::has('View'))
+			return Redirect::to(URL::to('review')."/".Session::get('View')."/".$lang);
 		return Redirect::to(URL::previous());
 	}
     
@@ -54,6 +57,7 @@ class BlogController extends BaseController {
 		{
 			Session::put('Lang','TH');
 		}
+		Session::forget('View');
 		Session::forget('mode');
 		Session::forget('catName');
 		$home = Post::active()->where('is_home','=',1)->get();
@@ -108,7 +112,7 @@ class BlogController extends BaseController {
 			Session::put('Lang','TH');
 		}
 		$catName = Category::find($categoryId);
-		
+		Session::forget('View');
 		$mode = null;
 		if (Session::has('mode') && Session::get('catName') == $catName->category_name){
 			$mode = Session::get('mode');
@@ -185,13 +189,13 @@ class BlogController extends BaseController {
 	 * @return View
 	 * @throws NotFoundHttpException
 	 */
-	public function getView($postId)
+	public function getView($postId,$lang)
 	{
 		// Get this blog post data
-		if(!Session::has('Lang'))
-		{
-			Session::put('Lang','TH');
-		}
+
+		Session::put('Lang',$lang);	
+		Session::put('View',$postId);
+
 		$post = $this->post->active()->where('id', '=', $postId)->first();
 		// Check if the blog post exists
 		if (is_null($post))
@@ -285,15 +289,15 @@ class BlogController extends BaseController {
 			if($post->comments()->save($comment))
 			{
 				// Redirect to this blog post page
-				return Redirect::to($postId . '#comments')->with('success', 'Your comment was added with success.');
+				return Redirect::to("review/".$postId."/".Session::get('Lang') . '#comments')->with('success', 'Your comment was added with success.');
 			}
 
 			// Redirect to this blog post page
-			return Redirect::to($postId . '#comments')->with('error', 'There was a problem adding your comment, please try again.');
+			return Redirect::to("review/".$postId."/".Session::get('Lang')  . '#comments')->with('error', 'There was a problem adding your comment, please try again.');
 		}
 
 		// Redirect to this blog post page
-		return Redirect::to($postId)->withInput()->withErrors($validator);
+		return Redirect::to("review/".$postId."/".Session::get('Lang'))->withInput()->withErrors($validator);
 	}
 	public function searchReview($keyword)
 	{

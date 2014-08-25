@@ -1,6 +1,10 @@
 @extends('site.layouts.default')
 	<title> @section('title')
-			LoveDining - {{Category::find($categoryId)->category_name}}
+			@if(isset($categoryId))
+				LoveDining - {{Category::find($categoryId)->category_name}}
+			@else
+				LoveDining - Search Result
+			@endif	
 			@show </title>
 @section('sort')
 

@@ -11,7 +11,18 @@
 		<meta name="author" content="Jon Doe" />
 		<meta name="description" content="" />
 		@if(isset($post))
-			<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 100, '...')}}" />
+			<meta property="og:title" content="{{$post->title}}" />
+			<meta property="og:url" content="{{$post->url()}}" />
+			<meta property="og:type" content="website" />
+			<meta property="og:image" content="{{Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name}}" />
+			<meta property="fb:app_id" content="566292166825639"/>
+			@if(Session::get('Lang') == 'TH')
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 100, '...')}}" />
+			@elseif(Session::get('Lang') == 'EN')
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_en()), 100, '...')}}" />
+			@elseif(Session::get('Lang') == 'CN')
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_cn()), 100, '...')}}" />
+			@endif
 		@endif
 		<!-- Mobile Specific Metas
 		================================================== -->

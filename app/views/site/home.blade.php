@@ -55,7 +55,7 @@
 			
 				<li>
 					<div class="crop">																																	
-					<a href="{{$post->id}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}}, {{(Session::get('Lang') == 'TH') ? $post->province->province_name: $post->province->province_name_en}}" align="middle" class="resize"/></a>		
+					<a href="{{$post->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}}, {{(Session::get('Lang') == 'TH') ? $post->province->province_name: $post->province->province_name_en}}" align="middle" class="resize"/></a>		
 					</div>
 				</li>
 			@endif
