@@ -17,7 +17,7 @@
 
 		<!-- Post Content -->
 
-		<div class="col-md-4" style="left: 0; margin-right: 5px;">	
+		<div class="col-md-hl" style="left: 0; margin-right: 15px; padding: 0;">	
 			<!--
 			<div class="non-semantic-protector">
 				<!-- ribbons and other content in here 
@@ -46,7 +46,7 @@
 	<!-- new Column -->
 	@if(($i+1)<count($highlight))
 		<!-- Post Content -->
-		<div class="col-md-4 " style="right: 0; margin-right: 5px;" >
+		<div class="col-md-hl" style="right: 0; margin-right: 15px; padding: 0;" >
 			
 	
 			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+1]->album_name)) === 0))
@@ -76,7 +76,7 @@
 		<!-- new Column -->
 		@if(($i+2)<count($highlight))
 			<!-- Post Content -->
-			<div class="col-md-4 " style="right: 0; margin-right: 5px;" >
+			<div class="col-md-hl" style="right: 0; margin-right: 15px; padding: 0;" >
 				
 		
 				@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+2]->album_name)) === 0))
