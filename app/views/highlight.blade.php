@@ -17,7 +17,7 @@
 
 		<!-- Post Content -->
 
-		<div class="col-md-6_5 " style="left: 0; margin-right: 20px;">	
+		<div class="col-md-4" style="left: 0; margin-right: 5px;">	
 			<!--
 			<div class="non-semantic-protector">
 				<!-- ribbons and other content in here 
@@ -46,7 +46,7 @@
 	<!-- new Column -->
 	@if(($i+1)<count($highlight))
 		<!-- Post Content -->
-		<div class="col-md-6_5 " style="right: 0; margin-left: 20px;" >
+		<div class="col-md-4 " style="right: 0; margin-right: 5px;" >
 			
 	
 			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+1]->album_name)) === 0))
