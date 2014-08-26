@@ -22,7 +22,7 @@
     height: auto;
 	}	
 	img.hl{
-    width:250px; /* you can use % */
+    width:300px; /* you can use % */
     height: auto;
 	}	
 
