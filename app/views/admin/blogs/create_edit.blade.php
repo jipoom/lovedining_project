@@ -183,9 +183,9 @@
 				<div class="form-group">
                     <div class="col-md-12"
 						 <!-- Selection Published Date -->
-						 <label class="control-label" for="timestamp">Published At</label>	
-						Now: <input type="radio" name="radio1" id="published_now" value="now">
-    					Specify: <input type="radio" name="radio1" id="published_specified" value="specified" checked="checked">																
+						 <label class="control-label" for="timestamp">Published At: </label>	
+						<input type="radio" name="radio1" id="published_now" value="now"> Now 
+    					<input type="radio" name="radio1" id="published_specified" value="specified" checked="checked">	Specify															
 						{{ Form::text('publishedAt',Input::old('publishedAt', isset($post) ? $post->published_at : null), array('id'=>'publishedDate'))}} </p>
 						{{{ $errors->first('publishedAt', ':message') }}}
 					</div>
@@ -193,25 +193,25 @@
 				<div class="form-group">
                     <div class="col-md-12"
 						 <!-- Selection Expiry Date -->
-						 <label class="control-label" for="timestamp">Expired At</label>						 
+						 <label class="control-label" for="timestamp">Expired At: </label>						 
 						 @if(isset($post))
 						 	@if($post->is_permanent == 1)
-								Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" checked="checked">   						
-    							Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" >
+								<input type="radio" name="radio2" id="expired_unknown" value="permanent" checked="checked"> Permanent  						
+    							<input type="radio" name="radio2" id="expired_specified" value="specified" > Specify
     							{{ Form::text('expiredAt',Input::old('expiredAt', null), array('id'=>'expiredDate'))}} </p>
 								{{{ $errors->first('expiredAt', ':message') }}}
 								{{ Form::hidden('expired_at', Input::old('expired_at', 1), array('id'=>'permanent')) }} </p>  
                        
     						@else	
-    							Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" >   						
-    							Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" checked="checked">
+    							<input type="radio" name="radio2" id="expired_unknown" value="permanent" > Permanent   						
+    							<input type="radio" name="radio2" id="expired_specified" value="specified" checked="checked"> Specify
     							{{ Form::text('expiredAt',Input::old('expiredAt', $post->expired_at), array('id'=>'expiredDate'))}} </p>
 								{{{ $errors->first('expiredAt', ':message') }}}
 								{{ Form::hidden('expired_at', Input::old('expired_at', 0), array('id'=>'permanent')) }} </p>
     						@endif	
     					 @else
-    					 	Permanent: <input type="radio" name="radio2" id="expired_unknown" value="permanent" checked="checked">
-    						Specify: <input type="radio" name="radio2" id="expired_specified" value="specified" >
+    					 	<input type="radio" name="radio2" id="expired_unknown" value="permanent" checked="checked"> Permanent
+    						<input type="radio" name="radio2" id="expired_specified" value="specified" > Specify
     						{{ Form::text('expiredAt',Input::old('expiredAt', null), array('id'=>'expiredDate'))}} </p>
 							{{{ $errors->first('expiredAt', ':message') }}}
 							{{ Form::hidden('expired_at', Input::old('expired_at', 1), array('id'=>'permanent')) }} </p>
