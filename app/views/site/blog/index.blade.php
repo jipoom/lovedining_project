@@ -10,7 +10,7 @@
 
 {{-- Content --}}
 @section('content')
-<div class="col-md-8">
+<div class="col-md-8"  style="position:absolute;">
 	<h3> @if($mode == "date")
 	เรียงลำดับตาม  Recently published
 	@elseif($mode == "reviewName")
