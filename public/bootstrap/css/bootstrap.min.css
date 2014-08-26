@@ -5072,6 +5072,24 @@ button.close {
 .tfclear {
 	clear: both;
 }
+@media (max-width: 768px) {
+	.lang_th {
+		top: 50%;
+  		right: 20%;
+		position:absolute;
+	}
+	.lang_en {
+		top: 50%;
+  		right: 13%;	
+		position:absolute;
+	}
+	.lang_cn {
+		top: 50%;
+  		right: 6%;
+		position:absolute;
+	}
+}
+
 /* ribbon new*/
 .ribbon-wrapper-green {
   width: 85px;
