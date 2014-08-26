@@ -14,7 +14,7 @@ class Statistic extends Eloquent {
 		$stat->ip_address = $ip_addr;
 		$stat->save();	
 	}
-	public static function get4PopularReviews()
+	public static function get6PopularReviews()
 	{
 		$popularId = array();	
 		$i=0;			
@@ -22,7 +22,7 @@ class Statistic extends Eloquent {
                         ->select(DB::raw('posts.id as p_id, COUNT(*) AS total_posts'))
                         ->orderBy('total_posts', 'DESC')
                         ->groupBy('posts.id')
-                        ->take(4)
+                        ->take(6)
                         ->get();
 		foreach ($posts as $post)
 		{
