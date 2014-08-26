@@ -57,7 +57,7 @@
 <!-- .Ads -->
 <div class="ads-right pull-right">
 	<div class="col-md-12">
-		<a href="" class="thumbnail"><img src="{{$adsSide}}" alt=""></a>
+		<a href="" class="ads"><img src="{{$adsSide}}" alt=""></a>
 	</div>
 </div>
 <!-- ./ Ads -->
@@ -338,7 +338,7 @@
 <!-- . Ads -->
 <div class="ads-foot">
 	<div class="col-md-12">
-		<a href="" class="thumbnail"><img src="{{$adsFoot}}" alt=""></a>
+		<a href="" class="ads"><img src="{{$adsFoot}}" alt=""></a>
 	</div>
 </div>
 <!-- ./ Ads -->
