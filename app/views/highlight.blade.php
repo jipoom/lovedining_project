@@ -9,7 +9,7 @@
 				@endif
 			@endif
 			</h3>
-<?php for($i=0;$i<count($highlight);$i+=2)
+<?php for($i=0;$i<count($highlight);$i+=3)
 {
 ?>
 <input type="hidden" name="newMode" id = "newMode" value="{{isset($mode) ? $mode : null}}" />
@@ -32,14 +32,14 @@
 			-->
 			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i]->album_name)) === 0))				
 				@if($highlight[$i]->profile_picture_name!="")
-					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}"></a>
+					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" class ="hl"></a>
 				@else
 					<a href="{{{ $highlight[$i]->url() }}}" class=""><img src="http://placehold.it/260x180" alt=""></a>
 				@endif
 				
 				
 			@endif
-			<a href="{{{ $highlight[$i]->url() }}}">{{ Str::limit($highlight[$i]->title, 35, "...") }}</a>
+			<a href="{{{ $highlight[$i]->url() }}}">{{ $highlight[$i]->title }}</a>
 		</div>
 		<!-- ./ post content -->
 
@@ -52,13 +52,13 @@
 			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+1]->album_name)) === 0))
 	
 				@if($highlight[$i+1]->profile_picture_name!="")
-					<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}"/></a>
+					<a href="{{{ $highlight[$i+1]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+1]->album_name.'/'.$highlight[$i+1]->profile_picture_name}}" class ="hl"/></a>
 				@else
 					<a href="{{{ $highlight[$i+1]->url() }}}" class=""><img src="http://placehold.it/260x180" alt=""></a>
 				@endif
 				
 			@endif
-			<a href="{{{ $highlight[$i+1]->url() }}}">{{ Str::limit($highlight[$i+1]->title, 35, "...") }}</a>
+			<a href="{{{ $highlight[$i+1]->url() }}}">{{ $highlight[$i+1]->title }}</a>
 			<!--
 			<div class="non-semantic-protector">
 				
@@ -72,9 +72,44 @@
 			-->
 		</div>
 		<!-- ./ post content -->
+		
+		<!-- new Column -->
+		@if(($i+2)<count($highlight))
+			<!-- Post Content -->
+			<div class="col-md-4 " style="right: 0; margin-right: 5px;" >
+				
+		
+				@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+2]->album_name)) === 0))
+		
+					@if($highlight[$i+2]->profile_picture_name!="")
+						<a href="{{{ $highlight[$i+2]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i+2]->album_name.'/'.$highlight[$i+2]->profile_picture_name}}" class ="hl"/></a>
+					@else
+						<a href="{{{ $highlight[$i+2]->url() }}}" class=""><img src="http://placehold.it/260x180" alt=""></a>
+					@endif
+					
+				@endif
+				<a href="{{{ $highlight[$i+2]->url() }}}">{{ $highlight[$i+2]->title }}</a>
+				<!--
+				<div class="non-semantic-protector">
+					
+					<div class="ribbon">
+						<div class="ribbon-stitches-top"></div>
+						<div class="ribbon-content">
+							<a href="{{{ $highlight[$i+1]->url() }}}">{{ Str::limit($highlight[$i+1]->title, 35, "...") }}</a>
+						</div><div class="ribbon-stitches-bottom"></div>
+					</div>
+				</div>
+				-->
+			</div>
+			<!-- ./ post content -->
 	
-@endif
-<!-- /new Column -->
+		@endif
+		<!-- /new Column -->
+	
+	@endif
+	<!-- /new Column -->
+	
+	
 </div>
 <?php
 }

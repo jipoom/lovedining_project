@@ -21,6 +21,10 @@
     width:950px; /* you can use % */
     height: auto;
 	}	
+	img.hl{
+    width:250px; /* you can use % */
+    height: auto;
+	}	
 
     
 }

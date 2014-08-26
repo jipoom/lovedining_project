@@ -11,15 +11,39 @@
 {{-- Content --}}
 @section('content')
 <div class="col-md-8"  style="position:absolute;">
-	<h3> @if($mode == "date")
-	เรียงลำดับตาม  Recently published
-	@elseif($mode == "reviewName")
-	เรียงลำดับตามชื่อรีวิว
-	@elseif($mode == "restaurantName")
-	เรียงลำดับตามชื่อร้านอาหาร
-	@elseif($mode == "popularity")
-	เรียงลำดับตามความนิยม
-	@endif </h3>
+	<h3> 
+	@if(Session::get('Lang') == 'TH')
+		@if($mode == "date")
+		เรียงลำดับตามวันที่ล่าสุด
+		@elseif($mode == "reviewName")
+		เรียงลำดับตามชื่อรีวิว
+		@elseif($mode == "restaurantName")
+		เรียงลำดับตามชื่อร้านอาหาร
+		@elseif($mode == "popularity")
+		เรียงลำดับตามความนิยม
+		@endif 
+	@elseif(Session::get('Lang') == 'EN')
+		@if($mode == "date")
+		Sort by recently published
+		@elseif($mode == "reviewName")
+		Sort by review name
+		@elseif($mode == "restaurantName")
+		Sort by restaurant name
+		@elseif($mode == "popularity")
+		Sort by popularity
+		@endif 
+	@elseif(Session::get('Lang') == 'CN')
+		@if($mode == "date")
+		Sort by recently published
+		@elseif($mode == "reviewName")
+		Sort by review name
+		@elseif($mode == "restaurantName")
+		Sort by restaurant name
+		@elseif($mode == "popularity")
+		Sort by popularity
+		@endif 
+	@endif
+		</h3>
 </div>
 <!-- .Ads -->
 <div class="ads-right pull-right">

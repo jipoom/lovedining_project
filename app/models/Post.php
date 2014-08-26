@@ -202,7 +202,7 @@ class Post extends Eloquent {
 		else if ($mode == "popularity"){
 			Session::put('mode', 'popularity');
 			Session::put('catName',$catName);
-			return Statistic::getPopularReviews();
+			return Statistic::getPopularReviews($category);
 			/*$posts = array();
 			$i=0;
 			foreach ($popularIds as $popularId)
