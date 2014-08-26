@@ -219,7 +219,7 @@ class AdminBlogsController extends AdminController {
 				foreach($users as $user)
 				{
 					//echo $user->firstname;
-					Post::sendEmail("New Review","We have new review available for you",$this->post,$user,$publishedDate);
+					//Post::sendEmail("New Review","We have new review available for you",$this->post,$user,$publishedDate);
 				}
 				return Redirect::to('admin/blogs/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
 
@@ -493,7 +493,7 @@ class AdminBlogsController extends AdminController {
 				 foreach($users as $user)
 				{
 					//echo $user->firstname;
-					Post::sendEmail("Review updated!","We have updated a review and would like you to check it out",$post,$user,$post->published_at);
+					//Post::sendEmail("Review updated!","We have updated a review and would like you to check it out",$post,$user,$post->published_at);
 		
 				}
 				 
