@@ -5047,7 +5047,10 @@ button.close {
 }
 
 #tfnewsearch {
+	position: relative;
+	right: -240px;
 	float: right;
+	top: 20px;
 	padding: 15px;
 }
 .tftextinput {
@@ -5149,12 +5152,14 @@ button.close {
 }
 
 
-#home-contact-about {
+.home-contact-about {
 	float: right;
+	position:relative;
+	
 	padding: 5px;
 }
 @media (max-width: 768px) {
-	#home-contact-about {
+	.home-contact-about {
 		display: none !important
 	}
 }
