@@ -24,7 +24,7 @@
 	img.hl{
     width:300px; /* you can use % */
     height: auto;
-	}	
+	}
 
     
 }

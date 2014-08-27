@@ -253,8 +253,9 @@ a {
 	text-decoration: none
 }
 a:hover, a:focus {
-	color: #121212;
-	text-decoration: underline
+	/*color: #121212;*/
+	color: #DF0101;
+	/* text-decoration: underline */
 }
 a:focus {
 	outline: thin dotted;
@@ -3831,7 +3832,7 @@ a.list-group-item.active > .badge, .nav-pills > .active > a > .badge {
 	margin-bottom: 10px;
 }
 a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
-
+	
 }
 .thumbnail .caption {
 
@@ -5074,20 +5075,28 @@ button.close {
 }
 @media (max-width: 768px) {
 	.lang_th {
-		top: 50%;
-  		right: 20%;
-		position:absolute;
+		top: -35px;
+  		left: 70%;
+		position:relative;
 	}
 	.lang_en {
-		top: 50%;
-  		right: 13%;	
-		position:absolute;
+		top: -35px;
+  		left: 70%;	
+		position:relative;
 	}
 	.lang_cn {
-		top: 50%;
-  		right: 6%;
-		position:absolute;
+		top: -35px;
+  		left: 70%;
+		position:relative;
 	}
+	.tfbutton{
+		display: none !important
+	}
+	.tftextinput{
+
+		position:relative;
+	}
+
 }
 
 
