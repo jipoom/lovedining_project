@@ -18,7 +18,7 @@
     margin: 0 auto;
 	}
 	img.resize{
-    width:950px; /* you can use % */
+    width:1100px; /* you can use % */
     height: auto;
 	}	
 	img.hl{
@@ -33,15 +33,9 @@
 
 {{-- Content --}}
 @section('content')
-<!-- .Ads -->
-<div class="ads-right-home checkscreen">
-	<div class="col-md-12">
-		<a href="" class="ads"><img src="{{$adsSide}}" alt=""></a>
-	</div>
-</div>
-<!-- ./ Ads -->
 
-<div class="col-md-10">
+
+<div class="col-md-12">
 
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
@@ -66,10 +60,17 @@
 		@endforeach
 
 	</ul>
-
-@include('highlight')
-
 </div>
+<div class="col-md-10">
+@include('highlight')
+</div>
+<!-- .Ads -->
+<div class="ads-right-home checkscreen">
+	<div class="col-md-12">
+		<a href="" class="ads"><img src="{{$adsSide}}" alt=""></a>
+	</div>
+</div>
+<!-- ./ Ads -->
 
 <!-- . Ads -->
 <div class="ads-foot">
@@ -117,7 +118,7 @@
 			speed : 500,
 			randomStart : true,
 			responsive : true,
-			slideWidth : 950,
+			slideWidth : 1100,
 			adaptiveHeight: true
 		});
 		
