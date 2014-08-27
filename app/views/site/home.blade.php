@@ -109,7 +109,7 @@
 			autoHover : true,
 			pause : 3000,
 			autoControls : false,
-			pager : true,
+			pager : false,
 			pagerType : 'full',
 			controls : false,
 			captions : true,
