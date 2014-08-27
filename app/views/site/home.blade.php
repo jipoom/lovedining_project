@@ -1,4 +1,4 @@
-@extends('site.layouts.default')
+@extends('site.layouts.home_layout')
 {{-- Web site Title --}}
 @section('title')
 {{{ Lang::get('site.introduction') }}} ::

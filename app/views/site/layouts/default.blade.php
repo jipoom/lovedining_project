@@ -35,6 +35,7 @@
 		<link rel="stylesheet" href="{{asset('bootstrap/css/ribbon.css')}}">
 		<link rel="stylesheet" href="{{asset('bootstrap/css/dbcdss.css')}}">
 		<style>
+
 			@section('styles')
 			@show
 		</style>
@@ -89,7 +90,14 @@
 							
 
 						</div>   
-
+						<!-- Home Contact About -->
+						<div id ="home-contact-about">
+							
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>HOME </a></li> | 
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>ABOUT US </a></li> |
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>CONTACT </a></li>
+				
+						</div>
 						<!-- Searchbox -->
 						<div id="tfnewsearch">
 							<!--
@@ -141,17 +149,17 @@
 							<ul class="nav navbar-nav">
 
 								<li{{ (Request::is('/') ? ' class="active"' : '') }}>
-									<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-
+									<!--<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+-->
 									<?php $mode = CategoryOrder::getMode(); ?>
 									@foreach(CategoryOrder::getOrder($mode) as $category)
 									<li {{ (Request::is('category/'.$category->
 										id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
 										@if (Auth::check())
-										<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
-										@if($numUnread>0)
-										({{$numUnread}})
-										@endif
+											<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
+											@if($numUnread>0)
+												({{$numUnread}})
+											@endif
 										@endif </a>
 									</li>
 

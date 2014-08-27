@@ -5148,6 +5148,17 @@ button.close {
 	color: #333
 }
 
+
+#home-contact-about {
+	float: right;
+	padding: 5px;
+}
+@media (max-width: 768px) {
+	#home-contact-about {
+		display: none !important
+	}
+}
+
 /* ribbon new*/
 .ribbon-wrapper-green {
   width: 85px;
