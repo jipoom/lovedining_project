@@ -616,14 +616,13 @@ pre code {
 	width: 16%
 }
 .ads-right-home {
-	margin-right: auto;
+
 
 	position: relative;
 	min-height: 1px;
-	padding-left: 5px;
-	padding-right: 5px;
+
 	float: right;
-	width: 16%
+	width: 23%
 }
 .ads-foot {
 	bottom: 0px;
@@ -631,7 +630,6 @@ pre code {
 	min-height: 1px;
 	padding-left: 5px;
 	padding-right: 5px;
-	width: 100%
 }
 @media only screen and (max-width: 500px) {
     .slogan {
@@ -1009,7 +1007,7 @@ pre code {
 		width: 83.33333333%
 	}
 	.col-md-9 {
-		width: 75%
+		width: 77%
 	}
 	.col-md-8 {
 		width: 66.66666667%
@@ -5131,8 +5129,8 @@ button.close {
 /* Ads*/
 .ads {
 	display: block;
-	padding: 4px;
-	margin-bottom: 5px;
+	left: 0px;
+	padding: 5px ;
 	line-height: 1.42857143;
 	background-color: #fff;
 	border: 1px solid #ddd;

@@ -36,11 +36,11 @@
 
 
 <div class="col-md-12">
-
+<!-- Welcome --> <!--
 <h4 style="color: #282828">
 {{{ Lang::get('site.introduction') }}}
 </h4>
-
+<!-- Welcome -->
 	
 	<ul class="bxslider" style="margin-bottom: 0px; padding-bottom: 0px;">
 		@foreach($home as $post)
@@ -59,20 +59,30 @@
 
 	</ul>
 
-<div class="col-md-10" style="padding-top: 0px; margin-top: 0px;">
+<div class="col-md-9" style="padding-top: 0px; margin-top: 0px; ">
 @include('highlight')
 </div>
+
+	<!-- Searchbox -->
+	<div id="tfnewsearch">
+		
+		<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
+		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+		
+		
+		<div class="tfclear"></div>
+	</div>
 <!-- .Ads -->
-<div class="ads-right-home checkscreen">
-	<div class="col-md-12">
-		<a href="" class="ads"><img src="{{$adsSide}}" alt=""></a>
+<div class="ads-right-home checkscreen" >
+	<div class="col-md-12 ads">
+		<a href="" ><img src="{{$adsSide}}" alt=""></a>
 	</div>
 </div>
 <!-- ./ Ads -->
 
 <!-- . Ads -->
 <div class="ads-foot">
-	<div class="col-md-10">
+	<div class="col-md-9">
 		<a href="" class="ads"><img src="{{$adsFoot}}" alt=""></a>
 	</div>
 </div>

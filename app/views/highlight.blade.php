@@ -46,7 +46,7 @@
 	<!-- new Column -->
 	@if(($i+1)<count($highlight))
 		<!-- Post Content -->
-		<div class="col-md-hl" style="right: 0; margin-right: 15px; padding: 0; margin-bottom: 15px;" >
+		<div class="col-md-hl" style="margin-right: 15px; padding: 0; margin-bottom: 15px;" >
 			
 	
 			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+1]->album_name)) === 0))
@@ -76,7 +76,7 @@
 		<!-- new Column -->
 		@if(($i+2)<count($highlight))
 			<!-- Post Content -->
-			<div class="col-md-hl" style="right: 0; margin-right: 15px; padding: 0; margin-bottom: 15px;" >
+			<div class="col-md-hl" style="margin-right: 15px; padding: 0; margin-bottom: 15px;" >
 				
 		
 				@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i+2]->album_name)) === 0))
