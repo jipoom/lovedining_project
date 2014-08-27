@@ -42,7 +42,7 @@
 </h4>
 
 	
-	<ul class="bxslider">
+	<ul class="bxslider" style="margin-bottom: 0px; padding-bottom: 0px;">
 		@foreach($home as $post)
 			@if(!(count(glob(Config::get('app.image_path').'/'.$post->album_name.'/banner/')) === 0))
 				<?php
@@ -59,7 +59,7 @@
 
 	</ul>
 
-<div class="col-md-10">
+<div class="col-md-10" style="padding-top: 0px; margin-top: 0px;">
 @include('highlight')
 </div>
 <!-- .Ads -->
