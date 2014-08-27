@@ -5046,11 +5046,17 @@ button.close {
 	}
 }
 
-#tfnewsearch {
+#tfsubscribe {
 	position: relative;
 	right: -240px;
 	float: right;
 	top: 20px;
+	padding: 15px;
+}
+
+#tfnewsearch {
+	position: relative;
+	float: right;
 	padding: 15px;
 }
 .tftextinput {
@@ -5097,12 +5103,18 @@ button.close {
 }
 @media (min-width: 768px) {
  	#social{
- 		top: 35px;
- 		left: 30%;
+ 		top: 50px;
+ 		left: 42%;
  		position:relative;
  	}
 }
 @media (max-width: 768px) {
+	#tfsubscribe {
+		position: relative;
+		top: -5px;
+		right: -15px;
+		float: right;
+	}
 	.lang_th {
 		top: -35px;
   		left: 70%;

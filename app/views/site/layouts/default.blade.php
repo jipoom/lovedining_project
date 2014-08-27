@@ -104,7 +104,7 @@
 							
 						<!-- Searchbox -->
 						
-						<div id="tfnewsearch" class="pull-right">
+						<div id="tfsubscribe" class="pull-right">
 							<!--
 							<a href="{{{ URL::to('lang/TH') }}}"><span class="glyphicon"></span>{{(Session::get('Lang') == 'TH') ? '<b>TH</b>': 'TH'}} </a></li>
 							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
