@@ -9,7 +9,7 @@
 				@endif
 			@endif
 			</h3>
-<?php for($i=0;$i<count($highlight);$i+=3)
+<?php for($i=0;$i<count($highlight) && $i<6;$i+=3)
 {
 ?>
 <input type="hidden" name="newMode" id = "newMode" value="{{isset($mode) ? $mode : null}}" />
