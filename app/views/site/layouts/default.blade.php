@@ -119,6 +119,20 @@
 							
 							<div class="tfclear"></div>
 						</div>
+		
+						<!-- Socail -->
+						<div id="social">
+							
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>FB </a></li>
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>TW </a></li>
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>G+ </a></li>
+				
+							<!--<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
+							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
+							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
+							-->
+
+						</div>
 						
 					</div>
 					<div class="container">

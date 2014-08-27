@@ -5088,6 +5088,12 @@ button.close {
 .tfclear {
 	clear: both;
 }
+
+/*Social*/
+#social {
+	float: right;
+	padding: 15px;
+}
 @media (max-width: 768px) {
 	.lang_th {
 		top: -35px;
