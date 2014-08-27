@@ -41,8 +41,6 @@
 {{{ Lang::get('site.introduction') }}}
 </h4>
 
-
-<div class="col-md-12">
 	
 	<ul class="bxslider">
 		@foreach($home as $post)
@@ -60,7 +58,7 @@
 		@endforeach
 
 	</ul>
-</div>
+
 <div class="col-md-10">
 @include('highlight')
 </div>
@@ -74,7 +72,7 @@
 
 <!-- . Ads -->
 <div class="ads-foot">
-	<div class="col-md-12">
+	<div class="col-md-10">
 		<a href="" class="ads"><img src="{{$adsFoot}}" alt=""></a>
 	</div>
 </div>
