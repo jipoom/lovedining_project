@@ -34,7 +34,7 @@
 {{-- Content --}}
 @section('content')
 <!-- .Ads -->
-<div class="ads-right checkscreen">
+<div class="ads-right-home checkscreen">
 	<div class="col-md-12">
 		<a href="" class="ads"><img src="{{$adsSide}}" alt=""></a>
 	</div>
@@ -58,7 +58,7 @@
 				?>
 			
 				<li>
-					<div class="crop">																																	
+					<div>																																	
 					<a href="{{$post->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$post->album_name.'/banner/'.$banner[0]}}" title="{{$post->title}}, {{(Session::get('Lang') == 'TH') ? $post->province->province_name: $post->province->province_name_en}}" align="middle" class="resize"/></a>		
 					</div>
 				</li>

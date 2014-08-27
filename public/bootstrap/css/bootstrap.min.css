@@ -615,6 +615,16 @@ pre code {
 	float: right;
 	width: 16%
 }
+.ads-right-home {
+	margin-right: auto;
+	margin-top: 50%;
+	position: relative;
+	min-height: 1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	float: right;
+	width: 16%
+}
 .ads-foot {
 	bottom: 0px;
 	position: relative;
@@ -628,8 +638,13 @@ pre code {
         display: none;
     }
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
     .ads-right {
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .ads-right-home {
         display: none;
     }
 }
