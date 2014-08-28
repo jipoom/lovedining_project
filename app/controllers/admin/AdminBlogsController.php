@@ -121,6 +121,7 @@ class AdminBlogsController extends AdminController {
 
 			// Update the blog post data
 			$this -> post -> title = Input::get('title');
+			$this -> post -> title_2 = Input::get('title2');
 			$this -> post -> restaurant_name = Input::get('restaurant_name');
 			$this -> post -> tel = Input::get('tel');
 			$this -> post -> address1 = Input::get('address1');
@@ -363,6 +364,7 @@ class AdminBlogsController extends AdminController {
 				$content = str_replace('/images/' . $oldImageDir . '/', '/images/' . Input::get('album_name') . '/', Input::get('content'));
 			}*/
 			$post -> title = Input::get('title');
+			$post -> title_2 = Input::get('title2');
 			$post -> restaurant_name = Input::get('restaurant_name');
 			$post -> tel = Input::get('tel');
 			$post -> address1 = Input::get('address1');

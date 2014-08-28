@@ -259,7 +259,7 @@ class Post extends Eloquent {
 				//where date > published_date
 				//where date < expired_date
 				-> orderBy($orderBy, $mode)
-				->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
+				->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 'posts.title_2', 
 				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
 				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
@@ -267,7 +267,7 @@ class Post extends Eloquent {
 		 }
 		 //If user searches with a keyword
 		 else {
-			 return $post->orderBy($orderBy, $mode)->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
+			 return $post->orderBy($orderBy, $mode)->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 'posts.title_2', 
 				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
 				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
@@ -295,7 +295,7 @@ class Post extends Eloquent {
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
 						  ->orwhere('tumbol', 'LIKE', '%'. $term .'%');
 
-	            })->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 
+	            })->paginate(8,array('posts.id', 'posts.user_id', 'posts.title', 'posts.title_2', 
 				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
 				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
@@ -313,6 +313,7 @@ class Post extends Eloquent {
 	            {
 	                $query->where('restaurant_name', 'LIKE',  '%'. $term .'%')
 	                      ->orwhere('title', 'LIKE', '%'. $term .'%')
+						  ->orwhere('title_2', 'LIKE', '%'. $term .'%')
 						  ->orwhere('province.province_name', 'LIKE', '%'. $term .'%')
 						  ->orwhere('province.province_name_en', 'LIKE', '%'. $term .'%')
 						  ->orwhere('amphur', 'LIKE', '%'. $term .'%')
@@ -341,7 +342,7 @@ class Post extends Eloquent {
 						'emailTitle' => $emailTitle, 
 						'url' => Config::get('app.host_name').'/review'.$post->id."/TH",
 						'firstname'=>$user->firstname,
-						'postTitle'=>$post->title,
+						'postTitle'=>$post->title.' '.$post->title_2,
 						'album_name'=>$post->album_name,
 						'profile_picture_name'=>$post->profile_picture_name,
 						'postTitle'=>$post->title,

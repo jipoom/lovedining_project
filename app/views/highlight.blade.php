@@ -39,7 +39,7 @@
 				
 				
 			@endif
-			<a href="{{{ $highlight[$i]->url() }}}">{{ $highlight[$i]->title }}</a>
+			<a href="{{{ $highlight[$i]->url() }}}">{{ $highlight[$i]->title }}<p>{{$highlight[$i]->title_2}}</p></a>
 		</div>
 		<!-- ./ post content -->
 
@@ -58,7 +58,7 @@
 				@endif
 				
 			@endif
-			<a href="{{{ $highlight[$i+1]->url() }}}">{{ $highlight[$i+1]->title }}</a>
+			<a href="{{{ $highlight[$i+1]->url() }}}">{{ $highlight[$i+1]->title }}<p>{{$highlight[$i+1]->title_2}}</p></a>
 			<!--
 			<div class="non-semantic-protector">
 				
@@ -88,7 +88,7 @@
 					@endif
 					
 				@endif
-				<a href="{{{ $highlight[$i+2]->url() }}}">{{ $highlight[$i+2]->title }}</a>
+				<a href="{{{ $highlight[$i+2]->url() }}}">{{ $highlight[$i+2]->title }}<p>{{$highlight[$i+2]->title_2}}</p></a>
 				<!--
 				<div class="non-semantic-protector">
 					

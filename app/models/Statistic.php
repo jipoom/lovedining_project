@@ -53,23 +53,24 @@ class Statistic extends Eloquent {
 		$i=0;			
 		if($catId!="undefined")
 		{
-			$posts = Post::active()->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')->where('statistic.category_id','=',$catId)
-	                        ->select(DB::raw('posts.id, posts.user_id, posts.title, 
+			$posts = Post::active()->leftjoin('posts_category','posts_category.post_id','=','posts.id')->where('posts_category.category_id','=',$catId)
+							->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
+	                        ->select(DB::raw('posts.id, posts.user_id, posts.title,  posts.title_2, 
 								posts.profile_picture_name,posts.content,posts.content_en,posts.content_cn,posts.album_name,
 								posts.restaurant_name,posts.tel,posts.address1,
 								posts.address2,posts.tumbol,posts.amphur,posts.route,posts.route_en,posts.route_cn,
-								posts.province_id,posts.zip,posts.created_at,posts.updated_at, COUNT(*) AS total_posts'))
+								posts.province_id,posts.zip,posts.created_at,posts.updated_at, COUNT(posts.id) AS total_posts'))
 	                        ->orderBy('total_posts', 'DESC')
 	                        ->groupBy('posts.id')
 							->paginate(8);
 		}
 		else {
 			$posts = Post::active()->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
-	                        ->select(DB::raw('posts.id, posts.user_id, posts.title, 
+	                        ->select(DB::raw('posts.id, posts.user_id, posts.title,  posts.title_2, 
 								posts.profile_picture_name,posts.content,posts.content_en,posts.content_cn,posts.album_name,
 								posts.restaurant_name,posts.tel,posts.address1,
 								posts.address2,posts.tumbol,posts.amphur,posts.route,posts.route_en,posts.route_cn,
-								posts.province_id,posts.zip,posts.created_at,posts.updated_at, COUNT(*) AS total_posts'))
+								posts.province_id,posts.zip,posts.created_at,posts.updated_at, COUNT(posts.id) AS total_posts'))
 	                        ->orderBy('total_posts', 'DESC')
 	                        ->groupBy('posts.id')
 							->paginate(8);

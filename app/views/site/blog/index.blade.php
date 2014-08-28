@@ -98,7 +98,7 @@
 	<div class="col-md-6">
 		<!-- Post Title -->
 		<div class="col-md-12">
-				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}</a></strong></h4>
+				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}<p>{{String::title($posts[$i]->title_2)}}</p></a></strong></h4>
 			</div>
 		<!-- ./ post title -->
 
@@ -164,7 +164,7 @@
 		<!-- Post Title -->
 		<div class="col-md-12">
 			<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
-			title) }}</a></strong></h4>
+			title) }}<p>{{String::title($posts[$i+1]->title_2)}}</p></a></strong></h4>
 			</div>
 		<!-- ./ post title -->
 	

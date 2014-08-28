@@ -64,6 +64,14 @@
 						{{{ $errors->first('title', ':message') }}}
                     </div>
                 </div>
+                <!-- Post Title_2 -->
+				<div class="form-group {{{ $errors->has('title2') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                        <label class="control-label" for="title">ชื่อรีวิว ย่อย</label>
+						{{ Form::text('title2',Input::old('title2', isset($post) ? $post->title_2 : null) , array('class'=>'form-control', 'placeholder'=>'ชื่อรีวิว ย่่อย'))}} </p>
+						{{{ $errors->first('title2', ':message') }}}
+                    </div>
+                </div>
                 <div class="form-group {{{ $errors->has('restaurant_name') ? 'error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label" for="title">ชื่อร้านอาหาร</label>
