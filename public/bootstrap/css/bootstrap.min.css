@@ -5046,7 +5046,7 @@ button.close {
 	}
 }
 
-#tfsubscribe {
+#tfsubscribe, #tfsearch-default {
 	position: relative;
 	right: -240px;
 	float: right;
@@ -5059,6 +5059,7 @@ button.close {
 	float: right;
 	padding: 15px;
 }
+
 .tftextinput {
 	margin: 0 0 0 0;
 	padding: 1px 5px;
@@ -5115,19 +5116,30 @@ button.close {
 		right: -15px;
 		float: right;
 	}
+	#tfsearch-default {
+		position: relative;
+		left: 6%;
+		float: right;
+		top: -27px;
+		padding: 15px;
+	}
+	#social{
+ 		left: 65%;
+ 		position:relative;
+ 	}
 	.lang_th {
 		top: -35px;
-  		left: 70%;
+  		left: 75%;
 		position:relative;
 	}
 	.lang_en {
 		top: -35px;
-  		left: 70%;	
+  		left: 75%;	
 		position:relative;
 	}
 	.lang_cn {
 		top: -35px;
-  		left: 70%;
+  		left: 75%;
 		position:relative;
 	}
 	.tfbutton{

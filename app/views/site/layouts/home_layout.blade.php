@@ -112,8 +112,8 @@
 							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li>
 							-->
 							
-							Subscribe E-newsletter: 
-							<input type="text" class="tftextinput" name="email" id ="email" placeholder = "{{(Session::get('Lang') == 'TH') ? 'email': 'email'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
+
+							<input type="text" class="tftextinput" name="email" id ="email" placeholder = "{{(Session::get('Lang') == 'TH') ? 'Subscribe E-newsletter': 'Subscribe E-newsletter'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
 							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="subscribeActionDefault(this.value)"> 
 							
 							
