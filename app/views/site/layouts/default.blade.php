@@ -113,7 +113,7 @@
 							
 							
 							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
-							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchActionDefault(this.value)"> 
 							
 							
 							
@@ -258,7 +258,7 @@
 
 			<!-- Search Review -->
 			<script>
-				function searchAction(mode) {
+				function searchActionDefault(mode) {
 					var word = $("#keywords").val();
 					if (mode == "") {
 						document.getElementById("txtHint").innerHTML = "";
@@ -282,7 +282,7 @@
 
 				function runScript(e) {
 					if (e.keyCode == 13) {
-						searchAction("go");
+						searchActionDefault("go");
 					}
 				}
 			</script>
