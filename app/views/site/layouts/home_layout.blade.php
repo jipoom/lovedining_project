@@ -113,8 +113,8 @@
 							-->
 							
 
-							<input type="text" class="tftextinput" name="email" id ="email" placeholder = "{{(Session::get('Lang') == 'TH') ? 'Subscribe E-newsletter': 'Subscribe E-newsletter'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
-							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="subscribeActionDefault(this.value)"> 
+							<input type="text" class="tftextinput" name="subscribe" id ="subscribe" placeholder = "{{(Session::get('Lang') == 'TH') ? 'Subscribe E-newsletter': 'Subscribe E-newsletter'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
+							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="subscribeAction(this.value)"> 
 							
 							
 							
@@ -279,12 +279,6 @@
 					xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
 					xmlhttp.send();
 
-				}
-
-				function runScript(e) {
-					if (e.keyCode == 13) {
-						searchActionDefault("go");
-					}
 				}
 			</script>
 			<!-- End Search Review -->
