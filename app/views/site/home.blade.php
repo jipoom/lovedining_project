@@ -1,4 +1,4 @@
-@extends('site.layouts.default')
+@extends('site.layouts.home_layout')
 {{-- Web site Title --}}
 @section('title')
 {{{ Lang::get('site.introduction') }}} ::
@@ -67,8 +67,8 @@
 	<!-- Searchbox -->
 	<div id="tfnewsearch">
 		
-		<input type="text" class="tftextinput" name="keyword" id ="keywords_home" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
-		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+		<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
+		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchActionDefault(this.value)"> 
 		
 		
 		<div class="tfclear"></div>

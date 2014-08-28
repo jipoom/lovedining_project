@@ -77,6 +77,7 @@
 						<div class="navbar-header">
 							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo" width="170" height="100"></a>
 
+
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
 								<span class="icon-bar"></span>
@@ -111,9 +112,9 @@
 							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li>
 							-->
 							
-							
-							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
-							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchActionDefault(this.value)"> 
+							Subscribe E-newsletter: 
+							<input type="text" class="tftextinput" name="email" id ="email" placeholder = "{{(Session::get('Lang') == 'TH') ? 'email': 'email'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
+							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="subscribeActionDefault(this.value)"> 
 							
 							
 							
