@@ -58,8 +58,9 @@
 		@endforeach
 
 	</ul>
+<br />
+<div class="col-md-9" style="padding: 0; margin: 0;>
 
-<div class="col-md-9" style="padding-top: 0px; margin-top: 0px; ">
 @include('highlight')
 </div>
 
