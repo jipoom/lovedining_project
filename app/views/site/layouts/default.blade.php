@@ -235,15 +235,15 @@
 				<div id="push"></div>
 			</div>
 			<!-- ./wrap -->
-<div class="panel-footer">
+		<div class="panel-footer">
 			<div id="footer" style="word-break: break-all;">
 				<div class="container">
-					<p class="muted credit">
-						Lovedining testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt footerrrrrrr
+					<p class="muted credit pull-right">
+						© 2014 LOVEDININGS.com.
 					</p>
 				</div>
 			</div>
-</div>
+		</div>
 			<!-- Javascripts
 			================================================== -->
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
