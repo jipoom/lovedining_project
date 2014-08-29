@@ -64,6 +64,7 @@
 <div class="col-md-10">
 
 	<h3 style="color: #1AC4BF">{{ $post->title }}</h3>
+	<h4 style="color: #1AC4BF">{{ $post->title_2 }}</h4>
 	<div>
 		<span class="badge badge-info pull-right">Posted {{{ $post->date() }}}</span>
 	</div>
