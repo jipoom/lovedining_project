@@ -148,8 +148,8 @@
 
 							<ul class="nav navbar-nav">
 
-								<li{{ (Request::is('/') ? ' class="active"' : '') }}>
-									<!--<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+								<!--<li{{ (Request::is('/') ? ' class="active"' : '') }}>
+									<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 -->
 									<?php $mode = CategoryOrder::getMode(); ?>
 									@foreach(CategoryOrder::getOrder($mode) as $category)
