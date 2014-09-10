@@ -64,15 +64,15 @@
 @include('highlight')
 </div>
 
-	<!-- Searchbox -->
-	<div id="tfnewsearch">
-		
-		<input type="text" class="tftextinput" name="keyword" id ="keywords_home" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
-		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
-		
-		
-		<div class="tfclear"></div>
-	</div>
+<!-- Searchbox -->
+<div id="tfnewsearch">
+	
+	<input type="text" class="tftextinput" name="keyword" id ="keywords_home" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
+	<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+	
+	
+	<div class="tfclear"></div>
+</div>
 <!-- .Ads -->
 <div class="ads-right-home checkscreen" >
 	<div class="col-md-12 ads">
