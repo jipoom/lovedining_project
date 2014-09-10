@@ -11,7 +11,7 @@
 {{-- Content --}}
 @section('content')
 <div class="col-md-8"  style="position:absolute;">
-	<h3> 
+	<!--<h3> 
 	@if(Session::get('Lang') == 'TH')
 		@if($mode == "date")
 		เรียงลำดับตามวันที่ล่าสุด
@@ -42,7 +42,7 @@
 		@elseif($mode == "popularity")
 		Sort by popularity
 		@endif 
-	@endif
+	@endif-->
 		</h3>
 </div>
 
@@ -53,8 +53,8 @@
 	<!-- Searchbox -->
 	<div id="tfnewsearch">
 		
-		<input type="text" class="tftextinput" name="keyword" id ="keywords_home" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
-		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+		<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
+		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchActionDefault(this.value)"> 
 		
 		
 		<div class="tfclear"></div>
@@ -109,9 +109,9 @@
 
 	<div class="col-md-6">
 		<!-- Post Title -->
-		<div class="col-md-12">
+		<!--<div class="col-md-12">
 				<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}<p>{{String::title($posts[$i]->title_2)}}</p></a></strong></h4>
-			</div>
+		</div>-->
 		<!-- ./ post title -->
 
 		<!-- Post Content -->
@@ -134,6 +134,11 @@
 		@endif	
 		</div>
 		<div class="col-md-12" style="font-size: 13px">
+			<!-- Post Title -->
+
+			<h4><strong><a href="{{{ $posts[$i]->url() }}}">{{ String::title($posts[$i]->title) }}<p>{{String::title($posts[$i]->title_2)}}</p></a></strong></h4>
+	
+		<!-- ./ post title -->
 			<p>
 				{{ String::tidy($posts[$i]->restaurant_name) }}
 			</p>
@@ -174,10 +179,10 @@
 	<div class="col-md-6">
 		
 		<!-- Post Title -->
-		<div class="col-md-12">
+		<!--<div class="col-md-12">
 			<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->
 			title) }}<p>{{String::title($posts[$i+1]->title_2)}}</p></a></strong></h4>
-			</div>
+			</div> -->
 		<!-- ./ post title -->
 	
 		<!-- Post Content -->
@@ -197,6 +202,8 @@
 			@endif	
 		</div>
 		<div class="col-md-12" style="font-size: 13px">
+			<h4><strong><a href="{{{ $posts[$i+1]->url() }}}">{{ String::title($posts[$i+1]->title) }}<p>{{String::title($posts[$i+1]->title_2)}}</p></a></strong></h4>
+	
 			<p>
 				{{ String::tidy($posts[$i+1]->restaurant_name) }}
 			</p>

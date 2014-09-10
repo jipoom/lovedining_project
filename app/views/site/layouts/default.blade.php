@@ -102,34 +102,10 @@
 							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
 							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
 							
-						<!-- Searchbox -->
 						
-						<div id="tfsearch-default" class="pull-right">
-							<!--
-							<a href="{{{ URL::to('lang/TH') }}}"><span class="glyphicon"></span>{{(Session::get('Lang') == 'TH') ? '<b>TH</b>': 'TH'}} </a></li>
-							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
-							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li>
-							-->
-							
-							
-							<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
-							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchActionDefault(this.value)"> 
-							
-							
-							
-							<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
-							<option value="date">Recently published</option>
-							<option value="reviewName">Review Name</option>
-							<option value="restaurantName">Restaurant Name</option>
-							<option value="popularity">Popularity</option>
-							</select>	-->
-							
-							
-							<div class="tfclear"></div>
-						</div>
 						
 						<!-- Socail -->
-						<div id="social_default">
+						<div id="social">
 							
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
@@ -166,32 +142,34 @@
 									@endforeach
 									<li {{ (Request::is('news*') ? ' class="active"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-cutlery"></span> News</a></li>
 									<li>
-										<form class ="form-dropdown">
-		<select name="sort" id ="mode" onchange="showReviews(this.value)">
-			@if($mode == "date")
-			<option value="date" selected>Recently published</option>
-			@else
-			<option value="date">Recently published</option>
-			@endif
-			@if($mode == "reviewName")
-			<option value="reviewName" selected>Review Name</option>
-			@else
-			<option value="reviewName">Review Name</option>
-			@endif
-			@if($mode == "restaurantName")
-			<option value="restaurantName" selected>Restaurant Name</option>
-			@else
-			<option value="restaurantName">Restaurant Name</option>
-			@endif
-			@if($mode == "popularity")
-			<option value="popularity" selected>Popularity</option>
-			@else
-			<option value="popularity">Popularity</option>
-			@endif
-		</select>
-	</form>
+										<form class ="form-dropdown ">
+											<select name="sort" id ="mode" onchange="showReviews(this.value)">
+												<option value="" selected>View by</option>
+												@if($mode == "date")
+												<option value="date" selected>Recently published</option>
+												@else
+												<option value="date">Recently published</option>
+												@endif
+												@if($mode == "reviewName")
+												<option value="reviewName" selected>Review Name</option>
+												@else
+												<option value="reviewName">Review Name</option>
+												@endif
+												@if($mode == "restaurantName")
+												<option value="restaurantName" selected>Restaurant Name</option>
+												@else
+												<option value="restaurantName">Restaurant Name</option>
+												@endif
+												@if($mode == "popularity")
+												<option value="popularity" selected>Popularity</option>
+												@else
+												<option value="popularity">Popularity</option>
+												@endif
+											</select>
+										</form>
 									</li>
 							</ul>
+							
 
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
