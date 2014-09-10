@@ -129,7 +129,7 @@
 						</div>
 						
 						<!-- Socail -->
-						<div id="social">
+						<div id="social_default">
 							
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>

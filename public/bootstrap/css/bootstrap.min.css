@@ -3241,7 +3241,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 }
 .navbar-fixed-top {
 	top: 0;
-	border-width: 0 0 1px
+	border-width: 0 0 0 0px
 }
 .navbar-fixed-bottom {
 	bottom: 0;
@@ -5105,10 +5105,19 @@ button.close {
 	float: right;
 	padding: 15px;
 }
+#social_default {
+	float: right;
+	padding: 15px;
+}
 @media (min-width: 768px) {
  	#social{
  		top: 20px;
- 		left: 20%;
+ 		left: 21%;
+ 		position:relative;
+ 	}
+ 	#social_default{
+ 		top: 50px;
+ 		left: 42%;
  		position:relative;
  	}
 }
@@ -5128,6 +5137,10 @@ button.close {
 	}
 	#social{
  		left: 3%;
+ 		position:relative;
+ 	}
+ 	#social_default{
+ 		left: 58%;
  		position:relative;
  	}
 	.lang_th {
