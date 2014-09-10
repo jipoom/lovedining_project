@@ -241,6 +241,25 @@
 					<p class="muted credit pull-right">
 						© 2014 LOVEDININGS.com.
 					</p>
+					<p class="pull-right">					
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/google+.png')}} style="width: 25px;"></a></li>
+					</p>
+					<table>
+						<tr>
+							<th class="col-md-4"><a href="{{{ URL::to('/') }}}">Advertisement</a></li>
+						</th>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">เกี่ยวกับเรา</a></td>
+						</tr>
+						<tr>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติดต่อโฆษณา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติอต่อเรา</a></td>
+						</tr>
+						<tr>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">Lovedining</a></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>

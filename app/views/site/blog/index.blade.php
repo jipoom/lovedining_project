@@ -45,6 +45,7 @@
 	@endif
 		</h3>
 </div>
+
 <!-- .Ads -->
 <div class="ads-right pull-right">
 	<div class="col-md-12">

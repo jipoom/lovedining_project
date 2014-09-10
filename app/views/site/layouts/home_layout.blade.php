@@ -105,29 +105,7 @@
 							
 						<!-- Searchbox -->
 						
-						<div id="tfsubscribe" class="pull-right">
-							<!--
-							<a href="{{{ URL::to('lang/TH') }}}"><span class="glyphicon"></span>{{(Session::get('Lang') == 'TH') ? '<b>TH</b>': 'TH'}} </a></li>
-							<a href="{{{ URL::to('lang/EN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'EN') ? '<b>EN</b>': 'EN'}}</a></li>
-							<a href="{{{ URL::to('lang/CN') }}}"><span class="glyphicon"></span> {{(Session::get('Lang') == 'CN') ? '<b>CN</b>': 'CN'}}</a></li>
-							-->
-							
-
-							<input type="text" class="tftextinput" name="subscribe" id ="subscribe" placeholder = "{{(Session::get('Lang') == 'TH') ? 'Subscribe E-newsletter': 'Subscribe E-newsletter'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
-							<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="subscribeAction(this.value)"> 
-							
-							
-							
-							<!--Sort by:<select name="sort" id ="mode" onchange="searchAction(this.value)">
-							<option value="date">Recently published</option>
-							<option value="reviewName">Review Name</option>
-							<option value="restaurantName">Restaurant Name</option>
-							<option value="popularity">Popularity</option>
-							</select>	-->
-							
-							
-							<div class="tfclear"></div>
-						</div>
+						
 						
 						<!-- Socail -->
 						<div id="social">
@@ -241,6 +219,28 @@
 				<div class="container">
 					<p class="muted credit pull-right">
 						© 2014 LOVEDININGS.com.
+					</p>
+					<p class="pull-right">					
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/google+.png')}} style="width: 25px;"></a></li>
+					</p>
+					<table>
+						<tr>
+							<th class="col-md-4"><a href="{{{ URL::to('/') }}}">Advertisement</a></li>
+						</th>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">เกี่ยวกับเรา</a></td>
+						</tr>
+						<tr>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติดต่อโฆษณา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติอต่อเรา</a></td>
+						</tr>
+						<tr>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">Lovedining</a></td>
+						</tr>
+					</table>
+					<p>
+						
 					</p>
 				</div>
 			</div>

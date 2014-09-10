@@ -5107,8 +5107,8 @@ button.close {
 }
 @media (min-width: 768px) {
  	#social{
- 		top: 50px;
- 		left: 42%;
+ 		top: 20px;
+ 		left: 20%;
  		position:relative;
  	}
 }
@@ -5127,7 +5127,7 @@ button.close {
 		padding: 15px;
 	}
 	#social{
- 		left: 65%;
+ 		left: 3%;
  		position:relative;
  	}
 	.lang_th {
