@@ -154,7 +154,7 @@
 									<?php $mode = CategoryOrder::getMode(); ?>
 									@foreach(CategoryOrder::getOrder($mode) as $category)
 									<li {{ (Request::is('category/'.$category->
-										id) ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
+										id.'*') ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
 										@if (Auth::check())
 											<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
 											@if($numUnread>0)

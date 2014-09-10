@@ -47,7 +47,7 @@ class Statistic extends Eloquent {
 		} 
 		return $popularId;
 	}
-	public static function getPopularReviews($catId)
+	public static function getPopularReviews($catId,$post=null)
 	{
 		$popularId = array();	
 		$i=0;			
@@ -65,7 +65,7 @@ class Statistic extends Eloquent {
 							->paginate(8);
 		}
 		else {
-			$posts = Post::active()->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
+			$posts = $post->leftjoin('statistic', 'posts.id', '=', 'statistic.post_id')
 	                        ->select(DB::raw('posts.id, posts.user_id, posts.title,  posts.title_2, 
 								posts.profile_picture_name,posts.content,posts.content_en,posts.content_cn,posts.album_name,
 								posts.restaurant_name,posts.tel,posts.address1,
