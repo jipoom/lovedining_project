@@ -59,7 +59,7 @@
 
 	</ul>
 <br />
-<div class="col-md-highlight" style="padding: 0; margin: 0;>
+<div class="col-md-highlight" style="padding: 0; margin: 0;">
 
 @include('highlight')
 </div>

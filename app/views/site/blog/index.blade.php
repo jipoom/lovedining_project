@@ -46,14 +46,25 @@
 		</h3>
 </div>
 
+
+	
 <!-- .Ads -->
-<div class="ads-right pull-right">
+<div class="ads-right-home pull-right">	
+	<!-- Searchbox -->
+	<div id="tfnewsearch">
+		
+		<input type="text" class="tftextinput" name="keyword" id ="keywords_home" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
+		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+		
+		
+		<div class="tfclear"></div>
+	</div>
 	<div class="col-md-12">
 		<a href="" class="ads"><img src="{{$adsSide}}" alt=""></a>
 	</div>
 </div>
 <!-- ./ Ads -->
-<!-- Sorting Menu goes here -->
+<!-- Sorting Menu goes here 
 
 <div class="col-md-3 pull-right">
 
@@ -83,7 +94,7 @@
 		</select>
 	</form>
 
-</div>
+</div> -->
 <?php for($i=0;$i<count($posts);$i+=2)
 {
 ?>
@@ -94,7 +105,7 @@
 <?php $yetToPrint = false; ?>
 @endif
 
-<div class="col-md-10">
+<div class="col-md-highlight" style="padding: 0; margin: 0;"="col-md-9">
 
 	<div class="col-md-6">
 		<!-- Post Title -->
