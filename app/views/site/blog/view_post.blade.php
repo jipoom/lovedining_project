@@ -69,8 +69,8 @@
 		<span class="badge badge-info pull-right">Posted {{{ $post->date() }}}</span>
 	</div>
 	<br>
-	<div class="col-md-3" >
-		<div class="movieinfo">
+	<div class="col-md-3 pull-right">
+		<div class="movieinfo" >
 
 			<h4>{{ $post->restaurant_name }}</h4>
 			<h5>Tel: {{ $post->tel }}</h5>
