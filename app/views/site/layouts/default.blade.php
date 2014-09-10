@@ -164,6 +164,33 @@
 									</li>
 
 									@endforeach
+									<li {{ (Request::is('news*') ? ' class="active"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-cutlery"></span> News</a></li>
+									<li>
+										<form class ="form-dropdown">
+		<select name="sort" id ="mode" onchange="showReviews(this.value)">
+			@if($mode == "date")
+			<option value="date" selected>Recently published</option>
+			@else
+			<option value="date">Recently published</option>
+			@endif
+			@if($mode == "reviewName")
+			<option value="reviewName" selected>Review Name</option>
+			@else
+			<option value="reviewName">Review Name</option>
+			@endif
+			@if($mode == "restaurantName")
+			<option value="restaurantName" selected>Restaurant Name</option>
+			@else
+			<option value="restaurantName">Restaurant Name</option>
+			@endif
+			@if($mode == "popularity")
+			<option value="popularity" selected>Popularity</option>
+			@else
+			<option value="popularity">Popularity</option>
+			@endif
+		</select>
+	</form>
+									</li>
 							</ul>
 
 							<ul class="nav navbar-nav pull-right">
