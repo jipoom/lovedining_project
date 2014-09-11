@@ -130,7 +130,7 @@
 									<?php $mode = CategoryOrder::getMode(); ?>
 									@foreach(CategoryOrder::getOrder($mode) as $category)
 									<li {{ (Request::is('category/'.$category->
-										id.'*') ? ' class="active"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
+										id.'*') ? ' class="selected"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
 										@if (Auth::check())
 											<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
 											@if($numUnread>0)
@@ -140,7 +140,7 @@
 									</li>
 
 									@endforeach
-									<li {{ (Request::is('news*') ? ' class="active"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-book"></span> News</a></li>
+									<li {{ (Request::is('news*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-book"></span> News</a></li>
 									<li>
 										<form class ="form-dropdown ">
 											<select name="sort" id ="mode" onchange="showReviews(this.value)">
@@ -196,10 +196,10 @@
 									</ul>
 								</li>
 								@else
-								<li {{ (Request::is('user/login') ? ' class="active"' : '') }}>
+								<li {{ (Request::is('user/login') ? ' class="selected"' : '') }}>
 									<a href="{{{ URL::to('user/login') }}}">Login</a>
 								</li>
-								<li {{ (Request::is('user/register') ? ' class="active"' : '') }}>
+								<li {{ (Request::is('user/create') ? ' class="selected"' : '') }}>
 									<a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a>
 								</li>
 								@endif
