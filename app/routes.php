@@ -204,6 +204,10 @@ Route::get('contact-us', function()
     return View::make('site/contact-us');
 });
 
+// Return about us page
+Route::get('about-us', 'BlogController@getAboutUs');
+
+
 Route::group(array('prefix' => 'message_service', 'before' => 'auth'), function()
 {
 	# Private Message	

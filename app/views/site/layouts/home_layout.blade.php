@@ -95,7 +95,7 @@
 						<div class ="home-contact-about pull-right">
 							
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>HOME </a></li> | 
-							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>ABOUT US </a></li> |
+							<a href="{{{ URL::to('about-us') }}}"><span class="glyphicon"></span>ABOUT US </a></li> |
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>CONTACT </a></li>
 				
 						</div>
@@ -143,8 +143,10 @@
 									</li>
 
 									@endforeach
+									<li {{ (Request::is('news*') ? ' class="active"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-book"></span> News</a></li>
+								
 							</ul>
-
+							
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
 
@@ -229,7 +231,7 @@
 						<tr>
 							<th class="col-md-4"><a href="{{{ URL::to('/') }}}">Advertisement</a></li>
 						</th>
-							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">เกี่ยวกับเรา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('about-us') }}}">เกี่ยวกับเรา</a></td>
 						</tr>
 						<tr>
 							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติดต่อโฆษณา</a></td>
@@ -259,7 +261,7 @@
 
 			<!-- Search Review -->
 			<script>
-				function searchActionDefault(mode) {
+				function searchAction(mode) {
 					var word = $("#keywords").val();
 					if (mode == "") {
 						document.getElementById("txtHint").innerHTML = "";
@@ -279,6 +281,14 @@
 					xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
 					xmlhttp.send();
 
+				}
+				function runScript(e) {
+					if (e.keyCode == 13) {
+						if($("#keywords").val()!=null)
+							searchAction("go");
+						else if($("#subscribe").val()!=null)
+							subscribeAction("go");
+					}
 				}
 			</script>
 			<!-- End Search Review -->

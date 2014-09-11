@@ -94,7 +94,7 @@
 						<div class ="home-contact-about pull-right">
 							
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>HOME </a></li> | 
-							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>ABOUT US </a></li> |
+							<a href="{{{ URL::to('about-us') }}}"><span class="glyphicon"></span>ABOUT US </a></li> |
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>CONTACT </a></li>
 				
 						</div>
@@ -140,7 +140,7 @@
 									</li>
 
 									@endforeach
-									<li {{ (Request::is('news*') ? ' class="active"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-cutlery"></span> News</a></li>
+									<li {{ (Request::is('news*') ? ' class="active"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-book"></span> News</a></li>
 									<li>
 										<form class ="form-dropdown ">
 											<select name="sort" id ="mode" onchange="showReviews(this.value)">
@@ -255,7 +255,7 @@
 						<tr>
 							<th class="col-md-4"><a href="{{{ URL::to('/') }}}">Advertisement</a></li>
 						</th>
-							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">เกี่ยวกับเรา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('about-us') }}}">เกี่ยวกับเรา</a></td>
 						</tr>
 						<tr>
 							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติดต่อโฆษณา</a></td>

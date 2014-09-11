@@ -41,6 +41,13 @@ class BlogController extends BaseController {
 		Logic::deployProject();
 		return View::make('deploy');
 	}
+	
+	public function getAboutUs()
+	{
+		$introduction = Introduction::first();
+		return View::make('site/about-us',compact('introduction'));
+	}
+	
 	/**
 	 * Returns all the blog posts.
 	 *

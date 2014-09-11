@@ -67,7 +67,7 @@
 <!-- Searchbox -->
 <div id="tfnewsearch">
 	
-	<input type="text" class="tftextinput" name="keyword" id ="keywords_home" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
+	<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
 	<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
 	
 	
@@ -159,7 +159,7 @@
 </script>
 <!-- Search Review -->
 			<script>
-				function searchAction(mode) {
+				/*function searchAction(mode) {
 					var word = $("#keywords_home").val();
 					if (mode == "") {
 						document.getElementById("txtHint").innerHTML = "";
@@ -188,7 +188,7 @@
 						else if($("#subscribe").val()!=null)
 							subscribeAction("go");
 					}
-				}
+				}*/
 			</script>
 			<!-- End Search Review -->
 @stop
