@@ -5093,7 +5093,8 @@ button.close {
 	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
 }
 ul.navbar-nav li.selected a {
-  color: #15BEC6;
+  /*color: #15BEC6;*/
+  color: #0D8FA9;
 }
 .selected {
 	background: none;
