@@ -14,7 +14,7 @@
 @stop
 @section('content')
 <div class="col-md-10">
-	<h3 style="color: #1AC4BF;">{{ link_to(URL::to($post->id), $post->title, $attributes = array(), $secure = null);}}
+	<h3 style="color: #1AC4BF;">{{ link_to(URL::to('review/'.$post->id.'/'.Session::get('Lang')), $post->title, $attributes = array(), $secure = null);}}
 	
 	<div class="btn btn-default pull-right">
 	
@@ -25,7 +25,7 @@
 </div>
 	<!--<div class="galleria">-->
 	<div>
-	<ul class="gallery clearfix">
+	<ul class="gallery clearfix bxslider">
 	@foreach ($album as $picture)
 
 	<li><a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" width="20%" height="20%" alt="" /></a></li>
