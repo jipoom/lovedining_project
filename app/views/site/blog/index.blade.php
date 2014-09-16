@@ -144,15 +144,17 @@
 			</p>
 			<p>
 				@if(Session::get('Lang') == 'TH')
-					{{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name); }}
+					<!-- {{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name); }} -->
+					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i]->content()), 150, '...')}}
 				@else
 					{{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name_en); }}
 				@endif
+				
 			</p>
-			<p>
+			<!--<p>
 				Tel:
 				{{ String::tidy($posts[$i]->tel); }}
-			</p>
+			</p>-->
 		</div>
 
 		<!-- ./ post content -->
@@ -209,15 +211,16 @@
 			</p>
 			<p>
 				@if(Session::get('Lang') == 'TH')
-					{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name); }}
+					<!--{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name); }} -->
+					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i]->content()), 150, '...')}}
 				@else
 					{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name_en); }}
 				@endif
 			</p>
-			<p>
+			<!--<p>
 				Tel:
 				{{ String::tidy($posts[$i+1]->tel); }}
-			</p>
+			</p>-->
 		</div>
 	
 		<!-- ./ post content -->

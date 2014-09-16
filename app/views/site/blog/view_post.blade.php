@@ -234,7 +234,7 @@
 					@foreach ($album as $picture)
 
 					<li>
-						<a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" class ="album"/></a>
+						<a href="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$post->album_name.'/'.$picture)}}" alt="" class ="thumbnail"/></a>
 					</li>
 
 					@endforeach
