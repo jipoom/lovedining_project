@@ -3308,6 +3308,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	}
 }
 .navbar-nav {
+	padding-left: 10%;
 	margin: 7.5px -15px;
 }
 
