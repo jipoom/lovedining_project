@@ -243,9 +243,6 @@
 		<div class="panel-footer footer-container">
 			<div id="footer" style="word-break: break-all;">
 				<div class="container">
-					<p class="muted credit pull-right">
-						© 2014 LOVEDININGS.com.
-					</p>
 					<p class="pull-right">					
 						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
 						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
@@ -267,6 +264,12 @@
 				</div>
 			</div>
 		</div>
+		<div class="footer-container">
+			<p class="muted credit pull-right">
+						<font color="#0D8FA9">© 2014 LOVEDININGS.com</font>
+					</p>
+		</div>
+						
 			<!-- Javascripts
 			================================================== -->
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
