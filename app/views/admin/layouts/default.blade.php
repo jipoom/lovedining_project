@@ -68,7 +68,7 @@
 				<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
 					<div class="container">
 						<div class="navbar-header">
-							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo" width="170" height="100"></a>
+							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo" height="100"></a>
 
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
