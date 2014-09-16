@@ -146,10 +146,13 @@
 				@if(Session::get('Lang') == 'TH')
 					<!-- {{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name); }} -->
 					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i]->content()), 150, '...')}}
-				@else
-					{{ String::tidy($posts[$i]->amphur); }}, {{ String::tidy($posts[$i]->province->province_name_en); }}
-				@endif
+				@elseif(Session::get('Lang') == 'EN')
+					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i]->content_en()), 150, '...')}}
+				@elseif(Session::get('Lang') == 'CN')
+					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i]->content_cn()), 150, '...')}}
 				
+				@endif
+				<strong><a href="{{{ $posts[$i]->url() }}}" class ="pull-right" style="color:#0D8FA9;">More info</a></strong>
 			</p>
 			<!--<p>
 				Tel:
@@ -212,10 +215,15 @@
 			<p>
 				@if(Session::get('Lang') == 'TH')
 					<!--{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name); }} -->
-					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i]->content()), 150, '...')}}
-				@else
-					{{ String::tidy($posts[$i+1]->amphur); }}, {{ String::tidy($posts[$i+1]->province->province_name_en); }}
+					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i+1]->content()), 150, '...')}}
+				@elseif(Session::get('Lang') == 'EN')
+					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i+1]->content_en()), 150, '...')}}
+				@elseif(Session::get('Lang') == 'CN')
+					{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $posts[$i+1]->content_cn()), 150, '...')}}
+				
 				@endif
+				<strong><a href="{{{ $posts[$i+1]->url() }}}" class ="pull-right" style="color:#0D8FA9;">More info</a></strong>
+	
 			</p>
 			<!--<p>
 				Tel:

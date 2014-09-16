@@ -240,28 +240,28 @@
 				<div id="push"></div>
 			</div>
 			<!-- ./wrap -->
-		<div class="panel-footer">
+		<div class="panel-footer footer-container">
 			<div id="footer" style="word-break: break-all;">
 				<div class="container">
 					<p class="muted credit pull-right">
 						© 2014 LOVEDININGS.com.
 					</p>
 					<p class="pull-right">					
-						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/fb.png')}} style="width: 25px;"></a></li>
-						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/twitter.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
 					</p>
 					<table>
 						<tr>
-							<th class="col-md-4"><a href="{{{ URL::to('/') }}}">Advertisement</a></li>
+							<th class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">Advertisement</a></li>
 						</th>
-							<td class="col-md-4"><a href="{{{ URL::to('about-us') }}}">เกี่ยวกับเรา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('about-us') }}}" style="color:#0D8FA9;">เกี่ยวกับเรา</a></td>
 						</tr>
 						<tr>
-							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติดต่อโฆษณา</a></td>
-							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">ติอต่อเรา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">ติดต่อโฆษณา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">ติอต่อเรา</a></td>
 						</tr>
 						<tr>
-							<td class="col-md-4"><a href="{{{ URL::to('/') }}}">Lovedining</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">Lovedining</a></td>
 						</tr>
 					</table>
 				</div>

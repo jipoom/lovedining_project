@@ -594,6 +594,12 @@ pre code {
 	padding-left: 15px;
 	padding-right: 15px
 }
+.footer-container {
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px
+}
 .slogan {
 	position: absolute;
 	margin-top: 30px;
@@ -650,15 +656,24 @@ pre code {
 	.container {
 		width: 750px
 	}
+	.footer-container {
+		width: 750px
+	}
 }
 @media (min-width: 992px) {
 	.container {
+		width: 970px
+	}
+	.footer-container {
 		width: 970px
 	}
 }
 @media (min-width: 1200px) {
 	.container {
 		width: 1170px
+	}
+	.footer-container {
+		width: 1200px
 	}
 }
 .container-fluid {
@@ -4187,8 +4202,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 	color: inherit
 }
 .panel-footer {
-	padding: 10px 15px;
-	background-color: #E7E7E7;
+	padding: 30px 15px;
+	background-color: #BFCEDE;
 	border-top: 1px solid #DCDCDC;
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px
