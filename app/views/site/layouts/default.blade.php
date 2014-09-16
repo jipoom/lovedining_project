@@ -247,9 +247,8 @@
 						© 2014 LOVEDININGS.com.
 					</p>
 					<p class="pull-right">					
-						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
-						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
-						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/google+.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/fb.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/twitter.png')}} style="width: 25px;"></a></li>
 					</p>
 					<table>
 						<tr>
