@@ -5229,7 +5229,7 @@ ul.navbar-nav li.selected a {
 .home-contact-about {
 	float: right;
 	position:relative;
-	
+	color:#0D8FA9;
 	padding: 5px;
 }
 @media (max-width: 768px) {

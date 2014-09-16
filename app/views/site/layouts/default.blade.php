@@ -93,9 +93,9 @@
 						<!-- Home Contact About -->
 						<div class ="home-contact-about pull-right">
 							
-							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>HOME </a></li> | 
-							<a href="{{{ URL::to('about-us') }}}"><span class="glyphicon"></span>ABOUT US </a></li> |
-							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>CONTACT </a></li>
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">HOME</font> </a></li> | 
+							<a href="{{{ URL::to('about-us') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">ABOUT US</font> </a></li> |
+							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">CONTACT </font></a></li>
 				
 						</div>
 						<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
