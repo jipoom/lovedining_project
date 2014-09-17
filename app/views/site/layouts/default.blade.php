@@ -243,10 +243,13 @@
 		<div class="panel-footer footer-container">
 			<div id="footer" style="word-break: break-all;">
 				<div class="container">
-					<p class="pull-right">					
+					<p class="pull-right">		
+						
 						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
 						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
+						
 					</p>
+					<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/spoonforkfooter.png')}} style="width: 50px;"></a></li>
 					<table>
 						<tr>
 							<th class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">Advertisement</a></li>
