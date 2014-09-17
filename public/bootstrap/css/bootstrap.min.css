@@ -2746,17 +2746,13 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 	}
 }
 .form-dropdown select {
-	padding: 5px;
-	margin: 0 10px 10px 10px;
+	padding: 1px;
+
 	font-size: 14px;
 	background-color: #F5F5F5;
-	border: 1px solid #ccc;
 	border: 1px solid rgba(0,0,0,.15);
-	border-radius: 10px 0;
-	-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	border-radius: 10px;
 	background-clip: padding-box -moz-appearance : none; /* Removes Default Firefox style*/
-
 	text-indent: 0.01px; /* Removes default arrow from firefox*/
 	text-overflow: ""; /*Removes default arrow from firefox*/ /*My custom style for fonts*/
 	color: #66512C
@@ -5147,12 +5143,22 @@ ul.navbar-nav li.selected a {
 	float: right;
 	padding: 15px;
 }
+#langflag{
+	float: right;
+	right: 0;
+	padding-top: 50px;
+}
 @media (min-width: 768px) {
  	#social{
  		top: 20px;
  		left: 21%;
  		position:relative;
  	}
+ 	#langflag{
+		top: 20px;
+ 		left: 21%;
+ 		position:relative;
+	}
  	#social_default{
  		top: 50px;
  		left: 42%;
@@ -5174,6 +5180,10 @@ ul.navbar-nav li.selected a {
 		padding: 15px;
 	}
 	#social{
+ 		left: 3%;
+ 		position:relative;
+ 	}
+ 	#langflag{
  		left: 3%;
  		position:relative;
  	}
