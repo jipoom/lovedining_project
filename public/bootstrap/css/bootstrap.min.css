@@ -13,9 +13,11 @@ html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%
+	
 }
 body {
-	margin: 0
+	margin: 0;
+	background: #FFFFFF;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
 	display: block
@@ -234,7 +236,7 @@ body {
 	font-size: 15px;
 	line-height: 1.42857143;
 	color: #333333;
-	
+	background-color:#FFFFFF;
 	/*background-color:#FFFFFF;
 	background-image: radial-gradient(#fbfbfb 10%, transparent 50%);
 	radial-gradient(#fbfbfb 10%, transparent 20%);
@@ -2746,9 +2748,11 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 	}
 }
 .form-dropdown select {
+	
 	padding: 1px;
-
-	font-size: 14px;
+	margin-left: 15px;
+	
+	font-size: 12.5px;
 	background-color: #F5F5F5;
 	border: 1px solid rgba(0,0,0,.15);
 	border-radius: 10px;
@@ -3008,7 +3012,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 .nav > li > a {
 	position: relative;
 	display: block;
-	padding: 1px 10px 1px 10px
+	padding: 1px 1px 1px 1px
 }
 .nav > li > a:hover, .nav > li > a:focus {
 	text-decoration: none;
