@@ -133,8 +133,8 @@
 									<?php $mode = CategoryOrder::getMode(); ?>
 									@foreach(CategoryOrder::getOrder($mode) as $category)
 									<li {{ (Request::is('category/'.$category->
-										id.'*') ? ' class="selected"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}"><span class="glyphicon glyphicon-cutlery"></span> {{$category->category_name}}
-										@if (Auth::check())
+										id.'*') ? ' class="selected"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}}|
+											@if (Auth::check())
 											<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
 											@if($numUnread>0)
 												({{$numUnread}})
@@ -143,7 +143,7 @@
 									</li>
 
 									@endforeach
-									<li {{ (Request::is('news*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('/') }}}"><span class="glyphicon glyphicon-book"></span> News</a></li>
+									<li {{ (Request::is('news*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('/') }}}">News   </a></li>
 									<li>
 										<form class ="form-dropdown ">
 											<select name="sort" id ="mode" onchange="showReviews(this.value)">
