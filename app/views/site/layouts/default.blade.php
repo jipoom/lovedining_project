@@ -200,7 +200,7 @@
 								</li>
 								@else
 								<li {{ (Request::is('user/login') ? ' class="selected"' : '') }}>
-									<a href="{{{ URL::to('user/login') }}}">Login</a>
+									<a href="{{{ URL::to('user/login') }}}">Login&nbsp;&nbsp;</a>
 								</li>
 								<li {{ (Request::is('user/create') ? ' class="selected"' : '') }}>
 									<a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a>
