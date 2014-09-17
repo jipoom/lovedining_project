@@ -3308,7 +3308,6 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	}
 }
 .navbar-nav {
-	padding-left: 10%;
 	margin: 7.5px -15px;
 }
 .logo{
@@ -3318,6 +3317,11 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	.logo
 	{
 		top: 20px;
+		position:relative;
+	}
+	.navbar-nav
+	{
+		padding-left: 10%;
 		position:relative;
 	}
 }

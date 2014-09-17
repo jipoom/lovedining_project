@@ -72,7 +72,7 @@
 		<div id="reload">
 			<div id="wrap">
 				<!-- Navbar -->
-				<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
+				<div class="navbar navbar-inverse navbar-fixed-top">
 					<div class="container">
 						<div class="navbar-header">
 							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="100" class ="logo"></a>
