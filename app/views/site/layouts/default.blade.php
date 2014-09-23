@@ -133,13 +133,13 @@
 									<?php $mode = CategoryOrder::getMode(); ?>
 									@foreach(CategoryOrder::getOrder($mode) as $category)
 									<li {{ (Request::is('category/'.$category->
-										id.'*') ? ' class="selected"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}} <font color="#777">|</font> 
+										id.'*') ? ' class="selected"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}} 
 											@if (Auth::check())
 											<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
 											@if($numUnread>0)
 												({{$numUnread}})
 											@endif
-										@endif </a>
+										@endif <font color="#777">|</font> </a>
 									</li>
 
 									@endforeach
