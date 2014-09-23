@@ -247,11 +247,15 @@
 			<div id="footer" style="word-break: break-all;">
 				<div class="container">
 					<p class="pull-right">		
-						
-						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
-						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
 						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/spoonforkfooter.png')}} style="width: 50px;"></a></li>
 					</p>
+					<p class="pull-right">		
+						<br></br>
+						<br>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/fb.png')}} style="width: 25px;"></a></li>
+						<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_gray/twitter.png')}} style="width: 25px;"></a></li>
+					</p>
+					
 					
 					<table>
 						<tr>
