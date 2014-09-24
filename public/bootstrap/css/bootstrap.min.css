@@ -5155,12 +5155,12 @@ ul.navbar-nav li.selected a {
 @media (min-width: 768px) {
  	#social{
  		top: 20px;
- 		left: 21%;
+ 		left: 22%;
  		position:relative;
  	}
  	#langflag{
 		top: 20px;
- 		left: 21%;
+ 		left: 28%;
  		position:relative;
 	}
  	#social_default{
