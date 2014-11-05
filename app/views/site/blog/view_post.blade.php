@@ -120,7 +120,7 @@
 			@if(count($post->foodType)>0)
 				<h5>
 				@if(Session::get('Lang') == 'TH')
-					ประเทภอาหาร:
+					ประเภทอาหาร:
 				@elseif(Session::get('Lang') == 'EN')
 					Cuisine:
 				@elseif(Session::get('Lang') == 'CN')
