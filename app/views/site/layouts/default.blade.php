@@ -75,7 +75,7 @@
 				<div class="navbar navbar-inverse navbar-fixed-top">
 					<div class="container">
 						<div class="navbar-header">
-							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="100" class ="logo"></a>
+							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="125" class ="logo"></a>
 
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
@@ -92,21 +92,16 @@
 						</div>   
 						<!-- Home Contact About -->
 						<div class ="home-contact-about pull-right">
-							
+							<br />
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">HOME</font> </a></li> | 
 							<a href="{{{ URL::to('about-us') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">ABOUT US</font> </a></li> |
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">CONTACT </font></a></li>
 				
 						</div>
-						<!--<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
-							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
-							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
-							
-						-->
 						
 						<!-- Social -->
 						<div id="social">
-							
+							<br />
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/fb.png')}} style="width: 25px;"></a></li>
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/twitter.png')}} style="width: 25px;"></a></li>
 
@@ -114,11 +109,15 @@
 						
 						<!-- language flag -->
 						<div id="langflag">
+							<!--
 							<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<strong>TH</strong>': 'TH'}} </a></li>
 							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<strong>EN</strong>': 'EN'}} </a></li>
 							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<strong>CN</strong>': 'CN'}} </a></li>
-							
-
+							-->
+							<br />
+							<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
+							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
+							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
 						</div>
 						
 					</div>

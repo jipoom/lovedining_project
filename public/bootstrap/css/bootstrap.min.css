@@ -232,7 +232,8 @@ html {
 }
 body {
 
-	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+	/*font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;*/
+	font-family: Open Sans Condensed, Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	line-height: 1.42857143;
 	color: #333333;
@@ -308,7 +309,8 @@ hr {
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
-	font-family: 'wdb_bangnaregular';
+	/*font-family: 'wdb_bangnaregular';*/
+	font-family: Open Sans Condensed, Arial, Helvetica, sans-serif;
 	font-weight: 1000;
 	line-height: 1.5;
 	color: inherit
@@ -3321,7 +3323,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	}
 	.navbar-nav
 	{
-		padding-left: 10%;
+		padding-left: 14%;
 		position:relative;
 	}
 }
@@ -3488,6 +3490,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 	background-color: transparent
 }
 .navbar-default .navbar-text {
+	
 	color: #777
 }
 .navbar-default .navbar-nav > li > a {
