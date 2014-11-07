@@ -25,11 +25,11 @@
 
 @section('styles')
 	<style>
-	/*img {
+	img {
 		max-width: 100%;
 		height: auto;
-		width: auto\9; /* ie8 
-	}*/
+		width: auto\9; /* ie8 */
+	}
 </style>
 <link rel="stylesheet" href="{{asset('assets/css/preettyphoto/prettyPhoto.css')}}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 
