@@ -27,7 +27,6 @@
 	<style>
 	img {
 		max-width: 100%;
-		height: auto;
 		width: auto\9; /* ie8 */
 	}
 </style>
@@ -57,7 +56,7 @@
 	<!-- Searchbox -->
 	<div id="tfnewsearch">
 		
-		<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="28" maxlength="120" onkeypress="return runScript(event)">
+		<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
 		<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
 		
 		
