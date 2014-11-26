@@ -25,8 +25,9 @@
 
 @section('styles')
 	<style>
-	img {
+	.col-md-9 img {
 		max-width: 100%;
+		height: auto;
 		width: auto\9; /* ie8 */
 	}
 </style>
