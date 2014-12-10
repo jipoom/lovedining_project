@@ -217,8 +217,8 @@
 
 			<div id="googleMap" style="width:auto;height:140px;"></div>
 
-			<a href="http://maps.google.com/?q={{$post->latitude}},{{$post->longitude}}"><img src="{{{ asset('assets/img/map.png') }}}" title="View map in full screen"></a>
-
+			<a href="http://maps.google.com/?q={{$post->latitude}},{{$post->longitude}}"><img src="{{{ asset('assets/img/map.png') }}}" title="View map in full screen" width="100%"></a>
+ 
 			@endif
 		</div>
 
