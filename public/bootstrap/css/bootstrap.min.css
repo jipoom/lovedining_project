@@ -5231,8 +5231,7 @@ ul.navbar-nav li.selected a {
 	padding: 5px ;
 	line-height: 1.42857143;
 	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+
 	-webkit-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out
 }
