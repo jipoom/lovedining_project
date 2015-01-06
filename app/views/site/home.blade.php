@@ -127,7 +127,7 @@
 			speed : 500,
 			randomStart : true,
 			responsive : true,
-			slideWidth : 1100,
+			slideWidth : 1600,
 			adaptiveHeight: true
 		});
 		

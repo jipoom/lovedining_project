@@ -102,8 +102,8 @@ class ElfinderController extends \BaseController
 	    'plugin' => array(
 	        'AutoResize' => array(
 	        'enable' => true,
-	        'maxWidth'  => 750,
-	        'maxHeight'  => 500,
+	        'maxWidth'  => 2400,
+	        'maxHeight'  => 1600,
 	        'quality' => 75
 	        )
 	    ),
