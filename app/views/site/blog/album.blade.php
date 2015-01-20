@@ -46,12 +46,14 @@
 				animation_speed : 'normal',
 				theme : 'light_square',
 				slideshow : 3000,
-				autoplay_slideshow : false
+				autoplay_slideshow : false,
+				deeplinking:false
 			});
 			$(".gallery:gt(0) a[rel^='LoveDining']").prettyPhoto({
 				animation_speed : 'fast',
 				slideshow : 10000,
-				hideflash : true
+				hideflash : true,
+				deeplinking:false
 			});
 
 			$("#custom_content a[rel^='LoveDining']:first").prettyPhoto({
