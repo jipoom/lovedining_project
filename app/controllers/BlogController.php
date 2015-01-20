@@ -321,7 +321,7 @@ class BlogController extends BaseController {
 	}
 	
 	public function getAlbum($postId)
-	{
+	{		
 		// Get all the blog posts
 		$post = $this->post->active()->where('id', '=', $postId)->first();
 		if($post)
