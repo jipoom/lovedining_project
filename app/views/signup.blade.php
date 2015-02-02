@@ -43,7 +43,7 @@
         	 <?php 
         	 $i=0; 
         	 ?>
-			 @foreach(FoodType::all() as $temp)
+			 @foreach(FoodType::orderBy('name','asc')->get() as $temp)
 				{{ Form::checkbox('foodType_id_temp[]', $temp->id, null, array('class'=>'input-block-level'))}}
 				{{ $temp->name}}
 				<P>	 

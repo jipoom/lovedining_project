@@ -98,11 +98,11 @@ class BlogController extends BaseController {
 		//Ads
 		$adsSide = Picture::getAdsSide(Config::get('app.home'));
 		$adsFoot = Picture::getAdsFoot(Config::get('app.home'));
-		
+		$postUserRead = PostsUserRead::where('user_id','=',Auth::id())->get();
 		//$randReviews = Post::getRandomReviews();
 		//$randReviews = Post::getRecentReviews();
 		
-		return View::make('site/home',compact('home','highlight','adsSide','adsFoot'));
+		return View::make('site/home',compact('home','highlight','postUserRead','adsSide','adsFoot'));
 	}
 
 	/**

@@ -31,12 +31,24 @@
 			</div>
 			-->
 			@if(!(count(glob(Config::get('app.image_path').'/'.$highlight[$i]->album_name)) === 0))				
-				@if($highlight[$i]->profile_picture_name!="")
-					<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" class ="hl"></a>
-				@else
-					<a href="{{{ $highlight[$i]->url() }}}" class=""><img src="http://placehold.it/260x180" alt=""></a>
-				@endif
+				@if(Auth::check()) 
 				
+					@if($highlight[$i]->profile_picture_name!="")			
+						<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" class="hl"></a>
+					@else
+						<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+					@endif
+						
+					@if(!User::checkIfUserRead($postUserRead,$highlight[$i]->id))
+						<div class="ribbon-wrapper-green"><div class="ribbon-green">NEW</div></div>		
+					@endif	
+				@else
+					@if($highlight[$i]->profile_picture_name!="")
+						<a href="{{{ $highlight[$i]->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$highlight[$i]->album_name.'/'.$highlight[$i]->profile_picture_name}}" class ="hl"></a>
+					@else
+						<a href="{{{ $highlight[$i]->url() }}}" class=""><img src="http://placehold.it/260x180" alt=""></a>
+					@endif
+				@endif
 				
 			@endif
 			<a href="{{{ $highlight[$i]->url() }}}">{{ $highlight[$i]->title }}<p>{{$highlight[$i]->title_2}}</p></a>

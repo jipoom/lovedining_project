@@ -120,7 +120,7 @@
 			autoHover : true,
 			pause : 3000,
 			autoControls : false,
-			pager : false,
+			pager : true,
 			pagerType : 'full',
 			controls : false,
 			captions : true,
