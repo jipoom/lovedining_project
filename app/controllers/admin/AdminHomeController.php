@@ -100,7 +100,27 @@ class AdminHomeController extends AdminController {
 		if ($validator -> passes()) {
 			
 			//reset all to non-banner	
-			Post::where('is_highlight', '=', 1)->update(array('is_highlight' => 0));
+			//Post::where('is_highlight', '=', 1)->update(array('is_highlight' => 0));
+			$i = 0;	
+			if(count(Post::where('is_highlight', '=', 1)->get()) + count(Input::get('setHighlight')) > 6)
+			{
+				foreach(Input::get('setHighlight') as $highlight)
+				{
+					
+					//Set home to selected review
+					$post = Post::find($highlight);
+					if($post->is_highlight == 1)
+					{					
+						$post->is_highlight = 0;
+						$post->save();	
+						$i++;				
+					}				
+									
+				}
+				Post::whereNotIn('id', Input::get('setHighlight'))->take(count(Input::get('setHighlight')) - $i)->update(array('is_highlight' => 0));
+				//Post::where('is_highlight', '=', 1)->take(count(Input::get('setHighlight')) - $i)->update(array('is_highlight' => 0));
+			}
+			$i = 0;	
 			foreach(Input::get('setHighlight') as $highlight)
 			{
 				
@@ -111,6 +131,10 @@ class AdminHomeController extends AdminController {
 				{					
 					$post->is_highlight = 1;
 					$post->save();				
+				}
+				$i++;
+				if($i==6){
+					break;
 				}
 				
 			}
