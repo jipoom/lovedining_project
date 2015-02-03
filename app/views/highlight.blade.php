@@ -40,7 +40,7 @@
 					@endif
 						
 					@if(!User::checkIfUserRead($postUserRead,$highlight[$i]->id))
-						<div class="ribbon-wrapper-green"><div class="ribbon-green">NEW</div></div>		
+						<div class="ribbon-wrapper-green" style="left: 186px;"><div class="ribbon-green">NEW</div></div>	
 					@endif	
 				@else
 					@if($highlight[$i]->profile_picture_name!="")
