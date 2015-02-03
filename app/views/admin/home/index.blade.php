@@ -27,7 +27,7 @@
 <div id="selected_banner">
 <h4>Reviews selected to be banner(s)</h4>
 <p></p>
-<table style="width:30%">
+<table style="width:50%">
 @foreach(Post::where('is_home','=',1)->get() as $post)
 	<tr>
 		<td>

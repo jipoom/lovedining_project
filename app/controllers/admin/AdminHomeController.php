@@ -76,12 +76,12 @@ class AdminHomeController extends AdminController {
 				}
 				
 			}
-				return Redirect::to('admin/home/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
+				return Redirect::to('admin/home/') -> with('success', Post::find($banner)->title." has been added to banner");
 		}
 		//If set home to the old review
 		else
 		{
-			return Redirect::to('admin/home/') -> with('success', Lang::get('admin/blogs/messages.create.success'));
+			return Redirect::to('admin/home/') -> with('success', Post::find($banner)->title." has been added to banner");
 		}
 		
 		// There was a problem deleting the blog post
