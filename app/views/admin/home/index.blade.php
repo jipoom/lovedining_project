@@ -17,13 +17,31 @@
 
 <ul class="nav nav-tabs">
 	<li class="active">
-		<a href="#tab-general" data-toggle="tab">Banner</a>
+		<a href="#tab-general" data-toggle="tab" id="banner_tab">Banner</a>
 	</li>
 	<li>
-		<a href="#tab-highlight" data-toggle="tab">Highlight</a>
+		<a href="#tab-highlight" data-toggle="tab" id="highlight_tab">Highlight</a>
 	</li>
 </ul>
 <p></p>
+<div id="selected_banner">
+<h4>Reviews selected to be banner(s)</h4>
+<p></p>
+<table style="width:30%">
+@foreach(Post::where('is_home','=',1)->get() as $post)
+	<tr>
+		<td>
+			{{$post->title}} 
+		</td>
+		<td>
+			<a href="{{{ URL::to('admin/home/banner/remove/'.$post->id) }}}" class="btn btn-xs btn-danger">remove</a>
+		</td>
+	</tr>
+@endforeach
+</table>
+<hr>
+<p></p>
+</div>
 <form class="form-horizontal" method="post" action="{{URL::to('admin/home/setHome')}}" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -103,6 +121,14 @@
 {{-- Scripts --}}
 @section('scripts')
 <script src="{{asset('assets/js/jquery.bxslider.min.js')}}"></script>
+<script>
+	$( "#highlight_tab" ).click(function() {
+  		$( "#selected_banner" ).hide()
+	});
+	$( "#banner_tab" ).click(function() {
+  		$( "#selected_banner" ).show()
+	});
+</script>
 <script>
 	$(document).ready(function() {
 		$('.bxslider_hightlight').bxSlider({
@@ -197,8 +223,8 @@
 			"fnDrawCallback" : function(oSettings) {
 				$(".iframe").colorbox({
 					iframe : true,
-					width : "80%",
-					height : "80%"
+					width : "90%",
+					height : "90%"
 				});
 			},
 			"fnRowCallback" : function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {

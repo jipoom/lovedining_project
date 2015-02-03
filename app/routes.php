@@ -77,6 +77,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::get('home/custom_highlight', 'AdminHomeController@highlightCustom');
 	Route::post('home/custom_highlight', 'AdminHomeController@postHighlightCustom');
 	Route::post('home/setHome', 'AdminHomeController@setHome');
+	Route::get('home/banner/remove/{postId}', 'AdminHomeController@removeBanner');
+	Route::get('home/highlight/remove/{postId}', 'AdminHomeController@removeHighlight');
     Route::controller('home', 'AdminHomeController');
 
     # User Management

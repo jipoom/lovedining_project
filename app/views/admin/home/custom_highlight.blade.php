@@ -11,6 +11,24 @@
 			<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
 	</ul>-->
 	{{-- Edit Category Form --}}
+	<div id="selected_banner">
+	<h4>Reviews selected to be highlight(s)</h4>
+	<p></p>
+	<table style="width:30%">
+	@foreach(Post::where('is_highlight','=',1)->get() as $post)
+		<tr>
+			<td>
+				{{$post->title}} 
+			</td>
+			<td>
+				<a href="{{{ URL::to('admin/home/highlight/remove/'.$post->id) }}}" class="btn btn-xs btn-danger">remove</a>
+			</td>
+		</tr>
+	@endforeach
+	</table>
+	<hr>
+	<p></p>
+	</div>
 	<form class="form-horizontal" method="post" action="" autocomplete="off">
 		<!-- CSRF Token -->
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />

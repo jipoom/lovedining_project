@@ -62,7 +62,7 @@ class AdminHomeController extends AdminController {
 		if ($validator -> passes()) {
 			
 			//reset all to non-banner	
-			Post::where('is_home', '=', 1)->update(array('is_home' => 0));
+			//Post::where('is_home', '=', 1)->update(array('is_home' => 0));
 			foreach(Input::get('setHome') as $banner)
 			{
 				
@@ -86,6 +86,31 @@ class AdminHomeController extends AdminController {
 		
 		// There was a problem deleting the blog post
 		//return Redirect::to('admin/home') -> with('error', Lang::get('admin/blogs/messages.delete.error'));
+	}
+
+	public function removeBanner($postId) {
+
+		// Title
+		$title = "Upload Banner Images";
+		$rules = array('setHome' => 'required');
+
+			
+		//reset all to non-banner	
+		Post::where('id', '=', $postId)->update(array('is_home' => 0));
+		return Redirect::to('admin/home/') -> with('success', Post::find($postId)->title." has been removed from banner");
+	
+	}
+	public function removeHighlight($postId) {
+
+		// Title
+		$title = "Upload Banner Images";
+		$rules = array('setHome' => 'required');
+
+			
+		//reset all to non-banner	
+		Post::where('id', '=', $postId)->update(array('is_highlight' => 0));
+		return Redirect::to('admin/home/custom_highlight') -> with('success', Post::find($postId)->title." has been removed from highlight");
+	
 	}
 
 	public function postHighlightCustom() {
@@ -227,7 +252,7 @@ class AdminHomeController extends AdminController {
 		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
 		-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $id .\'/edit\') }}}">{{{ Str::limit($post_name, 40, \'...\') }}}</a>')
 
-		-> add_column('actions', '@if($is_home == 0){{Form::checkbox(\'setHome[]\', $id)}} @else {{Form::checkbox(\'setHome[]\', $id, true)}} @endif')  
+		-> add_column('actions', '@if($is_home == 0){{Form::radio(\'setHome[]\', $id)}} @else {{Form::radio(\'setHome[]\', $id, true)}} @endif')  
         -> remove_column('id') -> make();
 
 	}
@@ -249,7 +274,7 @@ class AdminHomeController extends AdminController {
 		-> edit_column('comments', '<a href="{{{ URL::to(\'admin/comments/\'.$id.\'/view_comments\' ) }}}">{{$comments}}</a>') 
 		-> edit_column('post_name', '<a href="{{{ URL::to(\'admin/blogs/\'. $id .\'/edit\') }}}">{{{ Str::limit($post_name, 40, \'...\') }}}</a>')
 
-		-> add_column('actions', '@if($is_highlight == 0){{Form::checkbox(\'setHighlight[]\', $id)}} @else {{Form::checkbox(\'setHighlight[]\', $id, true)}} @endif')  
+		-> add_column('actions', '@if($is_highlight == 0){{Form::radio(\'setHighlight[]\', $id)}} @else {{Form::radio(\'setHighlight[]\', $id, true)}} @endif')  
         -> remove_column('id') -> make();
 
 	}
