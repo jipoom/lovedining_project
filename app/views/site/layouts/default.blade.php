@@ -268,6 +268,10 @@
 						</tr>
 						<tr>
 							<td class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">Lovedining</a></td>
+							
+						</tr>
+						<tr>
+							<td class="col-md-4"><a href="http://www.2madames.com" style="color:#0D8FA9;">2madames.com</a></td>
 						</tr>
 					</table>
 				</div>
@@ -278,9 +282,7 @@
 						<font color="#0D8FA9">© 2014 LOVEDININGS.com</font>
 						
 					</p>
-					<p>
-						www.2madames.com
-					</p>
+
 		</div>
 						
 			<!-- Javascripts
