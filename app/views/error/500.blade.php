@@ -109,7 +109,9 @@
 			<hr>
 
 			<h3>What does this mean?</h3>
-
+			<p>
+				Make sure you device is cookie-enabled.
+			</p>
 			<p>
 				Something went wrong on our servers while we were processing your request.
 				We're really sorry about this, and will work hard to get this resolved as

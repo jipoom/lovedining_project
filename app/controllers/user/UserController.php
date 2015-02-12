@@ -38,54 +38,72 @@ class UserController extends BaseController {
      */
     public function postIndex()
     {
-        $this->user->username = Input::get( 'username' );
-        $this->user->email = Input::get( 'email' );
-		$this->user->firstname = Input::get( 'firstname' );
-		$this->user->lastname = Input::get( 'lastname' );
-		$this->user->age_id = Input::get( 'age' );
-		$this->user->sex_id = Input::get( 'sex' );
-		$this->user->income_id = Input::get( 'income' );
-        $password = Input::get( 'password' );
-        $passwordConfirmation = Input::get( 'password_confirmation' );
-
-        if(!empty($password)) {
-            if($password === $passwordConfirmation) {
-                $this->user->password = $password;
-                // The password confirmation will be removed from model
-                // before saving. This field will be used in Ardent's
-                // auto validation.
-                $this->user->password_confirmation = $passwordConfirmation;
-            } else {
-                // Redirect to the new user page
-                return Redirect::to('user/create')
-                    ->withInput(Input::except('password','password_confirmation'))
-                    ->with('error', Lang::get('admin/users/messages.password_does_not_match'));
-            }
-        } else {
-            unset($this->user->password);
-            unset($this->user->password_confirmation);
-        }
-
-        // Save if valid. Password field will be hashed before save
-        $this->user->save();
-
-        if ( $this->user->id )
-        {
-            // Redirect with success message, You may replace "Lang::get(..." for your custom message.
-            $roles = array('0'=>'2');
-			$this->user->saveRoles($roles);
-            return Redirect::to('user/login')
-                ->with( 'notice', Lang::get('user/user.user_account_created') );
-        }
-        else
-        {
-            // Get validation errors (see Ardent package)
-            $error = $this->user->errors()->all();
-
-            return Redirect::to('user/create')
-                ->withInput(Input::except('password'))
-                ->with( 'error', $error );
-        }
+        $rules = array(
+			'email' => array('regex:(^((?![0-9A-Za-z]*@hotmail.com[0-9A-Za-z]*).)*$)')
+		);
+		
+		// Validate the inputs
+		$validator = Validator::make(Input::all(), $rules);	
+		// Check if the form validates with success
+		if ($validator->passes())
+		{
+			
+	        $this->user->username = Input::get( 'username' );
+	        $this->user->email = Input::get( 'email' );
+			$this->user->firstname = Input::get( 'firstname' );
+			$this->user->lastname = Input::get( 'lastname' );
+			$this->user->age_id = Input::get( 'age' );
+			$this->user->sex_id = Input::get( 'sex' );
+			$this->user->income_id = Input::get( 'income' );
+	        $password = Input::get( 'password' );
+	        $passwordConfirmation = Input::get( 'password_confirmation' );
+	
+	        if(!empty($password)) {
+	            if($password === $passwordConfirmation) {
+	                $this->user->password = $password;
+	                // The password confirmation will be removed from model
+	                // before saving. This field will be used in Ardent's
+	                // auto validation.
+	                $this->user->password_confirmation = $passwordConfirmation;
+	            } else {
+	                // Redirect to the new user page
+	                return Redirect::to('user/create')
+	                    ->withInput(Input::except('password','password_confirmation'))
+	                    ->with('error', Lang::get('admin/users/messages.password_does_not_match'));
+	            }
+	        } else {
+	            unset($this->user->password);
+	            unset($this->user->password_confirmation);
+	        }
+	
+	        // Save if valid. Password field will be hashed before save
+	        $this->user->save();
+			if(Input::get('foodType_id_temp'))
+					$this->user->foodType()->sync(Input::get('foodType_id_temp'));
+	        if ( $this->user->id )
+	        {
+	            // Redirect with success message, You may replace "Lang::get(..." for your custom message.
+	            $roles = array('0'=>'2');
+				$this->user->saveRoles($roles);
+	            return Redirect::to('user/login')
+	                ->with( 'notice', Lang::get('user/user.user_account_created') );
+	        }
+	        else
+	        {
+	            // Get validation errors (see Ardent package)
+	            $error = $this->user->errors()->all();
+	
+	            return Redirect::to('user/create')
+	                ->withInput(Input::except('password'))
+	                ->with( 'error', $error );
+	        }
+	       }
+		else{
+			 return Redirect::to('user/create')
+	                    ->withInput(Input::except('password','password_confirmation'))
+	                    ->with('error', 'Please change your email, domain hotmail.com is not reachable');
+		}
+				
     }
 
     /**

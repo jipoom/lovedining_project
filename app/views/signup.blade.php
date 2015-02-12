@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label for="email">{{{ Lang::get('confide::confide.e_mail') }}}* <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small></label>
-            <input class="form-control" placeholder="  {{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
+            <input class="form-control" placeholder="  {{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}"><font color="blue">We do not support <strong>hotmail.com</strong> </font>
         </div>
          <div class="form-group">
             <label for="password">{{{ Lang::get('confide::confide.password') }}}*</label>

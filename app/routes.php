@@ -189,7 +189,7 @@ Route::post('user/reset/{token}', 'UserController@postReset');
 Route::post('user/{user}/edit', 'UserController@postEdit');
 
 //:: User Account Routes ::
-Route::post('user/login', 'UserController@postLogin');
+Route::post('user/login',array('before' => 'csrf', 'uses' =>'UserController@postLogin'));
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
