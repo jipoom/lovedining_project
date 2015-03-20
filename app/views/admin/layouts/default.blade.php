@@ -53,7 +53,7 @@
 		<link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
 		<link rel="stylesheet" href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
-
+		
 		@yield('styles')
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -241,7 +241,7 @@
 		<!-- ./ showCategory -->
 
 		<!-- Javascripts -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 		<script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
 		<script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
@@ -250,7 +250,7 @@
 		<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
 		<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
 		<script src="{{asset('assets/js/prettify.js')}}"></script>
-
+		
 		<script type="text/javascript">
 			$('.wysihtml5').wysihtml5();
 			$(prettyPrint);

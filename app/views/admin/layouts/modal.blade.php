@@ -152,6 +152,9 @@
 			$(function() {
 				$('*[name=expiryDate]').appendDtpicker();
 			});
+			$(function() {
+				$('*[name=startDate]').appendDtpicker();
+			});
 		
 		</script>
 		<script>

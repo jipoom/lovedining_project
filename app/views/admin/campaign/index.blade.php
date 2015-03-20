@@ -16,7 +16,7 @@
 			{{{ $title }}}
 
 			<div class="pull-right">
-				<a href="{{{ URL::to('admin/campaign/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+				<a href="{{{ URL::to('admin/campaign/create') }}}" class="btn btn-small btn-info"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
 			</div>
 		</h3>
 	</div>
@@ -26,9 +26,9 @@
 			<tr>
 				<th class="col-md-2">{{{ Lang::get('admin/campaign/table.title') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/campaign/table.restaurant') }}}</th>
-				<th class="col-md-2">{{{ Lang::get('admin/campaign/table.description') }}}</th>
-				<th class="col-md-2">{{{ Lang::get('admin/campaign/table.created_at') }}}</th>
+				<th class="col-md-2">Start Date</th>
 				<th class="col-md-2">{{{ Lang::get('admin/campaign/table.expire') }}}</th>
+				<th class="col-md-2">Status</th>
 				<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
 			</tr>
 		</thead>

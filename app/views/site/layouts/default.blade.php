@@ -143,6 +143,8 @@
 
 									@endforeach
 									<li {{ (Request::is('news*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('/') }}}">News   |</a></li>
+									<li {{ (Request::is('campaign*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('campaign') }}}">Campaigns   |</a></li>
+									
 									<li>
 										<form class ="form-dropdown ">
 											<select name="sort" id ="mode" onchange="showReviews(this.value)">

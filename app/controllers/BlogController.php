@@ -333,4 +333,16 @@ class BlogController extends BaseController {
 		}
 		return View::make('error/404');
 	}
+	
+	//Campaign
+	public function getAllCampaign(){
+		$campaigns = Campaign::all();
+		return View::make('site/campaign/index',compact('campaigns'));
+	}
+	public function getRegister($campaignId,$lang){
+		Session::put('Lang',$lang);	
+		
+		$campaign= Campaign::find($campaignId);
+		return View::make('site/campaign/view_register',compact('campaign'));
+	}
 }

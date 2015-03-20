@@ -143,6 +143,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('campaign/{campaign}/edit', 'AdminCampaignController@postEdit');
     Route::get('campaign/{campaign}/delete', 'AdminCampaignController@getDelete');
     Route::post('campaign/{campaign}/delete', 'AdminCampaignController@postDelete');
+	Route::get('campaign/{directory}/{campaignId}','AdminCampaignController@getIndex');	
+	Route::get('campaign/search', 'AdminCampaignController@autocomplete');
     Route::controller('campaign', 'AdminCampaignController');
 	
 	# Introduction Management
@@ -231,6 +233,14 @@ Route::get('{postId}/album', 'BlogController@getAlbum');
 Route::get('deploy/project', 'BlogController@getDeploy');
 # Category - ID
 //Route::get('category/{categoryId}/{mode}', 'BlogController@getCategory');
+
+# Campaign
+Route::group(array('prefix' => 'campaign'), function()
+{
+	 Route::get('/', 'BlogController@getAllCampaign');	
+	 Route::get('{campaignId}/{lang}', 'BlogController@getRegister');
+	 Route::post('{campaignId}/{lang}', 'BlogController@postRegister');
+});
 
 Route::group(array('prefix' => 'category'), function()
 {
