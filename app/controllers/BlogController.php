@@ -33,6 +33,8 @@ class BlogController extends BaseController {
 
 		if(Session::has('View'))
 			return Redirect::to(URL::to('review')."/".Session::get('View')."/".$lang);
+		else if(Session::has('Campaign'))
+			return Redirect::to(URL::to('campaign')."/".Session::get('Campaign')."/".$lang);
 		return Redirect::to(URL::previous());
 	}
     
@@ -65,6 +67,7 @@ class BlogController extends BaseController {
 			Session::put('Lang','TH');
 		}
 		Session::forget('View');
+		Session::forget('Campaign');
 		Session::forget('mode');
 		Session::forget('catName');
 		$home = Post::active()->where('is_home','=',1)->get();
@@ -120,6 +123,7 @@ class BlogController extends BaseController {
 		}
 		$catName = Category::find($categoryId);
 		Session::forget('View');
+		Session::forget('Campaign');
 		$mode = null;
 		if (Session::has('mode') && Session::get('catName') == $catName->category_name){
 			$mode = Session::get('mode');
@@ -336,13 +340,66 @@ class BlogController extends BaseController {
 	
 	//Campaign
 	public function getAllCampaign(){
+		if(!Session::has('Lang'))
+		{
+			Session::put('Lang','TH');
+		}
+		Session::forget('View');
+		Session::forget('Campaign');
+		Session::forget('mode');
+		Session::forget('catName');
 		$campaigns = Campaign::all();
 		return View::make('site/campaign/index',compact('campaigns'));
 	}
 	public function getRegister($campaignId,$lang){
+		//Session::put('Lang',$lang);	
 		Session::put('Lang',$lang);	
-		
+		Session::put('Campaign',$campaignId);
 		$campaign= Campaign::find($campaignId);
 		return View::make('site/campaign/view_register',compact('campaign'));
+	}
+	public function postRegister($campaignId,$lang){
+		$campaign= Campaign::find($campaignId);
+		$rules = array();
+		if($campaign->show_firstname == 1){
+			$rules['firstname'] = 'required';
+		}
+		if($campaign->show_lastname == 1){
+			$rules['lastname'] = 'required';
+		}
+		if($campaign->show_email == 1){
+			$rules['email'] = 'required';
+		}
+		if($campaign->show_tel == 1){
+			$rules['tel'] = 'required';
+		}
+		if($campaign->show_cid == 1){
+			$rules['cid'] = 'required';
+		}
+		if($campaign->show_dob == 1){
+			$rules['dob'] = 'required';
+		}
+		$validator = Validator::make(Input::all(), $rules);
+
+		// Check if the form validates with success
+		if ($validator -> passes()) {
+			$userCampaign = new UserCampaign;
+			$userCampaign->user_id = Auth::user() -> id;
+			$userCampaign->campaign_id = $campaignId;
+			$userCampaign->user_firstname = Input::get('firstname');
+			$userCampaign->user_lastname = Input::get('lastname');
+			$userCampaign->user_email = Input::get('emailname');
+			$userCampaign->user_tel = Input::get('tel');
+			$userCampaign->user_dob= Input::get('dob');
+			$userCampaign->user_cid = Input::get('cid');
+			if($userCampaign->save())
+            {
+                return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('success', 'ลงทะเบียนรับ Voucher เสร็จสมบูรณ์');
+            }
+
+            return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
+        			
+		}
+		return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
 	}
 }

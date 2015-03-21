@@ -237,9 +237,9 @@ Route::get('deploy/project', 'BlogController@getDeploy');
 # Campaign
 Route::group(array('prefix' => 'campaign'), function()
 {
-	 Route::get('/', 'BlogController@getAllCampaign');	
-	 Route::get('{campaignId}/{lang}', 'BlogController@getRegister');
-	 Route::post('{campaignId}/{lang}', 'BlogController@postRegister');
+	 Route::get('/{lang?}', 'BlogController@getAllCampaign');	
+	 Route::get('{campaignId}/{lang?}', 'BlogController@getRegister');
+	 Route::post('{campaignId}/{lang?}', 'BlogController@postRegister');
 });
 
 Route::group(array('prefix' => 'category'), function()
