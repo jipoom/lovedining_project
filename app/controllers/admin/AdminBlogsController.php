@@ -106,7 +106,8 @@ class AdminBlogsController extends AdminController {
 		'newFoodType' => 'min:3',
 		'newDressing' => 'min:3',
 		'latitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',
-		'longitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)'
+		'longitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',
+		'slug' => 'required'
 		);
 		
 
@@ -135,7 +136,11 @@ class AdminBlogsController extends AdminController {
 			$this -> post -> province_id = Input::get('province');
 			$this -> post -> amphur = Input::get('amphur');
 			$this -> post -> tumbol = Input::get('tumbol');
-			
+			$this -> post -> slug = Input::get('slug');
+			$this -> post -> meta_title = Input::get('meta_title');
+			$this -> post -> meta_description = Input::get('meta_description');
+			$this -> post -> meta_keywords = Input::get('meta_keyword');
+			$this -> post -> slug = Input::get('slug');
 			$this -> post -> zip = Input::get('zip');
 			$this -> post -> album_name = Input::get('album_name');
 			$this -> post -> profile_picture_name = Input::get('profilePic');
@@ -348,7 +353,8 @@ class AdminBlogsController extends AdminController {
 		'newDressing' => 'min:3',
 		'newDressing' => 'min:3',
 		'latitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',
-		'longitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',);
+		'longitude' => 'min:3|regex:([-]{0,1}[0-9]+[.]{0,1}[0-9]*)',
+		 'slug' => 'required',);
 		
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
@@ -375,6 +381,11 @@ class AdminBlogsController extends AdminController {
 			$post -> tumbol = Input::get('tumbol');
 			$post -> amphur = Input::get('amphur');
 			$post -> province_id = Input::get('province');
+			$post -> slug = Input::get('slug');
+			$post -> meta_title = Input::get('meta_title');
+			$post -> meta_description = Input::get('meta_description');
+			$post -> meta_keywords = Input::get('meta_keyword');
+			
 			$post -> zip = Input::get('zip');
 			$post -> album_name = Input::get('album_name');
 			$post -> profile_picture_name = Input::get('profilePic');

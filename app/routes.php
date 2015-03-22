@@ -143,6 +143,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::post('campaign/{campaign}/edit', 'AdminCampaignController@postEdit');
     Route::get('campaign/{campaign}/delete', 'AdminCampaignController@getDelete');
     Route::post('campaign/{campaign}/delete', 'AdminCampaignController@postDelete');
+	Route::get('campaign/{campaign}/view_registered', 'AdminCampaignController@viewRegistered');
 	Route::get('campaign/{directory}/{campaignId}','AdminCampaignController@getIndex');	
 	Route::get('campaign/search', 'AdminCampaignController@autocomplete');
     Route::controller('campaign', 'AdminCampaignController');
@@ -225,9 +226,9 @@ Route::group(array('prefix' => 'message_service', 'before' => 'auth'), function(
 });
 
 # Posts - Second to last set, match slug
-Route::get('review/{postId}/{lang}', 'BlogController@getView');
-Route::post('review/{postId}/{lang}', 'BlogController@postView');
-Route::get('{postId}/album', 'BlogController@getAlbum');
+Route::get('review/{postId}/{slug}/{lang}', 'BlogController@getView');
+Route::post('review/{postId}/{slug}/{lang}', 'BlogController@postView');
+Route::get('{postId}/{slug}album', 'BlogController@getAlbum');
 
 # deploy project
 Route::get('deploy/project', 'BlogController@getDeploy');
@@ -237,9 +238,9 @@ Route::get('deploy/project', 'BlogController@getDeploy');
 # Campaign
 Route::group(array('prefix' => 'campaign'), function()
 {
-	 Route::get('/{lang?}', 'BlogController@getAllCampaign');	
-	 Route::get('{campaignId}/{lang?}', 'BlogController@getRegister');
-	 Route::post('{campaignId}/{lang?}', 'BlogController@postRegister');
+	 Route::get('/', 'BlogController@getAllCampaign');	
+	 Route::get('{campaignId}/{lang}', 'BlogController@getRegister');
+	 Route::post('{campaignId}/{lang}', 'BlogController@postRegister');
 });
 
 Route::group(array('prefix' => 'category'), function()
@@ -256,7 +257,7 @@ Route::group(array('prefix' => 'search'), function()
 });
 # Lang
 
-Route::get('lang/{lang}', 'BlogController@changeLang');
+Route::get('lang/{lang}/{page?}', 'BlogController@changeLang');
 
 
 # Index Page - Last route, no matches

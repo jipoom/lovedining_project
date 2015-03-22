@@ -275,6 +275,16 @@ class AdminCampaignController extends AdminController {
         // There was a problem deleting the blog post
         return Redirect::to('admin/campaign')->with('error', Lang::get('admin/campaign/messages.delete.error'));
     }
+	
+	
+	public function viewRegistered($campaign)
+    {
+        // Title
+        $title = "List of registered users for ".$campaign->name;
+		$userCampaign = UserCampaign::where('campaign_id','=',$campaign->id)->get();
+        // Show the page
+        return View::make('admin/campaign/view_registered', compact('userCampaign', 'title','campaign'));
+    }
 
        /**
      * Show a list of all the blog posts formatted for Datatables.
@@ -294,7 +304,9 @@ class AdminCampaignController extends AdminController {
 		
 		->edit_column('isActive', '@if(strtotime($expiry_date) < time() || $isActive == 0) inactive @elseif($isActive == 1) active @endif') 
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/campaign/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs" >{{{ Lang::get(\'button.edit\') }}}</a>
+        ->add_column('actions', '
+        		<a href="{{{ URL::to(\'admin/campaign/\' . $id . \'/view_registered\' ) }}}" class="btn btn-default btn-xs">View</a>
+        		<a href="{{{ URL::to(\'admin/campaign/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/campaign/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
 

@@ -27,14 +27,23 @@ class BlogController extends BaseController {
         $this->user = $user;
     }
 	
-	public function changeLang($lang)
+	public function changeLang($lang,$page=null)
 	{
 		Session::put('Lang',$lang);
 
-		if(Session::has('View'))
-			return Redirect::to(URL::to('review')."/".Session::get('View')."/".$lang);
-		else if(Session::has('Campaign'))
-			return Redirect::to(URL::to('campaign')."/".Session::get('Campaign')."/".$lang);
+		if($page == "campaign")
+		{
+			$goto = Session::get('Campaign');
+			Session::forget('Campaign');
+			return Redirect::to(URL::to('campaign')."/".$goto."/".$lang);
+		}
+		else if($page == "post")
+		{
+			$goto = Session::get('View');
+			Session::forget('View');
+			return Redirect::to('review/'.$goto.'/'.$lang);
+			//return Redirect::to(URL::to('review')."/".$goto."/".$lang);
+		}
 		return Redirect::to(URL::previous());
 	}
     
@@ -200,13 +209,12 @@ class BlogController extends BaseController {
 	 * @return View
 	 * @throws NotFoundHttpException
 	 */
-	public function getView($postId,$lang)
+	public function getView($postId,$slug,$lang)
 	{
 		// Get this blog post data
-
 		Session::put('Lang',$lang);	
-		Session::put('View',$postId);
-
+		Session::put('View',$postId."/".$slug);
+		$page = "post";
 		$post = $this->post->active()->where('id', '=', $postId)->first();
 		// Check if the blog post exists
 		if (is_null($post))
@@ -259,7 +267,7 @@ class BlogController extends BaseController {
 		$adsFoot = Picture::getAdsFoot(Config::get('app.review'));
 		
 		// Show the page
-		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment','adsSide','adsFoot'));
+		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment','adsSide','adsFoot','page'));
 	}
 	
 	/**
@@ -300,15 +308,15 @@ class BlogController extends BaseController {
 			if($post->comments()->save($comment))
 			{
 				// Redirect to this blog post page
-				return Redirect::to("review/".$postId."/".Session::get('Lang') . '#comments')->with('success', 'Your comment was added with success.');
+				return Redirect::to("review/".$postId."/".$post->slug."/".Session::get('Lang') . '#comments')->with('success', 'Your comment was added with success.');
 			}
 
 			// Redirect to this blog post page
-			return Redirect::to("review/".$postId."/".Session::get('Lang')  . '#comments')->with('error', 'There was a problem adding your comment, please try again.');
+			return Redirect::to("review/".$postId."/".$post->slug."/".Session::get('Lang')  . '#comments')->with('error', 'There was a problem adding your comment, please try again.');
 		}
 
 		// Redirect to this blog post page
-		return Redirect::to("review/".$postId."/".Session::get('Lang'))->withInput()->withErrors($validator);
+		return Redirect::to("review/".$postId."/".$post->slug."/".Session::get('Lang'))->withInput()->withErrors($validator);
 	}
 	public function searchReview($keyword)
 	{
@@ -344,19 +352,20 @@ class BlogController extends BaseController {
 		{
 			Session::put('Lang','TH');
 		}
-		Session::forget('View');
+
 		Session::forget('Campaign');
 		Session::forget('mode');
 		Session::forget('catName');
 		$campaigns = Campaign::all();
-		return View::make('site/campaign/index',compact('campaigns'));
+		return View::make('site/campaign/index',compact('campaigns','page'));
 	}
 	public function getRegister($campaignId,$lang){
 		//Session::put('Lang',$lang);	
 		Session::put('Lang',$lang);	
 		Session::put('Campaign',$campaignId);
+		$page = "campaign";
 		$campaign= Campaign::find($campaignId);
-		return View::make('site/campaign/view_register',compact('campaign'));
+		return View::make('site/campaign/view_register',compact('campaign','page'));
 	}
 	public function postRegister($campaignId,$lang){
 		$campaign= Campaign::find($campaignId);
@@ -383,15 +392,20 @@ class BlogController extends BaseController {
 
 		// Check if the form validates with success
 		if ($validator -> passes()) {
+			$len = 10;
+				
+			$bytes = openssl_random_pseudo_bytes($len, $cstrong);
+    		$hex   = bin2hex($bytes);	
 			$userCampaign = new UserCampaign;
 			$userCampaign->user_id = Auth::user() -> id;
 			$userCampaign->campaign_id = $campaignId;
 			$userCampaign->user_firstname = Input::get('firstname');
 			$userCampaign->user_lastname = Input::get('lastname');
-			$userCampaign->user_email = Input::get('emailname');
+			$userCampaign->user_email = Input::get('email');
 			$userCampaign->user_tel = Input::get('tel');
-			$userCampaign->user_dob= Input::get('dob');
+			$userCampaign->user_dob= Date('Y-m-d',strtotime(Input::get('dob')));
 			$userCampaign->user_cid = Input::get('cid');
+			$userCampaign->campaign_code = $hex;
 			if($userCampaign->save())
             {
                 return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('success', 'ลงทะเบียนรับ Voucher เสร็จสมบูรณ์');

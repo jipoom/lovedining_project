@@ -114,7 +114,12 @@
 			<br />
 			<br />
 		@else
-			@if ($campaign->allow_duplicate_user == 1 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) == 0)
+			@if ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
+				You already registered for this voucher!!
+				<p />
+				Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
+				<p />
+			@else
 				<div class="row">
 					<div class="col-md-12">
 					  <h3>ลงทะเบียนรับ Voucher</h3>
@@ -123,37 +128,37 @@
 						<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 						<!-- ./ csrf token -->
 					  @if($campaign->show_firstname == 1)
-					 	<label class="control-label" for="campaign"> Firstname</label> <font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
-									{{ Form::text('firstname',Input::old('firstname', isset($firstname) ? $firstname : null) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
+					 	<label class="control-label" for="Firstname"> Firstname</label> <font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
+									{{ Form::text('firstname',Input::old('firstname', isset($firstname) ? $firstname : Auth::user() -> firstname) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
 									
 					  @endif	
 					  @if($campaign->show_lastname == 1)
-					 	<label class="control-label" for="campaign"> Lastname</label>  <font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
-									{{ Form::text('lastname',Input::old('lastname', isset($lastname) ? $lastname : null) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
+					 	<label class="control-label" for="Lastname"> Lastname</label>  <font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
+									{{ Form::text('lastname',Input::old('lastname', isset($lastname) ? $lastname : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
 									
 						
 					  @endif
 					  @if($campaign->show_email == 1)
-					 	<label class="control-label" for="campaign"> Email</label>  <font color="red">{{{ $errors->first('email', ':message') }}}</font>
-									{{ Form::text('email',Input::old('email', isset($email) ? $lastname : null) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
+					 	<label class="control-label" for="Email"> Email</label>  <font color="red">{{{ $errors->first('email', ':message') }}}</font>
+									{{ Form::text('email',Input::old('email', isset($email) ? $lastname : Auth::user() -> email) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
 									
 						
 					  @endif	
 					  @if($campaign->show_cid == 1)
-					 	<label class="control-label" for="campaign"> Citizen ID</label>  <font color="red">{{{ $errors->first('cid', ':message') }}}</font>
+					 	<label class="control-label" for="Cid"> Citizen ID</label>  <font color="red">{{{ $errors->first('cid', ':message') }}}</font>
 									{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
 									
 						
 					  @endif	
 					  @if($campaign->show_tel == 1)
-					 	<label class="control-label" for="campaign"> Tel</label>  <font color="red">{{{ $errors->first('tel', ':message') }}}</font>
+					 	<label class="control-label" for="Tel"> Tel</label>  <font color="red">{{{ $errors->first('tel', ':message') }}}</font>
 									{{ Form::text('tel',Input::old('tel', isset($tel) ? $tel: null) , array('class'=>'form-control', 'placeholder'=>'Tel'))}} </p>
 									
 						
 					  @endif
 					  @if($campaign->show_dob == 1)
-					 	<label class="control-label" for="campaign"> Date of Birth</label>  <font color="red">{{{ $errors->first('dob', ':message') }}}</font>
-									<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY"></p>
+					 	<label class="control-label" for="dob"> Date of Birth</label>  <font color="red">{{{ $errors->first('dob', ':message') }}}</font>
+									<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true"></p>
 					 	
 					  @endif
 					  
@@ -168,11 +173,7 @@
 					</div>
 					</form>
 				</div>
-			@else
-				You already registered for this voucher!!
-				<p />
-				Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
-				<p />
+
 			@endif
 		@endif
 	</div>
@@ -187,7 +188,12 @@
 		<!-- datepicker -->
 <script>
   $(function() {
-    $( "#datepicker").datepicker();
+     $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      maxDate: "-1y",
+      yearRange: "c-70:c+10"
+    });
   });
  </script>
 @stop

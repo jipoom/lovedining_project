@@ -114,7 +114,7 @@ class Post extends Eloquent {
 	 */
 	public function url()
 	{
-		return Url::to("review/".$this->id."/".Session::get('Lang'));
+		return Url::to("review/".$this->id."/".$this->slug."/".Session::get('Lang'));
 	}
 
 	/**
@@ -263,7 +263,8 @@ class Post extends Eloquent {
 				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
 				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
-				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at','posts.meta_title',
+				'posts.meta_description','posts.meta_keywords','posts.slug'));
 		 }
 		 //If user searches with a keyword
 		 else {
@@ -271,7 +272,8 @@ class Post extends Eloquent {
 				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
 				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
-				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at','posts.meta_title',
+				'posts.meta_description','posts.meta_keywords','posts.slug'));
 		 }
 	}
 	
@@ -299,7 +301,8 @@ class Post extends Eloquent {
 				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
 				'posts.restaurant_name','posts.tel','posts.address1',
 				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
-				'posts.province_id','posts.zip','posts.created_at','posts.updated_at'));
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at','posts.meta_title',
+				'posts.meta_description','posts.meta_keywords','posts.slug'));
 				//$posts = Post::active()->search($term);
 			}
 		}

@@ -7,9 +7,10 @@
 		<title> @section('title')
 			LoveDinings
 			@show </title>
-		<meta name="keywords" content="{{ (isset($post) ? $post->title : 'Lovedinings')}}" />
+		<meta name="title" content="{{ (isset($post) ? (isset($post->meta_title) ? $post->meta_title: $post->title) : 'Lovedinings')}}" />
+		<meta name="keywords" content="{{ (isset($post) ? (isset($post->meta_keywords) ? $post->meta_keywords: $post->title) : 'Lovedinings')}}" />
 		<meta name="author" content="LoveDinings" />
-		<meta name="description" content="{{(isset($post) ? $post->title : 'Lovedinings')}}" />
+		<meta name="description" content="{{(isset($post) ? (isset($post->meta_description) ? $post->meta_description: $post->title) : 'Lovedinings')}}" />
 		@if(isset($post))
 			<meta property="og:title" content="{{$post->title}}" />
 			<meta property="og:url" content="{{$post->url()}}" />
@@ -115,9 +116,9 @@
 							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<strong>CN</strong>': 'CN'}} </a></li>
 							-->
 							<br />
-							<a href="{{{ URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
-							<a href="{{{ URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
-							<a href="{{{ URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/TH').'/'.$page : URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/EN').'/'.$page : URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/CN').'/'.$page : URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
 						</div>
 						
 					</div>

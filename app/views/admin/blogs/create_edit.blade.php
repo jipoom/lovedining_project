@@ -80,6 +80,38 @@
 					</div>
 				</div>
 				
+				<div class="form-group {{{ $errors->has('meta_description') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                        <label class="control-label" for="title">Meta Title</label>
+						{{ Form::text('meta_title', Input::old('meta_title', isset($post) ? $post->meta_title : null), array('class'=>'form-control', 'placeholder'=>'Meta Title'))}} </p>
+						{{{ $errors->first('meta_title', ':message') }}}
+					</div>
+				</div>
+				
+				<div class="form-group {{{ $errors->has('meta_description') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                        <label class="control-label" for="title">Meta Description</label>
+						{{ Form::text('meta_description', Input::old('meta_description', isset($post) ? $post->meta_description : null), array('class'=>'form-control', 'placeholder'=>'Meta Description'))}} </p>
+						{{{ $errors->first('meta_description', ':message') }}}
+					</div>
+				</div>
+				
+				<div class="form-group {{{ $errors->has('meta_keyword') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                        <label class="control-label" for="title">Meta Keywords</label>
+						{{ Form::text('meta_keyword', Input::old('meta_keyword', isset($post) ? $post->meta_keyword : null), array('class'=>'form-control', 'placeholder'=>'Meta Keywords'))}} </p>
+						{{{ $errors->first('meta_keyword', ':message') }}}
+					</div>
+				</div>
+				
+				<div class="form-group {{{ $errors->has('restaurant_name') ? 'error' : '' }}}">
+                    <div class="col-md-12">
+                        <label class="control-label" for="title">Slug</label>
+						{{ Form::text('slug', Input::old('slug', isset($post) ? $post->slug : null), array('class'=>'form-control', 'placeholder'=>'Slug'))}} </p>
+						{{{ $errors->first('slug', ':message') }}}
+					</div>
+				</div>
+				
 				<!-- Category -->					 
 			   <div class="form-group">
                     <div class="col-md-12">
