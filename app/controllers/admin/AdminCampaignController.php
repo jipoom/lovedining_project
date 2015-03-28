@@ -285,6 +285,25 @@ class AdminCampaignController extends AdminController {
         // Show the page
         return View::make('admin/campaign/view_registered', compact('userCampaign', 'title','campaign'));
     }
+	
+	public function exportRegistered($campaign)
+    {
+        // Title
+        $title = "List of registered users for ".$campaign->post->restaurant_name.' (Lovedinings)';
+		$userCampaign = UserCampaign::where('campaign_id','=',$campaign->id)->get();
+        // Show the page
+        //return View::make('admin/campaign/view_registered', compact('userCampaign', 'title','campaign'));
+		return View::make('admin/campaign/export_registered',compact('userCampaign', 'title','campaign'));
+    }
+	
+	public function streamPDF()
+    {
+        $filename = 'campaign.pdf';
+		$path = storage_path().DIRECTORY_SEPARATOR.$filename;
+		
+		return Response::make(file_get_contents($path), 200, 
+		array('Content-Type' => 'application/pdf','Content-Disposition' => 'inline; '.$filename));
+    }
 
        /**
      * Show a list of all the blog posts formatted for Datatables.

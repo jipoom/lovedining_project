@@ -144,6 +144,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::get('campaign/{campaign}/delete', 'AdminCampaignController@getDelete');
     Route::post('campaign/{campaign}/delete', 'AdminCampaignController@postDelete');
 	Route::get('campaign/{campaign}/view_registered', 'AdminCampaignController@viewRegistered');
+	Route::get('campaign/{campaign}/export_registered', 'AdminCampaignController@exportRegistered');
+	Route::get('campaign/stream_pdf', 'AdminCampaignController@streamPDF');
 	Route::get('campaign/{directory}/{campaignId}','AdminCampaignController@getIndex');	
 	Route::get('campaign/search', 'AdminCampaignController@autocomplete');
     Route::controller('campaign', 'AdminCampaignController');

@@ -18,7 +18,7 @@
 	</h3>
 </div>
 @if (count($userCampaign) > 0)
-	<P><a target = '_blank' href="{{{ URL::to('admin/campaign/'.$campaign.'/export') }}}" class="btn btn-default btn-xs">Export table to PDF</a></p>
+	<P><a target = '_blank' href="{{{ URL::to('admin/campaign/'.$campaign->id.'/export_registered') }}}" class="btn btn-default btn-xs">Export table to PDF</a></p>
 	<table border="1">
   
 		<tr>
@@ -62,13 +62,13 @@
 				<td>{{$user->user_tel}}</td>
 			@endif
 			@if($campaign->show_dob == 1)
-				<td>{{$user->user_dob}}</td>
+				<td><center>{{$user->user_dob}}</center></td>
 			@endif
 			@if($campaign->show_cid == 1)
-				<td>{{$user->user_cid}}</td>
+				<td><center>{{$user->user_cid}}</center></td>
 			@endif
-			<td>{{$user->campaign_code}}</td>
-			<td>{{$user->created_at}}</td>
+			<td><center>{{$user->campaign_code}}</center></td>
+			<td><center>{{$user->created_at}}</center></td>
 		</tr>
 		@endforeach
 	</table>
