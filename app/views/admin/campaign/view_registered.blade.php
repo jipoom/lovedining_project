@@ -36,13 +36,22 @@
 				<th>Tel</th>
 			@endif
 			@if($campaign->show_dob == 1)
-				<th width="110">Date of Birth</th>
+				<th width="100">Date of Birth</th>
 			@endif
 			@if($campaign->show_cid == 1)
 				<th>ID</th>
 			@endif
-			<th width="200">Code</th>
-			<th width="200">Registered date</th>
+			@if($campaign->opt1_name != '')
+				<th>{{$campaign->opt1_name}}</th>
+			@endif
+			@if($campaign->opt2_name != '')
+				<th>{{$campaign->opt2_name}}</th>
+			@endif
+			@if($campaign->opt3_name != '')
+				<th>{{$campaign->opt3_name}}</th>
+			@endif
+			<th width="180">Code</th>
+			<th width="170">Registered date</th>
 		</tr>
 		<?php $i = 1;?>
 		@foreach($userCampaign as $user)
@@ -66,6 +75,15 @@
 			@endif
 			@if($campaign->show_cid == 1)
 				<td><center>{{$user->user_cid}}</center></td>
+			@endif
+			@if($campaign->opt1_name != '')
+				<td><center>{{$user->opt1}}</center></td>
+			@endif
+			@if($campaign->opt2_name != '')
+				<td><center>{{$user->opt2}}</center></td>
+			@endif
+			@if($campaign->opt3_name != '')
+				<td><center>{{$user->opt3}}</center></td>
 			@endif
 			<td><center>{{$user->campaign_code}}</center></td>
 			<td><center>{{$user->created_at}}</center></td>

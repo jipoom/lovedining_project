@@ -388,7 +388,20 @@ class BlogController extends BaseController {
 		if($campaign->show_dob == 1){
 			$rules['dob'] = 'required';
 		}
-		$validator = Validator::make(Input::all(), $rules);
+		if($campaign->opt1_name != ''){
+			$rules['opt1'] = 'required';
+		}
+		if($campaign->opt2_name != ''){
+			$rules['opt2'] = 'required';
+		}
+		if($campaign->opt3_name != ''){
+			$rules['opt3'] = 'required';
+		}
+
+		$messages = array(
+		    'required' => 'This field is required.',
+		);
+		$validator = Validator::make(Input::all(), $rules,$messages);
 
 		// Check if the form validates with success
 		if ($validator -> passes()) {
@@ -406,6 +419,9 @@ class BlogController extends BaseController {
 			$userCampaign->user_dob= Date('Y-m-d',strtotime(Input::get('dob')));
 			$userCampaign->user_cid = Input::get('cid');
 			$userCampaign->campaign_code = $hex;
+			$userCampaign->opt1 = Input::get('opt1');
+			$userCampaign->opt2 = Input::get('opt2');
+			$userCampaign->opt3 = Input::get('opt3');
 			if($userCampaign->save())
             {
                 return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('success', 'ลงทะเบียนรับ Voucher เสร็จสมบูรณ์');

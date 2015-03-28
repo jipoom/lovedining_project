@@ -161,6 +161,21 @@
 									<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true"></p>
 					 	
 					  @endif
+					   @if($campaign->opt1_name != '')
+					 	<label class="control-label" for="opt1"> {{{$campaign->opt1_name}}}</label>  <font color="red">{{{ $errors->first('opt1', ':message') }}}</font>
+									<p><input type="text" name ="opt1" placeholder="{{{$campaign->opt1_name}}}"></p>
+					 	
+					  @endif
+					  @if($campaign->opt2_name != '')
+					 	<label class="control-label" for="opt2"> {{{$campaign->opt2_name}}}</label>  <font color="red">{{{ $errors->first('opt2', ':message') }}}</font>
+									<p><input type="text" name ="opt2" placeholder="{{{$campaign->opt2_name}}}"></p>
+					 	
+					  @endif
+					  @if($campaign->opt3_name != '')
+					 	<label class="control-label" for="opt3"> {{{$campaign->opt3_name}}}</label>  <font color="red">{{{ $errors->first('opt3', ':message') }}}</font>
+									<p><input type="text" name ="opt3" placeholder="{{{$campaign->opt3_name}}}"></p>
+					 	
+					  @endif
 					  
 					  <!-- Form Actions -->
 						<div class="form-group">

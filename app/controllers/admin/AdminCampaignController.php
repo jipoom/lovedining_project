@@ -97,15 +97,18 @@ class AdminCampaignController extends AdminController {
 			$this->campaign->remark1  = Input::get('remark1');
 			$this->campaign->remark2  = Input::get('remark2');
 			$this->campaign->allow_duplicate_user  = Input::get('dupRegis');
-			$this->campaign->show_fisrtname  = Input::get('show_name');
+			$this->campaign->show_firstname  = Input::get('show_firstname');
 			$this->campaign->show_lastname  = Input::get('show_lastname');
-			$this->campaign->show_cid  = Input::get('show_id');
+			$this->campaign->show_cid  = Input::get('show_cid');
 			$this->campaign->show_email  = Input::get('show_email');
 			$this->campaign->show_dob  = Input::get('show_dob');
-			$this->campaign->show_tel  = Input::get('show_mobile');
+			$this->campaign->show_tel  = Input::get('show_tel');
 			$this->campaign->isActive  = Input::get('isActive');
 			$this->campaign->album_name  = Input::get('album_name');
 			$this->campaign->hotel_logo  = Input::get('hotel_logo');
+			$this->campaign->opt1_name  = Input::get('opt1_name');
+			$this->campaign->opt2_name  = Input::get('opt2_name');
+			$this->campaign->opt3_name  = Input::get('opt3_name');
             // Was the blog post updated?
             if($this->campaign->save())
             {
@@ -202,15 +205,18 @@ class AdminCampaignController extends AdminController {
 			$campaign->remark1  = Input::get('remark1');
 			$campaign->remark2  = Input::get('remark2');
 			$campaign->allow_duplicate_user  = Input::get('dupRegis');
-			$campaign->show_firstname  = Input::get('show_name');
+			$campaign->show_firstname  = Input::get('show_firstname');
 			$campaign->show_lastname  = Input::get('show_lastname');
-			$campaign->show_cid  = Input::get('show_id');
+			$campaign->show_cid  = Input::get('show_cid');
 			$campaign->show_email  = Input::get('show_email');
 			$campaign->show_dob  = Input::get('show_dob');
-			$campaign->show_tel  = Input::get('show_mobile');
+			$campaign->show_tel  = Input::get('show_tel');
 			$campaign->isActive  = Input::get('isActive');
 			$campaign->album_name  = Input::get('album_name');
 			$campaign->hotel_logo  = Input::get('hotel_logo');
+			$campaign->opt1_name  = Input::get('opt1_name');
+			$campaign->opt2_name  = Input::get('opt2_name');
+			$campaign->opt3_name  = Input::get('opt3_name');
             // Was the blog post updated?
             if($campaign->save())
             {

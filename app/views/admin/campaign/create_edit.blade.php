@@ -84,20 +84,32 @@
 						<label class="control-label" for="description">Remark 2: </label>
 						 {{ Form::text('remark2',Input::old('remark2', isset($campaign) ? $campaign->remark2 : null))}} </p>
 						{{{ $errors->first('remark2', ':message') }}}</p>
-
+						
+						<label class="control-label" for="description">Optional field 1 Name: (Leave it empty to ignore this field) </label>
+						 {{ Form::text('opt1_name',Input::old('opt1_name', isset($campaign) ? $campaign->opt1_name : null))}} </p>
+						{{{ $errors->first('opt1_name', ':message') }}}</p>
+						
+						<label class="control-label" for="description">Optional field 2 Name: (Leave it empty to ignore this field)</label>
+						 {{ Form::text('opt2_name',Input::old('opt2_name', isset($campaign) ? $campaign->opt2_name : null))}} </p>
+						{{{ $errors->first('opt2_name', ':message') }}}</p>
+							
+						<label class="control-label" for="description">Optional field 3 Name: (Leave it empty to ignore this field)</label>
+						 {{ Form::text('opt3_name',Input::old('opt3_name', isset($campaign) ? $campaign->opt3_name : null))}} </p>
+						{{{ $errors->first('opt3_name', ':message') }}}</p>
+								
 						<label class="control-label" for="description">Allow duplicate registration?</label>
 						{{ Form::radio('dupRegis', 1) }} Yes
 						{{ Form::radio('dupRegis', 0, true) }} No</p>
 						
 						<br><label>Field Management</label></br>
-						{{ Form::checkbox('show_name',1,Input::old('show_name', isset($campaign) ? $campaign->show_name : 1)) }} Include Name</p>
-						{{ Form::checkbox('show_lastname',1,Input::old('show_name', isset($campaign) ? $campaign->show_lastname : 1)) }} Include Lastname</label></p>
-						{{ Form::checkbox('show_id',1,Input::old('show_name', isset($campaign) ? $campaign->show_id : 1)) }} Include ID</label></p>
-						{{ Form::checkbox('show_dob',1,Input::old('show_name', isset($campaign) ? $campaign->show_dob : 1)) }} Include Date of Birth</label></p>
-						{{ Form::checkbox('show_email',1,Input::old('show_name', isset($campaign) ? $campaign->show_email : 1)) }} Include Email</label></p>
-						{{ Form::checkbox('show_mobile',1,Input::old('show_name', isset($campaign) ? $campaign->show_mobile : 1)) }} Include Tel</label></p>
+						{{ Form::checkbox('show_firstname',1,Input::old('show_firstname', isset($campaign) ? $campaign->show_firstname : 1)) }} Include Name</p>
+						{{ Form::checkbox('show_lastname',1,Input::old('show_lastname', isset($campaign) ? $campaign->show_lastname : 1)) }} Include Lastname</label></p>
+						{{ Form::checkbox('show_cid',1,Input::old('show_cid', isset($campaign) ? $campaign->show_cid : 1)) }} Include ID</label></p>
+						{{ Form::checkbox('show_dob',1,Input::old('show_dob', isset($campaign) ? $campaign->show_dob : 1)) }} Include Date of Birth</label></p>
+						{{ Form::checkbox('show_email',1,Input::old('show_email', isset($campaign) ? $campaign->show_email : 1)) }} Include Email</label></p>
+						{{ Form::checkbox('show_tel',1,Input::old('show_tel', isset($campaign) ? $campaign->show_tel : 1)) }} Include Tel</label></p>
 						
-						{{ Form::checkbox('isActive',1,Input::old('show_name', isset($campaign) ? $campaign->isActive : 0)) }}<label class="control-label" for="description"> Activate/Deactivate</label></p>
+						{{ Form::checkbox('isActive',1,Input::old('isActive', isset($campaign) ? $campaign->isActive : 0)) }}<label class="control-label" for="description"> Activate/Deactivate</label></p>
 						
 						
 						<div class="form-group">
