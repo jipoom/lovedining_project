@@ -34,68 +34,12 @@
 <link rel="stylesheet" href="{{asset('assets/css/preettyphoto/prettyPhoto.css')}}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link href="{{asset('assets/css/jquery.bxslider.css')}}" rel="stylesheet" />
-<style>
-	ul.bxslider {
-		margin: 0;
-		padding: 0;
-	}
-
-	.bx-wrapper img {
-		margin: 0 auto;
-	}
-	img.resize {
-		width: auto; /* you can use % */
-		height: 400px;
-	}
-</style>
 
 @stop
 
 {{-- Content --}}
 @section('content')
-<h3>รายละเอียด Campaign</h3>
-<div class="col-md-3 pull-right">
-	<div class="movieinfo" >
-		<p>
-				<p><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->start_date }}}</p>
-				<p><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->expiry_date }}}</p>
-
-				<span class="glyphicon glyphicon-comment"></span> {{UserCampaign::where('campaign_id','=',$campaign->id)->count()}} {{ \Illuminate\Support\Pluralizer::plural('member', UserCampaign::where('campaign_id','=',$campaign->id)->count()) }} registered
-				</p>
-				@if($campaign->remark1 != "")
-					<p>
-						<font color="red">*{{$campaign->remark1}}</font>
-					</p>
-				@endif
-				@if($campaign->remark2 != "")
-					<p>
-						<font color="red">*{{$campaign->remark2}}</font>
-					</p>
-				@endif
-				
-				<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name, true); ?>
-
-					<!-- picture div -->
-					<div>
-		
-						<ul class="gallery clearfix bxslider">
-							@foreach ($album as $picture)
-		
-							<li>
-								<a href="{{URL::to('/images/'.$campaign -> post -> album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$campaign -> post->album_name.'/'.$picture)}}" alt="" class ="thumbnail"/></a>
-							</li>
-		
-							@endforeach
-						</ul>
-					</div>
-					<p>
-					<a href="{{{ Post::find($campaign->post_id)->url() }}}">Review</a>
-					
-					
-					
-				</p>
-	</div>
-</div>
+<h3>Register For {{$campaign->name}}</h3>
 <div class="row">
 	<div class="col-md-8">
 		<!-- Post Title -->
@@ -112,14 +56,8 @@
 			@endif
 			
 			</div>
-			<div class="col-md-6">
-				<p>
-					{{ String::tidy($campaign->description) }}
-				</p>
-			</div>
 		</div>
-					
-				
+
 		<div class="row">
 			<div class="col-md-8">
 				<p></p>
@@ -143,8 +81,71 @@
 			@else
 				<div class="row">
 					<div class="col-md-12">
-					  <a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-default btn-xs">กดรับสิทธิ์</a>
-					</div> 
+					  <h3>ลงทะเบียนรับ Voucher</h3>
+					  <form class="form-horizontal" name = "form_register" method="post" action="" autocomplete="off">
+						<!-- CSRF Token -->
+						<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+						<!-- ./ csrf token -->
+					  @if($campaign->show_firstname == 1)
+					 	<label class="control-label" for="Firstname"> Firstname</label> <font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
+									{{ Form::text('firstname',Input::old('firstname', isset($firstname) ? $firstname : Auth::user() -> firstname) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
+									
+					  @endif	
+					  @if($campaign->show_lastname == 1)
+					 	<label class="control-label" for="Lastname"> Lastname</label>  <font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
+									{{ Form::text('lastname',Input::old('lastname', isset($lastname) ? $lastname : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
+									
+						
+					  @endif
+					  @if($campaign->show_email == 1)
+					 	<label class="control-label" for="Email"> Email</label>  <font color="red">{{{ $errors->first('email', ':message') }}}</font>
+									{{ Form::text('email',Input::old('email', isset($email) ? $lastname : Auth::user() -> email) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
+									
+						
+					  @endif	
+					  @if($campaign->show_cid == 1)
+					 	<label class="control-label" for="Cid"> Citizen ID</label>  <font color="red">{{{ $errors->first('cid', ':message') }}}</font>
+									{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
+									
+						
+					  @endif	
+					  @if($campaign->show_tel == 1)
+					 	<label class="control-label" for="Tel"> Tel</label>  <font color="red">{{{ $errors->first('tel', ':message') }}}</font>
+									{{ Form::text('tel',Input::old('tel', isset($tel) ? $tel: null) , array('class'=>'form-control', 'placeholder'=>'Tel'))}} </p>
+									
+						
+					  @endif
+					  @if($campaign->show_dob == 1)
+					 	<label class="control-label" for="dob"> Date of Birth</label>  <font color="red">{{{ $errors->first('dob', ':message') }}}</font>
+									<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true"></p>
+					 	
+					  @endif
+					   @if($campaign->opt1_name != '')
+					 	<label class="control-label" for="opt1"> {{{$campaign->opt1_name}}}</label>  <font color="red">{{{ $errors->first('opt1', ':message') }}}</font>
+									<p><input type="text" name ="opt1" placeholder="{{{$campaign->opt1_name}}}"></p>
+					 	
+					  @endif
+					  @if($campaign->opt2_name != '')
+					 	<label class="control-label" for="opt2"> {{{$campaign->opt2_name}}}</label>  <font color="red">{{{ $errors->first('opt2', ':message') }}}</font>
+									<p><input type="text" name ="opt2" placeholder="{{{$campaign->opt2_name}}}"></p>
+					 	
+					  @endif
+					  @if($campaign->opt3_name != '')
+					 	<label class="control-label" for="opt3"> {{{$campaign->opt3_name}}}</label>  <font color="red">{{{ $errors->first('opt3', ':message') }}}</font>
+									<p><input type="text" name ="opt3" placeholder="{{{$campaign->opt3_name}}}"></p>
+					 	
+					  @endif
+					  
+					  <!-- Form Actions -->
+						<div class="form-group">
+							<div class="col-md-12">
+								<button type="reset" class="btn btn-default">Reset</button>
+								<button type="submit" class="btn btn-success">Save</button>
+							</div>
+						</div>
+						<!-- ./ form actions -->
+					</div>
+					</form>
 				</div>
 
 			@endif
