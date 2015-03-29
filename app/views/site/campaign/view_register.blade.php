@@ -59,7 +59,8 @@
 		<p>
 				<p><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->start_date }}}</p>
 				<p><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->expiry_date }}}</p>
-				<span class="glyphicon glyphicon-comment"></span> {{5}} {{ \Illuminate\Support\Pluralizer::plural('member', 5) }} registered
+
+				<span class="glyphicon glyphicon-comment"></span> {{UserCampaign::where('campaign_id','=',$campaign->id)->count()}} {{ \Illuminate\Support\Pluralizer::plural('member', UserCampaign::where('campaign_id','=',$campaign->id)->count()) }} registered
 				</p>
 				@if($campaign->remark1 != "")
 					<p>
@@ -71,6 +72,23 @@
 						<font color="red">*{{$campaign->remark2}}</font>
 					</p>
 				@endif
+				
+				<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name, true); ?>
+
+					<!-- picture div -->
+					<div>
+		
+						<ul class="gallery clearfix bxslider">
+							@foreach ($album as $picture)
+		
+							<li>
+								<a href="{{URL::to('/images/'.$campaign -> post -> album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$campaign -> post->album_name.'/'.$picture)}}" alt="" class ="thumbnail"/></a>
+							</li>
+		
+							@endforeach
+						</ul>
+					</div>
+				
 	</div>
 </div>
 <div class="row">
@@ -97,6 +115,9 @@
 		</div>
 						<p>
 					<a href="{{{ Post::find($campaign->post_id)->url() }}}">Review</a>
+					
+					
+					
 				</p>
 				
 		<div class="row">
@@ -200,6 +221,8 @@
 @section('scripts')
 <!-- datepicker -->
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{{asset('assets/js/jquery.bxslider.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery.prettyPhoto.js')}}" type="text/javascript" charset="utf-8"></script>
 		<!-- datepicker -->
 <script>
   $(function() {
@@ -209,6 +232,55 @@
       maxDate: "-1y",
       yearRange: "c-70:c+10"
     });
+    
+    $('.bxslider').bxSlider({
+			mode : 'horizontal',
+			infiniteLoop : true,
+			auto : true,
+			autoStart : true,
+			autoDirection : 'next',
+			autoHover : true,
+			pause : 3000,
+			autoControls : false,
+			pager : false,
+			pagerType : 'full',
+			controls : true,
+			captions : true,
+			speed : 500,
+			randomStart : true,
+			responsive : true,
+			slideWidth : 300,
+			adaptiveHeight : true
+		});
+    $("area[rel^='LoveDining']").prettyPhoto();
+
+		$(".gallery:first a[rel^='LoveDining']").prettyPhoto({
+			animation_speed : 'normal',
+			theme : 'light_square',
+			slideshow : 3000,
+			autoplay_slideshow : false
+		});
+		$(".gallery:gt(0) a[rel^='LoveDining']").prettyPhoto({
+			animation_speed : 'fast',
+			slideshow : 10000,
+			hideflash : true
+		});
+
+		$("#custom_content a[rel^='LoveDining']:first").prettyPhoto({
+			custom_markup : '<div id="map_canvas" style="width:260px; height:265px"></div>',
+			changepicturecallback : function() {
+				initialize();
+			}
+		});
+
+		$("#custom_content a[rel^='LoveDining']:last").prettyPhoto({
+			custom_markup : '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+			changepicturecallback : function() {
+				_bsap.exec();
+			}
+		});
+    
+    
   });
  </script>
 @stop

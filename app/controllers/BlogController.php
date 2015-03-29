@@ -357,7 +357,8 @@ class BlogController extends BaseController {
 		Session::forget('mode');
 		Session::forget('catName');
 		$campaigns = Campaign::all();
-		return View::make('site/campaign/index',compact('campaigns','page'));
+		$home = Campaign::active()->where('is_home','=',1)->get();
+		return View::make('site/campaign/index',compact('campaigns','page','home'));
 	}
 	public function getRegister($campaignId,$lang){
 		//Session::put('Lang',$lang);	

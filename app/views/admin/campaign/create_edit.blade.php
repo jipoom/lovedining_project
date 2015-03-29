@@ -137,6 +137,7 @@
 						
 						 @if(!Input::old('album_name') && !isset($campaign))
 						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName);?>
+						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName.'/banner');?>
 						 	{{ Form::hidden('album_name', Input::old('album_name', isset($campaign) ? $campaign->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
 	                     @else
 	                     	{{ Form::hidden('album_name', Input::old('album_name', isset($campaign) ? $campaign->album_name : Input::old('album_name')), array('id'=>'album_name')) }} </p>  

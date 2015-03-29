@@ -44,7 +44,7 @@
 	
 	<ul class="bxslider" style="margin-bottom: 0px; padding-bottom: 0px;">
 		@foreach($home as $post)
-			@if(!(count(glob(Config::get('app.image_path').'/'.$post->album_name.'/banner/'.'*.{jpg,png,gif}',GLOB_BRACE)) === 0))
+			@if(!(count(glob(Config::get('app.image_path').'/'.$post->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 				<?php
 				$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$post->album_name.'/banner/',true);
 				?>

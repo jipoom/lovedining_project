@@ -150,6 +150,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::get('campaign/search', 'AdminCampaignController@autocomplete');
     Route::controller('campaign', 'AdminCampaignController');
 	
+	# Campaign Home Management
+	Route::post('campaign_home/setBanner', 'AdminCampaignHomeController@setBanner');
+	Route::get('campaign_home/banner/remove/{postId}', 'AdminCampaignHomeController@removeBanner');
+    Route::controller('campaign_home', 'AdminCampaignHomeController');
+	
 	# Introduction Management
 	Route::get('introduction', 'AdminIntroductionController@getCreate');
 	Route::post('introduction', 'AdminIntroductionController@postCreate');

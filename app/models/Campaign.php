@@ -14,6 +14,12 @@ class Campaign extends Eloquent {
 		return Url::to("campaign/".$this->id."/".Session::get('Lang'));
 	}
 	
+	public function scopeActive($query)
+    {
+      
+	    return $query-> whereRaw('(UNIX_TIMESTAMP(start_date) <= UNIX_TIMESTAMP(now())) and (isActive = 1 or UNIX_TIMESTAMP(expiry_date) > UNIX_TIMESTAMP(now()))');
+    }
+	
 }
 
 ?>
