@@ -246,6 +246,38 @@ class Post extends Eloquent {
 		return $posts;
 	}
 	
+	
+	public static function getReviewsByCategoryUnpaginate($post,$categoryId,$orderBy,$mode)
+	{
+		
+		 if(!$post)
+		 	$post = new Post;
+		 if($categoryId!="undefined")	
+		 {	
+			 return $post->active()->join('posts_category', 'posts.id', '=', 'posts_category.post_id')
+				-> join('category', 'posts_category.category_id', '=', 'category.id')
+				-> where('category.id', '=', $categoryId)
+				//where date > published_date
+				//where date < expired_date
+				-> orderBy($orderBy, $mode)
+				->get(array('posts.id', 'posts.user_id', 'posts.title', 'posts.title_2', 
+				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
+				'posts.restaurant_name','posts.tel','posts.address1',
+				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at','posts.meta_title',
+				'posts.meta_description','posts.meta_keywords','posts.slug'));
+		 }
+		 //If user searches with a keyword
+		 else {
+			 return $post->orderBy($orderBy, $mode)->get(array('posts.id', 'posts.user_id', 'posts.title', 'posts.title_2', 
+				'posts.profile_picture_name','posts.content','posts.content_en','posts.content_cn','posts.album_name',
+				'posts.restaurant_name','posts.tel','posts.address1',
+				'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
+				'posts.province_id','posts.zip','posts.created_at','posts.updated_at','posts.meta_title',
+				'posts.meta_description','posts.meta_keywords','posts.slug'));
+		 }
+	}
+	
 	public static function getReviewsByCategory($post,$categoryId,$orderBy,$mode)
 	{
 		
