@@ -155,6 +155,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 	Route::get('campaign_home/banner/remove/{postId}', 'AdminCampaignHomeController@removeBanner');
     Route::controller('campaign_home', 'AdminCampaignHomeController');
 	
+	# Campaign Order Management
+	Route::get('campaign_order', 'AdminCampaignOrderController@getOrder');
+	Route::get('campaign_order/setOrder', 'AdminCampaignOrderController@setOrder');
+    Route::controller('campaign_order', 'AdminCampaignOrderController');
+	
 	# Introduction Management
 	Route::get('introduction', 'AdminIntroductionController@getCreate');
 	Route::post('introduction', 'AdminIntroductionController@postCreate');

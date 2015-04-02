@@ -10,6 +10,7 @@ return array(
     'AdminBlogsController' => $baseDir . '/app/controllers/admin/AdminBlogsController.php',
     'AdminCampaignController' => $baseDir . '/app/controllers/admin/AdminCampaignController.php',
     'AdminCampaignHomeController' => $baseDir . '/app/controllers/admin/AdminCampaignHomeController.php',
+    'AdminCampaignOrderController' => $baseDir . '/app/controllers/admin/AdminCampaignOrderController.php',
     'AdminCategoryController' => $baseDir . '/app/controllers/admin/AdminCategoryController.php',
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',

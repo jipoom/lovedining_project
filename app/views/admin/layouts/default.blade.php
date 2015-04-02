@@ -161,7 +161,7 @@
 								</ul>
 								</li>
 								
-								<li class="dropdown{{ (Request::is('admin/campaign*|admin/campaign_home*') ? ' selected' : '') }}">
+								<li class="dropdown{{ (Request::is('admin/campaign*|admin/campaign_home*|admin/campaign_order*') ? ' selected' : '') }}">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/campaign_home') }}}"> <span class="glyphicon glyphicon-list-alt"></span> Manage Campaigns <span class="caret"></span> </a>
 								<ul class="dropdown-menu">
 									<li{{ (Request::is('admin/campaign_home*') ? ' class="selected"' : '') }}>
@@ -169,6 +169,10 @@
 							</li>
 							<li{{ (Request::is('admin/campaign') ? ' class="selected"' : '') }}>
 								<a href="{{{ URL::to('admin/campaign') }}}"><span class="glyphicon glyphicon-bookmark"></span> Campaign</a></li>
+								<li{{ (Request::is('admin/campaign_order') ? ' class="selected"' : '') }}>
+								<a href="{{{ URL::to('admin/campaign_order') }}}"><span class="glyphicon glyphicon-bookmark"></span> Order</a></li>
+								
+								
 								</ul>
 								
 

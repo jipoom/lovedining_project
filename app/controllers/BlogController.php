@@ -356,7 +356,7 @@ class BlogController extends BaseController {
 		Session::forget('Campaign');
 		Session::forget('mode');
 		Session::forget('catName');
-		$campaigns = Campaign::all();
+		$campaigns = Campaign::orderBy('rank')->get();
 		$home = Campaign::active()->where('is_home','=',1)->get();
 		return View::make('site/campaign/index',compact('campaigns','page','home'));
 	}
