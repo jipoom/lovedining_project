@@ -269,13 +269,16 @@ class AdminCampaignController extends AdminController {
         {
             $id = $campaign->id;
             $campaign->delete();
-
+			$albumName = $campaign -> album_name;
             // Was the blog post deleted?
             $campaign = Post::find($id);
             if(empty($campaign))
             {
                 // Redirect to the blog posts management page
-                return Redirect::to('admin/campaign')->with('success', Lang::get('admin/campaign/messages.delete.success'));
+				UserCampaign::where('campaign_id', '=', $id) -> delete();
+				Picture::recursive_remove(Config::get('app.image_path') . '/' . $albumName);
+				// Redirect to the blog posts management page				
+                return Lang::get('admin/campaign/messages.delete.success');
             }
         }
         // There was a problem deleting the blog post
