@@ -8,6 +8,7 @@
 
 @import url(fonts4/th_kodchasal.css);
 @import url(fonts5/stylesheet.css);
+@import url(category/styles.css);
 
 html {
 	font-family: sans-serif;

@@ -124,8 +124,8 @@
 					</div>
 					<div class="container">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
-
-							<ul class="nav navbar-nav">
+<div id='cssmenu'>
+							<ul>
 
 								<!--<li{{ (Request::is('/') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
@@ -211,6 +211,7 @@
 							</ul>
 
 							<!-- ./ nav-collapse -->
+						</div>
 						</div>
 					</div>
 				</div>
