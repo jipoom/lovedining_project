@@ -300,6 +300,8 @@
 			<script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
 			<script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
 			<script src="{{asset('assets/js/prettify.js')}}"></script>
+			<script src="{{asset('assets/js/menu/script.js')}}"></script>
+			<script src="{{asset('assets/js/menu/script2.js')}}"></script>
 
 			<!-- Search Review -->
 			<script>
