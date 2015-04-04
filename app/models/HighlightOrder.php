@@ -26,7 +26,7 @@ class HighlightOrder extends Eloquent {
 		}
 		else if($mode == "custom")	
 		{
-			return Post::where('is_highlight','=','1')->active()->get();
+			return Post::where('is_highlight','=','1')->active()->orderBy('rank')->get();
 		}
 	}
 	public static function getMode()

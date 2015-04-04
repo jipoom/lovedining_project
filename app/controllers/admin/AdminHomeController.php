@@ -195,7 +195,7 @@ class AdminHomeController extends AdminController {
 		// There was a problem deleting the blog post
 		//return Redirect::to('admin/home') -> with('error', Lang::get('admin/blogs/messages.delete.error'));
 	}
-
+	
 	public function changeOrder($mode) {
 		//Sort Category by mode
 		$highlight = HighlightOrder::getOrder($mode);
@@ -234,7 +234,17 @@ class AdminHomeController extends AdminController {
 		
 
 	}
-
+	public function setHighlightRank() {
+		$order = Input::get('order');
+		$newOrder = explode(',', $order);
+		for($i=0;$i<count($newOrder);$i++){
+			$post = Post::find($newOrder[$i]);
+			$post->rank = $i;
+			$post->save();
+		}
+		echo "1";
+		
+	}
 	public function getData() {
 
 		//$posts = Post::select(array('posts.id', 'posts.title', 'category.category_name as category', 'posts.id as comments', 'posts.created_at')) -> leftjoin('category', 'posts.category_id', '=', 'category.id');

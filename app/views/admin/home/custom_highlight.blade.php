@@ -3,6 +3,12 @@
 @section('styles')
 <link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<style>
+ 	#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+ 
+	#sortable li span { position: absolute; margin-left: -1.3em; }
+</style>
 @stop
 {{-- Content --}}
 @section('content')
@@ -14,20 +20,17 @@
 	<div id="selected_banner">
 	<h4>Reviews selected to be highlight(s)</h4>
 	<p></p>
-	<table style="width:50%">
-	@foreach(Post::where('is_highlight','=',1)->get() as $post)
-		<tr>
-			<td>
-				{{$post->title}} 
-			</td>
-			<td>
-				<a href="{{{ URL::to('admin/home/highlight/remove/'.$post->id) }}}" class="btn btn-xs btn-danger">remove</a>
-			</td>
-		</tr>
-	@endforeach
-	</table>
 	<hr>
 	<p></p>
+	<div class="pull-right">
+			<button id="save" class="btn btn-success">save order</button>
+	</div>
+	<ul id="sortable">
+		@foreach(Post::where('is_highlight','=',1)->orderBy('rank')->get() as $post)
+	    <li class="ui-state-default" id='{{$post->id}}'>{{$post->title}}  <p align="right"><a href="{{{ URL::to('admin/home/highlight/remove/'.$post->id) }}}" class="btn btn-xs btn-danger">remove</a></p></li>
+	    @endforeach
+
+	</ul>
 	</div>
 	<form class="form-horizontal" method="post" action="" autocomplete="off">
 		<!-- CSRF Token -->
@@ -109,4 +112,33 @@
 		});
 	}); 
 </script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ <script>
+  $(function() {
+    $( "#sortable" ).sortable({
+        update : function () {
+	    //var order = $('#sortable').sortable('toArray').toString();
+            //alert(order)
+	}
+    }).disableSelection();
+    $( "#sortable" ).disableSelection();
+    $( "#save" ).click(saveOrder);
+    function saveOrder(){
+        order = $('#sortable').sortable('toArray').toString();
+        var result = $.ajax({
+	          url: "{{URL::to('admin/home/highlight_order/setHighlightRank')}}",
+	          data : { order : order},
+	          dataType:"text",
+	          async: false
+	          }).responseText;
+      	if(result == "1"){
+      		window.location.reload();
+      	}
+      	else{
+      		alert("ploblem exists reordering highlight, please try again")
+      	}
+	      		// enable textbox
+    }
+  });
+  </script>
 @stop
