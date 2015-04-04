@@ -77,7 +77,7 @@
 					<div class="container">
 						<div class="navbar-header">
 							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="125" class ="logo"></a>
-
+							We have  {{Post::count()}}  reviews (เอาลงมาใต้ Logoให้ด้วยครับ)
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 								<span class="sr-only">Toggle navigation</span>
 								<span class="icon-bar"></span>
