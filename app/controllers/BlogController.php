@@ -386,7 +386,7 @@ class BlogController extends BaseController {
 			$rules['lastname'] = 'required';
 		}
 		if($campaign->show_email == 1){
-			$rules['email'] = 'required';
+			$rules['email'] = array('regex:(^((?![0-9A-Za-z]*@hotmail.com[0-9A-Za-z]*).)*$)','required');
 		}
 		if($campaign->show_tel == 1){
 			$rules['tel'] = 'required';
@@ -419,7 +419,10 @@ class BlogController extends BaseController {
 			$bytes = openssl_random_pseudo_bytes($len, $cstrong);
     		$hex   = bin2hex($bytes);	
 			$userCampaign = new UserCampaign;
-			$userCampaign->user_id = Auth::user() -> id;
+			if(Session::get('socialUser.isLogin'))
+				$userCampaign->user_id = 0;
+			else
+				$userCampaign->user_id = Auth::user() -> id;
 			$userCampaign->campaign_id = $campaignId;
 			$userCampaign->user_firstname = Input::get('firstname');
 			$userCampaign->user_lastname = Input::get('lastname');
@@ -436,9 +439,9 @@ class BlogController extends BaseController {
                 return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('success', 'ลงทะเบียนรับ Voucher เสร็จสมบูรณ์');
             }
 
-            return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
+            return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
         			
 		}
-		return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
+		return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
 	}
 }

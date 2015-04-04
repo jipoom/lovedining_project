@@ -119,7 +119,8 @@ return array(
         'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
-		'Barryvdh\Elfinder\ElfinderServiceProvider'
+		'Barryvdh\Elfinder\ElfinderServiceProvider',
+		'Artdarek\OAuth\OAuthServiceProvider' // OAuth
         /* Uncomment for use in development */
 //        'Way\Generators\GeneratorsServiceProvider', // Generators
 //        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
@@ -208,7 +209,7 @@ return array(
         'String'          => 'Andrew13\Helpers\String', // String
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
-
+		'OAuth'			  => 'Artdarek\OAuth\Facade\OAuth', // OAuth
     ),
 
     'available_language' => array('en', 'pt', 'es'),

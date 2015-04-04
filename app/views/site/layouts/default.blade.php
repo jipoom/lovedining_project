@@ -200,6 +200,16 @@
 										</li>
 									</ul>
 								</li>
+								@elseif (Session::get('socialUser.isLogin'))
+
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"></span> {{{ Session::get('socialUser.name') }}} <span class="caret"></span> </a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="{{{ URL::to('user/logout_social') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a>
+										</li>
+									</ul>
+								</li>
 								@else
 								<li {{ (Request::is('user/login') ? ' class="selected"' : '') }}>
 									<a href="{{{ URL::to('user/login') }}}">Login&nbsp;&nbsp;</a>

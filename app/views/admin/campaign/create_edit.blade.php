@@ -98,9 +98,18 @@
 						{{{ $errors->first('opt3_name', ':message') }}}</p>
 								
 						<label class="control-label" for="description">Allow duplicate registration?</label>
-						{{ Form::radio('dupRegis', 1) }} Yes
-						{{ Form::radio('dupRegis', 0, true) }} No</p>
-						
+						@if(isset($campaign))
+							@if($campaign->allow_duplicate_user == 1)
+								{{ Form::radio('dupRegis', 1,Input::old('dupRegis',true)) }} Yes
+								{{ Form::radio('dupRegis', 0, Input::old('dupRegis',false)) }} No</p>
+							@else
+								{{ Form::radio('dupRegis', 1,Input::old('dupRegis',false)) }} Yes
+								{{ Form::radio('dupRegis', 0, Input::old('dupRegis',true)) }} No</p>
+							@endif
+						@else
+							{{ Form::radio('dupRegis', 1,Input::old('dupRegis',false)) }} Yes
+							{{ Form::radio('dupRegis', 0, Input::old('dupRegis',true)) }} No</p>
+						@endif
 						<br><label>Field Management</label></br>
 						{{ Form::checkbox('show_firstname',1,Input::old('show_firstname', isset($campaign) ? $campaign->show_firstname : 1)) }} Include Name</p>
 						{{ Form::checkbox('show_lastname',1,Input::old('show_lastname', isset($campaign) ? $campaign->show_lastname : 1)) }} Include Lastname</label></p>

@@ -92,7 +92,7 @@
 				<p></p>
 				<p>
 					<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->start_date }}}
-					| <span class="glyphicon glyphicon-comment"></span> {{5}} {{ \Illuminate\Support\Pluralizer::plural('Comment', 5) }}
+					| <span class="glyphicon glyphicon-comment"></span> {{UserCampaign::where('campaign_id','=',$campaign->id)->count()}} {{ \Illuminate\Support\Pluralizer::plural('Member registered', UserCampaign::where('campaign_id','=',$campaign->id)->count()) }}
 				</p>
 			</div>
 		</div>

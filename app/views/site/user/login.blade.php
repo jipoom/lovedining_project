@@ -28,7 +28,11 @@
                 <input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password">
             </div>
         </div>
-
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href = "{{{URL::to('user/fb')}}}" class="btn btn-primary">Login with Facebook</a>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="checkbox">

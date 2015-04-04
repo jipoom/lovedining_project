@@ -183,6 +183,8 @@ class UserController extends BaseController {
      */
     public function getLogin()
     {
+        //Logout from the userSocial
+        Session::forget('socialUser');	
         $user = Auth::user();
         if(!empty($user->id)){
             return Redirect::to('/');
@@ -370,4 +372,59 @@ class UserController extends BaseController {
         }
         return $redirect;
     }
+	
+	
+	
+	// Facebook Login
+	public function fbLoginAction(){
+		//Logout from the website
+		Confide::logout();
+        // get data from input
+	    $code = Input::get( 'code' );
+	
+	    // get fb service
+	    $fb = OAuth::consumer( 'Facebook' );
+	
+	    // check if code is valid
+	
+	    // if code is provided get user data and sign in
+	    if ( !empty( $code ) ) {
+	
+	        // This was a callback request from facebook, get the token
+	        $token = $fb->requestAccessToken( $code );
+	
+	        // Send a request with it
+	        $result = json_decode( $fb->request( '/me' ), true );
+	
+	        $message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
+	        echo $message. "<br/>";
+	
+	        //Var_dump
+	        //display whole array().
+	        
+	        /*
+			 * 
+			 *array(11) { ["id"]=> string(17) "10154442001970001" ["email"]=> string(19) "ji_poom@hotmail.com" ["first_name"]=> string(7) "Jirapat" ["gender"]=> string(4) "male" ["last_name"]=> string(12) "Temvuttirojn" ["link"]=> string(62) "https://www.facebook.com/app_scoped_user_id/10154442001970001/" ["locale"]=> string(5) "en_US" ["name"]=> string(20) "Jirapat Temvuttirojn" ["timezone"]=> int(7) ["updated_time"]=> string(24) "2014-04-10T02:46:50+0000" ["verified"]=> bool(true) }
+			 */
+
+	        Session::put('socialUser', $result);
+	        Session::put('socialUser.isLogin', true);
+
+	        return Redirect::to('/');
+	    }
+	    // if not ask for permission first
+	    else {
+	        // get fb authorization
+	        $url = $fb->getAuthorizationUri();
+	
+	        // return to facebook login url
+	        return Redirect::to( (string)$url );
+	    }  
+	}
+ 	public function logoutSocial()
+    {
+         Session::forget('socialUser');	
+         return Redirect::to('/');
+    }
+	
 }

@@ -41,6 +41,14 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('auth_social', function()
+{
+	if ( Auth::guest() && !Session::get('socialUser.isLogin')) // If the user is not logged in
+	{
+        	return Redirect::guest('user/login');
+	}
+});
+
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();

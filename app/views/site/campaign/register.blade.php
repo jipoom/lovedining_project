@@ -65,90 +65,80 @@
 			</div>
 		</div>
 		<hr />
-		@if ( ! Auth::check())
-			You need to be logged in to register for this Voucher.
-			<br />
-			<br />
-			Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
-			<br />
-			<br />
-		@else
-			@if ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
-				You already registered for this voucher!!
-				<p />
-				Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
-				<p />
-			@else
-				<div class="row">
-					<div class="col-md-12">
-					  <h3>ลงทะเบียนรับ Voucher</h3>
-					  <form class="form-horizontal" name = "form_register" method="post" action="" autocomplete="off">
-						<!-- CSRF Token -->
-						<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-						<!-- ./ csrf token -->
-					  @if($campaign->show_firstname == 1)
-					 	<label class="control-label" for="Firstname"> Firstname</label> <font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
-									{{ Form::text('firstname',Input::old('firstname', isset($firstname) ? $firstname : Auth::user() -> firstname) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
-									
-					  @endif	
-					  @if($campaign->show_lastname == 1)
-					 	<label class="control-label" for="Lastname"> Lastname</label>  <font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
-									{{ Form::text('lastname',Input::old('lastname', isset($lastname) ? $lastname : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
-									
-						
-					  @endif
-					  @if($campaign->show_email == 1)
-					 	<label class="control-label" for="Email"> Email</label>  <font color="red">{{{ $errors->first('email', ':message') }}}</font>
-									{{ Form::text('email',Input::old('email', isset($email) ? $lastname : Auth::user() -> email) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
-									
-						
-					  @endif	
-					  @if($campaign->show_cid == 1)
-					 	<label class="control-label" for="Cid"> Citizen ID</label>  <font color="red">{{{ $errors->first('cid', ':message') }}}</font>
-									{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
-									
-						
-					  @endif	
-					  @if($campaign->show_tel == 1)
-					 	<label class="control-label" for="Tel"> Tel</label>  <font color="red">{{{ $errors->first('tel', ':message') }}}</font>
-									{{ Form::text('tel',Input::old('tel', isset($tel) ? $tel: null) , array('class'=>'form-control', 'placeholder'=>'Tel'))}} </p>
-									
-						
-					  @endif
-					  @if($campaign->show_dob == 1)
-					 	<label class="control-label" for="dob"> Date of Birth</label>  <font color="red">{{{ $errors->first('dob', ':message') }}}</font>
-									<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true"></p>
-					 	
-					  @endif
-					   @if($campaign->opt1_name != '')
-					 	<label class="control-label" for="opt1"> {{{$campaign->opt1_name}}}</label>  <font color="red">{{{ $errors->first('opt1', ':message') }}}</font>
-									<p><input type="text" name ="opt1" placeholder="{{{$campaign->opt1_name}}}"></p>
-					 	
-					  @endif
-					  @if($campaign->opt2_name != '')
-					 	<label class="control-label" for="opt2"> {{{$campaign->opt2_name}}}</label>  <font color="red">{{{ $errors->first('opt2', ':message') }}}</font>
-									<p><input type="text" name ="opt2" placeholder="{{{$campaign->opt2_name}}}"></p>
-					 	
-					  @endif
-					  @if($campaign->opt3_name != '')
-					 	<label class="control-label" for="opt3"> {{{$campaign->opt3_name}}}</label>  <font color="red">{{{ $errors->first('opt3', ':message') }}}</font>
-									<p><input type="text" name ="opt3" placeholder="{{{$campaign->opt3_name}}}"></p>
-					 	
-					  @endif
-					  
-					  <!-- Form Actions -->
-						<div class="form-group">
-							<div class="col-md-12">
-								<button type="reset" class="btn btn-default">Reset</button>
-								<button type="submit" class="btn btn-success">Save</button>
-							</div>
+		@if ($campaign->allow_duplicate_user == 1)
+			<div class="row">
+				<div class="col-md-12">
+				  <h3>ลงทะเบียนรับ Voucher</h3>
+				  <form class="form-horizontal" name = "form_register" method="post" action="" autocomplete="off">
+					<!-- CSRF Token -->
+					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+					<!-- ./ csrf token -->
+				  @if($campaign->show_firstname == 1)
+				 	<label class="control-label" for="Firstname"> Firstname</label> <font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
+								{{ Form::text('firstname',Input::old('firstname', Session::get('socialUser.isLogin') ? Session::get('socialUser.first_name') : Auth::user() -> firstname) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
+								
+				  @endif	
+				  @if($campaign->show_lastname == 1)
+				 	<label class="control-label" for="Lastname"> Lastname</label>  <font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
+								{{ Form::text('lastname',Input::old('lastname', Session::get('socialUser.isLogin') ? Session::get('socialUser.last_name') : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
+								
+					
+				  @endif
+				  @if($campaign->show_email == 1)
+				 	<label class="control-label" for="Email"> Email</label>  <font color="red">{{{ $errors->first('email', ':message') }}}</font><font color="blue">We do not support <strong>hotmail.com</strong> </font>
+								{{ Form::text('email',Input::old('email', Session::get('socialUser.isLogin') ? Session::get('socialUser.email') : Auth::user() -> email) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
+								
+					
+				  @endif	
+				  @if($campaign->show_cid == 1)
+				 	<label class="control-label" for="Cid"> Citizen ID</label>  <font color="red">{{{ $errors->first('cid', ':message') }}}</font>
+								{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
+								
+					
+				  @endif	
+				  @if($campaign->show_tel == 1)
+				 	<label class="control-label" for="Tel"> Tel</label>  <font color="red">{{{ $errors->first('tel', ':message') }}}</font>
+								{{ Form::text('tel',Input::old('tel', isset($tel) ? $tel: null) , array('class'=>'form-control', 'placeholder'=>'Tel'))}} </p>
+								
+					
+				  @endif
+				  @if($campaign->show_dob == 1)
+				 	<label class="control-label" for="dob"> Date of Birth</label>  <font color="red">{{{ $errors->first('dob', ':message') }}}</font>
+								<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true"></p>
+				 	
+				  @endif
+				   @if($campaign->opt1_name != '')
+				 	<label class="control-label" for="opt1"> {{{$campaign->opt1_name}}}</label>  <font color="red">{{{ $errors->first('opt1', ':message') }}}</font>
+								<p><input type="text" name ="opt1" placeholder="{{{$campaign->opt1_name}}}"></p>
+				 	
+				  @endif
+				  @if($campaign->opt2_name != '')
+				 	<label class="control-label" for="opt2"> {{{$campaign->opt2_name}}}</label>  <font color="red">{{{ $errors->first('opt2', ':message') }}}</font>
+								<p><input type="text" name ="opt2" placeholder="{{{$campaign->opt2_name}}}"></p>
+				 	
+				  @endif
+				  @if($campaign->opt3_name != '')
+				 	<label class="control-label" for="opt3"> {{{$campaign->opt3_name}}}</label>  <font color="red">{{{ $errors->first('opt3', ':message') }}}</font>
+								<p><input type="text" name ="opt3" placeholder="{{{$campaign->opt3_name}}}"></p>
+				 	
+				  @endif
+				  
+				  <!-- Form Actions -->
+					<div class="form-group">
+						<div class="col-md-12">
+							<button type="reset" class="btn btn-default">Reset</button>
+							<button type="submit" class="btn btn-success">Save</button>
 						</div>
-						<!-- ./ form actions -->
 					</div>
-					</form>
+					<!-- ./ form actions -->
 				</div>
-
-			@endif
+				</form>
+			</div>
+		@elseif ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
+			You already registered for this voucher!!
+			<p />
+			Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
+			<p />
 		@endif
 	</div>
 </div>
