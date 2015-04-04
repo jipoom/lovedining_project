@@ -139,7 +139,7 @@
 											@if($numUnread>0)
 												({{$numUnread}})
 											@endif
-										@endif </a>
+										@endif  </a>
 									</li>
 
 									@endforeach
