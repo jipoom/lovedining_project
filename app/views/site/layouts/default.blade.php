@@ -85,12 +85,7 @@
 								<span class="icon-bar"></span>
 							</button>
 						</div>
-						
-						<div class="slogan">
-
-							
-
-						</div>   
+ 
 						<!-- Home Contact About -->
 						<div class ="home-contact-about pull-right">
 							<br />
@@ -123,8 +118,10 @@
 						
 					</div>
 					<div class="container">
+						
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
-<div id='cssmenu'>
+							
+<div id='cssmenu' style="margin-left: 131">
 							<ul>
 
 								<!--<li{{ (Request::is('/') ? ' class="active"' : '') }}>

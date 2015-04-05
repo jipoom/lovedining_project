@@ -107,6 +107,7 @@
 					</div>
 					<div class="container">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
+							<div id='cssmenu' style="margin-left: 131">
 							<ul class="nav navbar-nav">
 								<li{{ (Request::is('admin/home*') ? ' class="selected"' : '') }}>
 									<a href="{{{ URL::to('admin/home') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
@@ -197,7 +198,7 @@
 								<a href="{{{ URL::to('admin/foodtype') }}}"><span class="glyphicon glyphicon-bookmark"></span> Food Type</a></li>	
 								</ul>
 
-</ul>
+							</ul>
 
 							<ul class="nav navbar-nav pull-right">
 											<li class="dropdown">
@@ -220,8 +221,8 @@
 												</ul>
 											</li>
 										</ul>
+							</div>
 						</div>
-
 					</div>
 				</div>
 				<!-- ./ navbar -->

@@ -124,7 +124,7 @@
 					</div>
 					<div class="container">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
-
+<div id='cssmenu' style="margin-left: 131">
 							<ul class="nav navbar-nav">
 
 								<!--<li{{ (Request::is('/') ? ' class="active"' : '') }}>
@@ -182,7 +182,7 @@
 							</ul>
 
 							<!-- ./ nav-collapse -->
-						</div>
+						</div></div>
 					</div>
 				</div>
 				<!-- ./ navbar -->
