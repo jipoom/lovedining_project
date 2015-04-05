@@ -5144,17 +5144,19 @@ ul.navbar-nav li.selected a {
 
 /*Social*/
 #social {
-	float: right;
-	padding: 15px;
+	/*float: right;
+	padding: 15px;*/
+	display: none !important;
 }
 #social_default {
 	float: right;
 	padding: 15px;
 }
 #langflag{
-	float: right;
+	display: none !important
+	/*float: right;
 	right: 0;
-	padding-top: 50px;
+	padding-top: 50px;*/
 }
 @media (min-width: 768px) {
  	#social{
@@ -5188,12 +5190,14 @@ ul.navbar-nav li.selected a {
 		padding: 15px;
 	}
 	#social{
- 		left: 3%;
- 		position:relative;
+		display: none !important
+ 		/*left: 3%;
+ 		position:relative;*/
  	}
  	#langflag{
- 		left: 3%;
- 		position:relative;
+ 		display: none !important
+ 		/*left: 3%;
+ 		position:relative;*/
  	}
  	#social_default{
  		left: 58%;

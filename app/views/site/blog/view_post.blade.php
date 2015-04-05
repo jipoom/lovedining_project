@@ -242,7 +242,7 @@
 			</div>
 			<!-- picture div -->
 			<div align="center">
-			<a href="{{{ URL::to($post->id.'/album') }}}"><img src="{{{ asset('assets/img/GalleryIcon.png') }}}" title="View full album" width="150px"></a>
+			<a href="{{{ $post->url().'/album' }}}"><img src="{{{ asset('assets/img/GalleryIcon.png') }}}" title="View full album" width="150px"></a>
 			</div>
 		</div>
 		<!-- ./ picture album -->
@@ -436,18 +436,20 @@
 			slideWidth : 300,
 			adaptiveHeight : true
 		});
-		$("area[rel^='LoveDining']").prettyPhoto();
+		$("area[rel^='LoveDining']").prettyPhoto({deeplinking:false});
 
 		$(".gallery:first a[rel^='LoveDining']").prettyPhoto({
 			animation_speed : 'normal',
 			theme : 'light_square',
 			slideshow : 3000,
-			autoplay_slideshow : false
+			autoplay_slideshow : false,
+			deeplinking:false
 		});
 		$(".gallery:gt(0) a[rel^='LoveDining']").prettyPhoto({
 			animation_speed : 'fast',
 			slideshow : 10000,
-			hideflash : true
+			hideflash : true,
+			deeplinking:false
 		});
 
 		$("#custom_content a[rel^='LoveDining']:first").prettyPhoto({

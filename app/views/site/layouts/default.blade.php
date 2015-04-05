@@ -89,10 +89,21 @@
 						<!-- Home Contact About -->
 						<div class ="home-contact-about pull-right">
 							<br />
+							<p></p>
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">HOME</font> </a></li> | 
 							<a href="{{{ URL::to('about-us') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">ABOUT US</font> </a></li> |
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">CONTACT </font></a></li>
-				
+							</p>
+							<p align="right">
+							<a href="https://www.facebook.com/LoveDinings?fref=ts"><img src={{asset('assets/img/social_blue/fb.png')}} style="width: 25px;"></a></li>
+							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/twitter.png')}} style="width: 25px;"></a></li>
+							</p>
+							<p align="right">
+							<a href="{{{ isset($page) ? URL::to('lang/TH').'/'.$page : URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/EN').'/'.$page : URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/CN').'/'.$page : URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
+						
+							</p>
 						</div>
 						
 						<!-- Social -->

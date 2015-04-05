@@ -246,7 +246,7 @@ Route::group(array('prefix' => 'message_service', 'before' => 'auth'), function(
 # Posts - Second to last set, match slug
 Route::get('review/{postId}/{slug}/{lang}', 'BlogController@getView');
 Route::post('review/{postId}/{slug}/{lang}', 'BlogController@postView');
-Route::get('{postId}/{slug}album', 'BlogController@getAlbum');
+Route::get('review/{postId}/{slug}/{lang}/album', 'BlogController@getAlbum');
 
 # deploy project
 Route::get('deploy/project', 'BlogController@getDeploy');

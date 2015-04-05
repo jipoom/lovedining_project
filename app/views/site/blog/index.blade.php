@@ -1,11 +1,13 @@
 @extends('site.layouts.default')
-	<title> @section('title')
-			@if(isset($categoryId) && $categoryId != "undefined")
-				LoveDining - {{Category::find($categoryId)->category_name}}
-			@else
-				LoveDining - Search Result
-			@endif	
-			@show </title>
+{{-- Web site Title --}}
+@section('title')
+@if(isset($categoryId) && $categoryId != "undefined")
+	LoveDining - {{Category::find($categoryId)->category_name}}
+@else
+	LoveDining - Search Result
+@endif ::
+@parent
+@stop
 @section('sort')
 
 {{-- Content --}}
