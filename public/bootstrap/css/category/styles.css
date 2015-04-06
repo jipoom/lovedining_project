@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
@@ -36,6 +36,8 @@
   background: #FFFFFF;
 
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.15), inset 0 -2px 0px #FFFFFF, inset 0 0px 0 #d4e7c4;
+  padding-right: 15px;
+  padding-left: 150px;
 }
 #cssmenu > ul > li {
   float: left;
@@ -78,6 +80,9 @@
 #cssmenu > ul > li:hover > a,
 #cssmenu > ul > li.active > a {
   color: #39B0EB;
+}
+#cssmenu > ul > li.selected > a {
+  color: #0D8FA9;
 }
 #cssmenu > ul > li:hover > a,
 #cssmenu > ul > li > a:hover {
@@ -129,6 +134,8 @@
 }
 #cssmenu.small-screen {
   width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 #cssmenu.small-screen > ul,
 #cssmenu.small-screen.align-center > ul {
