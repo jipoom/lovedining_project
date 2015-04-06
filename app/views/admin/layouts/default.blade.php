@@ -107,7 +107,7 @@
 					</div>
 					<div class="container">
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
-							<div id='cssmenu' style="margin-left: 131">
+							
 							<ul class="nav navbar-nav">
 								<li{{ (Request::is('admin/home*') ? ' class="selected"' : '') }}>
 									<a href="{{{ URL::to('admin/home') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
@@ -221,7 +221,7 @@
 												</ul>
 											</li>
 										</ul>
-							</div>
+							
 						</div>
 					</div>
 				</div>

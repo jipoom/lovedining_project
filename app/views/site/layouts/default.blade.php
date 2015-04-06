@@ -182,7 +182,7 @@
 										</form>
 									</li>
 							</ul>
-							
+							</div>
 
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
@@ -229,7 +229,7 @@
 							</ul>
 
 							<!-- ./ nav-collapse -->
-						</div>
+						
 						</div>
 					</div>
 				</div>

@@ -5189,6 +5189,10 @@ ul.navbar-nav li.selected a {
 		top: -27px;
 		padding: 15px;
 	}
+	#tfnewsearch{
+ 		
+ 		display: none !important
+ 	}
 	#social{
 		display: none !important
  		/*left: 3%;
