@@ -145,7 +145,7 @@
 											@if (Auth::check())
 											<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
 											@if($numUnread>0)
-												({{$numUnread}})
+												<span class="badge">{{$numUnread}}</span>
 											@endif
 										@endif  </a>
 									</li>
