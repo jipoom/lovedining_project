@@ -132,7 +132,7 @@
 						
 						<div class="collapse navbar-collapse navbar-ex1-collapse">
 							
-					<div id='cssmenu' style="">
+					<div id="cssmenu">
 							<ul>
 
 								<!--<li{{ (Request::is('/') ? ' class="active"' : '') }}>

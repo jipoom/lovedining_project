@@ -2754,11 +2754,11 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 	
 	padding: 1px;
 	margin-left: 15px;
-	
+	margin-top: 7px;
 	font-size: 12.5px;
 	background-color: #F5F5F5;
 	border: 1px solid rgba(0,0,0,.15);
-	border-radius: 10px;
+	border-radius: 8px;
 	background-clip: padding-box -moz-appearance : none; /* Removes Default Firefox style*/
 	text-indent: 0.01px; /* Removes default arrow from firefox*/
 	text-overflow: ""; /*Removes default arrow from firefox*/ /*My custom style for fonts*/
@@ -5317,4 +5317,10 @@ ul.navbar-nav li.selected a {
 }
 .ribbon-green:after {
   right: 0;
-}​
+}
+
+#tabs31{position:relative;display:block;height:40px;font-size:14px;background:transparent url(images/bgOFF1.gif) repeat-x top left;}
+#tabs31 ul{margin:0;padding:0;list-style-type:none;width:auto;}
+#tabs31 ul li{display:block;float:left;margin:0;}
+#tabs31 ul li a{display:block;float:left;color:#666;text-decoration:none;padding:11px 10px 0 10px;height:35px;background:transparent url(images/bgDIVIDER1.gif) no-repeat top right;}
+#tabs31 ul li a:hover,#tabs31 ul li a.current{color:#0D8FA9;background:#fff url(images/bgON1.gif) no-repeat top right;border-bottom:4px solid #0D8FA9}​
