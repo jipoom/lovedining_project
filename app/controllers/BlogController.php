@@ -436,7 +436,10 @@ class BlogController extends BaseController {
 			$userCampaign->opt3 = Input::get('opt3');
 			if($userCampaign->save())
             {
-                return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('success', 'ลงทะเบียนรับ Voucher เสร็จสมบูรณ์');
+                //return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('success', 'ลงทะเบียนรับ Voucher เสร็จสมบูรณ์');
+				// Send email to user
+				$title = "Your Voucher";
+				return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
             }
 
             return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
