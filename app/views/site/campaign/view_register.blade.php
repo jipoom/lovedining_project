@@ -24,15 +24,32 @@
 @stop
 
 @section('styles')
-	<style>
+<style>
 	.col-md-9 img {
 		max-width: 100%;
 		height: auto;
 		width: auto\9; /* ie8 */
 	}
+	ul.bxslider {
+		margin: 0;
+		padding: 0;
+	}
+	.bx-wrapper img {
+    margin: 0 auto;
+	}
+	img.resize{
+    width:1100px; /* you can use % */
+    height: auto;
+	}	
+	img.hl{
+    width:300px; /* you can use % */
+    height: auto;
+	}
+}
 </style>
 <link rel="stylesheet" href="{{asset('assets/css/preettyphoto/prettyPhoto.css')}}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="{{asset('bootstrap/css/image.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/css/jquery.bxslider.css')}}" rel="stylesheet" />
 <style>
 	ul.bxslider {
@@ -53,10 +70,47 @@
 
 {{-- Content --}}
 @section('content')
-<h3>รายละเอียด Campaign</h3>
-<div class="col-md-3 pull-right">
-	<div class="movieinfo" >
-		<p>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- Post Title -->
+		<!-- ./ post title -->
+
+		<!-- Post Content -->
+		<ul class="bxslider" style="margin-bottom: 0px; padding-bottom: 0px;">
+			@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+					<?php
+					$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->post->album_name.'/banner/',true);
+					?>
+						<div>																																	
+						<a href="{{$campaign->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->post->album_name.'/banner/'.$banner[0]}}" align="middle" /></a>		
+						</div>
+				@else
+						@if($campaign->hotel_logo!="")			
+								<a href="{{{ $campaign->url() }}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt=""></a>
+						@else
+								<a href="{{{ $campaign->url() }}}"></a>
+						@endif
+				@endif
+	
+		</ul>
+		<div class="row">
+			
+			<div class="col-md-9">
+				<h4>รายละเอียดโครงการ</h4>
+				<p>
+					{{ String::tidy($campaign->description) }}
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			
+			<div class="col-md-9">
+				<h4>ระยะเวลาโครงการ</h4>
+				<div class="col-md-6  pull-left">
+				
+				<p>
 				<p><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->start_date }}}</p>
 				<p><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->expiry_date }}}</p>
 
@@ -72,7 +126,8 @@
 						<font color="red">*{{$campaign->remark2}}</font>
 					</p>
 				@endif
-				
+				</div>
+				<div class="col-md-6 pull-right movieinfo" style="padding: 5px; margin: 0px" >
 				<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name, true); ?>
 
 					<!-- picture div -->
@@ -88,45 +143,12 @@
 							@endforeach
 						</ul>
 					</div>
-					<p>
+				</div>	
+					<div class="btn-default">
 					<a href="{{{ Post::find($campaign->post_id)->url() }}}">Review</a>
-					
-					
-					
-				</p>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-8">
-		<!-- Post Title -->
-		<!-- ./ post title -->
-
-		<!-- Post Content -->
-
-		<div class="row">
-			<div class="col-md-6">
-			@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
-				<?php
-				$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->post->album_name.'/banner/',true);
-				?>
-					<div>																																	
-					<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->post->album_name.'/banner/'.$banner[0]}}" align="middle" /></a>		
 					</div>
-			@else
-					@if($campaign->hotel_logo!="")			
-							<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt=""></a>
-					@else
-							<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-					@endif
-			@endif
-			
-			
 			</div>
-			<div class="col-md-6">
-				<p>
-					{{ String::tidy($campaign->description) }}
-				</p>
-			</div>
+
 		</div>
 					
 				
@@ -178,7 +200,6 @@
 		@endif
 	</div>
 </div>
-
 
 @stop
 
