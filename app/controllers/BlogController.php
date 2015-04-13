@@ -447,4 +447,24 @@ class BlogController extends BaseController {
 		}
 		return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
 	}
+	
+	public function getDownload($campaignId,$userCampaignId){
+		//Session::put('Lang',$lang);	
+		$userCampaign= UserCampaign::find($userCampaignId);
+		$campaign= Campaign::find($campaignId);
+		return View::make('site/campaign/download',compact('campaign','userCampaign'));
+	}
+	public function streamPDF($userCampaignId)
+    {
+        $userCampaign= UserCampaign::find($userCampaignId);	
+        if($userCampaign->user_id == Auth::id()){
+        	$filename = $userCampaignId.'.pdf';
+			$path = storage_path().DIRECTORY_SEPARATOR.$filename;		
+			return Response::make(file_get_contents($path), 200, 
+			array('Content-Type' => 'application/pdf','Content-Disposition' => 'inline; '.$filename));
+        }
+		return null;	
+        
+    }
+
 }

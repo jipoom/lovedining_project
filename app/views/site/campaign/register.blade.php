@@ -69,7 +69,7 @@
 			<div class="row">
 				<div class="col-md-12">
 				  <h3>ลงทะเบียนรับ Voucher</h3>
-				  <form class="form-horizontal" name = "form_register" method="post" action="" autocomplete="off">
+				  <form class="form-horizontal" name = "form_register" method="post" action="" autocomplete="off" >
 					<!-- CSRF Token -->
 					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 					<!-- ./ csrf token -->
@@ -109,17 +109,17 @@
 				  @endif
 				   @if($campaign->opt1_name != '')
 				 	<label class="control-label" for="opt1"> {{{$campaign->opt1_name}}}</label>  <font color="red">{{{ $errors->first('opt1', ':message') }}}</font>
-								<p><input type="text" name ="opt1" placeholder="{{{$campaign->opt1_name}}}"></p>
+								{{ Form::text('opt1',Input::old('opt1', isset($opt1) ? $opt1: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt1_name))}}</p>
 				 	
 				  @endif
 				  @if($campaign->opt2_name != '')
 				 	<label class="control-label" for="opt2"> {{{$campaign->opt2_name}}}</label>  <font color="red">{{{ $errors->first('opt2', ':message') }}}</font>
-								<p><input type="text" name ="opt2" placeholder="{{{$campaign->opt2_name}}}"></p>
+								{{ Form::text('opt2',Input::old('opt2', isset($opt2) ? $opt2: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt2_name))}}</p>
 				 	
 				  @endif
 				  @if($campaign->opt3_name != '')
 				 	<label class="control-label" for="opt3"> {{{$campaign->opt3_name}}}</label>  <font color="red">{{{ $errors->first('opt3', ':message') }}}</font>
-								<p><input type="text" name ="opt3" placeholder="{{{$campaign->opt3_name}}}"></p>
+								{{ Form::text('opt3',Input::old('opt3', isset($opt3) ? $opt3: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt3_name))}}</p>
 				 	
 				  @endif
 				  
@@ -181,19 +181,19 @@
 								<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true"></p>
 				 	
 				  @endif
-				   @if($campaign->opt1_name != '')
+				  @if($campaign->opt1_name != '')
 				 	<label class="control-label" for="opt1"> {{{$campaign->opt1_name}}}</label>  <font color="red">{{{ $errors->first('opt1', ':message') }}}</font>
-								<p><input type="text" name ="opt1" placeholder="{{{$campaign->opt1_name}}}"></p>
+								{{ Form::text('opt1',Input::old('opt1', isset($opt1) ? $opt1: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt1_name))}}</p>
 				 	
 				  @endif
 				  @if($campaign->opt2_name != '')
 				 	<label class="control-label" for="opt2"> {{{$campaign->opt2_name}}}</label>  <font color="red">{{{ $errors->first('opt2', ':message') }}}</font>
-								<p><input type="text" name ="opt2" placeholder="{{{$campaign->opt2_name}}}"></p>
+								{{ Form::text('opt2',Input::old('opt2', isset($opt2) ? $opt2: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt2_name))}}</p>
 				 	
 				  @endif
 				  @if($campaign->opt3_name != '')
 				 	<label class="control-label" for="opt3"> {{{$campaign->opt3_name}}}</label>  <font color="red">{{{ $errors->first('opt3', ':message') }}}</font>
-								<p><input type="text" name ="opt3" placeholder="{{{$campaign->opt3_name}}}"></p>
+								{{ Form::text('opt3',Input::old('opt3', isset($opt3) ? $opt3: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt3_name))}}</p>
 				 	
 				  @endif
 				  

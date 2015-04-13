@@ -96,8 +96,7 @@
 			<h3>
 				{{ $title }}
 				<div class="pull-right">
-					<a href="{{{ URL::to('campaign/print') }}}" id="print"><button class="btn btn-default btn-small"><span class="glyphicon glyphicon-print"></span> Print</button></a>
-					<a href="{{{ URL::to('campaign/download') }}}" id="download"><button class="btn btn-default btn-small"><span class="glyphicon glyphicon-cloud-download"></span> Download</button></a>
+					<a href="{{{ URL::to('campaign/download').'/'.$campaign->id.'/'.$userCampaign->id }}}" id="download"><button class="btn btn-default btn-small"><span class="glyphicon glyphicon-cloud-download"></span> Download</button></a>
 				</div>
 			</h3>
 		</div>
