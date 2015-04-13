@@ -179,6 +179,12 @@
 					<p />
 					Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
 					<p />
+				@else
+					<div class="row">
+						<div class="col-md-12">
+						  <a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-default btn-xs">กดรับสิทธิ์</a>
+						</div> 
+					</div>
 				@endif
 
 			@elseif(Session::get('socialUser.isLogin'))
