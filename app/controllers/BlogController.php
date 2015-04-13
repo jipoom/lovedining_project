@@ -422,7 +422,7 @@ class BlogController extends BaseController {
 			if(Session::get('socialUser.isLogin'))
 				$userCampaign->user_id = 0;
 			else
-				$userCampaign->user_id = Auth::user() -> id;
+			$userCampaign->user_id = Auth::user() -> id;
 			$userCampaign->campaign_id = $campaignId;
 			$userCampaign->user_firstname = Input::get('firstname');
 			$userCampaign->user_lastname = Input::get('lastname');
@@ -439,6 +439,15 @@ class BlogController extends BaseController {
                 //return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('success', 'ลงทะเบียนรับ Voucher เสร็จสมบูรณ์');
 				// Send email to user
 				$title = "Your Voucher";
+				$subject = $title." for ".$campaign->name;
+				$data['campaign'] = serialize($campaign);
+				$data['userCampaign'] = serialize($userCampaign);
+				$data['title'] = $title;
+				Mail::queue('site.campaign.email', $data, function($message) use ($userCampaign,$subject)
+				{
+				  $message->to($userCampaign->user_email)
+				          ->subject($subject);
+				});
 				return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
             }
 

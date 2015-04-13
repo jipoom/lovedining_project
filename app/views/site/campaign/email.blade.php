@@ -1,12 +1,10 @@
-<?php
-require_once(public_path().'/mpdf60/mpdf.php');
-
-?>
-@extends('site.layouts.default')
+<?php $campaign = unserialize($campaign); ?>
+<?php $userCampaign = unserialize($userCampaign); ?>
+@extends('site.layouts.modal_voucher')
 
 {{-- Content --}}
 @section('content')
-<?php ob_start(); ?>
+
 <img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="125" class ="logo">
 @if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 	<?php
@@ -49,26 +47,7 @@ Code: {{$userCampaign->campaign_code}}
 
 Date expired: {{$campaign->expiry_date}}
 
-<?Php
-		$html = ob_get_contents();
-		ob_end_clean();
-		$pdf = new mPDF('th', 'A4-L', '0', 'THSaraban');
-		
-		$pdf->SetDisplayMode('fullpage');
-		$pdf->WriteHTML($html, 2);
-		$pdf->Output(storage_path().'/'.$userCampaign->id.'.pdf','F');?>
-<div id="show_file"><p><a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank">เปิด Voucher</a></p></div>
 @stop
 @section('scripts')
-<script>
-$( document ).ready(function() {
-	$("#show_file").hide();
-setTimeout(function(){showDownload()},1000);
-});
-function showDownload(){
-	alert('สร้างไฟล์  PDF สำเร็จ');
-	$("#title").text("สร้างไฟล์  PDF สำเร็จ");
-	$("#show_file").show();
-}
-</script>
+
 @stop
