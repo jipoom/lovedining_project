@@ -171,6 +171,7 @@
 				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
 			</div>
 		</div>
+		<br />
 		@elseif ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
 		You already registered for this voucher!!
 		<p />
