@@ -106,7 +106,7 @@
 						@if($campaign->show_dob == 1)
 						<label class="control-label" for="dob"> Date of Birth</label><font color="red">{{{ $errors->first('dob', ':message') }}}</font>
 						<p>
-							<input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true">
+							<input type="text" name ="dob" id="datepicker" class = "form-control-static" placeholder="MM/DD/YYYY" readonly="true">
 						</p>
 
 						@endif
