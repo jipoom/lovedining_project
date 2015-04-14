@@ -107,9 +107,6 @@
 
 			<div class="col-md-9">
 				<h4>ระยะเวลาโครงการ</h4>
-				<div class="col-md-6  pull-left">
-
-					<p>
 					<p>
 						<span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
 						{{{ $campaign->start_date }}}
@@ -131,10 +128,9 @@
 						<font color="red">*{{$campaign->remark2}}</font>
 					</p>
 					@endif
-				</div>
+				<h4>รูปรีวิว</h4>
+					<div class="col-lg-6  movieinfo" style="padding: 5px 0px 4px 10px;  margin: 0px" >
 
-				<div class="col-md-4 pull-right">
-					<div class="movieinfo" style="padding: 5px 0px 4px 10px;  margin: 0px" >
 						<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name, true); ?>
 
 						<!-- picture div -->
@@ -151,9 +147,11 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+
 			</div>
 		</div>
+		<br />
+		<br />
 		<div class="btn btn-default">
 			<a href="{{{ Post::find($campaign->post_id)->url() }}}">click here to see a Review</a>
 		</div>
