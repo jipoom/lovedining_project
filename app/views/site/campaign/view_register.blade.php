@@ -167,7 +167,7 @@
 		<br />
 		@else
 		@if(Auth::check())
-		@if($campaign->allow_duplicate_user == 1)
+		@if ($campaign->allow_duplicate_user == 1 || ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) == 0))
 		<div class="row">
 			<div class="col-md-12">
 				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
@@ -178,19 +178,13 @@
 		<p />
 		Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
 		<p />
-		@else
-		<div class="row">
-			<div class="col-md-12">
-				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
-			</div>
-		</div>
 		@endif
 
 		@elseif(Session::get('socialUser.isLogin'))
 		@if($campaign->allow_duplicate_user == 1)
 		<div class="row">
 			<div class="col-md-12">
-				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-default btn-xs">กดรับสิทธิ์</a>
+				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
 			</div>
 		</div>
 		@else
