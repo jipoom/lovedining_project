@@ -68,11 +68,14 @@
 		@if ($campaign->allow_duplicate_user == 1)
 			<div class="row">
 				<div class="col-md-12">
-				  <h3>ลงทะเบียนรับ Voucher</h3>
+				  <h4>ลงทะเบียนรับ Voucher</h4>
+				
 				  <form class="form-horizontal" name = "form_register" method="post" action="" autocomplete="off" >
+				  
 					<!-- CSRF Token -->
 					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 					<!-- ./ csrf token -->
+					  
 				  @if($campaign->show_firstname == 1)
 				 	<label class="control-label" for="Firstname"> Firstname</label> <font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
 								{{ Form::text('firstname',Input::old('firstname', Session::get('socialUser.isLogin') ? Session::get('socialUser.first_name') : Auth::user() -> firstname) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
@@ -115,7 +118,7 @@
 				  @if($campaign->opt2_name != '')
 				 	<label class="control-label" for="opt2"> {{{$campaign->opt2_name}}}</label>  <font color="red">{{{ $errors->first('opt2', ':message') }}}</font>
 								{{ Form::text('opt2',Input::old('opt2', isset($opt2) ? $opt2: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt2_name))}}</p>
-				 	
+
 				  @endif
 				  @if($campaign->opt3_name != '')
 				 	<label class="control-label" for="opt3"> {{{$campaign->opt3_name}}}</label>  <font color="red">{{{ $errors->first('opt3', ':message') }}}</font>
@@ -142,19 +145,23 @@
 		@else
 			<div class="row">
 				<div class="col-md-12">
-				  <h3>ลงทะเบียนรับ Voucher</h3>
+				  <h4>ลงทะเบียนรับ Voucher</h4>
+				  
 				  <form class="form-horizontal" name = "form_register" method="post" action="" autocomplete="off">
 					<!-- CSRF Token -->
 					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 					<!-- ./ csrf token -->
+				
+				<!-- Left Column -->
+				  <div class="col-md-6 pull-left">
 				  @if($campaign->show_firstname == 1)
 				 	<label class="control-label" for="Firstname"> Firstname</label> <font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
 								{{ Form::text('firstname',Input::old('firstname', Session::get('socialUser.isLogin') ? Session::get('socialUser.first_name') : Auth::user() -> firstname) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
 								
 				  @endif	
-				  @if($campaign->show_lastname == 1)
-				 	<label class="control-label" for="Lastname"> Lastname</label>  <font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
-								{{ Form::text('lastname',Input::old('lastname', Session::get('socialUser.isLogin') ? Session::get('socialUser.last_name') : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
+				  @if($campaign->show_cid == 1)
+				 	<label class="control-label" for="Cid"> Citizen ID</label>  <font color="red">{{{ $errors->first('cid', ':message') }}}</font>
+								{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
 								
 					
 				  @endif
@@ -163,16 +170,15 @@
 								{{ Form::text('email',Input::old('email', Session::get('socialUser.isLogin') ? Session::get('socialUser.email') : Auth::user() -> email) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
 								
 					
-				  @endif	
-				  @if($campaign->show_cid == 1)
-				 	<label class="control-label" for="Cid"> Citizen ID</label>  <font color="red">{{{ $errors->first('cid', ':message') }}}</font>
-								{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
-								
-					
-				  @endif	
-				  @if($campaign->show_tel == 1)
-				 	<label class="control-label" for="Tel"> Tel</label>  <font color="red">{{{ $errors->first('tel', ':message') }}}</font>
-								{{ Form::text('tel',Input::old('tel', isset($tel) ? $tel: null) , array('class'=>'form-control', 'placeholder'=>'Tel'))}} </p>
+				  @endif
+				  </div>
+				  <!-- ./ Left Column -->
+				  
+				  <!-- Right Column -->
+				  <div class="col-md-6 pull-right">
+				  @if($campaign->show_lastname == 1)
+				 	<label class="control-label" for="Lastname"> Lastname</label>  <font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
+								{{ Form::text('lastname',Input::old('lastname', Session::get('socialUser.isLogin') ? Session::get('socialUser.last_name') : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
 								
 					
 				  @endif
@@ -181,6 +187,13 @@
 								<p><input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true"></p>
 				 	
 				  @endif
+				  @if($campaign->show_tel == 1)
+				 	<label class="control-label" for="Tel"> Tel</label>  <font color="red">{{{ $errors->first('tel', ':message') }}}</font>
+								{{ Form::text('tel',Input::old('tel', isset($tel) ? $tel: null) , array('class'=>'form-control', 'placeholder'=>'Tel'))}} </p>
+								
+					
+				  @endif
+				  
 				  @if($campaign->opt1_name != '')
 				 	<label class="control-label" for="opt1"> {{{$campaign->opt1_name}}}</label>  <font color="red">{{{ $errors->first('opt1', ':message') }}}</font>
 								{{ Form::text('opt1',Input::old('opt1', isset($opt1) ? $opt1: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt1_name))}}</p>
@@ -196,13 +209,14 @@
 								{{ Form::text('opt3',Input::old('opt3', isset($opt3) ? $opt3: null) , array('class'=>'form-control', 'placeholder'=>$campaign->opt3_name))}}</p>
 				 	
 				  @endif
-				  
+				  </div>
+				  <!-- ./ Right Column -->
 				  <!-- Form Actions -->
-					<div class="form-group">
-						<div class="col-md-12">
+					<div class="form-group pull-right">
+						
 							<button type="reset" class="btn btn-default">Reset</button>
 							<button type="submit" class="btn btn-success">Save</button>
-						</div>
+						
 					</div>
 					<!-- ./ form actions -->
 				</div>
