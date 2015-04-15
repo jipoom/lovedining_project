@@ -175,7 +175,8 @@
 		@elseif ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
 		You already registered for this voucher!!
 		<p />
-		Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
+		<?php $userCampaign = UserCampaign::where('user_id','=',Auth::id())->where('campaign_id','=',$campaign->id)->first()?>
+		Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
 		<p />
 		@endif
 
