@@ -8,7 +8,8 @@ require_once(public_path().'/mpdf60/mpdf.php');
 @section('content')
 <?php ob_start(); ?>
 <div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: auto 30px 30px 30px; padding: auto 30px 30px 30px; background-color: #eeeeff;" align="center;">
-<p align="right;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" class ="logo">
+<div class="pull-left"><h1 style="">VOUCHER</h1></div>
+<p align="right"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" class ="logo">
 
 @if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 	<?php
@@ -23,6 +24,7 @@ require_once(public_path().'/mpdf60/mpdf.php');
 				<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt="" height="150"></a>
 		@endif
 @endif
+
 <div style="font-family: Shruti; font-style: oblique; color: aaaaff;">
 @if($campaign->show_firstname == 1)
 	<p>
