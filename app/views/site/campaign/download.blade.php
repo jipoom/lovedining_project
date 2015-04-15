@@ -3,10 +3,13 @@ require_once(public_path().'/mpdf60/mpdf.php');
 
 ?>
 @extends('site.layouts.default')
-
+<?php ob_start(); ?>
+@section('styles')
+<!-- put style here -->
+@stop
 {{-- Content --}}
 @section('content')
-<?php ob_start(); ?>
+
 <div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: auto 30px 30px 30px; padding: auto 30px 30px 30px; background-color: #eeeeff;" align="center;">
 <div class="pull-left"><h1 style="">VOUCHER</h1></div>
 <p align="right"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" class ="logo">
@@ -60,18 +63,18 @@ Date expired: {{$campaign->expiry_date}}
 		$pdf->SetDisplayMode('fullpage');
 		$pdf->WriteHTML($html, 2);
 		$pdf->Output(storage_path().'/'.$userCampaign->id.'.pdf','F');?>
-<div class="btn btn-default" style="margin: auto;"><a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank">เปิด Voucher</a></div>
+<div class="btn btn-default" id = "open_pdf" style="margin: auto;"><a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank">เปิด Voucher</a></div>
 @stop
 @section('scripts')
 <script>
 $( document ).ready(function() {
-	$("#show_file").hide();
+	$("#open_pdf").hide();
 setTimeout(function(){showDownload()},1000);
 });
 function showDownload(){
 	alert('สร้างไฟล์  PDF สำเร็จ');
 	$("#title").text("สร้างไฟล์  PDF สำเร็จ");
-	$("#show_file").show();
+	$("#open_pdf").show();
 }
 </script>
 @stop
