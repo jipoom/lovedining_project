@@ -443,11 +443,11 @@ class BlogController extends BaseController {
 				$data['campaign'] = serialize($campaign);
 				$data['userCampaign'] = serialize($userCampaign);
 				$data['title'] = $title;
-				Mail::queue('site.campaign.email', $data, function($message) use ($userCampaign,$subject)
+				/*Mail::queue('site.campaign.email', $data, function($message) use ($userCampaign,$subject)
 				{
 				  $message->to($userCampaign->user_email)
 				          ->subject($subject);
-				});
+				});*/
 				return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
             }
 
