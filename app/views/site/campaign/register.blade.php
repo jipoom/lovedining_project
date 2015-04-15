@@ -76,17 +76,18 @@
 					<!-- ./ csrf token -->
 
 					<!-- Left Column -->
-					<div class="col-md-6 pull-left">
+					<div class="col-md-6">
 						@if($campaign->show_firstname == 1)
 						<label class="control-label" for="Firstname"> Firstname</label><font color="red">{{{ $errors->first('firstname', ':message') }}}</font>
 						{{ Form::text('firstname',Input::old('firstname', Session::get('socialUser.isLogin') ? Session::get('socialUser.first_name') : Auth::user() -> firstname) , array('class'=>'form-control', 'placeholder'=>'Fistname'))}} </p>
 
 						@endif
-						@if($campaign->show_cid == 1)
-						<label class="control-label" for="Cid"> Citizen ID</label><font color="red">{{{ $errors->first('cid', ':message') }}}</font>
-						{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
+						@if($campaign->show_lastname == 1)
+						<label class="control-label" for="Lastname"> Lastname</label><font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
+						{{ Form::text('lastname',Input::old('lastname', Session::get('socialUser.isLogin') ? Session::get('socialUser.last_name') : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
 
 						@endif
+						
 						@if($campaign->show_email == 1)
 						<label class="control-label" for="Email"> Email</label><font color="red">{{{ $errors->first('email', ':message') }}}</font><font color="blue">We do not support <strong>hotmail.com</strong> </font>
 						{{ Form::text('email',Input::old('email', Session::get('socialUser.isLogin') ? Session::get('socialUser.email') : Auth::user() -> email) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
@@ -96,16 +97,16 @@
 					<!-- ./ Left Column -->
 
 					<!-- Right Column -->
-					<div class="col-md-6 pull-right">
-						@if($campaign->show_lastname == 1)
-						<label class="control-label" for="Lastname"> Lastname</label><font color="red">{{{ $errors->first('lastname', ':message') }}}</font>
-						{{ Form::text('lastname',Input::old('lastname', Session::get('socialUser.isLogin') ? Session::get('socialUser.last_name') : Auth::user() -> lastname) , array('class'=>'form-control', 'placeholder'=>'Lastname'))}} </p>
+					<div class="col-md-6">
+						@if($campaign->show_cid == 1)
+						<label class="control-label" for="Cid"> Citizen ID</label><font color="red">{{{ $errors->first('cid', ':message') }}}</font>
+						{{ Form::text('cid',Input::old('cid', isset($cid) ? $cid : null) , array('class'=>'form-control', 'placeholder'=>'ID Card'))}} </p>
 
 						@endif
 						@if($campaign->show_dob == 1)
 						<label class="control-label" for="dob"> Date of Birth</label><font color="red">{{{ $errors->first('dob', ':message') }}}</font>
 						<p>
-							<input type="text" name ="dob" id="datepicker" class = "" placeholder="MM/DD/YYYY" readonly="true">
+							<input type="text" name ="dob" id="datepicker" class = "form-control-static" placeholder="MM/DD/YYYY" readonly="true">
 						</p>
 
 						@endif
