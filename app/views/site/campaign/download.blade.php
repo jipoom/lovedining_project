@@ -3,16 +3,16 @@ require_once(public_path().'/mpdf60/mpdf.php');
 
 ?>
 @extends('site.layouts.default')
-<?php ob_start(); ?>
+
 @section('styles')
 <!-- put style here -->
 @stop
 {{-- Content --}}
 @section('content')
-
+<?php ob_start(); ?>
 <div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: auto 30px 30px 30px; padding: auto 30px 30px 30px; background-color: #eeeeff;" align="center;">
-<div class="pull-left"><h1 style="">VOUCHER</h1></div>
-<p align="right"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" class ="logo">
+<div style="float: left; width: 28%;"><h1 style="">VOUCHER</h1></div>
+<div style="float: right; width: 28%;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" class ="logo">
 
 @if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 	<?php
@@ -27,7 +27,8 @@ require_once(public_path().'/mpdf60/mpdf.php');
 				<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt="" height="150"></a>
 		@endif
 @endif
-
+</div>
+<p></p>
 <div style="font-family: Shruti; font-style: oblique; color: aaaaff;">
 @if($campaign->show_firstname == 1)
 	<p>
@@ -61,9 +62,13 @@ Date expired: {{$campaign->expiry_date}}
 		ob_end_clean();
 		$pdf = new mPDF('th', 'A4-L', '0', 'THSaraban');
 		$pdf->SetDisplayMode('fullpage');
+		//$stylesheet = '<style>'.file_get_contents(asset('bootstrap/css/bootstrap.min.css')).'</style>';
+		//$pdf->WriteHTML($stylesheet, 1);
 		$pdf->WriteHTML($html, 2);
 		$pdf->Output(storage_path().'/'.$userCampaign->id.'.pdf','F');?>
-<div class="btn btn-default" id = "open_pdf" style="margin: auto;"><a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank">เปิด Voucher</a></div>
+<p>
+	<div class="btn btn-default" id = "open_pdf" style="margin: auto;"><a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank">เปิด Voucher</a></div>
+</p>
 @stop
 @section('scripts')
 <script>
