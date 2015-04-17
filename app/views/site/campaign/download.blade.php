@@ -11,9 +11,9 @@ require_once(public_path().'/mpdf60/mpdf.php');
 @section('content')
 <?php ob_start(); ?>
 <div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: auto 30px 30px 30px; padding: auto 30px 30px 30px; background-color: #eeeeff;" align="center;">
-<div style="float: left; width: 28%;"><h1 style="">VOUCHER</h1></div>
-<div style="float: right; width: 28%;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" class ="logo">
-
+<div style="float: left; width: 28%; margin-top: 1cm;"><h1 style="">VOUCHER</h1></div>
+<div style="float: right; width: 28%;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" class ="logo"></div>
+<div style="float: right; width: 28%;">
 @if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 	<?php
 	$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/',true);
@@ -28,7 +28,7 @@ require_once(public_path().'/mpdf60/mpdf.php');
 		@endif
 @endif
 </div>
-<p></p>
+<div style="clear: both; margin: 0pt; padding: 0pt; ">
 <div style="font-family: Shruti; font-style: oblique; color: aaaaff;">
 @if($campaign->show_firstname == 1)
 	<p>
