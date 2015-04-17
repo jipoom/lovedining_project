@@ -157,45 +157,54 @@
 		</div>
 		<hr />
 		@if ( ! (Auth::check()  || Session::get('socialUser.isLogin')))
-		You need to be logged in to register for this Voucher.
-		<br />
-		<br />
-		Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
-		<br />
-		<br />
+			You need to be logged in to register for this Voucher.
+			<br />
+			<br />
+			Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
+			<br />
+			<br />
 		@else
-		@if(Auth::check())
-		@if ($campaign->allow_duplicate_user == 1 || ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) == 0))
-		<div class="row">
-			<div class="col-md-12">
-				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
-			</div>
-		</div>
-		<br />
-		@elseif ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
-		You already registered for this voucher!!
-		<p />
-		<?php $userCampaign = UserCampaign::where('user_id','=',Auth::id())->where('campaign_id','=',$campaign->id)->first()?>
-		Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
-		<p />
-		@endif
-
-		@elseif(Session::get('socialUser.isLogin'))
-		@if($campaign->allow_duplicate_user == 1)
-		<div class="row">
-			<div class="col-md-12">
-				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
-			</div>
-		</div>
-		@else
-		You need to be logged in to the website to register for this Voucher.
-		<br />
-		<br />
-		Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
-		<br />
-		<br />
-		@endif
-		@endif
+			@if(Auth::check() || Session::get('socialUser.isLogin'))
+				@if ($campaign->allow_duplicate_user == 1)
+				<div class="row">
+					<div class="col-md-12">
+						<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
+					</div>
+				</div>
+				<br />
+				@elseif(Auth::check())
+					@if (count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
+						You already registered for this voucher!!
+						<p />
+						<?php $userCampaign = UserCampaign::where('user_id','=',Auth::id())->where('campaign_id','=',$campaign->id)->first()?>
+						Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
+						<p />
+					@else
+						<div class="row">
+							<div class="col-md-12">
+								<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
+							</div>
+						</div>
+						<br />
+					@endif
+		
+				@elseif(Session::get('socialUser.isLogin'))
+					@if (count(UserCampaign::where('campaign_id','=',$campaign->id)->where('social_id','=',Session::get('socialUser.id'))->first()) > 0)
+						You already registered for this voucher!!
+						<p />
+						<?php $userCampaign = UserCampaign::where('social_id','=',Session::get('socialUser.id'))->where('campaign_id','=',$campaign->id)->first()?>
+						Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
+						<p />
+					@else
+						<div class="row">
+							<div class="col-md-12">
+								<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
+							</div>
+						</div>
+						<br />
+					@endif
+				@endif
+			@endif
 		@endif
 	</div>
 </div>

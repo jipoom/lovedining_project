@@ -420,7 +420,10 @@ class BlogController extends BaseController {
     		$hex   = bin2hex($bytes);	
 			$userCampaign = new UserCampaign;
 			if(Session::get('socialUser.isLogin'))
+			{
 				$userCampaign->user_id = 0;
+				$userCampaign->social_id = Session::get('socialUser.id');
+			}
 			else
 			$userCampaign->user_id = Auth::user() -> id;
 			$userCampaign->campaign_id = $campaignId;
@@ -466,7 +469,14 @@ class BlogController extends BaseController {
 	public function streamPDF($userCampaignId)
     {
         $userCampaign= UserCampaign::find($userCampaignId);	
-        if($userCampaign->user_id == Auth::id()){
+        if($userCampaign->social_id == Session::get('socialUser.id'))
+		{
+			$filename = $userCampaignId.'.pdf';
+			$path = storage_path().DIRECTORY_SEPARATOR.$filename;		
+			return Response::make(file_get_contents($path), 200, 
+			array('Content-Type' => 'application/pdf','Content-Disposition' => 'inline; '.$filename));
+		}
+		else if($userCampaign->user_id == Auth::id()){
         	$filename = $userCampaignId.'.pdf';
 			$path = storage_path().DIRECTORY_SEPARATOR.$filename;		
 			return Response::make(file_get_contents($path), 200, 
