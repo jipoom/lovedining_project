@@ -358,7 +358,11 @@ class BlogController extends BaseController {
 		Session::forget('catName');
 		$campaigns = Campaign::active()->orderBy('rank')->get();
 		$home = Campaign::active()->where('is_home','=',1)->get();
-		return View::make('site/campaign/index',compact('campaigns','page','home'));
+		if(Session::get('socialUser.isLogin'))
+			$campaignUserRead = CampaignUserRead::where('social_id','=',Session::get('socialUser.id'))->get();
+		else if(Auth::check())
+			$campaignUserRead = CampaignUserRead::where('user_id','=',Auth::id())->get();
+		return View::make('site/campaign/index',compact('campaigns','page','home','campaignUserRead'));
 	}
 	public function getCampaign($campaignId,$lang){
 		//Session::put('Lang',$lang);	
@@ -366,6 +370,27 @@ class BlogController extends BaseController {
 		Session::put('Campaign',$campaignId);
 		$page = "campaign";
 		$campaign= Campaign::find($campaignId);
+		
+		$campaignUserRead = new CampaignUserRead;
+		
+		//check if user is logged in and has not read this review yet.
+		if(Session::get('socialUser.isLogin') && !($campaignUserRead->where('campaign_id','=', $campaignId)->where('social_id','=', Session::get('socialUser.id'))->exists()))
+		{
+			$campaignUserRead->user_id = 0;
+			$campaignUserRead->social_id = Session::get('socialUser.id');
+			$campaignUserRead->campaign_id = $campaignId;
+			//$postsUserRead->category_id = $post->category_id;
+			$campaignUserRead->save();
+		}
+		else if(Auth::check() && !($campaignUserRead->where('campaign_id','=', $campaignId)->where('user_id','=', Auth::user()->id)->exists()))
+		{
+			
+			$campaignUserRead->user_id = Auth::user()->id;
+			$campaignUserRead->campaign_id = $campaignId;
+			//$postsUserRead->category_id = $post->category_id;
+			$campaignUserRead->save();
+		}
+		
 		return View::make('site/campaign/view_register',compact('campaign','page'));
 	}
 	public function getRegister($campaignId,$lang){
