@@ -9,7 +9,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 {{-- Content --}}
 @section('content')
 <?php ob_start(); ?>
-<div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: 0px 30px 0px 30px; padding: 0px 30px 0px 30px; background-size:10%; background-image: url({{{ asset('assets/img/wm.png') }}});"  align="center;">
+<div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: 0px 30px 20px 30px; padding: 0px 30px 20px 30px; background-size:10%; background-image: url({{{ asset('assets/img/wm.png') }}});"  align="center;">
 	<div style="float: left; width: 46%; margin-top: 1cm; margin-bottom: 10px;"><img src="{{{ asset('assets/img/voucher.png') }}}" alt="Voucher" height="200">
 	</div>
 	<div style="float: right; position: absolute; right:0px; width: 25%; padding: 0px; margin: 0px;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150px" class ="logo">
@@ -47,7 +47,10 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 		<div style="color: red; font-size: 12pt;">
 			Date expired: {{$campaign->expiry_date}}
 		</div>
-		<div style="float: right; line-height: 50%">
+		
+	</div>
+</div>
+<div style="float: right; line-height: 50%; margin: 0 10px 0 20px; padding: 0 10px 0 20px;">
 			@if($campaign->remark1 != "")
 			<p>
 				* {{$campaign->remark1}}
@@ -59,8 +62,6 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			</p>
 			@endif
 		</div>
-	</div>
-</div>
 <?Php
 	$html = ob_get_contents();
 	ob_end_clean();
