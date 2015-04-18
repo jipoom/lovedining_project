@@ -61,34 +61,34 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 		</div>
 	</div>
 </div>
-	<?Php
-		$html = ob_get_contents();
-		ob_end_clean();
-		$pdf = new mPDF('th', 'A4-L', '0', 'THSaraban');
-		$pdf -> SetDisplayMode('fullpage');
-		//$stylesheet = '<style>'.file_get_contents(asset('bootstrap/css/bootstrap.min.css')).'</style>';
-		//$pdf->WriteHTML($stylesheet, 1);
-		$pdf -> WriteHTML($html, 2);
-		$pdf -> Output(storage_path() . '/' . $userCampaign -> id . '.pdf', 'F');
-	?>
-	<p>
-		<div class="btn btn-default" id = "open_pdf" style="margin: auto;">
-			<a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank">เปิด Voucher</a>
-		</div>
-	</p>
-	@stop
-	@section('scripts')
-	<script>
-		$(document).ready(function() {
-			$("#open_pdf").hide();
-			setTimeout(function() {
-				showDownload()
-			}, 1000);
-		});
-		function showDownload() {
-			alert('สร้างไฟล์  PDF สำเร็จ');
-			$("#title").text("สร้างไฟล์  PDF สำเร็จ");
-			$("#open_pdf").show();
-		}
-	</script>
-	@stop
+<?Php
+	$html = ob_get_contents();
+	ob_end_clean();
+	$pdf = new mPDF('th', 'A4-L', '0', 'THSaraban');
+	$pdf -> SetDisplayMode('fullpage');
+	//$stylesheet = '<style>'.file_get_contents(asset('bootstrap/css/bootstrap.min.css')).'</style>';
+	//$pdf->WriteHTML($stylesheet, 1);
+	$pdf -> WriteHTML($html, 2);
+	$pdf -> Output(storage_path() . '/' . $userCampaign -> id . '.pdf', 'F');
+?>
+<p>
+	<div class="btn btn-default" id = "open_pdf" style="margin: auto;">
+		<a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank">เปิด Voucher</a>
+	</div>
+</p>
+@stop
+@section('scripts')
+<script>
+	$(document).ready(function() {
+		$("#open_pdf").hide();
+		setTimeout(function() {
+			showDownload()
+		}, 1000);
+	});
+	function showDownload() {
+		alert('สร้างไฟล์  PDF สำเร็จ');
+		$("#title").text("สร้างไฟล์  PDF สำเร็จ");
+		$("#open_pdf").show();
+	}
+</script>
+@stop
