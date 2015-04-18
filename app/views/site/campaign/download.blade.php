@@ -6,20 +6,6 @@ require_once(public_path().'/mpdf60/mpdf.php');
 
 @section('styles')
 <!-- put style here -->
-<style>
-p {
-        color: #424242;
-        font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
-	letter-spacing:0.1em;
-	text-align:center;
-	margin: 40px auto;
-	text-transform: lowercase;
-	line-height: 145%;
-	font-size: 14pt;
-	font-variant: small-caps;
-        }	
-	
-</style>
 @stop
 {{-- Content --}}
 @section('content')
@@ -28,24 +14,16 @@ p {
 <div style="float: left; width: 46%; margin-top: 1cm; margin-bottom: 10px;"><img src="{{{ asset('assets/img/voucher.png') }}}" alt="Voucher" height="200"></div>
 <div style="float: right; position: absolute; right:0px; width: 25%; padding: 0px; margin: 0px;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150px" class ="logo"></div>
 <div style="float: right; position: absolute; right:0px; width: 25%; padding: 0px; margin: 0px;">
-@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
-	<?php
-	$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/',true);
-	?>
-		<a href="{{$campaign->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" height="150"/></a>		
-
+@if($campaign->hotel_logo!="")			
+		<a href="{{{ $campaign->url() }}}" ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="150"></a>
 @else
-		@if($campaign->hotel_logo!="")			
-				<a href="{{{ $campaign->url() }}}" ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="150"></a>
-		@else
-				<a href="{{{ $campaign->url() }}}"><img src="http://placehold.it/260x180" alt="" height="150"></a>
-		@endif
+		<a href="{{{ $campaign->url() }}}"><img src="http://placehold.it/260x180" alt="" height="150"></a>
 @endif
 </div>
 
 <div style="clear: both; margin: 0pt; padding: 0pt; ">
 <div style="color: #313131; font-size: 20pt; font-style: oblique; margin: 0px; padding: 0px; line-height: 30%">
-	<p>Campaign name ทดสอง</p>
+	<p>{{$campaign->name}}</p>
 </div>
 
 <div style="color: #424242; letter-spacing: 0.1em; font-size: 14pt; line-height: 80%;">
