@@ -140,6 +140,19 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
 		return false;
 	}
 	
+	public static function checkIfUserSeeCampaign($campaignUserRead,$campaignId)
+	{
+		foreach($campaignUserRead as $read)
+		{		
+			if($read->campaign_id == $campaignId)
+			{
+
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static function getAllEmailArray()
 	{
 		$allUser = User::where('confirmed','=','1')->get();

@@ -65,7 +65,12 @@
 			</div>
 		</div>
 		<hr />
-		@if ($campaign->allow_duplicate_user == 1 || ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) == 0))
+		@if(Session::get('socialUser.isLogin'))
+			<?php $statement = ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('social_id','=',Session::get('socialUser.id'))->first()) == 0);?>
+		@elseif(Auth::check())
+			<?php $statement = ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) == 0);?>
+		@endif
+		@if ($campaign->allow_duplicate_user == 1 || $statement)
 		<div class="row">
 			<div class="col-md-12">
 				<h4>ลงทะเบียนรับ Voucher</h4>
@@ -153,11 +158,16 @@
 			</div>
 			</form>
 		</div>
-		@elseif ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
-		You already registered for this voucher!!
-		<p />
-		Click <a href="{{{ URL::to('user/login') }}}">here</a> to see your voucher.
-		<p />
+		@else
+			You already registered for this voucher!!
+			<p />
+			@if(Session::get('socialUser.isLogin'))
+				<?php $userCampaign = UserCampaign::where('social_id','=',Session::get('socialUser.id'))->where('campaign_id','=',$campaign->id)->first()?>				
+			@elseif(Auth::check())
+				<?php $userCampaign = UserCampaign::where('user_id','=',Auth::id())->where('campaign_id','=',$campaign->id)->first()?>		
+			@endif
+			Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
+			<p />
 		@endif
 	</div>
 </div>

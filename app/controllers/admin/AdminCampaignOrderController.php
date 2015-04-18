@@ -28,8 +28,7 @@ class AdminCampaignOrderController extends AdminController {
 		$title = "Campaign Order Management";
 	
 		// Grab all the blog posts
-		$campaigns = Campaign::orderBy('rank')->get() ;
-		
+		$campaigns = Campaign::active()->orderBy('rank')->get() ;
 		return View::make('admin/campaign_order/index', compact('campaigns', 'title'));
 	}
 	

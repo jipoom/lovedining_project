@@ -152,7 +152,15 @@
 
 									@endforeach
 									<li {{ (Request::is('news*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('/') }}}">News</a></li>
-									<li {{ (Request::is('campaign*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('campaign') }}}">Campaigns</a></li>
+									<li {{ (Request::is('campaign*') ? ' class="selected"' : '') }}>
+									<a href="{{{ URL::to('campaign') }}}">Campaigns
+										@if (Auth::check() || Session::get('socialUser.isLogin'))
+											<?php $numUnread = CampaignUserRead::getUnreadCampaign(); ?>
+											@if($numUnread>0)
+												<span class="badge">{{$numUnread}}</span>
+											@endif
+										@endif
+									</a></li>
 									
 									<li>
 										<form class ="form-dropdown ">

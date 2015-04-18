@@ -53,7 +53,7 @@
 		<!-- Post Title -->
 		<div class="row">
 			<div class="col-md-8">
-				<h4><strong><a href="{{{ $campaign->url() }}}">{{ String::title($campaign->title) }}</a></strong></h4>
+				<h4><strong><a href="{{{ $campaign->url() }}}">{{ String::title($campaign->name) }}</a></strong></h4>
 			</div>
 		</div>
 		<!-- ./ post title -->
@@ -61,7 +61,7 @@
 		<!-- Post Content -->
 		<div class="row">
 			<div class="col-md-6">
-		@if(Auth::check()) 
+		@if(Auth::check() || Session::get('socialUser.isLogin')) 
 				
 				@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 					<?php
@@ -79,7 +79,7 @@
 						@endif
 				@endif
 					
-				@if(False)
+				@if(!User::checkIfUserSeeCampaign($campaignUserRead,$campaign->id))
 					<div class="ribbon-wrapper-green"><div class="ribbon-green">NEW</div></div>		
 				@endif	
 		@else
