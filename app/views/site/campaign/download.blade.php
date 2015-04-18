@@ -47,21 +47,21 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 		<div style="color: red; font-size: 12pt;">
 			Date expired: {{$campaign->expiry_date}}
 		</div>
-		
+
 	</div>
 </div>
 <div style="float: right; line-height: 50%; margin: 0 10px 0 20px; padding: 0 10px 0 20px;">
-			@if($campaign->remark1 != "")
-			<p>
-				* {{$campaign->remark1}}
-			</p>
-			@endif
-			@if($campaign->remark2 != "")
-			<p>
-				** {{$campaign->remark2}}
-			</p>
-			@endif
-		</div>
+	@if($campaign->remark1 != "")
+	<p>
+		* {{$campaign->remark1}}
+	</p>
+	@endif
+	@if($campaign->remark2 != "")
+	<p>
+		** {{$campaign->remark2}}
+	</p>
+	@endif
+</div>
 <?Php
 	$html = ob_get_contents();
 	ob_end_clean();
