@@ -258,12 +258,14 @@ Route::group(array('prefix' => 'campaign'), function()
 {
 	 Route::get('/', 'BlogController@getAllCampaign');	
 	 Route::get('stream_pdf/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@streamPDF'));
+	 Route::get('search/{keywork}', 'BlogController@searchCampaign');
 	 Route::get('{campaignId}/{lang}', 'BlogController@getCampaign');
 	 //Route::post('{campaignId}/{lang}', 'BlogController@postRegister');
 	 //array('before' => 'csrf', 'uses' =>'UserController@getRegister'));
 	 Route::get('register/{campaignId}/{lang}', array('before' => 'auth_social', 'uses' =>'BlogController@getRegister'));
 	 Route::post('register/{campaignId}/{lang}', 'BlogController@postRegister');
 	 Route::get('voucher/{campaignId}/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@getVoucher'));
+	
 	 
 });
 

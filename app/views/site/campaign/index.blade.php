@@ -11,17 +11,34 @@
 	.bx-wrapper img {
     margin: 0 auto;
 	}
-	img.resize{
+	img.resize {
     width:1100px; /* you can use % */
     height: auto;
 	}	
-	img.hl{
+	img.hl {
     width:300px; /* you can use % */
     height: auto;
 	}
-
-    
-}
+	
+	#content_header {
+	  padding: 0px 0px 30px 0px;
+	  width: 70%;
+	  float: left;
+	}
+	#content_aside {
+		padding: 20px 0px 30px 0px;
+		float: right;	
+	}
+	
+	@media (max-width: 768px) {
+		#content_header {
+			width: 100%;
+		}
+		#content_aside {
+			display: none;
+		}
+	}
+		
 </style>
 @stop
 {{-- Content --}}
@@ -44,19 +61,21 @@
 		@endforeach
 
 	</ul>
-<br />
+<div id="content_header">
+<h3>Campaign of the month</h3>
+</div>
 
+<div id="content_aside">
+<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
+<input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
+<p><font color="blue"><center>{{count($campaigns)}} {{ \Illuminate\Support\Pluralizer::plural('campaign', count($campaigns)) }} valid</center></font></p>
 
+</div>
+<div id="reload_campaign">
 @foreach ($campaigns as $campaign)
 <div class="row">
 	<div class="col-md-8">
-		<!-- Post Title -->
-		<div class="row">
-			<div class="col-md-8">
-				<h4><strong><a href="{{{ $campaign->url() }}}">{{ String::title($campaign->name) }}</a></strong></h4>
-			</div>
-		</div>
-		<!-- ./ post title -->
+
 
 		<!-- Post Content -->
 		<div class="row">
@@ -101,32 +120,38 @@
 		@endif	
 			</div>
 			<div class="col-md-6">
+				
+				<h4><strong><a href="{{{ $campaign->url() }}}">{{ String::title($campaign->name) }}</a></strong></h4>
+				
 				<p>
 					{{ String::tidy(Str::limit($campaign->description, 200)) }}
 				</p>
-				<strong><a href="{{{ $campaign->url() }}}"  style="color:#0D8FA9;">More info</a></strong>
+				<br/>
+				<?php $startDate =  new DateTime($campaign->start_date); ?>
+				<?php $endDate =  new DateTime($campaign->expiry_date); ?>
+				@if($startDate->format('Y') == $endDate->format('Y'))
+					<p>Valid {{{ $startDate->format('d M') }}} - {{{ $endDate->format('d M Y') }}}</p>
+				@else
+					<p>Valid {{{ $startDate->format('d M Y') }}} - {{{ $endDate->format('d M Y') }}}</p>
+				@endif
+				
+				<a href="{{{ $campaign->url() }}}"  style="color:#0D8FA9;">more detail</a>
+				|
+				<a href="{{{ Post::find($campaign->post_id)->url() }}}"  style="color:#0D8FA9;">review</a>
+				|
+				<a href="{{{ $campaign->url() }}}"  style="color:#0D8FA9;">get voucher</a>
 				
 			</div>
 		</div>
 		<!-- ./ post content -->
 
-		<!-- Post Footer -->
-		<div class="row">
-			<div class="col-md-8">
-				<p></p>
-				<p>
-					<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $campaign->start_date }}}
-					| <span class="glyphicon glyphicon-comment"></span> {{UserCampaign::where('campaign_id','=',$campaign->id)->count()}} {{ \Illuminate\Support\Pluralizer::plural('Member registered', UserCampaign::where('campaign_id','=',$campaign->id)->count()) }}
-				</p>
-			</div>
-		</div>
-		<!-- ./ post footer -->
+	
 	</div>
 </div>
 
 <hr />
 @endforeach
-
+</div>
 
 
 @stop
@@ -157,4 +182,34 @@
 			
 	}); 
 </script>
+<script>
+	function searchAction(mode) {
+		var word = $("#keywords").val();
+		if (mode == "") {
+			document.getElementById("txtHint").innerHTML = "";
+			return;
+		}
+		if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {// code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById("reload_campaign").innerHTML = xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open("GET", "{{{ URL::to('campaign/search') }}}/" + word, true);
+		xmlhttp.send();
+
+	}
+
+	function runScript(e) {
+		if (e.keyCode == 13) {
+			searchActionDefault("go");
+		}
+	}
+</script>
+
 @stop

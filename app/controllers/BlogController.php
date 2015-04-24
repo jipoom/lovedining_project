@@ -520,5 +520,18 @@ class BlogController extends BaseController {
 		return View::make('error/404');
         
     }
+	
+	public function searchCampaign($keyword)
+	{
+
+		$campaigns = Campaign::search($keyword);
+		if(Session::get('socialUser.isLogin'))
+			$campaignUserRead = CampaignUserRead::where('social_id','=',Session::get('socialUser.id'))->get();
+		else if(Auth::check())
+			$campaignUserRead = CampaignUserRead::where('user_id','=',Auth::id())->get();
+		//Ads
+        return View::make('site/campaign/search_result', compact('campaigns','keyword','campaignUserRead'));
+    
+	}
 
 }
