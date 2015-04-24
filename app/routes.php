@@ -263,7 +263,7 @@ Route::group(array('prefix' => 'campaign'), function()
 	 //array('before' => 'csrf', 'uses' =>'UserController@getRegister'));
 	 Route::get('register/{campaignId}/{lang}', array('before' => 'auth_social', 'uses' =>'BlogController@getRegister'));
 	 Route::post('register/{campaignId}/{lang}', 'BlogController@postRegister');
-	 Route::get('download/{campaignId}/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@getDownload'));
+	 Route::get('voucher/{campaignId}/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@getVoucher'));
 	 
 });
 

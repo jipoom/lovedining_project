@@ -476,7 +476,8 @@ class BlogController extends BaseController {
 				  $message->to($userCampaign->user_email)
 				          ->subject($subject);
 				});*/
-				return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
+				//return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
+				return Redirect::to('campaign/voucher/' . $campaignId.'/'.$userCampaign->id);
             }
 
             return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
@@ -484,13 +485,22 @@ class BlogController extends BaseController {
 		}
 		return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
 	}
-	
-	public function getDownload($campaignId,$userCampaignId){
+	public function getVoucher($campaignId,$userCampaignId){
 		//Session::put('Lang',$lang);	
 		$userCampaign= UserCampaign::find($userCampaignId);
+		$title = "Your Voucher";
 		$campaign= Campaign::find($campaignId);
-		return View::make('site/campaign/download',compact('campaign','userCampaign'));
+		if($userCampaign->social_id == Session::get('socialUser.id'))
+		{
+			return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
+		}
+		else if($userCampaign->user_id == Auth::id()){
+			
+        	return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
+        }
+		return View::make('error/404');
 	}
+
 	public function streamPDF($userCampaignId)
     {
         $userCampaign= UserCampaign::find($userCampaignId);	
@@ -507,7 +517,7 @@ class BlogController extends BaseController {
 			return Response::make(file_get_contents($path), 200, 
 			array('Content-Type' => 'application/pdf','Content-Disposition' => 'inline; '.$filename));
         }
-		return null;	
+		return View::make('error/404');
         
     }
 
