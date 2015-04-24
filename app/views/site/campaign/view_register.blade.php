@@ -64,6 +64,13 @@
 		width: auto; /* you can use % */
 		height: 400px;
 	}
+	#voucher {
+		display: block;
+		margin: 10px;
+	}
+	#voucher_logo {
+		text-align: center;
+	}
 </style>
 
 @stop
@@ -72,7 +79,7 @@
 @section('content')
 
 <div class="row">
-	<div class="col-md-12">
+	<div id="voucher" class="">
 		<!-- Post Title -->
 		<!-- ./ post title -->
 
@@ -94,17 +101,16 @@
 			@endif
 
 		</ul>
-		<div class="row">
-
-			<div class="col-md-9">
+			<div class="">
 				<h3>ชื่อโรงแรม and Lovedinings</h3>
 				<p>
 					{{ String::tidy($campaign->description) }}
 				</p>
-				<div style="float: center; width: 25%; padding: 10px; margin: 10px;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="">
+				<div id="voucher_logo">
+					<img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="100" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="hotel_logo" height="100">
 				</div>
 			</div>
-		</div>
 		<div class="row">
 
 			<div class="col-md-9">
