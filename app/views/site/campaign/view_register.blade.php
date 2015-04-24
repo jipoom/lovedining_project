@@ -97,6 +97,17 @@
 		<div class="row">
 
 			<div class="col-md-9">
+				<h3>ชื่อโรงแรม and Lovedinings</h3>
+				<p>
+					{{ String::tidy($campaign->description) }}
+				</p>
+				<div style="float: center; width: 25%; padding: 10px; margin: 10px;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+
+			<div class="col-md-9">
 				<h4>รายละเอียดโครงการ</h4>
 				<p>
 					{{ String::tidy($campaign->description) }}
@@ -107,104 +118,115 @@
 
 			<div class="col-md-9">
 				<h4>ระยะเวลาโครงการ</h4>
-					<p>
-						<span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
-						{{{ $campaign->start_date }}}
-					</p>
-					<p>
-						<span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
-						{{{ $campaign->expiry_date }}}
-					</p>
+				<p>
+					<span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
+					{{{ $campaign->start_date }}}
+				</p>
+				<p>
+					<span class="glyphicon glyphicon-calendar"></span><!--Sept 16th, 2012-->
+					{{{ $campaign->expiry_date }}}
+				</p>
 
-					<span class="glyphicon glyphicon-comment"></span> {{UserCampaign::where('campaign_id','=',$campaign->id)->count()}} {{ \Illuminate\Support\Pluralizer::plural('member', UserCampaign::where('campaign_id','=',$campaign->id)->count()) }} registered
-					</p>
-					@if($campaign->remark1 != "")
-					<p>
-						<font color="red">*{{$campaign->remark1}}</font>
-					</p>
-					@endif
-					@if($campaign->remark2 != "")
-					<p>
-						<font color="red">*{{$campaign->remark2}}</font>
-					</p>
-					@endif
+				<span class="glyphicon glyphicon-comment"></span> {{UserCampaign::where('campaign_id','=',$campaign->id)->count()}} {{ \Illuminate\Support\Pluralizer::plural('member', UserCampaign::where('campaign_id','=',$campaign->id)->count()) }} registered
+				</p>
+				@if($campaign->remark1 != "")
+				<p>
+					<font color="red">*{{$campaign->remark1}}</font>
+				</p>
+				@endif
+				@if($campaign->remark2 != "")
+				<p>
+					<font color="red">*{{$campaign->remark2}}</font>
+				</p>
+				@endif
 				<h4>รูปรีวิว</h4>
-					<div class="col-lg-6  movieinfo" style="padding: 5px 0px 4px 10px;  margin: 0px" >
+				<div class="col-lg-6  movieinfo" style="padding: 5px 0px 4px 10px;  margin: 0px" >
 
-						<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name, true); ?>
+					<?php $album = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name, true); ?>
 
-						<!-- picture div -->
-						<div>
+					<!-- picture div -->
+					<div>
 
-							<ul class="gallery clearfix bxslider">
-								@foreach ($album as $picture)
+						<ul class="gallery clearfix bxslider">
+							@foreach ($album as $picture)
 
-								<li>
-									<a href="{{URL::to('/images/'.$campaign -> post -> album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$campaign -> post->album_name.'/'.$picture)}}" alt="" class ="thumbnail"/></a>
-								</li>
+							<li>
+								<a href="{{URL::to('/images/'.$campaign -> post -> album_name.'/'.$picture)}}" rel="LoveDining[gallery]"><img src="{{URL::to('/images/'.$campaign -> post->album_name.'/'.$picture)}}" alt="" class ="thumbnail"/></a>
+							</li>
 
-								@endforeach
-							</ul>
-						</div>
+							@endforeach
+						</ul>
 					</div>
+				</div>
 
 			</div>
 		</div>
+		
 		<br />
+		
+		<div class="row">
+
+			<div class="col-md-9">
+				<h4>Location</h4>
+				<p>
+					ที่อยู่
+				</p>
+			</div>
+		</div>
 		<br />
 		<div class="btn btn-default">
 			<a href="{{{ Post::find($campaign->post_id)->url() }}}">click here to see a Review</a>
 		</div>
 		<hr />
 		@if ( ! (Auth::check()  || Session::get('socialUser.isLogin')))
-			You need to be logged in to register for this Voucher.
-			<br />
-			<br />
-			Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
-			<br />
-			<br />
+		You need to be logged in to register for this Voucher.
+		<br />
+		<br />
+		Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
+		<br />
+		<br />
 		@else
-			@if(Auth::check() || Session::get('socialUser.isLogin'))
-				@if ($campaign->allow_duplicate_user == 1)
-				<div class="row">
-					<div class="col-md-12">
-						<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
-					</div>
-				</div>
-				<br />
-				@elseif(Auth::check())
-					@if (count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
-						You already registered for this voucher!!
-						<p />
-						<?php $userCampaign = UserCampaign::where('user_id','=',Auth::id())->where('campaign_id','=',$campaign->id)->first()?>
-						Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
-						<p />
-					@else
-						<div class="row">
-							<div class="col-md-12">
-								<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
-							</div>
-						</div>
-						<br />
-					@endif
-		
-				@elseif(Session::get('socialUser.isLogin'))
-					@if (count(UserCampaign::where('campaign_id','=',$campaign->id)->where('social_id','=',Session::get('socialUser.id'))->first()) > 0)
-						You already registered for this voucher!!
-						<p />
-						<?php $userCampaign = UserCampaign::where('social_id','=',Session::get('socialUser.id'))->where('campaign_id','=',$campaign->id)->first()?>
-						Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
-						<p />
-					@else
-						<div class="row">
-							<div class="col-md-12">
-								<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
-							</div>
-						</div>
-						<br />
-					@endif
-				@endif
-			@endif
+		@if(Auth::check() || Session::get('socialUser.isLogin'))
+		@if ($campaign->allow_duplicate_user == 1)
+		<div class="row">
+			<div class="col-md-12">
+				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
+			</div>
+		</div>
+		<br />
+		@elseif(Auth::check())
+		@if (count(UserCampaign::where('campaign_id','=',$campaign->id)->where('user_id','=',Auth::user() -> id)->first()) > 0)
+		You already registered for this voucher!!
+		<p />
+		<?php $userCampaign = UserCampaign::where('user_id','=',Auth::id())->where('campaign_id','=',$campaign->id)->first()?>
+		Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
+		<p />
+		@else
+		<div class="row">
+			<div class="col-md-12">
+				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
+			</div>
+		</div>
+		<br />
+		@endif
+
+		@elseif(Session::get('socialUser.isLogin'))
+		@if (count(UserCampaign::where('campaign_id','=',$campaign->id)->where('social_id','=',Session::get('socialUser.id'))->first()) > 0)
+		You already registered for this voucher!!
+		<p />
+		<?php $userCampaign = UserCampaign::where('social_id','=',Session::get('socialUser.id'))->where('campaign_id','=',$campaign->id)->first()?>
+		Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
+		<p />
+		@else
+		<div class="row">
+			<div class="col-md-12">
+				<a href="{{{ URL::to('campaign/register/'.$campaign->id.'/'.Session::get('Lang')) }}}" class="btn btn-danger">กดรับสิทธิ์</a>
+			</div>
+		</div>
+		<br />
+		@endif
+		@endif
+		@endif
 		@endif
 	</div>
 </div>
