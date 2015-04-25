@@ -8,6 +8,13 @@
 	<!-- AutoComplete -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 	<!-- /AutoComplete -->
+	<style>
+		#export {
+			float: right;
+			display: block;
+			margin-bottom: 20px;
+		}
+	</style>
 @stop
 {{-- Content --}}
 @section('content')
@@ -18,7 +25,10 @@
 	</h3>
 </div>
 @if (count($userCampaign) > 0)
-	<P><a target = '_blank' href="{{{ URL::to('admin/campaign/'.$campaign->id.'/export_registered') }}}" class="btn btn-default btn-xs">Export table to PDF</a></p>
+	<div id="export">
+		<p><a target = '_blank' href="{{{ URL::to('admin/campaign/'.$campaign->id.'/export_registered') }}}" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-down"></span> Export table to PDF</a>
+		<a target = '_blank' href="{{{ URL::to('admin/campaign/'.$campaign->id.'/export_excel_registered') }}}" class="btn btn-default"><span class="glyphicon glyphicon-download-alt"></span> Export table to Excel</a></p>
+	</div>
 	<table border="1">
   
 		<tr>

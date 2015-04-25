@@ -342,5 +342,16 @@ class AdminCampaignController extends AdminController {
 		->remove_column('post_id')
         ->make();
     }
+		
+	public function exportRegisteredToExcel($campaign){
+		$title = "List of registered users for ".$campaign->post->restaurant_name.' (Lovedinings)';
+		$userCampaign = UserCampaign::where('campaign_id','=',$campaign->id)->get();
+		Excel::create($campaign->post->restaurant_name.' (Lovedinings)', function($excel) use ($title, $campaign, $userCampaign) {
+		    $excel->sheet('List', function($sheet) use ($title, $campaign, $userCampaign){	
+		        $sheet->loadView('admin.campaign.table')->with("title", $title)->with("campaign", $campaign)->with("userCampaign", $userCampaign);
+		    });
+
+		})->download('xlsx');
+	}
 
 }

@@ -120,7 +120,8 @@ return array(
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
 		'Barryvdh\Elfinder\ElfinderServiceProvider',
-		'Artdarek\OAuth\OAuthServiceProvider' // OAuth
+		'Artdarek\OAuth\OAuthServiceProvider', // OAuth
+		'Maatwebsite\Excel\ExcelServiceProvider' // Excel
         /* Uncomment for use in development */
 //        'Way\Generators\GeneratorsServiceProvider', // Generators
 //        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
@@ -210,6 +211,7 @@ return array(
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
 		'OAuth'			  => 'Artdarek\OAuth\Facade\OAuth', // OAuth
+		'Excel'			  => 'Maatwebsite\Excel\Facades\Excel', // Excel
     ),
 
     'available_language' => array('en', 'pt', 'es'),
