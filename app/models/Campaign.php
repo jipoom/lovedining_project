@@ -37,14 +37,13 @@ class Campaign extends Eloquent {
 					  ->orwhere('campaign.name', 'LIKE', '%'. $term .'%')
 					  ->orwhere('campaign.description', 'LIKE', '%'. $term .'%');
 
-            })->get();
-            /*paginate(8,array('campaign.id', 'campaign.name', 'campaign.start_date', 'campaign.expiry_date', 
-			'campaign.hotel_logo','campaign.d','posts.content_en','posts.content_cn','posts.album_name',
-			'posts.restaurant_name','posts.tel','posts.address1',
-			'posts.address2','posts.tumbol','posts.amphur','posts.route','posts.route_en','posts.route_cn',
-			'posts.province_id','posts.zip','posts.created_at','posts.updated_at','posts.meta_title',
-			'posts.meta_description','posts.meta_keywords','posts.slug'));
-			//$posts = Post::active()->search($term);*/
+            })->paginate(8,array('campaign.id', 'campaign.name', 'campaign.description', 'campaign.start_date', 
+			'campaign.expiry_date','campaign.hotel_logo','campaign.album_name','campaign.remark1','campaign.remark2',
+			'campaign.allow_duplicate_user','campaign.post_id','campaign.created_at',
+			'campaign.updated_at','campaign.show_firstname','campaign.show_lastname','campaign.show_cid','campaign.show_email','campaign.show_tel',
+			'campaign.show_dob','campaign.isActive','campaign.opt1_name','campaign.opt2_name','campaign.opt3_name',
+			'campaign.is_home','campaign.rank'));
+			//$posts = Post::active()->search($term);
 		}
 		return $items;
 	}

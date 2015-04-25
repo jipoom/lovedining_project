@@ -66,7 +66,7 @@
 </div>
 
 <div id="content_aside">
-<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา ชื่อร้าน ชื่อรีวิว หรือสถานที่': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
+<input type="text" class="tftextinput" name="keyword" id ="keywords" value = "{{isset($keyword) ? $keyword : null}}" placeholder = "{{(Session::get('Lang') == 'TH') ? 'ค้นหา campaign': 'search'}} "size="25" maxlength="120" onkeypress="return runScript(event)">
 <input type="submit" value="Go" id = "go" class="tfbutton" onclick ="searchAction(this.value)"> 
 <p><font color="blue"><center>{{count($campaigns)}} {{ \Illuminate\Support\Pluralizer::plural('campaign', count($campaigns)) }} valid</center></font></p>
 
@@ -134,12 +134,10 @@
 				@else
 					<p>Valid {{{ $startDate->format('d M Y') }}} - {{{ $endDate->format('d M Y') }}}</p>
 				@endif
-				
+				<br/>
 				<a href="{{{ $campaign->url() }}}"  style="color:#0D8FA9;">more detail</a>
 				|
 				<a href="{{{ Post::find($campaign->post_id)->url() }}}"  style="color:#0D8FA9;">review</a>
-				|
-				<a href="{{{ $campaign->url() }}}"  style="color:#0D8FA9;">get voucher</a>
 				
 			</div>
 		</div>
