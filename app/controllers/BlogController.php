@@ -393,14 +393,14 @@ class BlogController extends BaseController {
 		
 		return View::make('site/campaign/view_register',compact('campaign','page'));
 	}
-	public function getRegister($campaignId,$lang){
+	/*public function getRegister($campaignId,$lang){
 		//Session::put('Lang',$lang);	
 		Session::put('Lang',$lang);	
 		Session::put('Campaign',$campaignId);
 		$page = "campaign";
 		$campaign= Campaign::find($campaignId);
 		return View::make('site/campaign/register',compact('campaign','page'));
-	}
+	}*/
 	public function postRegister($campaignId,$lang){
 		$campaign= Campaign::find($campaignId);
 		$rules = array();
