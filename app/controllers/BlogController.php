@@ -480,10 +480,10 @@ class BlogController extends BaseController {
 				return Redirect::to('campaign/voucher/' . $campaignId.'/'.$userCampaign->id);
             }
 
-            return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
+            return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
         			
 		}
-		return Redirect::to('campaign/register/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
+		return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
 	}
 	public function getVoucher($campaignId,$userCampaignId){
 		//Session::put('Lang',$lang);	
