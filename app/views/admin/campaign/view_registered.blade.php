@@ -14,6 +14,10 @@
 			display: block;
 			margin-bottom: 20px;
 		}
+		#table {
+			display: block;
+			width: 100%;
+		}
 	</style>
 @stop
 {{-- Content --}}
@@ -29,6 +33,10 @@
 		<p><a target = '_blank' href="{{{ URL::to('admin/campaign/'.$campaign->id.'/export_registered') }}}" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-down"></span> Export table to PDF</a>
 		<a target = '_blank' href="{{{ URL::to('admin/campaign/'.$campaign->id.'/export_excel_registered') }}}" class="btn btn-default"><span class="glyphicon glyphicon-download-alt"></span> Export table to Excel</a></p>
 	</div>
+	<div id="table">
+		<br/>
+		<br/>
+		<br/>
 	<table border="1">
   
 		<tr>
@@ -100,6 +108,7 @@
 		</tr>
 		@endforeach
 	</table>
+	</div>
 	
 @endif
 @stop

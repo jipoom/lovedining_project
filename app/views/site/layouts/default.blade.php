@@ -18,11 +18,11 @@
 			<meta property="og:image" content="{{Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name}}" />
 			<meta property="fb:app_id" content="566292166825639"/>
 			@if(Session::get('Lang') == 'TH')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 200, '...')}}" />
 			@elseif(Session::get('Lang') == 'EN')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_en()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_en()), 200, '...')}}" />
 			@elseif(Session::get('Lang') == 'CN')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_cn()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_cn()), 200, '...')}}" />
 			@endif
 		@endif
 		<!-- Mobile Specific Metas
@@ -36,16 +36,13 @@
 		<link rel="stylesheet" href="{{asset('bootstrap/css/ribbon.css')}}">
 		<link rel="stylesheet" href="{{asset('bootstrap/css/dbcdss.css')}}">
 		<style>
-
 			@section('styles')
 			@show
 		</style>
-
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-
 		<!-- Favicons
 		================================================== -->
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}">
@@ -61,10 +58,8 @@
 		<link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/colorbox.css')}}">
 		<link rel="stylesheet" href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
-
 		@yield('styles')
 	</head>
-
 	<body>
 		<!-- for facebook like and share -->
 		<div id="fb-root"></div>
@@ -111,7 +106,6 @@
 							<br />
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/fb.png')}} style="width: 25px;"></a></li>
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/twitter.png')}} style="width: 25px;"></a></li>
-
 						</div>
 						
 						<!-- language flag -->
@@ -134,7 +128,6 @@
 							
 					<div id="cssmenu">
 							<ul>
-
 								<!--<li{{ (Request::is('/') ? ' class="active"' : '') }}>
 									<a href="{{{ URL::to('') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 -->
@@ -149,7 +142,6 @@
 											@endif
 										@endif  </a>
 									</li>
-
 									@endforeach
 									<li {{ (Request::is('news*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('/') }}}">News</a></li>
 									<li {{ (Request::is('campaign*') ? ' class="selected"' : '') }}>
@@ -191,10 +183,8 @@
 									</li>
 							</ul>
 							</div>
-
 							<ul class="nav navbar-nav pull-right">
 								@if (Auth::check())
-
 								<li class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}} <span class="caret"></span> </a>
 									<ul class="dropdown-menu">
@@ -217,7 +207,6 @@
 									</ul>
 								</li>
 								@elseif (Session::get('socialUser.isLogin'))
-
 								<li class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"></span> {{{ Session::get('socialUser.name') }}} <span class="caret"></span> </a>
 									<ul class="dropdown-menu">
@@ -235,39 +224,30 @@
 								</li>
 								@endif
 							</ul>
-
 							<!-- ./ nav-collapse -->
 						
 						</div>
 					</div>
 				</div>
 				<!-- ./ navbar -->
-
 				<!-- .Ads
 				<div class="ads-right ">
-
 				<div class="col-md-12">
-
 				<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 				<a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a><a href="" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-
 				</div>
 				</div>
 				./ Ads -->
-
 				<!-- Container -->
 				<div class="container">
 					<!-- Notifications -->
 					@include('notifications')
-
 					<!-- ./ notifications -->
-
 					<!-- Content -->
 					@yield('content')
 					<!-- ./ content -->
 				</div>
 				<!-- ./ container -->
-
 				<!-- the following div is needed to make a sticky footer -->
 				<div id="push"></div>
 			</div>
@@ -312,7 +292,6 @@
 						<font color="#0D8FA9">© 2014 LOVEDININGS.com</font>
 						
 					</p>
-
 		</div>
 						
 			<!-- Javascripts
@@ -328,7 +307,6 @@
 			<script src="{{asset('assets/js/prettify.js')}}"></script>
 			<script src="{{asset('assets/js/menu/script.js')}}"></script>
 			<script src="{{asset('assets/js/menu/script2.js')}}"></script>
-
 			<!-- Search Review -->
 			<script>
 				function searchActionDefault(mode) {
@@ -350,9 +328,7 @@
 					}
 					xmlhttp.open("GET", "{{{ URL::to('search') }}}/" + word, true);
 					xmlhttp.send();
-
 				}
-
 				function runScript(e) {
 					if (e.keyCode == 13) {
 						searchActionDefault("go");
@@ -392,7 +368,6 @@
 			xmlhttp.open("GET", "{{{ URL::to('category') }}}/"+categoryId + "/" + mode, true);
 		}
 		xmlhttp.send();
-
 	}
 </script>
 <script>
@@ -400,10 +375,8 @@
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-59527800-1', 'auto');
   ga('send', 'pageview');
-
 </script>
 <!-- End Sort Review -->
 			
