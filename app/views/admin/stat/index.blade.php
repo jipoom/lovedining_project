@@ -1,3 +1,6 @@
+<?php
+set_time_limit(0);
+?>
 @extends('admin.layouts.default')
 
 {{-- Content --}}

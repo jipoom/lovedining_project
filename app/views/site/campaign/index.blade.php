@@ -137,7 +137,7 @@
 				<br/>
 				<a href="{{{ $campaign->url() }}}"  style="color:#0D8FA9;">more detail</a>
 				|
-				<a href="{{{ Post::find($campaign->post_id)->url() }}}"  style="color:#0D8FA9;">review</a>
+				<a href="{{{ Post::find($campaign->post_id)->url() }}}"  target="_blank" style="color:#0D8FA9;">review</a>
 				
 			</div>
 		</div>
