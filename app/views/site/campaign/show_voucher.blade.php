@@ -5,113 +5,66 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 
 {{-- Content --}}
 @section('content')
-<div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: 0px 30px 20px 30px; padding: 0px 30px 20px 30px; background-size:10%; background-image: url({{{ asset('assets/img/wm.png') }}});">
-	<div style="float: left; width: 30%; margin-top: 1cm; margin-bottom: 10px;"><img src="{{{ asset('assets/img/voucher.png') }}}" alt="Voucher" height="150">
+<div class="Logo-Pane" style="float: left; width: 30%; height: 700px; background-color: blue;">
+	<div class="Logo" style="padding-top: 100px;">
+		<center>Lovedining LOGO</center>
 	</div>
-	<div style="float: right; width: 25%; padding: 10px; margin: 10px;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150" >
+	<div class="Voucher" style="padding-top: 400px;">
+		<center>Voucher</center>
 	</div>
-	<div style="float: right; width: 25%; padding: 10px; margin: 10px;">
-		@if($campaign->hotel_logo!="")
-		<a href="{{{ $campaign->url() }}}" ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="150"></a>
-		@else
-		<a href="{{{ $campaign->url() }}}"><img src="http://placehold.it/260x180" alt="" height="150"></a>
-		@endif
+	
+</div>
+<div class="Main-Pane" style="float: left; width: 70%; height: 700px; padding: 0px 10px 0px 10px; display: block; background-color: red;">
+	<div class="Banner-Pane" style="float: left; width: 70%; margin-top: 10px; background-color: green; height: 390px">
+		Campaign Banner
 	</div>
-
-	<div style="clear: both; margin: 0px; padding: 0px; ">
-		<div style="color: #313131; font-size: 20pt; font-style: oblique; margin: 10px; padding: 10px;">
-			<p>
-				{{$campaign->name}}
-			</p>
-		</div>
-
-		<div style="color: #424242; font-size: 14pt; ">
-			@if($campaign->show_firstname == 1)
-			<p>
-				First name: {{$userCampaign->user_firstname}}
-			</p>
-			@endif
-			@if($campaign->show_lastname == 1)
-			<p>
-				Last name: {{$userCampaign->user_lastname}}
-			</p>
-			@endif
-			<p>
-				Code: {{$userCampaign->campaign_code}}
-			</p>
-		</div>
-		<div style="color: red; font-size: 12pt;">
-			Date expired: {{$campaign->expiry_date}}
-		</div>
-		<div style="float: right; margin: 20px; padding: 20px;">
-			@if($campaign->remark1 != "")
-			<p>
-				Remark*: {{$campaign->remark1}}
-			</p>
-			@endif
-			@if($campaign->remark2 != "")
-			<p>
-				Remark**: {{$campaign->remark2}}
-			</p>
-			@endif
-		</div>
+	<div class="Detail-Pane" style="float: left; width: 30%;  margin-top: 10px; background-color: yellow; height: 390px">
+		Campaign Detail
+	</div>
+	<div class="Owner-Pane" style="float: left; width: 69%; margin-top:5px; margin-right:1%;background-color:pink; height: 280px">
+		Onwer Info
+	</div>
+	<div class="Term-Pane" style="float: left; width: 30%; margin-top:5px; background-color: blue; height: 180px">
+		Term and Condition
+	</div>
+	<div class="Code-Pane" style="float: left; width: 30%; margin-top:5px; background-color: violet; height: 95px">
+		Code
 	</div>
 </div>
+
 
 <?php ob_start(); ?>
-<div class="" style="border-style: ridge; border-width: 5px; border-color: #C0C0C0; margin: 0px 30px 20px 30px; padding: 0px 30px 20px 30px; background-size:10%; background-image: url({{{ asset('assets/img/wm.png') }}});"  align="center;">
-	<div style="float: left; width: 46%; margin-top: 1cm; margin-bottom: 10px;"><img src="{{{ asset('assets/img/voucher.png') }}}" alt="Voucher" height="200">
+<div class="Logo-Pane" style="float: left; width: 25%; height: 650px; background-color: blue;">
+	<div class="Logo" style="padding-top: 100px;">
+		<center>Lovedining LOGO</center>
 	</div>
-	<div style="float: right; position: absolute; right:0px; width: 25%; padding: 0px; margin: 0px;"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="150px" class ="logo">
+	<div class="Voucher" style="padding-top: 400px;">
+		<center>Voucher</center>
 	</div>
-	<div style="float: right; position: absolute; right:0px; width: 25%; padding: 0px; margin: 0px;">
-		@if($campaign->hotel_logo!="")
-		<a href="{{{ $campaign->url() }}}" ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="150"></a>
-		@else
-		<a href="{{{ $campaign->url() }}}"><img src="http://placehold.it/260x180" alt="" height="150"></a>
-		@endif
+	
+</div>
+<div class="Main-Pane" style="float: left; width: 70%; height: 640px; padding: 10px 10px 0px 10px; display: block; background-color: red;">
+	<div class="Banner-Pane" style="float: left; width: 70%; background-color: green; height: 370px">
+		Campaign Banner
 	</div>
-
-	<div style="clear: both; margin: 0pt; padding: 0pt; ">
-		<div style="color: #313131; font-size: 20pt; font-style: oblique; margin: 0px; padding: 0px; line-height: 30%">
-			<p>
-				{{$campaign->name}}
-			</p>
+	<div class="Detail-Pane" style="float: left; width: 30%;  background-color: yellow; height: 370px">
+		Campaign Detail
+	</div>
+	<div class="Owner-Pane" style="float: left; width: 70%; margin: 5px 5px 0px 0px; background-color:pink; height: 255px">
+		Onwer Info
+	</div>
+	<div class="Term-Code" style="float: left; width: 30%; background-color: blue; height: 255px">
+		<div class="Term-Pane" style="background-color: blue; height: 150px">
+			Term and Condition
 		</div>
-
-		<div style="color: #424242; letter-spacing: 0.1em; font-size: 14pt; line-height: 80%;">
-			@if($campaign->show_firstname == 1)
-			<p>
-				First name: {{$userCampaign->user_firstname}}
-			</p>
-			@endif
-			@if($campaign->show_lastname == 1)
-			<p>
-				Last name: {{$userCampaign->user_lastname}}
-			</p>
-			@endif
-			<p>
-				Code: {{$userCampaign->campaign_code}}
-			</p>
+		<div class="Code-Pane" style=" margin-top: 5px; background-color: violet; height: 100px">
+			Code
 		</div>
-		<div style="color: red; font-size: 12pt;">
-			Date expired: {{$campaign->expiry_date}}
-		</div>
-
 	</div>
 </div>
-<div style="float: right; line-height: 50%; margin: 0 10px 0 20px; padding: 0 10px 0 20px;">
-	@if($campaign->remark1 != "")
-	<p>
-		* {{$campaign->remark1}}
-	</p>
-	@endif
-	@if($campaign->remark2 != "")
-	<p>
-		** {{$campaign->remark2}}
-	</p>
-	@endif
-</div>
+
+
+
 <?Php
 	$html = ob_get_contents();
 	ob_end_clean();
