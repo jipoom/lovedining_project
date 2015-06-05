@@ -16,19 +16,45 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 </div>
 <div class="Main-Pane" style="float: left; width: 70%; height: 700px; padding: 0px 10px 0px 10px; display: block; background-color: red;">
 	<div class="Banner-Pane" style="float: left; width: 70%; margin-top: 10px; background-color: green; height: 390px">
-		Campaign Banner
+		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
+			?>
+			<div>
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" width="90%" alt="Banner" align="middle" /></center>
+			</div>
+		
+		@elseif(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/banner/', true);
+			?>
+			<div>
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" width="90%" alt="Banner" align="middle" /></center>
+			</div>
+		@endif
 	</div>
 	<div class="Detail-Pane" style="float: left; width: 30%;  margin-top: 10px; background-color: yellow; height: 390px">
-		Campaign Detail
+		@if($campaign->hotel_logo!="")
+		<p>
+		<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="150"></center>
+		</p>
+		
+		<p><strong>Restaurant Name</strong></p>
+		<p>Address:</p>
+		<p>Detail:</p>
+		<p>Validity:</p>
+		@else
+		<img src="http://placehold.it/260x180" alt="" height="150">
+		@endif
 	</div>
 	<div class="Owner-Pane" style="float: left; width: 69%; margin-top:5px; margin-right:1%;background-color:pink; height: 280px">
 		Onwer Info
 	</div>
 	<div class="Term-Pane" style="float: left; width: 30%; margin-top:5px; background-color: blue; height: 180px">
-		Term and Condition
+		<p><strong>Terms & Conditions</strong></p>
 	</div>
 	<div class="Code-Pane" style="float: left; width: 30%; margin-top:5px; background-color: violet; height: 95px">
-		Code
+		<p><strong>Code</strong></p>
 	</div>
 </div>
 
@@ -45,7 +71,14 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 </div>
 <div class="Main-Pane" style="float: left; width: 70%; height: 640px; padding: 10px 10px 0px 10px; display: block; background-color: red;">
 	<div class="Banner-Pane" style="float: left; width: 70%; background-color: green; height: 370px">
-		Campaign Banner
+		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name . '/banner/', true);
+			?>
+			<div>
+				<a href="{{$campaign->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->post->album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" /></a>
+			</div>
+		@endif
 	</div>
 	<div class="Detail-Pane" style="float: left; width: 30%;  background-color: yellow; height: 370px">
 		Campaign Detail
