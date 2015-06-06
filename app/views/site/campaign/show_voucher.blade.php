@@ -6,17 +6,19 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 {{-- Content --}}
 @section('content')
 <div style="width: 1100px; height: 700px">
-<div class="Logo-Pane" style="float: left; width: 300px; height: 700px; background-color: blue;">
-	<div class="Logo" style="padding-top: 100px;">
-		<center>Lovedining LOGO</center>
+<div class="Logo-Pane" style="float: left; width: 300px; height: 700px; background-color: #1b7f9f;">
+	<div class="Logo" style="padding: 40px;" >
+		<!-- <center>Lovedining LOGO</center> -->
+		<img src="{{{ asset('assets/img/logolarge.png') }}}" alt="Logo"  height="225px" class ="logo">
 	</div>
-	<div class="Voucher" style="padding-top: 400px;">
-		<center>Voucher</center>
+	<div class="Voucher" style="padding-top: 200px;">
+		<!-- <center>Voucher</center> -->
+		<img src="{{{ asset('assets/img/EVoucher.png') }}}" width="300px" class ="Voucher">
 	</div>
 	
 </div>
-<div class="Main-Pane" style="float: left; width: 800px; height: 700px; padding: 0px 10px 0px 10px; display: block; background-color: blue;">
-	<div class="Banner-Pane" style="float: left; width: 545px; margin-top: 10px; background-color: green; height: 475px">
+<div class="Main-Pane" style="float: left; width: 800px; height: 700px; padding: 0px 10px 0px 10px; display: block; background-color: #1b7f9f;">
+	<div class="Banner-Pane" style="float: left; width: 545px; margin-top: 10px; background-color: #1b7f9f; height: 475px">
 		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 			<?php
 			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
