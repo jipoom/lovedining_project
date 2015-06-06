@@ -5,7 +5,8 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 
 {{-- Content --}}
 @section('content')
-<div class="Logo-Pane" style="float: left; width: 30%; height: 700px; background-color: blue;">
+<div style="width: 1100px; height: 700px">
+<div class="Logo-Pane" style="float: left; width: 300px; height: 700px; background-color: blue;">
 	<div class="Logo" style="padding-top: 100px;">
 		<center>Lovedining LOGO</center>
 	</div>
@@ -14,13 +15,13 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 	</div>
 	
 </div>
-<div class="Main-Pane" style="float: left; width: 70%; height: 700px; padding: 0px 10px 0px 10px; display: block; background-color: red;">
-	<div class="Banner-Pane" style="float: left; width: 70%; margin-top: 10px; background-color: green; height: 390px">
+<div class="Main-Pane" style="float: left; width: 800px; height: 700px; padding: 0px 10px 0px 10px; display: block; background-color: blue;">
+	<div class="Banner-Pane" style="float: left; width: 545px; margin-top: 10px; background-color: green; height: 475px">
 		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 			<?php
 			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
 			?>
-			<div>
+			<div class="banner_main">
 				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" width="90%" alt="Banner" align="middle" /></center>
 			</div>
 		
@@ -28,39 +29,96 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			<?php
 			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/banner/', true);
 			?>
-			<div>
-				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" width="90%" alt="Banner" align="middle" /></center>
+			<div class="banner_reserve">
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" width="545px" height="475px"/></center>
 			</div>
 		@endif
 	</div>
-	<div class="Detail-Pane" style="float: left; width: 30%;  margin-top: 10px; background-color: yellow; height: 390px">
+	<div class="Detail-Pane" style="float: left; width: 30%;  margin-top: 10px; background-color: white; height: 475px">
 		@if($campaign->hotel_logo!="")
 		<p>
-		<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="150"></center>
+		<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="75px"></center>
 		</p>
+		<div class="restaurant-name" style="margin-top: 40px">
+		<h4 style="padding-left: 10px;">{{String::tidy($campaign->post->restaurant_name)}}</h3>
+		</div >
+		<div class="restaurant-address" style="height: 100px; word-wrap: break-word; margin-top: 20px"><p style="padding-left: 10px;">
+			Address: {{$campaign->post->address2}}
 		
-		<p><strong>Restaurant Name</strong></p>
-		<p>Address:</p>
-		<p>Detail:</p>
-		<p>Validity:</p>
+			{{$campaign->post->address1}}
+
+			@if($campaign->post->tumbol)
+				แขวง{{$campaign->post->tumbol}}
+			@endif
+
+			@if($campaign->post->amphur)
+				{{$campaign->post->amphur}}
+			@endif
+
+			{{$campaign->post->province->province_name}}
+			
+			{{$campaign->post->zip}}
+		</p></div>
+		<div class="campaign-detail" style="height: 160px; word-wrap: break-word;"><p style="padding-left: 10px;">Detail: {{ String::tidy($campaign->description) }}</p></div>
+		<p style="padding-left: 10px;">Valid till: {{$campaign->expiry_date}}</p>
 		@else
 		<img src="http://placehold.it/260x180" alt="" height="150">
 		@endif
 	</div>
-	<div class="Owner-Pane" style="float: left; width: 69%; margin-top:5px; margin-right:1%;background-color:pink; height: 280px">
-		Onwer Info
+	<div class="Owner-Pane" style="float: left; width: 69%; margin-top:13px; margin-right:1%;background-color:white; height: 195px">
+		@if($campaign->show_firstname == 1)
+		<div class="customer-name" style="margin-top:10px;">
+			<p style="padding-left: 10px;">
+				<strong>Name</strong> {{$userCampaign->user_firstname}}
+			@endif
+			@if($campaign->show_lastname == 1)
+				{{$userCampaign->user_lastname}}
+			</p>
+			@endif
+			@if($campaign->show_email == 1)
+			<p class="customer-email" style="padding-left: 10px;">
+				<strong>Email</strong> {{$userCampaign->user_email}}
+			</p>
+			@endif
+			@if($campaign->show_cid == 1)
+			<p class="customer-cid" style="padding-left: 10px;">
+				<strong>ID No.</strong> {{$userCampaign->user_cid}}
+			</p>
+			@endif
+			@if($campaign->show_tel == 1)
+			<p class="customer-tel" style="padding-left: 10px;">
+				<strong>MOBILE</strong> {{$userCampaign->user_tel}}
+			</p>
+		</div>
+		@endif
 	</div>
-	<div class="Term-Pane" style="float: left; width: 30%; margin-top:5px; background-color: blue; height: 180px">
-		<p><strong>Terms & Conditions</strong></p>
+	<div class="Term-Pane" style="float: left; width: 30%; margin-top:13px; background-color: white; height: 145px">
+		<div class="term-cond" style="margin-top:10px;">
+			<p style="padding-left: 10px;"><strong>Terms & Conditions</strong></p>
+			<?php $i=0;?>
+			@if($campaign->remark1 != "")
+			<p style="padding-left: 10px;">
+				{{++$i}}. {{$campaign->remark1}}
+			</p>
+			@endif
+			@if($campaign->remark2 != "")
+			<p style="padding-left: 10px;">
+				{{++$i}}. {{$campaign->remark2}}
+			</p>
+			@endif
+		</div>
 	</div>
-	<div class="Code-Pane" style="float: left; width: 30%; margin-top:5px; background-color: violet; height: 95px">
-		<p><strong>Code</strong></p>
+	<div class="Code-Pane" style="float: left; width: 30%; margin-top:5px; background-color: white; height: 45px">
+		<div class="code" style="margin-top:10px;">
+			<p style="padding-left: 10px;"><strong>Code:</strong> {{$userCampaign->campaign_code}}</p>
+		</div>
 	</div>
 </div>
-
+</div>
 
 <?php ob_start(); ?>
-<div class="Logo-Pane" style="float: left; width: 25%; height: 650px; background-color: blue;">
+<div style="width: 1000px; height: 700px">
+<div class="Logo-Pane" style="float: left; width: 250px; height: 700px; background-color: blue;">
 	<div class="Logo" style="padding-top: 100px;">
 		<center>Lovedining LOGO</center>
 	</div>
@@ -69,33 +127,103 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 	</div>
 	
 </div>
-<div class="Main-Pane" style="float: left; width: 70%; height: 640px; padding: 10px 10px 0px 10px; display: block; background-color: red;">
-	<div class="Banner-Pane" style="float: left; width: 70%; background-color: green; height: 370px">
-		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+<div class="Main-Pane" style="float: left; width: 700px; height: 700px; padding: 10px 10px 0px 10px; display: block; background-color: blue;">
+	<div class="Banner-Pane" style="float: left; width: 545px; background-color: white; height: 475px">
+		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 			<?php
-			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name . '/banner/', true);
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
 			?>
 			<div>
-				<a href="{{$campaign->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->post->album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" /></a>
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" width="545px" height="475px" alt="Banner" align="middle" /></center>
+			</div>
+		
+		@elseif(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/banner/', true);
+			?>
+			<div>
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" width="545px" height="475px"/></center>
 			</div>
 		@endif
 	</div>
-	<div class="Detail-Pane" style="float: left; width: 30%;  background-color: yellow; height: 370px">
-		Campaign Detail
+	<div class="Detail-Pane" style="float: left; width: 155px;  background-color: white; height: 475px">
+		@if($campaign->hotel_logo!="")
+		<p style="text-align: center"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="Hotel" height="75px"></p>
+		<div style="height: 160px; word-wrap: break-word;"><p style="padding-left: 5px;">
+			<p style="padding-left: 5px; font-size: 10pt"><strong>{{String::tidy($campaign->post->restaurant_name)}}</strong></p>
+			<p style="padding-left: 5px; font-size: 8pt">
+			{{$campaign->post->address2}}
+		
+			{{$campaign->post->address1}}
+
+			@if($campaign->post->tumbol)
+				แขวง{{$campaign->post->tumbol}}
+			@endif
+
+			@if($campaign->post->amphur)
+				{{$campaign->post->amphur}}
+			@endif
+
+			{{$campaign->post->province->province_name}}
+			
+			{{$campaign->post->zip}}
+		</p></div>
+		<div style="height: 160px; word-wrap: break-word;"><p style="padding-left: 5px; font-size: 8pt">Detail: {{ String::tidy($campaign->description) }}</p></div>
+		<div><p style="padding-left: 5px; font-size: 8pt">Valid till: {{$campaign->expiry_date}}</p></div>
+		@endif
 	</div>
-	<div class="Owner-Pane" style="float: left; width: 70%; margin: 5px 5px 0px 0px; background-color:pink; height: 255px">
-		Onwer Info
-	</div>
-	<div class="Term-Code" style="float: left; width: 30%; background-color: blue; height: 255px">
-		<div class="Term-Pane" style="background-color: blue; height: 150px">
-			Term and Condition
+	<div class="Owner-Pane" style="float: left; width: 540px; margin-top: 10px; background-color:white; height: 170px">
+		@if($campaign->show_firstname == 1)
+		<div style="margin-top:10px;">
+			<p style="padding-left: 5px; font-size: 8pt">
+				<strong>Name</strong> {{$userCampaign->user_firstname}}
+			@endif
+			@if($campaign->show_lastname == 1)
+				{{$userCampaign->user_lastname}}
+			</p>
+			@endif
+			@if($campaign->show_email == 1)
+			<p style="padding-left: 5px; font-size: 8pt">
+				<strong>Email</strong> {{$userCampaign->user_email}}
+			</p>
+			@endif
+			@if($campaign->show_cid == 1)
+			<p style="padding-left: 5px; font-size: 8pt">
+				<strong>ID No.</strong> {{$userCampaign->user_cid}}
+			</p>
+			@endif
+			@if($campaign->show_tel == 1)
+			<p style="padding-left: 5px; font-size: 8pt">
+				<strong>MOBILE</strong> {{$userCampaign->user_tel}}
+			</p>
 		</div>
-		<div class="Code-Pane" style=" margin-top: 5px; background-color: violet; height: 100px">
-			Code
+		@endif
+	</div>
+	<div class="Term-Code" style="float: left; width: 160px; background-color: blue; height: 170px">
+		<div class="Term-Pane" style="float: left; width: 160px; margin-left:5px; background-color: white; height: 118px">
+		<div>
+			<p style="padding-left: 5px; font-size: 8pt"><strong>Terms & Conditions</strong></p>
+			<?php $i=0;?>
+			@if($campaign->remark1 != "")
+			<p style="padding-left: 5px; font-size: 8pt">
+				{{++$i}}. {{$campaign->remark1}}
+			</p>
+			@endif
+			@if($campaign->remark2 != "")
+			<p style="padding-left: 5px; font-size: 8pt">
+				{{++$i}}. {{$campaign->remark2}}
+			</p>
+			@endif
+		</div>
+		</div>
+		<div class="Code-Pane" style="float: left; width: 160px; margin-left:5px; margin-top:5px; background-color: white; height: 40px">
+		<div>
+			<p style="padding-left: 5px; font-size: 8pt"><strong> {{$userCampaign->campaign_code}}</strong></p>
+		</div>
 		</div>
 	</div>
 </div>
-
+</div>
 
 
 <?Php
