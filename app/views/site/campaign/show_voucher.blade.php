@@ -67,7 +67,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 	</div>
 	<div class="Owner-Pane" style="float: left; width: 69%; margin-top:13px; margin-right:1%;background-color:white; height: 195px">
 		@if($campaign->show_firstname == 1)
-		<div class="customer-name" style="margin-top:10px;">
+		<div class="customer-detail" style="margin-top:10px;">
 			<p style="padding-left: 10px;">
 				<strong>Name</strong> {{$userCampaign->user_firstname}}
 			@endif
@@ -76,17 +76,17 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			</p>
 			@endif
 			@if($campaign->show_email == 1)
-			<p class="customer-email" style="padding-left: 10px;">
+			<p style="padding-left: 10px;">
 				<strong>Email</strong> {{$userCampaign->user_email}}
 			</p>
 			@endif
 			@if($campaign->show_cid == 1)
-			<p class="customer-cid" style="padding-left: 10px;">
+			<p style="padding-left: 10px;">
 				<strong>ID No.</strong> {{$userCampaign->user_cid}}
 			</p>
 			@endif
 			@if($campaign->show_tel == 1)
-			<p class="customer-tel" style="padding-left: 10px;">
+			<p style="padding-left: 10px;">
 				<strong>MOBILE</strong> {{$userCampaign->user_tel}}
 			</p>
 		</div>
@@ -133,7 +133,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			<?php
 			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
 			?>
-			<div>
+			<div class="banner-main-pdf">
 				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" width="545px" height="475px" alt="Banner" align="middle" /></center>
 			</div>
 		
@@ -141,7 +141,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			<?php
 			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/banner/', true);
 			?>
-			<div>
+			<div class="banner-reserve-pdf">
 				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" width="545px" height="475px"/></center>
 			</div>
 		@endif
@@ -149,7 +149,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 	<div class="Detail-Pane" style="float: left; width: 155px;  background-color: white; height: 475px">
 		@if($campaign->hotel_logo!="")
 		<p style="text-align: center"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="Hotel" height="75px"></p>
-		<div style="height: 160px; word-wrap: break-word;"><p style="padding-left: 5px;">
+		<div class="restaurant-name-pdf" style="height: 160px; word-wrap: break-word;"><p style="padding-left: 5px;">
 			<p style="padding-left: 5px; font-size: 10pt"><strong>{{String::tidy($campaign->post->restaurant_name)}}</strong></p>
 			<p style="padding-left: 5px; font-size: 8pt">
 			{{$campaign->post->address2}}
@@ -168,13 +168,13 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			
 			{{$campaign->post->zip}}
 		</p></div>
-		<div style="height: 160px; word-wrap: break-word;"><p style="padding-left: 5px; font-size: 8pt">Detail: {{ String::tidy($campaign->description) }}</p></div>
+		<div class="campaign-detail-pdf" style="height: 160px; word-wrap: break-word;"><p style="padding-left: 5px; font-size: 8pt">Detail: {{ String::tidy($campaign->description) }}</p></div>
 		<div><p style="padding-left: 5px; font-size: 8pt">Valid till: {{$campaign->expiry_date}}</p></div>
 		@endif
 	</div>
 	<div class="Owner-Pane" style="float: left; width: 540px; margin-top: 10px; background-color:white; height: 170px">
 		@if($campaign->show_firstname == 1)
-		<div style="margin-top:10px;">
+		<div class="customer-detail-pdf" style="margin-top:10px;">
 			<p style="padding-left: 5px; font-size: 8pt">
 				<strong>Name</strong> {{$userCampaign->user_firstname}}
 			@endif
@@ -201,7 +201,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 	</div>
 	<div class="Term-Code" style="float: left; width: 160px; background-color: blue; height: 170px">
 		<div class="Term-Pane" style="float: left; width: 160px; margin-left:5px; background-color: white; height: 118px">
-		<div>
+		<div class="Term-Cond-pdf">
 			<p style="padding-left: 5px; font-size: 8pt"><strong>Terms & Conditions</strong></p>
 			<?php $i=0;?>
 			@if($campaign->remark1 != "")
@@ -217,7 +217,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 		</div>
 		</div>
 		<div class="Code-Pane" style="float: left; width: 160px; margin-left:5px; margin-top:5px; background-color: white; height: 40px">
-		<div>
+		<div class="Code-pdf">
 			<p style="padding-left: 5px; font-size: 8pt"><strong> {{$userCampaign->campaign_code}}</strong></p>
 		</div>
 		</div>
