@@ -19,20 +19,19 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 </div>
 <div class="Main-Pane" style="float: left; width: 800px; height: 700px; padding: 0px 10px 0px 10px; display: block; background-color: #1b7f9f;">
 	<div class="Banner-Pane" style="float: left; width: 545px; margin-top: 10px; background-color: #1b7f9f; height: 475px">
-		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
-			<?php
-			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
-			?>
-			<div class="banner_main">
-				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" width="90%" alt="Banner" align="middle" /></center>
-			</div>
-		
-		@elseif(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 			<?php
 			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/banner/', true);
 			?>
 			<div class="banner_reserve">
 				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" width="545px" height="475px"/></center>
+			</div>
+		@elseif(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
+			?>
+			<div class="banner_main">
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" width="90%" alt="Banner" align="middle" /></center>
 			</div>
 		@endif
 	</div>
@@ -62,7 +61,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			{{$campaign->post->zip}}
 		</p></div>
 		<div class="campaign-detail" style="height: 160px; word-wrap: break-word;"><p style="padding-left: 10px;">Detail: {{ String::tidy($campaign->description) }}</p></div>
-		<p style="padding-left: 10px;">Valid till: {{$campaign->expiry_date}}</p>
+		<p style="padding-left: 10px;">Validity: {{$campaign->expiry_date}}</p>
 		@else
 		<img src="http://placehold.it/260x180" alt="" height="150">
 		@endif
@@ -120,32 +119,32 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 
 <?php ob_start(); ?>
 <div style="width: 1000px; height: 700px">
-<div class="Logo-Pane" style="float: left; width: 250px; height: 700px; background-color: blue;">
-	<div class="Logo" style="padding-top: 100px;">
-		<center>Lovedining LOGO</center>
+<div class="Logo-Pane" style="float: left; width: 250px; height: 700px; background-color: #1b7f9f;">
+	<div class="Logo" style="padding-top: 40px;">
+		<div style="text-align: center"><img src="{{{ asset('assets/img/logolarge.png') }}}" alt="Logo"  height="225px" class ="logo"></div>
 	</div>
-	<div class="Voucher" style="padding-top: 400px;">
-		<center>Voucher</center>
+	<div class="Voucher" style="padding-top: 200px;">
+		<div style="text-align: center"><img src="{{{ asset('assets/img/EVoucher.png') }}}" width="240px" class ="Voucher"></div>
 	</div>
 	
 </div>
-<div class="Main-Pane" style="float: left; width: 700px; height: 700px; padding: 10px 10px 0px 10px; display: block; background-color: blue;">
+<div class="Main-Pane" style="float: left; width: 700px; height: 700px; padding: 10px 10px 0px 10px; display: block; background-color: #1b7f9f;">
 	<div class="Banner-Pane" style="float: left; width: 545px; background-color: white; height: 475px">
-		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 			<?php
-			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post-> album_name . '/banner/', true);
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> album_name . '/banner/', true);
+			?>
+			<div class="banner-main-pdf">
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign-> album_name.'/banner/'.$banner[0]}}" width="545px" height="475px" alt="Banner" align="middle" /></center>
+			</div>
+		@elseif(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post->album_name . '/banner/', true);
 			?>
 			<div class="banner-main-pdf">
 				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" width="545px" height="475px" alt="Banner" align="middle" /></center>
 			</div>
-		
-		@elseif(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
-			<?php
-			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/banner/', true);
-			?>
-			<div class="banner-reserve-pdf">
-				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" width="545px" height="475px"/></center>
-			</div>
+			
 		@endif
 	</div>
 	<div class="Detail-Pane" style="float: left; width: 155px;  background-color: white; height: 475px">
@@ -171,7 +170,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 			{{$campaign->post->zip}}
 		</p></div>
 		<div class="campaign-detail-pdf" style="height: 160px; word-wrap: break-word;"><p style="padding-left: 5px; font-size: 8pt">Detail: {{ String::tidy($campaign->description) }}</p></div>
-		<div><p style="padding-left: 5px; font-size: 8pt">Valid till: {{$campaign->expiry_date}}</p></div>
+		<div><p style="padding-left: 5px; font-size: 8pt">Validity: {{$campaign->expiry_date}}</p></div>
 		@endif
 	</div>
 	<div class="Owner-Pane" style="float: left; width: 540px; margin-top: 10px; background-color:white; height: 170px">
@@ -201,7 +200,7 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 		</div>
 		@endif
 	</div>
-	<div class="Term-Code" style="float: left; width: 160px; background-color: blue; height: 170px">
+	<div class="Term-Code" style="float: left; width: 160px; background-color: #1b7f9f; height: 170px">
 		<div class="Term-Pane" style="float: left; width: 160px; margin-left:5px; background-color: white; height: 118px">
 		<div class="Term-Cond-pdf">
 			<p style="padding-left: 5px; font-size: 8pt"><strong>Terms & Conditions</strong></p>

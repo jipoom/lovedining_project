@@ -62,7 +62,6 @@
 	}
 	img.resize {
 		width: auto; /* you can use % */
-		height: 400px;
 	}
 	#voucher {
 		display: block;
@@ -71,15 +70,7 @@
 	#voucher_logo {
 		text-align: center;
 	}
-	#voucher_image {
-		height: 200px;
-	}
-	@media (max-width: 768px) {
-		#voucher_image {
-			height: 100px;
-		}
-	}
-	
+
 	#voucher p {
 		padding-left: 30px;
 	}
@@ -102,19 +93,21 @@
 
 		<!-- Post Content -->
 		<ul class="bx-wrapper" style="margin-bottom: 0px; padding-bottom: 0px;">
-			@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->post->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 			<?php
-			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post -> album_name . '/banner/', true);
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> album_name . '/banner/', true);
 			?>
 			<div>
-				<a href="{{$campaign->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->post->album_name.'/banner/'.$banner[0]}}" align="middle" /></a>
+				<a href="{{$campaign->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" align="middle" /></a>
 			</div>
-			@else
-			@if($campaign->hotel_logo!="")
-			<a href="{{{ $campaign->url() }}}"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt=""></a>
-			@else
-			<a href="{{{ $campaign->url() }}}"></a>
-			@endif
+			@elseif(!(count(glob(Config::get('app.image_path').'/'.$campaign->post-> album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$banner = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> post->album_name . '/banner/', true);
+			?>
+			<div>
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->post-> album_name.'/banner/'.$banner[0]}}" alt="Banner" align="middle" /></center>
+			</div>
+			
 			@endif
 
 		</ul>
@@ -384,7 +377,7 @@
 			slideWidth : 200,
 			adaptiveHeight : true,
 			minSlides: 3,
-  			maxSlides: 6
+  			maxSlides: 5
 		});
 		$("area[rel^='LoveDining']").prettyPhoto();
 
