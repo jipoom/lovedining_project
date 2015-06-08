@@ -114,7 +114,7 @@
 			<div id="section" class="">
 				<h3>{{String::tidy($campaign->post->restaurant_name)}}</h3>
 				<p>
-					{{ String::tidy($campaign->description) }}
+					{{ String::tidy($campaign->name) }}
 				</p>
 				<br/>
 				<div id="voucher_logo">
@@ -144,15 +144,6 @@
 					{{{ $startDate->format('d M Y') }}} to {{{ $endDate->format('d M Y') }}}
 				@endif
 			
-				@if($campaign->remark1 != "")
-					{{$campaign->remark1}}
-				@endif
-				@if($campaign->remark2 != "")
-					{{$campaign->remark2}}
-				</p>
-				<br/>
-				@endif
-				
 				<div class="row">
 
 					<div class="col-md-9">
@@ -177,7 +168,10 @@
 						</p>
 					</div>
 				</div>
-				
+				<h4>Term & Conditions</h4>
+				<p>
+					{{ String::tidy($campaign->condition) }}
+				</p>
 				<br />
 				<br />
 				@if((!$errors->isEmpty()))

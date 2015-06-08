@@ -89,13 +89,14 @@ class AdminCampaignController extends AdminController {
         if ($validator->passes())
         {
             // Update the blog post data
+            $condition = str_replace("font-family","nothing",Input::get('condition'));
+			$description = str_replace("font-family","nothing",Input::get('description'));
             $this->campaign->name  = Input::get('campaign');
 			$this->campaign->post_id  = Post::where('title','=',Input::get('review'))->first()->id;
 			$this->campaign->expiry_date  = Input::get('expiryDate');
 			$this->campaign->start_date  = Input::get('startDate');
-			$this->campaign->description  = Input::get('description');
-			$this->campaign->remark1  = Input::get('remark1');
-			$this->campaign->remark2  = Input::get('remark2');
+			$this->campaign->description  = $description;
+			$this->campaign->condition  = $condition;
 			$this->campaign->allow_duplicate_user  = Input::get('dupRegis');
 			$this->campaign->show_firstname  = Input::get('show_firstname');
 			$this->campaign->show_lastname  = Input::get('show_lastname');
@@ -197,13 +198,14 @@ class AdminCampaignController extends AdminController {
         if ($validator->passes())
         {
             // Update the blog post data
+            $condition = str_replace("font-family","nothing",Input::get('condition'));
+			$description = str_replace("font-family","nothing",Input::get('description'));
             $campaign->name  = Input::get('campaign');
 			$campaign->post_id  = Post::where('title','=',Input::get('review'))->first()->id;
 			$campaign->expiry_date  = Input::get('expiryDate');
 			$campaign->start_date  = Input::get('startDate');
-			$campaign->description  = Input::get('description');
-			$campaign->remark1  = Input::get('remark1');
-			$campaign->remark2  = Input::get('remark2');
+			$campaign->description  = $description;
+			$campaign->condition  = $condition;
 			$campaign->allow_duplicate_user  = Input::get('dupRegis');
 			$campaign->show_firstname  = Input::get('show_firstname');
 			$campaign->show_lastname  = Input::get('show_lastname');

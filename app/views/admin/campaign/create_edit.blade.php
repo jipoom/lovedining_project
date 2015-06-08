@@ -74,17 +74,16 @@
 
 						</p>
 						 <label class="control-label" for="description">Detail: </label>
-						 {{ Form::textarea('description', Input::old('description', isset($campaign) ? $campaign->description : null), array('rows'=>'5'))}} </p>
+	
+						 <textarea class="col-md-12 input-block-level" rows="5" name="description" id="description">{{{ Input::old('description', isset($campaign) ? $campaign->description : null) }}}</textarea>
 						 {{{ $errors->first('description', ':message') }}}	</p>
 						 
-						  <label class="control-label" for="description">Remark 1: </label>
-						 {{ Form::text('remark1',Input::old('remark1', isset($campaign) ? $campaign->remark1 : null))}} </p>
-						{{{ $errors->first('remark1', ':message') }}}</p>
-						
-						<label class="control-label" for="description">Remark 2: </label>
-						 {{ Form::text('remark2',Input::old('remark2', isset($campaign) ? $campaign->remark2 : null))}} </p>
-						{{{ $errors->first('remark2', ':message') }}}</p>
-						
+						 <label class="control-label" for="description">Term & Conditions: </label>
+	
+						 <textarea class="col-md-12 input-block-level" rows="8" name="condition" id="condition">{{{ Input::old('condition', isset($campaign) ? $campaign->condition : null) }}}</textarea>
+						 {{{ $errors->first('condition', ':message') }}}	</p>
+						 
+
 						<label class="control-label" for="description">Optional field 1 Name: (Leave it empty to ignore this field) </label>
 						 {{ Form::text('opt1_name',Input::old('opt1_name', isset($campaign) ? $campaign->opt1_name : null))}} </p>
 						{{{ $errors->first('opt1_name', ':message') }}}</p>
@@ -218,5 +217,35 @@ $(function() {
 	})
 
 });
+</script>
+
+<!-- TinyMCE -->
+<script type="text/javascript" src="{{asset('assets/js/tinymce/tinymce.min.js')}}"></script>
+<script type="text/javascript">
+	$(function() {
+		tinymce.init({
+			selector : "textarea",
+
+			// ===========================================
+			// INCLUDE THE PLUGIN
+			// ===========================================
+
+			menubar : false,
+			plugins : ["emoticons"],
+
+			// ===========================================
+			// PUT PLUGIN'S BUTTON on the toolbar
+			// ===========================================
+
+			toolbar : "emoticons",
+
+			// ===========================================
+			// SET RELATIVE_URLS to FALSE (This is required for images to display properly)
+			// ===========================================
+
+			relative_urls : false
+
+		});
+	}); 
 </script>
 @stop

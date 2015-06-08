@@ -149,7 +149,8 @@ class UserController extends BaseController {
             $user->prepareRules($oldUser, $user);
 			// Save Favorite Food Type
 			if(Input::get('foodType_id_temp'))
-				$user->foodType()->sync(Input::get('foodType_id_temp'));
+				$newUser = User::where('username','=',Input::get( 'username' ))->first();
+				$newUser->foodType()->sync(Input::get('foodType_id_temp'));
             // Save if valid. Password field will be hashed before save
             $user->amend();
         }
