@@ -18,11 +18,11 @@
 			<meta property="og:image" content="{{Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name}}" />
 			<meta property="fb:app_id" content="566292166825639"/>
 			@if(Session::get('Lang') == 'TH')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 200, '...')}}" />
 			@elseif(Session::get('Lang') == 'EN')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_en()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_en()), 200, '...')}}" />
 			@elseif(Session::get('Lang') == 'CN')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_cn()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_cn()), 200, '...')}}" />
 			@endif
 		@endif
 		<!-- Mobile Specific Metas

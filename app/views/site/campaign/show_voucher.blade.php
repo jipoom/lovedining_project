@@ -11,11 +11,12 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 <div class="Logo-Pane" style="float: left; width: 200px; height: 536px; background-color: #1b7f9f;">
 	<div class="Logo" >
 		<!-- <center>Lovedining LOGO</center> -->
-		<img src="{{{ asset('assets/img/logolarge.png') }}}" alt="Logo"  height="185px" class ="logo">
+		<img src="{{ Config::get('app.host_name').'/'.'assets/img/logolarge.png' }}" alt="Logo"  height="180px" class ="logo">
 	</div>
 	<div class="Voucher" style="padding-top: 200px;">
 		<!-- <center>Voucher</center> -->
-		<img src="{{{ asset('assets/img/EVoucher.png') }}}" width="200px" class ="Voucher">
+		
+		<img src="{{ Config::get('app.host_name').'/'.'assets/img/EVoucher.png' }}" width="200px" class ="Voucher">
 	</div>
 	
 </div>
@@ -172,11 +173,13 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 <div class="Logo-Pane" style="float: left; width: 180px; height: 448px; background-color: #1b7f9f;">
 	<div class="Logo" style="margin-top:15px">
 		<!-- <center>Lovedining LOGO</center> -->
-		<img src="{{{ asset('assets/img/logolarge.png') }}}" alt="Logo"  height="180px" class ="logo">
+		<img src="{{{ Config::get('app.host_name').'/'.'assets/img/logolarge.png' }}}" alt="Logo"  height="180px" class ="logo">
+		
+		
 	</div>
 	<div class="Voucher" style="padding-top: 140px;">
 		<!-- <center>Voucher</center> -->
-		<img src="{{{ asset('assets/img/EVoucher.png') }}}" width="180px" class ="Voucher">
+		<img src="{{{ Config::get('app.host_name').'/'.'assets/img/EVoucher.png' }}}" width="180px" class ="Voucher">
 	</div>
 	
 </div>
@@ -226,11 +229,11 @@ require_once (public_path() . '/mpdf60/mpdf.php');
 		<div class="Main-Bottom" style="float: left; width: 610px; margin-top:3px; background-color:#1b7f9f; height:190px; ">
 			<div class="Privilege-detail" style="float: left; background-color: white; width: 303px; height: 194px; border-radius: 5px;">
 				<p style="padding-left: 10px; margin-top: 15px;line-height: 10%;font-size: 12px"><strong>Privilege Detail: </strong></p>
-				<div style="font-size: 8px; padding-top: -10px;; padding-left: 15px; line-height: 180%">{{ String::tidy($campaign->description) }}</div>
+				<div style="font-size: 9px; padding-top: -10px;; padding-left: 15px; line-height: 140%; padding-bottom: -80px">{{ String::tidy($campaign->description) }}</div>
 			</div>
 			<div class="Term-Cond" style="float: left;  margin-left:4px; background-color: white; width: 303px; height: 194px; border-radius: 5px;">
 				<p style="padding-left: 10px; margin-top: 15px;line-height: 10%;font-size: 12px"><strong>Term & Conditions</strong></p>
-				<div style="font-size: 8px; padding-top: -10px;; padding-left: 15px; line-height: 180%">
+				<div style="font-size: 9px; padding-top: -10px;; padding-left: 15px; line-height: 140%; padding-bottom: -80px">
 					{{$campaign->condition}}
 				</div>
 

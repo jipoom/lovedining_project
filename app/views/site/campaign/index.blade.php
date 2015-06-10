@@ -124,7 +124,7 @@
 				<h4><strong><a href="{{{ $campaign->url() }}}">{{ String::title($campaign->name) }}</a></strong></h4>
 				
 				<p>
-					{{ String::tidy(Str::limit($campaign->description, 200)) }}
+					{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $campaign->description), 200, '...')}}
 				</p>
 				<br/>
 				<?php $startDate =  new DateTime($campaign->start_date); ?>
