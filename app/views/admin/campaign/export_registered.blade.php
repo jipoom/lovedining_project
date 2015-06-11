@@ -16,12 +16,6 @@ require_once(public_path().'/mpdf60/mpdf.php');
 {{-- Content --}}
 @section('content')
 
-<div class="page-header">
-	<h3>
-		Converting table to PDF ....
-
-	</h3>
-</div>
 @if (count($userCampaign) > 0)
 	<?php ob_start(); ?>
 	<h3>{{{ $title }}}</h3>
@@ -104,19 +98,16 @@ require_once(public_path().'/mpdf60/mpdf.php');
 		$pdf->SetDisplayMode('fullpage');
 		$pdf->WriteHTML($html, 2);
 		$pdf->Output(storage_path().'/campaign.pdf','F');?>
-	<div id="show_file"><p><a href="{{{ URL::to('admin/campaign/stream_pdf') }}}" id="open_pdf">เปิดไฟล์ที่นี่</a></p></div>
+		<div id="convert_file"><center>Converting table to PDF <img src="{{ Config::get('app.host_name').'/'.'assets/img/ajax-loader.gif' }}"></center></div>
 @endif
 @stop
 @section('scripts')
 <script>
 $( document ).ready(function() {
-	$("#show_file").hide();
-setTimeout(function(){showDownload()},1000);
+setTimeout(function(){showDownload()},2000);
 });
-function showDownload(){
-	alert('สร้างไฟล์  PDF สำเร็จ');
-	$("#title").text("สร้างไฟล์  PDF สำเร็จ");
-	$("#show_file").show();
-}
+function showDownload() {
+		window.location.assign("{{{ URL::to('admin/campaign/stream_pdf') }}}");
+	}
 </script>
 @stop

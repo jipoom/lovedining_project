@@ -54,7 +54,7 @@
 			
 				<li>
 					<div>																																	
-					<a href="{{$temp->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$temp->album_name.'/banner/'.$banner[0]}}" title="" align="middle" /></a>		
+					<a href="{{$temp->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$temp->album_name.'/banner/'.$banner[0]}}" title="{{$temp->name}}" align="middle" /></a>		
 					</div>
 				</li>
 			@endif
@@ -82,13 +82,13 @@
 			<div class="col-md-6">
 		@if(Auth::check() || Session::get('socialUser.isLogin')) 
 				
-				@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+				@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/thumbnail/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 					<?php
-					$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/',true);
+					$thumbnail = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->album_name.'/thumbnail/',true);
 					?>
 				
 						<div>																																	
-						<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" align="middle" /></a>		
+						<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" /></a>		
 						</div>
 				@else
 						@if($campaign->hotel_logo!="")			
@@ -102,13 +102,13 @@
 					<div class="ribbon-wrapper-green"><div class="ribbon-green">NEW</div></div>		
 				@endif	
 		@else
-			@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/thumbnail/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
 				<?php
-				$banner = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->album_name.'/banner/',true);
+				$thumbnail = Picture::directoryToArray(Config::get('app.image_path').'/'.$campaign->album_name.'/thumbnail/',true);
 				?>
 			
 					<div>																																	
-					<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/banner/'.$banner[0]}}" align="middle" /></a>		
+					<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" /></a>		
 					</div>
 			@else
 					@if($campaign->hotel_logo!="")			
@@ -124,7 +124,8 @@
 				<h4><strong><a href="{{{ $campaign->url() }}}">{{ String::title($campaign->name) }}</a></strong></h4>
 				
 				<p>
-					{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =/_{}:\".-]*[>]*)+)|(&nbsp;)%', '', $campaign->description), 200, '...')}}
+					
+					{{Str::limit(strip_tags($campaign->description),200,'...')}}
 				</p>
 				<br/>
 				<?php $startDate =  new DateTime($campaign->start_date); ?>

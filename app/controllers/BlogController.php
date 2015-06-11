@@ -521,6 +521,17 @@ class BlogController extends BaseController {
         
     }
 	
+	public function voucherToPDF($userCampaignId)
+    {
+        $title = "List of registered users for (Lovedinings)";
+		$userCampaign = UserCampaign::find($userCampaignId);
+		$campaign = Campaign::find($userCampaign->campaign_id);
+        // Show the page
+        //return View::make('admin/campaign/view_registered', compact('userCampaign', 'title','campaign'));
+		return View::make('site/campaign/download',compact('userCampaign', 'title','campaign'));
+    }
+	
+	
 	public function searchCampaign($keyword)
 	{
 

@@ -259,6 +259,7 @@ Route::group(array('prefix' => 'campaign'), function()
 {
 	 Route::get('/', 'BlogController@getAllCampaign');	
 	 Route::get('stream_pdf/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@streamPDF'));
+	 Route::get('convert_pdf/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@voucherToPDF'));
 	 Route::get('search/{keywork}', 'BlogController@searchCampaign');
 	 Route::get('{campaignId}/{lang}', 'BlogController@getCampaign');
 	 Route::post('{campaignId}/{lang}', 'BlogController@postRegister');

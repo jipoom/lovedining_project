@@ -18,13 +18,30 @@
 			<meta property="og:image" content="{{Config::get('app.image_base_url').'/'.$post->album_name.'/'.$post->profile_picture_name}}" />
 			<meta property="fb:app_id" content="566292166825639"/>
 			@if(Session::get('Lang') == 'TH')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(strip_tags($post->content()), 200, '...')}}" />
 			@elseif(Session::get('Lang') == 'EN')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_en()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(strip_tags($post->content_en()), 200, '...')}}" />
 			@elseif(Session::get('Lang') == 'CN')
-				<meta property="og:description" content="{{Str::limit(preg_replace('%(([<][/]*[#;ก-๙a-zA-Z0-9 =\'\%\'\/_{}:;\".-]*[>]*)+)|(&nbsp;)%', '', $post->content_cn()), 200, '...')}}" />
+				<meta property="og:description" content="{{Str::limit(strip_tags($post->content_cn()), 200, '...')}}" />
+			@endif
+		@elseif(isset($campaign))
+			<?php
+			$thumbnail = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign -> album_name . '/thumbnail/', true);
+			?>
+			<meta property="og:title" content="{{$campaign->name}}" />
+			<meta property="og:url" content="{{$campaign->url()}}" />
+			<meta property="og:type" content="website" />
+			<meta property="og:image" content="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" />
+			<meta property="fb:app_id" content="566292166825639"/>
+			@if(Session::get('Lang') == 'TH')
+				<meta property="og:description" content="{{Str::limit(strip_tags($campaign->description), 200, '...')}}" />
+			@elseif(Session::get('Lang') == 'EN')
+				<meta property="og:description" content="{{Str::limit(strip_tags($campaign->description), 200, '...')}}" />
+			@elseif(Session::get('Lang') == 'CN')
+				<meta property="og:description" content="{{Str::limit(strip_tags($campaign->description), 200, '...')}}" />
 			@endif
 		@endif
+		
 		<!-- Mobile Specific Metas
 		================================================== -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">

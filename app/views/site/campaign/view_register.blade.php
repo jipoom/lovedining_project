@@ -6,7 +6,6 @@
 @parent
 @stop
 {{-- Update the Meta Title --}}
-@section('meta_title')
 @parent
 
 @stop
@@ -173,14 +172,16 @@
 					{{ String::tidy($campaign->condition) }}
 				</p>
 				<br />
+				<div class="fb-like" data-href="{{Request::url()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+				<br />
 				<br />
 				@if((!$errors->isEmpty()))
 				<div id="voucher_nav_panel" style="display: none;">
 				@else
 				<div id="voucher_nav_panel">
 				@endif
-					<center style="color:#0D8FA9;"><a href="{{{ Post::find($campaign->post_id)->url() }}}" target="_blank" style="color:#0D8FA9;">review</a>
-						| <button style="color:#0D8FA9;" class="btn-link" onclick="showRegister()">get voucher</button>
+					<center style="color:#0D8FA9;"><a href="{{{ Post::find($campaign->post_id)->url() }}}" class="btn btn-primary" target="_blank">review</a>
+						<button class="btn btn-success" onclick="showRegister()">get voucher</button>
 					</center>
 				</div>
 				@if((!$errors->isEmpty()))
@@ -296,7 +297,7 @@
 				@endif	
 				</div>
 					<br/>
-					<center style="color:#0D8FA9;"><a href="{{{ Post::find($campaign->post_id)->url() }}}" target="_blank" style="color:#0D8FA9;">review</a>
+					<center style="color:#0D8FA9;"><a href="{{{ Post::find($campaign->post_id)->url() }}}" class="btn btn-success" target="_blank">review</a>
 					</center>
 				</div>
 				<br/>
@@ -404,5 +405,17 @@
 		});
 
 	}); 
+</script>
+<!-- for facebook like and share -->
+<script>
+	( function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=566292166825639&version=v2.0";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk')); 
 </script>
 @stop
