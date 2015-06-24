@@ -213,7 +213,9 @@ class UserController extends BaseController {
         // Check that the user is confirmed.
         if ( Confide::logAttempt( $input, true ) )
         {
-            return Redirect::intended('/');
+            $url = Session::get('previousPage');
+            Session::forget('previousPage');	
+            return Redirect::intended($url);
         }
         else
         {
@@ -324,7 +326,7 @@ class UserController extends BaseController {
     public function getLogout()
     {
         Confide::logout();
-
+		Session::flush();
         return Redirect::to('/');
     }
 

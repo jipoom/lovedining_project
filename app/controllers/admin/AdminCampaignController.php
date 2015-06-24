@@ -106,7 +106,6 @@ class AdminCampaignController extends AdminController {
 			$this->campaign->show_tel  = Input::get('show_tel');
 			$this->campaign->isActive  = Input::get('isActive');
 			$this->campaign->album_name  = Input::get('album_name');
-			$this->campaign->hotel_logo  = Input::get('hotel_logo');
 			$this->campaign->opt1_name  = Input::get('opt1_name');
 			$this->campaign->opt2_name  = Input::get('opt2_name');
 			$this->campaign->opt3_name  = Input::get('opt3_name');
@@ -215,7 +214,6 @@ class AdminCampaignController extends AdminController {
 			$campaign->show_tel  = Input::get('show_tel');
 			$campaign->isActive  = Input::get('isActive');
 			$campaign->album_name  = Input::get('album_name');
-			$campaign->hotel_logo  = Input::get('hotel_logo');
 			$campaign->opt1_name  = Input::get('opt1_name');
 			$campaign->opt2_name  = Input::get('opt2_name');
 			$campaign->opt3_name  = Input::get('opt3_name');

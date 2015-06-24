@@ -77,6 +77,9 @@
 		display: block;
 		border: 2px solid #0D8FA9;
 		padding: 20px 10px 20px 10px;
+		margin-bottom: 20px;
+		float: left;
+		width: 100%;
 	}
 </style>
 
@@ -118,7 +121,18 @@
 				<br/>
 				<div id="voucher_logo">
 					<img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="100" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="hotel_logo" height="100">
+					@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/hotel_logo/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+					<?php
+					$hotelLogo = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/hotel_logo/', true);
+					?>
+			
+						<img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/hotel_logo/'.$hotelLogo[0]}}" alt="Hotel"height="100"/>
+				
+					@else
+					
+						<img src="http://placehold.it/100x100" alt="" height="100">
+					
+					@endif
 				</div>
 			</div>
 		<div class="row">
@@ -191,12 +205,73 @@
 				@endif
 				<div id="register_zone">
 				@if ( ! (Auth::check()  || Session::get('socialUser.isLogin')))
-					You need to be logged in to register for this Voucher.
-					<br />
-					<br />
-					Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
-					<br />
-					<br />
+					<div>
+					<div style="height: 100%; width: 50%; float: left; padding-right: 10%; border-right: 1px solid #0D8FA9;">
+						<form class="form-horizontal" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
+						    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+						    <fieldset>
+						    	<p>
+						    		<font size="4">Sign in</font>
+						    	</p>
+						        <div class="form-group">
+						            <label class="col-md-4 control-label" for="email"><font size="2px">username</font></label>
+						            <div class="col-md-8">
+						                <input class="form-control" tabindex="1"  type="text" name="email" id="email" value="{{ Input::old('email') }}">
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label class="col-md-4 control-label" for="password">
+						                <font size="2px">password</font>
+						            </label>
+						            <div class="col-md-8">
+						                <input class="form-control" tabindex="2"  type="password" name="password" id="password">
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <div class="col-md-offset-2 col-md-10">
+						                <a href = "{{{URL::to('user/fb')}}}" class="btn btn-primary">Login with Facebook</a>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <div class="col-md-offset-2 col-md-10">
+						                <div class="checkbox">
+						                    <label for="remember">{{ Lang::get('confide::confide.login.remember') }}
+						                        <input type="hidden" name="remember" value="0">
+						                        <input tabindex="4" type="checkbox" name="remember" id="remember" value="1">
+						                    </label>
+						                </div>
+						            </div>
+						        </div>
+						
+						        @if ( Session::get('error') )
+						        <div class="alert alert-danger">{{ Session::get('error') }}</div>
+						        @endif
+						
+						        @if ( Session::get('notice') )
+						        <div class="alert">{{ Session::get('notice') }}</div>
+						        @endif
+						
+						        <div class="form-group">
+						            <div class="col-md-offset-2 col-md-10">
+						                <button tabindex="3" type="submit" class="btn btn-primary">{{ Lang::get('confide::confide.login.submit') }}</button>
+						                <a class="btn btn-default" href="forgot">{{ Lang::get('confide::confide.login.forgot_password') }}</a>
+						            </div>
+						        </div>
+						    </fieldset>
+						</form>
+					</div>
+					</div>
+					<div style="height: 100%; width: 45%; float: right;">
+					 	
+						<font size="4">I am new to Lovedinings</font> 
+						<br />
+						<br />
+						
+						<a href="{{{ URL::to('user/create') }}}" class="btn btn-warning" target="_blank">Create my account</a>
+					</div>
+					<?php 
+						Session::put('previousPage',Request::url());
+					?>
 				@else
 					@if(Session::get('socialUser.isLogin'))
 						<?php $statement = ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('social_id','=',Session::get('socialUser.id'))->first()) == 0);?>
@@ -213,7 +288,7 @@
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 								<!-- ./ csrf token -->
-			
+								
 								<!-- Left Column -->
 								<div class="col-md-12">
 									@if($campaign->show_firstname == 1)
@@ -296,8 +371,7 @@
 					@endif
 				@endif	
 				</div>
-					<br/>
-					<center style="color:#0D8FA9;"><a href="{{{ Post::find($campaign->post_id)->url() }}}" class="btn btn-success" target="_blank">review</a>
+					<center style="color:#0D8FA9;"><a href="{{{ Post::find($campaign->post_id)->url() }}}" class="btn btn-primary" target="_blank">review</a>
 					</center>
 				</div>
 				<br/>

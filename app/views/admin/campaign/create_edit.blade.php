@@ -120,26 +120,10 @@
 						{{ Form::checkbox('isActive',1,Input::old('isActive', isset($campaign) ? $campaign->isActive : 0)) }}<label class="control-label" for="description"> Activate/Deactivate</label></p>
 						
 						
-						<div class="form-group">
-		                    <div class="col-md-12">
-		 						<p><label class="control-label" for="hotelLogo">Hotel Logo</label></p>
-		                          <div id="picture">
-		                          	@if(isset($campaign) && $campaign->hotel_logo!="")
-		
-		                          		<img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" height="180" width="260"/>
-		                          		
-		                          	@else
-		                          		<img src="http://placehold.it/260x180" alt="">
-		                          	@endif
-				                   
-				             	</div>
-				        	</div>
-						</div>  
+					 
 				        <div class="button-group">
-				                	 {{ Form::hidden('hotel_logo', Input::old('hotel_logo', isset($campaign) && $campaign->hotel_logo!="" ? $campaign->hotel_logo : null), array('id'=>'featured_image')) }} </p>  
-				             
-				                   <!-- <input type="hidden" id="featured_image" placeholder="Profile Picture" readonly name="profilePic" /> -->
-				                    <button type="button" class="browse" id="imageUpload" > Browse Image</button>
+				        	  <br><label>Manage Images here: </label></br>
+				             <button type="button" class="browse btn btn-primary" id="imageUpload" > Image management</button>
 				        </div>
 								
 						
@@ -147,6 +131,7 @@
 						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName);?>
 						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName.'/banner');?>
 						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName.'/thumbnail');?>
+						 	<?php mkdir(Config::get('app.image_path') . '/' . $randAlbumName.'/hotel_logo');?>
 						 	{{ Form::hidden('album_name', Input::old('album_name', isset($campaign) ? $campaign->album_name : $randAlbumName), array('id'=>'album_name')) }} </p>  
 	                     @else
 	                     	{{ Form::hidden('album_name', Input::old('album_name', isset($campaign) ? $campaign->album_name : Input::old('album_name')), array('id'=>'album_name')) }} </p>  
@@ -190,10 +175,6 @@ $(document).ready(function(){
 
 });
 
-function processFile(url,name){
-    $('#picture').html('<img src="' + url + '" height="180" width="260"/>');
-    $('#featured_image').val(name);
-}
 </script>
 <!-- DatePicker -->
 <script src="{{asset('assets/js/jquery.simple-dtpicker.js')}}"></script>

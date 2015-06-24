@@ -91,11 +91,9 @@
 						<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" /></a>		
 						</div>
 				@else
-						@if($campaign->hotel_logo!="")			
-								<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt=""></a>
-						@else
-								<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-						@endif
+
+					<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+
 				@endif
 					
 				@if(!User::checkIfUserSeeCampaign($campaignUserRead,$campaign->id))
@@ -111,11 +109,7 @@
 					<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" /></a>		
 					</div>
 			@else
-					@if($campaign->hotel_logo!="")			
-							<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt=""></a>
-					@else
-							<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
-					@endif
+					<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 			@endif
 		@endif	
 			</div>
@@ -150,6 +144,9 @@
 
 <hr />
 @endforeach
+<div class="col-md-8 pull-right">
+	{{ $campaigns->links() }}
+</div>
 </div>
 
 

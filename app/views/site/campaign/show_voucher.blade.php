@@ -72,13 +72,17 @@
 		</div>
 	</div>
 	<div class="Detail-Pane" style="float: left; width: 236px; margin-left: 4px; background-color: white; height: 536px; ">
-		@if($campaign->hotel_logo!="")
-		<p>
-		<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/'.$campaign->hotel_logo}}" alt="" height="75px"></center>
-		</p>
+		
+		@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/hotel_logo/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
+			<?php
+			$hotelLogo = Picture::directoryToArray(Config::get('app.image_path') . '/' . $campaign ->album_name . '/hotel_logo/', true);
+			?>
+			<p>
+				<center><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/hotel_logo/'.$hotelLogo[0]}}" alt="Hotel" align="middle" height="75"/></center>
+			</p>
 		@else
 		<p>
-		<img src="http://placehold.it/260x180" alt="" height="150">
+				<center><img src="http://placehold.it/260x180" alt="" height="75"></center>
 		</p>
 		@endif
 		<div class="restaurant-name" style="margin-top: 70px">

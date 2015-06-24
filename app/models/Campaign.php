@@ -37,7 +37,7 @@ class Campaign extends Eloquent {
 					  ->orwhere('campaign.name', 'LIKE', '%'. $term .'%')
 					  ->orwhere('campaign.description', 'LIKE', '%'. $term .'%');
 
-            })->paginate(8,array('campaign.id', 'campaign.name', 'campaign.description', 'campaign.start_date', 
+            })->paginate(3,array('campaign.id', 'campaign.name', 'campaign.description', 'campaign.start_date', 
 			'campaign.expiry_date','campaign.hotel_logo','campaign.album_name','campaign.remark1','campaign.remark2',
 			'campaign.allow_duplicate_user','campaign.post_id','campaign.created_at',
 			'campaign.updated_at','campaign.show_firstname','campaign.show_lastname','campaign.show_cid','campaign.show_email','campaign.show_tel',

@@ -30,7 +30,7 @@ class BlogController extends BaseController {
 	public function changeLang($lang,$page=null)
 	{
 		Session::put('Lang',$lang);
-
+		Session::put('previousPage',Request::url());
 		if($page == "campaign")
 		{
 			$goto = Session::get('Campaign');
@@ -69,7 +69,7 @@ class BlogController extends BaseController {
 
 		//Keep stat
 		//Statistic::keepStat(0,"Home",0,Request::getClientIp());
-		
+		Session::put('previousPage',Request::url());
 		//Clear Session
 		if(!Session::has('Lang'))
 		{
@@ -124,7 +124,7 @@ class BlogController extends BaseController {
 	 */
 	public function getCategory($categoryId)
 	{
-		
+		Session::put('previousPage',Request::url());
 		// Get all the blog posts
 		if(!Session::has('Lang'))
 		{
@@ -162,6 +162,7 @@ class BlogController extends BaseController {
 	
 	public function getCategoryMode($categoryId, $mode,$keyword=null)
 	{
+		Session::put('previousPage',Request::url());
 		// Get all the blog posts
 		if(!Session::has('Lang'))
 		{
@@ -214,6 +215,7 @@ class BlogController extends BaseController {
 		// Get this blog post data
 		Session::put('Lang',$lang);	
 		Session::put('View',$postId."/".$slug);
+		Session::put('previousPage',Request::url());
 		$page = "post";
 		$post = $this->post->active()->where('id', '=', $postId)->first();
 		// Check if the blog post exists
@@ -352,11 +354,11 @@ class BlogController extends BaseController {
 		{
 			Session::put('Lang','TH');
 		}
-
+		Session::put('previousPage',Request::url());
 		Session::forget('Campaign');
 		Session::forget('mode');
 		Session::forget('catName');
-		$campaigns = Campaign::active()->orderBy('rank')->get();
+		$campaigns = Campaign::active()->orderBy('rank')->paginate(3);
 		$home = Campaign::active()->where('is_home','=',1)->get();
 		if(Session::get('socialUser.isLogin'))
 			$campaignUserRead = CampaignUserRead::where('social_id','=',Session::get('socialUser.id'))->get();
@@ -368,6 +370,7 @@ class BlogController extends BaseController {
 		//Session::put('Lang',$lang);	
 		Session::put('Lang',$lang);	
 		Session::put('Campaign',$campaignId);
+		Session::put('previousPage',Request::url());
 		$page = "campaign";
 		$campaign= Campaign::find($campaignId);
 		
