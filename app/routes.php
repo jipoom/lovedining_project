@@ -255,7 +255,7 @@ Route::get('deploy/project', 'BlogController@getDeploy');
 //Route::get('category/{categoryId}/{mode}', 'BlogController@getCategory');
 
 # Campaign
-Route::group(array('prefix' => 'campaign'), function()
+Route::group(array('prefix' => 'cp'), function()
 {
 	 Route::get('/', 'BlogController@getAllCampaign');	
 	 Route::get('stream_pdf/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@streamPDF'));

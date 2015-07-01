@@ -1,27 +1,5 @@
 @extends('site.layouts.default')
 
-{{-- Web site Title --}}
-@section('title')
-{{{ String::title($campaign->title) }}} ::
-@parent
-@stop
-{{-- Update the Meta Title --}}
-@parent
-
-@stop
-
-{{-- Update the Meta Description --}}
-@section('meta_description')
-@parent
-
-@stop
-
-{{-- Update the Meta Keywords --}}
-@section('meta_keywords')
-@parent
-
-@stop
-
 @section('styles')
 <style>
 	.col-md-9 img {
@@ -84,10 +62,8 @@
 </style>
 
 @stop
-
 {{-- Content --}}
 @section('content')
-
 <div class="row">
 	<div id="voucher" class="">
 		<!-- Post Title -->
@@ -269,9 +245,6 @@
 						
 						<a href="{{{ URL::to('user/create') }}}" class="btn btn-warning" target="_blank">Create my account</a>
 					</div>
-					<?php 
-						Session::put('previousPage',Request::url());
-					?>
 				@else
 					@if(Session::get('socialUser.isLogin'))
 						<?php $statement = ($campaign->allow_duplicate_user == 0 && count(UserCampaign::where('campaign_id','=',$campaign->id)->where('social_id','=',Session::get('socialUser.id'))->first()) == 0);?>
@@ -303,7 +276,7 @@
 									@endif
 									
 									@if($campaign->show_email == 1)
-									<label class="control-label" for="Email"> Email</label><font color="red">{{{ $errors->first('email', ':message') }}}</font><font color="blue">We do not support <strong>hotmail.com</strong> </font>
+									<label class="control-label" for="Email"> Email</label><font color="red">{{{ $errors->first('email', ':message') }}}</font>
 									{{ Form::text('email',Input::old('email', Session::get('socialUser.isLogin') ? Session::get('socialUser.email') : Auth::user() -> email) , array('class'=>'form-control', 'placeholder'=>'Email'))}} </p>
 			
 									@endif
@@ -401,6 +374,8 @@
 		
 		
 	</div>
+</div>
+</div>
 </div>
 
 @stop

@@ -11,7 +11,7 @@ class Campaign extends Eloquent {
 	
 	public function url()
 	{
-		return Url::to("campaign/".$this->id."/".Session::get('Lang'));
+		return Url::to("cp/".$this->id."/".Session::get('Lang'));
 	}
 	
 	public function scopeActive($query)

@@ -39,7 +39,7 @@ class UserController extends BaseController {
     public function postIndex()
     {
         $rules = array(
-			'email' => array('regex:(^((?![0-9A-Za-z]*@hotmail.com[0-9A-Za-z]*).)*$)')
+			//'email' => array('regex:(^((?![0-9A-Za-z]*@hotmail.com[0-9A-Za-z]*).)*$)')
 		);
 		
 		// Validate the inputs
@@ -325,8 +325,9 @@ class UserController extends BaseController {
      */
     public function getLogout()
     {
+        Auth::logout();	
+        Session::flush();	
         Confide::logout();
-		Session::flush();
         return Redirect::to('/');
     }
 

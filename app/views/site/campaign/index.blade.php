@@ -19,6 +19,10 @@
     width:300px; /* you can use % */
     height: auto;
 	}
+	img.profile-pic {
+    max-width:254px; /* you can use % */
+    max-height: 180px;
+	}
 	
 	#content_header {
 	  padding: 0px 0px 30px 0px;
@@ -54,7 +58,7 @@
 			
 				<li>
 					<div>																																	
-					<a href="{{$temp->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$temp->album_name.'/banner/'.$banner[0]}}" title="{{$temp->name}}" align="middle" /></a>		
+					<a href="{{$temp->url()}}"><img src="{{Config::get('app.image_base_url').'/'.$temp->album_name.'/banner/'.$banner[0]}}" title="{{$temp->name}}" align="middle" style="max-width: 800px; max-height: 250px"/></a>		
 					</div>
 				</li>
 			@endif
@@ -88,11 +92,11 @@
 					?>
 				
 						<div>																																	
-						<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" /></a>		
+						<a href="{{$campaign->url()}}"  ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" class="profile-pic"/></a>		
 						</div>
 				@else
 
-					<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+					<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/254x180" alt=""></a>
 
 				@endif
 					
@@ -106,7 +110,7 @@
 				?>
 			
 					<div>																																	
-					<a href="{{$campaign->url()}}"  class="thumbnail"><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" /></a>		
+					<a href="{{$campaign->url()}}" ><img src="{{Config::get('app.image_base_url').'/'.$campaign->album_name.'/thumbnail/'.$thumbnail[0]}}" align="middle" class="profile-pic"/></a>		
 					</div>
 			@else
 					<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
@@ -125,11 +129,11 @@
 				<?php $startDate =  new DateTime($campaign->start_date); ?>
 				<?php $endDate =  new DateTime($campaign->expiry_date); ?>
 				@if($startDate->format('Y') == $endDate->format('Y'))
-					<p>Valid {{{ $startDate->format('d M') }}} - {{{ $endDate->format('d M Y') }}}</p>
+					<p><strong>Valid</strong> {{{ $startDate->format('d M') }}} - {{{ $endDate->format('d M Y') }}}</p>
 				@else
-					<p>Valid {{{ $startDate->format('d M Y') }}} - {{{ $endDate->format('d M Y') }}}</p>
+					<p><strong>Valid</strong> {{{ $startDate->format('d M Y') }}} - {{{ $endDate->format('d M Y') }}}</p>
 				@endif
-				<br/>
+				</p>
 				<a href="{{{ $campaign->url() }}}"  style="color:#0D8FA9;">more detail</a>
 				|
 				<a href="{{{ Post::find($campaign->post_id)->url() }}}"  target="_blank" style="color:#0D8FA9;">review</a>
@@ -172,7 +176,7 @@
 			speed : 500,
 			randomStart : true,
 			responsive : true,
-			slideWidth : 1600,
+			slideWidth : 800,
 			adaptiveHeight: true
 		});
 			
@@ -196,7 +200,7 @@
 				document.getElementById("reload_campaign").innerHTML = xmlhttp.responseText;
 			}
 		}
-		xmlhttp.open("GET", "{{{ URL::to('campaign/search') }}}/" + word, true);
+		xmlhttp.open("GET", "{{{ URL::to('cp/search') }}}/" + word, true);
 		xmlhttp.send();
 
 	}
