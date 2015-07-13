@@ -85,8 +85,29 @@ class UserController extends BaseController {
 	            // Redirect with success message, You may replace "Lang::get(..." for your custom message.
 	            $roles = array('0'=>'2');
 				$this->user->saveRoles($roles);
-	            return Redirect::to('user/login')
-	                ->with( 'notice', Lang::get('user/user.user_account_created') );
+	            //return Redirect::to('user/login')
+	            //    ->with( 'notice', Lang::get('user/user.user_account_created') );
+				
+				// Login Automatically
+				$input = array(
+					'email'    => Input::get( 'email' ), // May be the username too
+					'username' => Input::get( 'email' ), // May be the username too
+					'password' => Input::get( 'password' ),
+					'remember' => 0,
+				);
+				
+				// If you wish to only allow login from confirmed users, call logAttempt
+				// with the second parameter as true.
+				// logAttempt will check if the 'email' perhaps is the username.
+				// Check that the user is confirmed.
+				if ( Confide::logAttempt( $input, true ) )
+				{
+						
+					$url = Session::get('previousPage');
+					Session::forget('previousPage');	
+					return Redirect::intended($url);
+				}
+				
 	        }
 	        else
 	        {

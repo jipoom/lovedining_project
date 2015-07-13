@@ -96,10 +96,8 @@
 			<h3>
 				{{ $title }}
 				<div class="pull-right">
-					<a href="{{{ URL::to('campaign').'/'.$campaign->id.'/'.Session::get('Lang') }}}" id="back"><button class="btn btn-default btn-small"><span class="glyphicon glyphicon-backward"></span> Back to Campaign</button></a>
-					<!--
-						<a href="{{{ URL::to('campaign/convert_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank"><button class="btn btn-default btn-small"><span class="glyphicon glyphicon-cloud-download"></span> Download Voucher</button></a>
-					-->
+					<a href="{{{ URL::to('cp').'/'.$campaign->id.'/'.Session::get('Lang') }}}" id="back"><button class="btn btn-default btn-small"><span class="glyphicon glyphicon-backward"></span> Back to Campaign</button></a>
+					<!--<a href="{{{ URL::to('campaign/convert_pdf/'.$userCampaign->id) }}}" id="open_pdf" target="_blank"><button class="btn btn-default btn-small"><span class="glyphicon glyphicon-cloud-download"></span> Download Voucher</button></a> -->
 				</div>
 			</h3>
 		</div>

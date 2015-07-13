@@ -83,7 +83,7 @@
 
 		<!-- Post Content -->
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 		@if(Auth::check() || Session::get('socialUser.isLogin')) 
 				
 				@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/thumbnail/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
@@ -116,6 +116,8 @@
 					<a href="{{{ $campaign->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 			@endif
 		@endif	
+			</div>
+			<div class="col-md-1">
 			</div>
 			<div class="col-md-6">
 				

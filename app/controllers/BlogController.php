@@ -415,7 +415,7 @@ class BlogController extends BaseController {
 			$rules['lastname'] = 'required';
 		}
 		if($campaign->show_email == 1){
-			$rules['email'] = array('regex:(^((?![0-9A-Za-z]*@hotmail.com[0-9A-Za-z]*).)*$)','required');
+			$rules['email'] = 'required';
 		}
 		if($campaign->show_tel == 1){
 			$rules['tel'] = 'required';
@@ -481,13 +481,13 @@ class BlogController extends BaseController {
 				          ->subject($subject);
 				});*/
 				//return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
-				return Redirect::to('campaign/voucher/' . $campaignId.'/'.$userCampaign->id);
+				return Redirect::to('cp/voucher/' . $campaignId.'/'.$userCampaign->id);
             }
 
-            return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
+            return Redirect::to('cp/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
         			
 		}
-		return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
+		return Redirect::to('cp/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
 	}
 	public function getVoucher($campaignId,$userCampaignId){
 		//Session::put('Lang',$lang);	
