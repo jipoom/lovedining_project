@@ -45,7 +45,13 @@
 		margin: 10px;
 	}
 	#voucher_logo {
-		text-align: center;
+		float:right;
+		width: 50%;
+		text-align: right;
+	}
+	#section {
+		float:right;
+		width: 50%;
 	}
 
 	#voucher p {
@@ -58,6 +64,16 @@
 		margin-bottom: 20px;
 		float: left;
 		width: 100%;
+	}
+	@media screen and (max-width: 768px) {
+		#voucher_logo 
+		{
+			width: 100%;
+			text-align: center;
+		}
+		#section {
+			width: 100%;
+		}
 	}
 </style>
 
@@ -88,13 +104,11 @@
 			
 			@endif
 
-		</ul>
-			<div id="section" class="">
-				<h3>{{String::tidy($campaign->post->restaurant_name)}}</h3>
-				<p>
-					{{ String::tidy($campaign->name) }}
-				</p>
-				<br/>
+			</ul>
+			<br/>
+			<br/>
+			<div>
+
 				<div id="voucher_logo">
 					<img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="100" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					@if(!(count(glob(Config::get('app.image_path').'/'.$campaign->album_name.'/hotel_logo/'.'*.{jpg,png,gif,JPG,PNG,GIF,jpeg,JPEG}',GLOB_BRACE)) === 0))
@@ -109,6 +123,14 @@
 						<img src="http://placehold.it/100x100" alt="" height="100">
 					
 					@endif
+				</div>
+				<div id="section" class="">
+					<h3>{{String::tidy($campaign->post->restaurant_name)}}</h3>
+					<p>
+						{{ String::tidy($campaign->name) }}
+					</p>
+					<br/>
+			
 				</div>
 			</div>
 		<div class="row">
@@ -342,7 +364,7 @@
 						@elseif(Auth::check())
 							<?php $userCampaign = UserCampaign::where('user_id','=',Auth::id())->where('campaign_id','=',$campaign->id)->first()?>		
 						@endif
-						Click <a href="{{{ URL::to('cp/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
+						Click <a href="{{{ URL::to('campaign/stream_pdf/'.$userCampaign->id) }}}" target="_blank">here</a> to see your voucher.
 						<p />
 					@endif
 				@endif	

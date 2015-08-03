@@ -245,6 +245,7 @@ Route::group(array('prefix' => 'message_service', 'before' => 'auth'), function(
 });
 
 # Posts - Second to last set, match slug
+Route::get('review/{postId}/{lang}', 'BlogController@getViewRedirect');
 Route::get('review/{postId}/{slug}/{lang}', 'BlogController@getView');
 Route::post('review/{postId}/{slug}/{lang}', 'BlogController@postView');
 Route::get('review/{postId}/{slug}/{lang}/album', 'BlogController@getAlbum');
@@ -255,7 +256,7 @@ Route::get('deploy/project', 'BlogController@getDeploy');
 //Route::get('category/{categoryId}/{mode}', 'BlogController@getCategory');
 
 # Campaign
-Route::group(array('prefix' => 'cp'), function()
+Route::group(array('prefix' => 'campaign'), function()
 {
 	 Route::get('/', 'BlogController@getAllCampaign');	
 	 Route::get('stream_pdf/{userCampaignId}', array('before' => 'auth_social', 'uses' =>'BlogController@streamPDF'));

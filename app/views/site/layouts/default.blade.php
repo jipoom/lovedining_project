@@ -3,7 +3,7 @@
 	<head>
 		<!-- Basic Page Needs
 		================================================== -->
-		<meta charset="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title> @section('title')
 			LoveDinings
 			@show </title>
@@ -92,24 +92,7 @@
 						<div class="navbar-header">
 							<a href="{{{ URL::to('/') }}}"><img src="{{{ asset('assets/img/logo.png') }}}" alt="Logo"  height="125" class ="logo"></a>
 							<!-- Ads-top -->
-							<div class="ads-top"style="margin-left: 20px; margin-top: 30px; float: right;">
-								<script type='text/javascript'><!--//<![CDATA[
-								   var m3_u = (location.protocol=='https:'?'https://unitus.synergy-e.com/www/delivery/ajs.php':'http://unitus.synergy-e.com/www/delivery/ajs.php');
-								   var m3_r = Math.floor(Math.random()*99999999999);
-								   if (!document.MAX_used) document.MAX_used = ',';
-								   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-								   document.write ("?zoneid=4287");
-								   document.write ('&amp;cb=' + m3_r);
-								   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-								   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-								   document.write ("&amp;loc=" + escape(window.location));
-								   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-								   if (document.context) document.write ("&context=" + escape(document.context));
-								   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
-								   document.write ("'><\/scr"+"ipt>");
-								//]]>--></script><noscript><a href='http://unitus.synergy-e.com/www/delivery/ck.php?n=af1b33a1&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://unitus.synergy-e.com/www/delivery/avw.php?zoneid=4287&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=af1b33a1' border='0' alt='' /></a></noscript>
-				
-							</div>
+							
 							<!-- end Ads-top -->
 							
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -134,9 +117,9 @@
 							<a href="{{{ URL::to('/') }}}"><img src={{asset('assets/img/social_blue/twitter.png')}} style="width: 25px;"></a></li>
 							</p>
 							<p align="right">
-							<a href="{{{ isset($page) ? URL::to('lang/TH').'/'.$page : URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
-							<a href="{{{ isset($page) ? URL::to('lang/EN').'/'.$page : URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
-							<a href="{{{ isset($page) ? URL::to('lang/CN').'/'.$page : URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/TH').'/'.$page : URL::to('lang/TH') }}}">{{(Session::get('Lang') == 'TH' || Session::get('Lang') == 'th') ? '<img src='.asset('assets/img/thD.png').' title="Thai" class="lang_th">': '<img src='.asset('assets/img/th.png').' title="Thai" class="lang_th">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/EN').'/'.$page : URL::to('lang/EN') }}}">{{(Session::get('Lang') == 'EN' || Session::get('Lang') == 'en') ? '<img src='.asset('assets/img/enD.png').' title="Thai" class="lang_en">': '<img src='.asset('assets/img/en.png').' title="English" class="lang_en">'}} </a></li>
+							<a href="{{{ isset($page) ? URL::to('lang/CN').'/'.$page : URL::to('lang/CN') }}}">{{(Session::get('Lang') == 'CN' || Session::get('Lang') == 'cn') ? '<img src='.asset('assets/img/cnD.png').' title="Thai" class="lang_cn">': '<img src='.asset('assets/img/cn.png').' title="Chinese" class="lang_cn">'}} </a></li>
 						
 							</p>
 						</div>
@@ -174,7 +157,7 @@
 									<?php $mode = CategoryOrder::getMode(); ?>
 									@foreach(CategoryOrder::getOrder($mode) as $category)
 									<li {{ (Request::is('category/'.$category->
-										id.'*') ? ' class="selected"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{$category->category_name}} 
+										id.'*') ? ' class="selected"' : '') }}> <a href="{{{ URL::to('category/'.$category->id) }}}">{{Str::limit($category->category_name, 30, '...')}} 
 											@if (Auth::check())
 											<?php $numUnread = PostsUserRead::getUnreadReviews($category, Auth::user() -> id); ?>
 											@if($numUnread>0)
@@ -185,7 +168,7 @@
 									@endforeach
 									<li {{ (Request::is('news*') ? ' class="selected"' : '') }}><a href="{{{ URL::to('/') }}}">News</a></li>
 									<li {{ (Request::is('campaign*') ? ' class="selected"' : '') }}>
-									<a href="{{{ URL::to('cp') }}}">Campaigns
+									<a href="{{{ URL::to('campaign') }}}">Campaigns
 										@if (Auth::check() || Session::get('socialUser.isLogin'))
 											<?php $numUnread = CampaignUserRead::getUnreadCampaign(); ?>
 											@if($numUnread>0)

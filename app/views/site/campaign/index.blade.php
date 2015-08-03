@@ -202,7 +202,7 @@
 				document.getElementById("reload_campaign").innerHTML = xmlhttp.responseText;
 			}
 		}
-		xmlhttp.open("GET", "{{{ URL::to('cp/search') }}}/" + word, true);
+		xmlhttp.open("GET", "{{{ URL::to('campaign/search') }}}/" + word, true);
 		xmlhttp.send();
 
 	}

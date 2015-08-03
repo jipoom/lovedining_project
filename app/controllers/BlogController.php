@@ -203,6 +203,13 @@ class BlogController extends BaseController {
 		// Show the page
 		return View::make('site/blog/index', compact('posts','yetToPrint','mode','categoryId','keyword','postUserRead','adsSide','adsFoot'));
 	}
+
+	public function getViewRedirect($postId,$lang){
+		$post = $this->post->active()->where('id', '=', $postId)->first();
+		$slug = $post->slug;
+		$lang = strtoupper($lang);
+		return Redirect::to("/review/".$postId."/".$slug."/".$lang);
+	}
 	/**
 	 * View a blog post.
 	 *
@@ -213,6 +220,11 @@ class BlogController extends BaseController {
 	public function getView($postId,$slug,$lang)
 	{
 		// Get this blog post data
+		//$lang = strtoupper($lang);
+		if(ctype_lower ($lang)){
+			$lang = strtoupper($lang);
+			return Redirect::to("/review/".$postId."/".$slug."/".$lang);
+		}
 		Session::put('Lang',$lang);	
 		Session::put('View',$postId."/".$slug);
 		Session::put('previousPage',Request::url());
@@ -368,6 +380,10 @@ class BlogController extends BaseController {
 	}
 	public function getCampaign($campaignId,$lang){
 		//Session::put('Lang',$lang);	
+		if(ctype_lower ($lang)){
+			$lang = strtoupper($lang);
+			return Redirect::to("/campaign/".$campaignId."/".$lang);
+		}
 		Session::put('Lang',$lang);	
 		Session::put('Campaign',$campaignId);
 		Session::put('previousPage',Request::url());
@@ -481,13 +497,13 @@ class BlogController extends BaseController {
 				          ->subject($subject);
 				});*/
 				//return View::make('site/campaign/show_voucher',compact('title','campaign','userCampaign'));
-				return Redirect::to('cp/voucher/' . $campaignId.'/'.$userCampaign->id);
+				return Redirect::to('campaign/voucher/' . $campaignId.'/'.$userCampaign->id);
             }
 
-            return Redirect::to('cp/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
+            return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang'))->with('error', 'การลงทะเบียนผิดพลาดกรูณาลองอีกครั้ง');
         			
 		}
-		return Redirect::to('cp/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
+		return Redirect::to('campaign/' . $campaignId.'/'.Session::get('Lang')) -> withInput() -> withErrors($validator);
 	}
 	public function getVoucher($campaignId,$userCampaignId){
 		//Session::put('Lang',$lang);	
