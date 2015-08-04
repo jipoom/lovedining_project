@@ -1,5 +1,8 @@
 @extends('site.layouts.default')
-
+@section('title')
+{{ String::tidy($campaign->name) }} ::
+@parent
+@stop
 @section('styles')
 <style>
 	.col-md-9 img {

@@ -8,6 +8,14 @@
 {{-- Content --}}
 @section('content')
 
-{{{ Lang::get('site.contact_us') }}}
 
+<div class="col-md-12" >
+	<div class="movieinfo" >
+		<h4>Contact Us</h4>
+		Name :   Chaisit  Sorsakul<br/>
+		Email :     targeting_trend@hotmail.com<br/>
+		Mobile : 0819172233
+	</div>
+	&nbsp;
+</div>
 @stop

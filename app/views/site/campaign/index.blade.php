@@ -1,4 +1,8 @@
 @extends('site.layouts.default')
+@section('title')
+Campaign ::
+@parent
+@stop
 @section('styles')
 <link href="{{asset('bootstrap/css/image.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/css/jquery.bxslider.css')}}" rel="stylesheet" />

@@ -110,7 +110,7 @@
 							<p></p>
 							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">HOME</font> </a></li> | 
 							<a href="{{{ URL::to('about-us') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">ABOUT US</font> </a></li> |
-							<a href="{{{ URL::to('/') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">CONTACT </font></a></li>
+							<a href="{{{ URL::to('contact-us') }}}"><span class="glyphicon"></span>	<font color="#0D8FA9">CONTACT </font></a></li>
 							</p>
 							<p align="right">
 							<a href="https://www.facebook.com/LoveDinings?fref=ts"><img src={{asset('assets/img/social_blue/fb.png')}} style="width: 25px;"></a></li>
@@ -297,7 +297,7 @@
 						</tr>
 						<tr>
 							<td class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">ติดต่อโฆษณา</a></td>
-							<td class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">ติอต่อเรา</a></td>
+							<td class="col-md-4"><a href="{{{ URL::to('contact-us') }}}" style="color:#0D8FA9;">ติอต่อเรา</a></td>
 						</tr>
 						<tr>
 							<td class="col-md-4"><a href="{{{ URL::to('/') }}}" style="color:#0D8FA9;">Lovedining</a></td>
