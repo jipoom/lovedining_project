@@ -55,6 +55,7 @@
 	#section {
 		float:right;
 		width: 50%;
+		margin-top: -24px;
 	}
 
 	#voucher p {
@@ -76,6 +77,7 @@
 		}
 		#section {
 			width: 100%;
+			margin-top: 0px;
 		}
 	}
 </style>
