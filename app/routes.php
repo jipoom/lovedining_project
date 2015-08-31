@@ -252,6 +252,7 @@ Route::get('review/{postId}/{slug}/{lang}/album', 'BlogController@getAlbum');
 
 # deploy project
 Route::get('deploy/project', 'BlogController@getDeploy');
+
 # Category - ID
 //Route::get('category/{categoryId}/{mode}', 'BlogController@getCategory');
 

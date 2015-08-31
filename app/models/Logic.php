@@ -46,6 +46,16 @@ class Logic {
 		echo "     ".$diff;
 	    return str_pad( $input, $pad_length + $diff, $pad_string, $pad_type );
 	}
+	
+	/*public static function copyTitleToSlug()
+	{
+	    $posts = Post::all();
+		foreach($posts as $post){
+			$post->slug =  $post->title;
+		    $post->save();
+			
+		}
+	}*/
 
 	
 	

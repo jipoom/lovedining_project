@@ -50,8 +50,9 @@ class BlogController extends BaseController {
 	public function getDeploy()
 	{
 		Logic::deployProject();
-		return View::make('deploy');
+		//return View::make('deploy');
 	}
+	
 	
 	public function getAboutUs()
 	{
