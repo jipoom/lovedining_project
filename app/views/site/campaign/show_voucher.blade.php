@@ -37,27 +37,52 @@
 		<div class="Owner-Pane" style="float: left; width: 758px; margin-top:3px; border-radius: 5px; margin-right:1%;background-color:white; height: 75px;">
 			<div class="customer-detail" style="margin-top:10px;">
 			@if($campaign->show_firstname == 1 || $campaign->show_lastname == 1)
-				<p style="padding-left: 10px;">
-				<strong>Name:</strong> 
-				@if($campaign->show_firstname == 1)
-					{{$userCampaign->user_firstname}}
-				@endif
-				@if($campaign->show_lastname == 1)
-					{{$userCampaign->user_lastname}}
-				</p>
-				@endif
+				<div class="firstLine" style="width: 100%;height: 40%">
+					<div class="name" style="width: 50%; float: left;">	
+						<p style="padding-left: 10px;">
+						<strong>Name:</strong> 
+						@if($campaign->show_firstname == 1)
+							{{$userCampaign->user_firstname}}
+						@endif
+						@if($campaign->show_lastname == 1)
+							{{$userCampaign->user_lastname}}
+						@endif
+					</div>	
+					<div class="id" style="width: 50%; float: left;">		
+						@if($campaign->show_cid == 1)
+						<p style="padding-left: 15px;">
+						<strong> ID: </strong> 
+							{{$userCampaign->user_cid}}
+						</p>	
+						@endif
+					</div>	
+				</div>
+				<div class="secondLine" style="width: 100%;height: 60%">	
+					<div class="Contact" style="width: 50%; float: left;">	
+						<p style="padding-left: 10px;">
+						<strong>Contacts:</strong> 
+						@if($campaign->show_email == 1)
+							{{$userCampaign->user_tel}}<strong> /</strong> 
+						@endif
+						@if($campaign->show_tel == 1)
+							{{$userCampaign->user_email}}	
+						@endif
+						</p>
+					</div>
+					<div class="dob" style="width: 50%; float: left;">	
+						@if($campaign->show_dob == 1)
+						<p style="padding-left: 15px;">
+						<strong> Date of Birth: </strong> 
+							<?php
+							$date = new DateTime($userCampaign->user_dob);
+							echo $date->format('d-M-Y');
+							?>
+						@endif	
+						</p>
+					</div>
+				</div>
+
 			@endif	
-			@if($campaign->show_email == 1 || $campaign->show_tel == 1)
-				<p style="padding-left: 10px;">
-				<strong>Contacts:</strong> 
-				@if($campaign->show_email == 1)
-					{{$userCampaign->user_tel}}<strong> /</strong> 
-				@endif
-				@if($campaign->show_tel == 1)
-					{{$userCampaign->user_email}}	
-				@endif
-				</p>
-			@endif
 			</div>
 		</div>
 		<div class="Main-Bottom" style="float: left; width: 758px; margin-top:3px; background-color:#1b7f9f; height:212px; ">
@@ -85,17 +110,19 @@
 				<center><img src="http://placehold.it/260x180" alt="" height="75"></center>
 		</p>
 		@endif
-		<div class="restaurant-name" style="margin-top: 70px">
+		<div class="restaurant-name" style="height: 120px; margin-top: 50px;">
 		<p style="padding-left: 10px; line-height: 10%;"><strong>Restaurant Name: </strong></p>
 		<p style="padding-left: 15px;">{{String::tidy($campaign->post->restaurant_name)}}</p>
 		</div >
 		<br />
-		<div class="restaurant-address" style="height: 100px; word-wrap: break-word; margin-top: 20px"><p style="padding-left: 10px;">
+		<div class="restaurant-address" style="height: 120px; word-wrap: break-word;"><p style="padding-left: 10px; ">
 			<p style="padding-left: 10px; line-height: 10%;"><strong>Address:</strong></p> 
 			<p style="padding-left: 15px;">
+				
+			{{$campaign->post->address1}}
+				
 			{{$campaign->post->address2}}
 		
-			{{$campaign->post->address1}}
 
 			@if($campaign->post->tumbol)
 				แขวง{{$campaign->post->tumbol}}
@@ -110,7 +137,7 @@
 			{{$campaign->post->zip}}
 			
 		</p></div>
-		<p style="padding-left: 10px; line-height: 10%"><strong>Validity:</strong></p>
+		<p style="margin-top:20px; padding-left: 10px; line-height: 10%"><strong>Validity:</strong></p>
 		<?php $startDate =  new DateTime($campaign->start_date); ?>
 		<?php $endDate =  new DateTime($campaign->expiry_date); ?>
 		@if($startDate->format('Y') == $endDate->format('Y'))
@@ -118,7 +145,7 @@
 		@else
 			<p style="padding-left: 15px;">{{{ $startDate->format('d M Y') }}} - {{{ $endDate->format('d M Y') }}}</p>
 		@endif
-		<div class="code" style="margin-top:100px;">
+		<div class="code" style="margin-top: 30px;">
 			<p style="padding-left: 10px; line-height: 10%"><strong>Code:</strong></p>
 			<p style="padding-left: 15px;">{{$userCampaign->campaign_code}}</p>
 		</div>

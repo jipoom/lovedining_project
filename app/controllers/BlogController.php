@@ -435,10 +435,10 @@ class BlogController extends BaseController {
 			$rules['email'] = 'required';
 		}
 		if($campaign->show_tel == 1){
-			$rules['tel'] = 'required';
+			$rules['tel'] = 'required|digits_between:9,10';
 		}
 		if($campaign->show_cid == 1){
-			$rules['cid'] = 'required';
+			$rules['cid'] = 'required|digits:13';
 		}
 		if($campaign->show_dob == 1){
 			$rules['dob'] = 'required';

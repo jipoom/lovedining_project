@@ -85,9 +85,9 @@
 			<h4>{{ $post->restaurant_name }}</h4>
 			<h5>Tel: {{ $post->tel }}</h5>
 			<h5> 
-			{{$post->address2}}
-
 			{{$post->address1}}
+
+			{{$post->address2}}
 
 			@if($post->tumbol)
 			แขวง{{$post->tumbol}}
